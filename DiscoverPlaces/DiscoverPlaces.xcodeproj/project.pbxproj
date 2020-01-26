@@ -16,6 +16,9 @@
 		CE5835B023DE16B600C89622 /* DiscoverPlacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835AF23DE16B600C89622 /* DiscoverPlacesTests.swift */; };
 		CE5835BB23DE16B700C89622 /* DiscoverPlacesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835BA23DE16B700C89622 /* DiscoverPlacesUITests.swift */; };
 		CE5835C923DE173800C89622 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835C823DE173800C89622 /* BaseTabBarController.swift */; };
+		CE5835CC23DE1F5E00C89622 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835CB23DE1F5E00C89622 /* SearchController.swift */; };
+		CE5835CE23DE204B00C89622 /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835CD23DE204B00C89622 /* BaseCollectionViewController.swift */; };
+		CE5835D123DE224C00C89622 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835D023DE224C00C89622 /* UIView+Layout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		CE5835BA23DE16B700C89622 /* DiscoverPlacesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverPlacesUITests.swift; sourceTree = "<group>"; };
 		CE5835BC23DE16B700C89622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE5835C823DE173800C89622 /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
+		CE5835CB23DE1F5E00C89622 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		CE5835CD23DE204B00C89622 /* BaseCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewController.swift; sourceTree = "<group>"; };
+		CE5835D023DE224C00C89622 /* UIView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +108,9 @@
 			isa = PBXGroup;
 			children = (
 				CE5835C823DE173800C89622 /* BaseTabBarController.swift */,
-				CE5835CA23DE17E200C89622 /* New Group */,
+				CE5835CD23DE204B00C89622 /* BaseCollectionViewController.swift */,
+				CE5835CA23DE17E200C89622 /* Controllers */,
+				CE5835CF23DE223800C89622 /* Helpers */,
 				CE58359823DE16B000C89622 /* AppDelegate.swift */,
 				CE58359A23DE16B000C89622 /* SceneDelegate.swift */,
 				CE58359C23DE16B000C89622 /* ViewController.swift */,
@@ -132,11 +140,20 @@
 			path = DiscoverPlacesUITests;
 			sourceTree = "<group>";
 		};
-		CE5835CA23DE17E200C89622 /* New Group */ = {
+		CE5835CA23DE17E200C89622 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CE5835CB23DE1F5E00C89622 /* SearchController.swift */,
 			);
-			path = "New Group";
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CE5835CF23DE223800C89622 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CE5835D023DE224C00C89622 /* UIView+Layout.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,8 +288,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE5835C923DE173800C89622 /* BaseTabBarController.swift in Sources */,
+				CE5835CC23DE1F5E00C89622 /* SearchController.swift in Sources */,
 				CE58359D23DE16B000C89622 /* ViewController.swift in Sources */,
+				CE5835CE23DE204B00C89622 /* BaseCollectionViewController.swift in Sources */,
 				CE58359923DE16B000C89622 /* AppDelegate.swift in Sources */,
+				CE5835D123DE224C00C89622 /* UIView+Layout.swift in Sources */,
 				CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
