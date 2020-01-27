@@ -7,19 +7,36 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SearchCell: UICollectionViewCell {
     
+    var searchResult: Result! {
+        didSet {
+            
+            if let photoReference = searchResult.photos?.first?.photo_reference {
+                
+                let imageUrl = UrlBuilder.buildImageUrl(with: photoReference)
+                placeImageView.sd_setImage(with: imageUrl)//
+                placeNameLabel.text = searchResult.name //Make Sentence Case
+                
+            } else {
+                //Set a default image
+            }
+        }
+    }
+    
+
+    
     let placeImageView: UIImageView = {
         let iv = UIImageView(image: nil)
-        iv.layer.backgroundColor = UIColor.clear.cgColor
         iv.layer.cornerRadius = 16 //Standardize
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
         iv.layer.borderColor = UIColor(white: 0.9, alpha: 0.7).cgColor //Standardize
         iv.layer.borderWidth = 0.5 //Standardize?
         let overlay = UIView()
-        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.3) //Standardize?
+        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.25) //Standardize?
         iv.addSubview(overlay)
         overlay.fillSuperview()
         return iv
@@ -28,7 +45,7 @@ class SearchCell: UICollectionViewCell {
     let placeNameLabel: UILabel = {
         let lbl = UILabel(frame: .zero)
         lbl.text = "Burj Al-Arab"
-        lbl.font = .boldSystemFont(ofSize: 30)
+        lbl.font = .boldSystemFont(ofSize: 28)
         lbl.textAlignment = .center
         lbl.textColor = .white
         lbl.numberOfLines = 2
@@ -38,8 +55,6 @@ class SearchCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        placeImageView.image = #imageLiteral(resourceName: "burj")
         
         addSubview(placeImageView)
         placeImageView.addSubview(placeNameLabel)

@@ -12,11 +12,11 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     fileprivate let cellId = "cellId"
     fileprivate let searchController = UISearchController(searchResultsController: nil)
-    fileprivate var placeResults = [Result]()
+    fileprivate var searchResults = [Result]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         setupSearchBar()
         
         collectionView.backgroundColor = .white
@@ -27,42 +27,19 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if searchText == "" { return }
+//        if searchText == "" { return }
+        timer?.invalidate()
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (_) in
-            self.fetchData(searchText: searchText)
-        })
-    }
-    
-
-    fileprivate func fetchData(searchText: String) {
-        
-        guard let url = URL(string: "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(searchText)&location=42.3675294,-71.186966&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg") else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, res, err) in
-            if let err = err {
-                print("Falied to fetch:, ", err)
-                return
-            }
-            
-            //success
-            guard let data = data else { return }
-            
-            do {
-                let response = try JSONDecoder().decode(Response.self, from: data)
-                self.placeResults = response.results
+                        
+            Service.shared.fetchSearchResults(for: searchText) { (results, error) in
                 
+                self.searchResults = results?.results ?? []
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
-            } catch let jsonErr {
-                print("Failed to decoded: ", jsonErr)
-                return
             }
-            
-            //CREATE NEW EMAIL FOR THIS APP, SET UP PLACES API, SET UP DEV KEY
-            
-        }.resume()
+        })
     }
     
     fileprivate func setupSearchBar() {
@@ -73,26 +50,16 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     }
 }
 
-struct Response: Decodable {
-    let results: [Result]
-    let next_page_token: String?
-}
-
-struct Result: Decodable {
-    let name: String
-}
-
 extension SearchController {
     
     //Delegate & DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return placeResults.count
+        return searchResults.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchCell
-        let placeResult = self.placeResults[indexPath.item]
-        cell.placeNameLabel.text = placeResult.name
+        cell.searchResult = searchResults[indexPath.item]
         return cell
     }
     
