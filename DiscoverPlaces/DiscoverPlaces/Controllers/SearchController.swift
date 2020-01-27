@@ -12,6 +12,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     fileprivate let cellId = "cellId"
     fileprivate let searchController = UISearchController(searchResultsController: nil)
+    fileprivate var placeResults = [Result]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,16 +23,21 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: cellId)
     }
     
+    var timer: Timer?
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
         
-        fetchData()
+        if searchText == "" { return }
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (_) in
+            self.fetchData(searchText: searchText)
+        })
     }
     
 
-    fileprivate func fetchData() {
+    fileprivate func fetchData(searchText: String) {
         
-        guard let url = URL(string: "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurant&location=42.3675294,-71.186966&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg") else { return }
+        guard let url = URL(string: "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(searchText)&location=42.3675294,-71.186966&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, res, err) in
             if let err = err {
@@ -41,7 +47,19 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             
             //success
             guard let data = data else { return }
-            print(data)
+            
+            do {
+                let response = try JSONDecoder().decode(Response.self, from: data)
+                self.placeResults = response.results
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            } catch let jsonErr {
+                print("Failed to decoded: ", jsonErr)
+                return
+            }
+            
             //CREATE NEW EMAIL FOR THIS APP, SET UP PLACES API, SET UP DEV KEY
             
         }.resume()
@@ -55,15 +73,26 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     }
 }
 
+struct Response: Decodable {
+    let results: [Result]
+    let next_page_token: String?
+}
+
+struct Result: Decodable {
+    let name: String
+}
+
 extension SearchController {
     
     //Delegate & DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return placeResults.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchCell
+        let placeResult = self.placeResults[indexPath.item]
+        cell.placeNameLabel.text = placeResult.name
         return cell
     }
     

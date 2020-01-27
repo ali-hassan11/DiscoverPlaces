@@ -31,6 +31,7 @@ class SearchCell: UICollectionViewCell {
         lbl.font = .boldSystemFont(ofSize: 30)
         lbl.textAlignment = .center
         lbl.textColor = .white
+        lbl.numberOfLines = 2
         return lbl
     }()
     
