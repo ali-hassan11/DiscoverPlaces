@@ -22,6 +22,31 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: cellId)
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+        
+        fetchData()
+    }
+    
+
+    fileprivate func fetchData() {
+        
+        guard let url = URL(string: "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=restaurant&location=42.3675294,-71.186966&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg") else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, res, err) in
+            if let err = err {
+                print("Falied to fetch:, ", err)
+                return
+            }
+            
+            //success
+            guard let data = data else { return }
+            print(data)
+            //CREATE NEW EMAIL FOR THIS APP, SET UP PLACES API, SET UP DEV KEY
+            
+        }.resume()
+    }
+    
     fileprivate func setupSearchBar() {
         definesPresentationContext = true
         navigationItem.searchController = searchController
@@ -50,56 +75,4 @@ extension SearchController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: 0, left: 12, bottom: 0, right: 12)
     }
-}
-
-extension SearchController {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-    }
-}
-
-class SearchCell: UICollectionViewCell {
-    
-    let placeImageView: UIImageView = {
-        let iv = UIImageView(image: nil)
-        iv.layer.backgroundColor = UIColor.clear.cgColor
-        iv.layer.cornerRadius = 16 //Standardize
-        iv.clipsToBounds = true
-        iv.contentMode = .scaleAspectFill
-        iv.layer.borderColor = UIColor(white: 0.9, alpha: 0.7).cgColor //Standardize
-        iv.layer.borderWidth = 0.5 //Standardize?
-        let overlay = UIView()
-        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.3) //Standardize?
-        iv.addSubview(overlay)
-        overlay.fillSuperview()
-        return iv
-    }()
-    
-    let placeNameLabel: UILabel = {
-        let lbl = UILabel(frame: .zero)
-        lbl.text = "Burj Al-Arab"
-        lbl.font = .boldSystemFont(ofSize: 30)
-        lbl.textAlignment = .center
-        lbl.textColor = .white
-        return lbl
-    }()
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        placeImageView.image = #imageLiteral(resourceName: "burj")
-        
-        addSubview(placeImageView)
-        placeImageView.addSubview(placeNameLabel)
-        placeImageView.fillSuperview()
-        placeNameLabel.fillSuperview()
-    }
-    
-    required init?(coder: NSCoder) {
-        
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
