@@ -48,7 +48,7 @@ class SearchCell: UICollectionViewCell {
         iv.layer.borderColor = UIColor(white: 0.9, alpha: 0.7).cgColor //Standardize
         iv.layer.borderWidth = 0.5 //Standardize?
         let overlay = UIView()
-        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.25) //Standardize?
+        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.25) //Make Gradient
         iv.addSubview(overlay)
         overlay.fillSuperview()
         return iv

@@ -10,6 +10,7 @@
 		2E39C3B970B8E6A013421063 /* Pods_DiscoverPlacesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C676B0D950FC109AB8002959 /* Pods_DiscoverPlacesTests.framework */; };
 		AAEB4ED4D2CBA033B4653B8D /* Pods_DiscoverPlaces_DiscoverPlacesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45BD1A0734859715269A27F /* Pods_DiscoverPlaces_DiscoverPlacesUITests.framework */; };
 		C6538ED96D942F3B3B93E7DC /* Pods_DiscoverPlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEB45643518974E8DC13C17 /* Pods_DiscoverPlaces.framework */; };
+		CE319CDB23E0D8100088B9D1 /* DiscoverGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE319CDA23E0D8100088B9D1 /* DiscoverGroupController.swift */; };
 		CE58359923DE16B000C89622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359823DE16B000C89622 /* AppDelegate.swift */; };
 		CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359A23DE16B000C89622 /* SceneDelegate.swift */; };
 		CE58359D23DE16B000C89622 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359C23DE16B000C89622 /* ViewController.swift */; };
@@ -26,6 +27,8 @@
 		CE5835D823DF145900C89622 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835D723DF145900C89622 /* SearchResults.swift */; };
 		CE5835DB23DF1B7A00C89622 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DA23DF1B7A00C89622 /* Service.swift */; };
 		CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */; };
+		CE5835DF23E0C2C500C89622 /* DiscoverGroupHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DE23E0C2C500C89622 /* DiscoverGroupHorizontalController.swift */; };
+		CE734D3123E0CB3C005AE0EB /* DiscoverGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE734D3023E0CB3C005AE0EB /* DiscoverGroupCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,7 @@
 		A45BD1A0734859715269A27F /* Pods_DiscoverPlaces_DiscoverPlacesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DiscoverPlaces_DiscoverPlacesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AECB8B9B789646550A651780 /* Pods-DiscoverPlaces-DiscoverPlacesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscoverPlaces-DiscoverPlacesUITests.release.xcconfig"; path = "Target Support Files/Pods-DiscoverPlaces-DiscoverPlacesUITests/Pods-DiscoverPlaces-DiscoverPlacesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C676B0D950FC109AB8002959 /* Pods_DiscoverPlacesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DiscoverPlacesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE319CDA23E0D8100088B9D1 /* DiscoverGroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverGroupController.swift; sourceTree = "<group>"; };
 		CE58359523DE16B000C89622 /* DiscoverPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE58359823DE16B000C89622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE58359A23DE16B000C89622 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +78,8 @@
 		CE5835D723DF145900C89622 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		CE5835DA23DF1B7A00C89622 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlBuilder.swift; sourceTree = "<group>"; };
+		CE5835DE23E0C2C500C89622 /* DiscoverGroupHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverGroupHorizontalController.swift; sourceTree = "<group>"; };
+		CE734D3023E0CB3C005AE0EB /* DiscoverGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverGroupCell.swift; sourceTree = "<group>"; };
 		DBEB45643518974E8DC13C17 /* Pods_DiscoverPlaces.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DiscoverPlaces.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91D16AD38E8F14B874FD126 /* Pods-DiscoverPlacesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscoverPlacesTests.debug.xcconfig"; path = "Target Support Files/Pods-DiscoverPlacesTests/Pods-DiscoverPlacesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		EFEF8AED997C27748E07F24F /* Pods-DiscoverPlacesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscoverPlacesTests.release.xcconfig"; path = "Target Support Files/Pods-DiscoverPlacesTests/Pods-DiscoverPlacesTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -155,10 +161,9 @@
 		CE58359723DE16B000C89622 /* DiscoverPlaces */ = {
 			isa = PBXGroup;
 			children = (
+				CE5835C823DE173800C89622 /* BaseTabBarController.swift */,
 				CE5835D923DF1B6900C89622 /* Service */,
 				CE5835D623DF143700C89622 /* Models */,
-				CE5835C823DE173800C89622 /* BaseTabBarController.swift */,
-				CE5835CD23DE204B00C89622 /* BaseCollectionViewController.swift */,
 				CE5835CA23DE17E200C89622 /* Controllers */,
 				CE5835D223DEB7B900C89622 /* Views */,
 				CE5835CF23DE223800C89622 /* Helpers */,
@@ -194,7 +199,9 @@
 		CE5835CA23DE17E200C89622 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CE5835CB23DE1F5E00C89622 /* SearchController.swift */,
+				CE5835CD23DE204B00C89622 /* BaseCollectionViewController.swift */,
+				CE734D2C23E0CAE6005AE0EB /* Discover */,
+				CE734D2B23E0CADE005AE0EB /* Search */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -211,7 +218,8 @@
 		CE5835D223DEB7B900C89622 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CE5835D323DEB7C500C89622 /* SearchCell.swift */,
+				CE734D2F23E0CB2E005AE0EB /* Discover */,
+				CE734D3223E0CB49005AE0EB /* Search */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,7 +227,7 @@
 		CE5835D623DF143700C89622 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CE5835D723DF145900C89622 /* SearchResults.swift */,
+				CE734D3323E0CB6A005AE0EB /* Search */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -230,6 +238,47 @@
 				CE5835DA23DF1B7A00C89622 /* Service.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		CE734D2B23E0CADE005AE0EB /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				CE5835CB23DE1F5E00C89622 /* SearchController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		CE734D2C23E0CAE6005AE0EB /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				CE319CDA23E0D8100088B9D1 /* DiscoverGroupController.swift */,
+				CE5835DE23E0C2C500C89622 /* DiscoverGroupHorizontalController.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		CE734D2F23E0CB2E005AE0EB /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				CE734D3023E0CB3C005AE0EB /* DiscoverGroupCell.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		CE734D3223E0CB49005AE0EB /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				CE5835D323DEB7C500C89622 /* SearchCell.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		CE734D3323E0CB6A005AE0EB /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				CE5835D723DF145900C89622 /* SearchResults.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -507,8 +556,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE734D3123E0CB3C005AE0EB /* DiscoverGroupCell.swift in Sources */,
+				CE319CDB23E0D8100088B9D1 /* DiscoverGroupController.swift in Sources */,
 				CE5835C923DE173800C89622 /* BaseTabBarController.swift in Sources */,
 				CE5835D423DEB7C500C89622 /* SearchCell.swift in Sources */,
+				CE5835DF23E0C2C500C89622 /* DiscoverGroupHorizontalController.swift in Sources */,
 				CE5835CC23DE1F5E00C89622 /* SearchController.swift in Sources */,
 				CE58359D23DE16B000C89622 /* ViewController.swift in Sources */,
 				CE5835CE23DE204B00C89622 /* BaseCollectionViewController.swift in Sources */,

@@ -41,7 +41,6 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
                         filteredResults.append(result)
                     }
                 })
-                
                 self.searchResults = filteredResults
                 
                 DispatchQueue.main.async {
