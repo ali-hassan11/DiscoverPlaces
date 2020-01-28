@@ -16,6 +16,9 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.addSubview(enterSearchTextlabel)
+        enterSearchTextlabel.centerXInSuperview()
+        enterSearchTextlabel.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 100).isActive = true
     
         setupSearchBar()
         
@@ -50,6 +53,15 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         })
     }
     
+    fileprivate let enterSearchTextlabel: UILabel = {
+        let label = UILabel()
+        label.text = "Enter search term above..."
+        label.font = .systemFont(ofSize: 16)
+        label.textAlignment = .center
+        return label
+    }()
+
+    
     fileprivate func setupSearchBar() {
         definesPresentationContext = true
         navigationItem.searchController = searchController
@@ -62,6 +74,7 @@ extension SearchController {
     
     //Delegate & DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        enterSearchTextlabel.isHidden = searchResults.count != 0
         return searchResults.count
     }
     
@@ -72,7 +85,7 @@ extension SearchController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let alertVC = UIAlertController(title: searchResults[indexPath.row].name, message: searchResults[indexPath.row].photos?.first?.photo_reference, preferredStyle: .alert)
+        let alertVC = UIAlertController(title: searchResults[indexPath.row].name, message: searchResults[indexPath.row].photos?.first?.photoReference, preferredStyle: .alert)
         alertVC.addAction(.init(title: "Dismiss", style: .default, handler: nil))
         present(alertVC, animated: true, completion: nil)
     }

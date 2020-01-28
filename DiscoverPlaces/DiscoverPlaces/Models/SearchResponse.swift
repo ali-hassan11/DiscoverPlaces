@@ -6,7 +6,6 @@
 //  Copyright © 2020 AHApps. All rights reserved.
 //
 
-// MARK: - Welcome
 struct Response: Decodable {
     let results: [Result]
     let status: String?
@@ -16,11 +15,11 @@ struct Response: Decodable {
     }
 }
 
-// MARK: - Result
 struct Result: Decodable {
     let geometry: Geometry?
     let icon: String?
-    let id, name: String?
+    let id: String?
+    let name: String?
     let openingHours: OpeningHours?
     let photos: [Photo]?
     let placeID: String?
@@ -42,23 +41,21 @@ struct Result: Decodable {
     }
 }
 
-// MARK: - Geometry
 struct Geometry: Decodable {
     let location: Location?
     let viewport: Viewport?
 }
 
-// MARK: - Location
 struct Location: Decodable {
-    let lat, lng: Double?
+    let lat: Double?
+    let lng: Double?
 }
 
-// MARK: - Viewport
 struct Viewport: Decodable {
-    let northeast, southwest: Location?
+    let northeast : Location?
+    let southwest: Location?
 }
 
-// MARK: - OpeningHours
 struct OpeningHours: Decodable {
     let openNow: Bool?
 
@@ -67,7 +64,6 @@ struct OpeningHours: Decodable {
     }
 }
 
-// MARK: - Photo
 struct Photo: Decodable {
     let height: Int?
     let photoReference: String?

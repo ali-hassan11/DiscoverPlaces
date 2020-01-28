@@ -14,26 +14,15 @@ class SearchCell: UICollectionViewCell {
     var searchResult: Result! {
         didSet {
             
-            if let photoReference = searchResult.photos?.first?.photo_reference {
-                
+            placeNameLabel.text = searchResult.name
+            placeNameLabel.textColor = .white
+            
+            if let photoReference = searchResult.photos?.first?.photoReference {
                 let imageUrl = UrlBuilder.buildImageUrl(with: photoReference)
-                
-                 placeImageView.sd_setImage(with: imageUrl) { (_, err, cache, url) in
-                            if let err = err {
-                                return
-//                                print("Couldn't load image with error: \(err.localizedDescription)")
-                            }
-                        }
-                
-                
-                placeNameLabel.text = searchResult.name //Make Sentence Case
-                placeNameLabel.textColor = .white
-
+                placeImageView.sd_setImage(with: imageUrl)
             } else {
                 //Set a default image
                 return
-//                placeNameLabel.text = "OOOPS"
-//                placeNameLabel.textColor = .red
             }
         }
     }
@@ -47,10 +36,7 @@ class SearchCell: UICollectionViewCell {
         iv.contentMode = .scaleAspectFill
         iv.layer.borderColor = UIColor(white: 0.9, alpha: 0.7).cgColor //Standardize
         iv.layer.borderWidth = 0.5 //Standardize?
-        let overlay = UIView()
-        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.25) //Make Gradient
-        iv.addSubview(overlay)
-        overlay.fillSuperview()
+        iv.addOverlay(color: .black, alpha: 0.25)
         return iv
     }()
     

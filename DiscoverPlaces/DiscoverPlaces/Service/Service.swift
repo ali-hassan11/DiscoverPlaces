@@ -16,8 +16,13 @@ class Service {
     
     
     func fetchSearchResults(for searchText: String, completion: @escaping (Response?, Error?) -> Void) {
-        
         let urlString = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(searchText)&location=\(25.1413),\(55.1853)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+        
+        fetchGenericJSONData(urlString: urlString, completion: completion)
+    }
+    
+    func fetchPlacesForCategory(for category: String, completion: @escaping (Response?, Error?) -> Void) { //Make category some sort of enum...
+        let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.8670522,151.1957362&radius=1500&type=\(category)&keyword=cruise&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
