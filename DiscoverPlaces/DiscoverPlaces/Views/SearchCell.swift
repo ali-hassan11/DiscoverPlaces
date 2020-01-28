@@ -17,11 +17,23 @@ class SearchCell: UICollectionViewCell {
             if let photoReference = searchResult.photos?.first?.photo_reference {
                 
                 let imageUrl = UrlBuilder.buildImageUrl(with: photoReference)
-                placeImageView.sd_setImage(with: imageUrl)//
-                placeNameLabel.text = searchResult.name //Make Sentence Case
                 
+                 placeImageView.sd_setImage(with: imageUrl) { (_, err, cache, url) in
+                            if let err = err {
+                                return
+//                                print("Couldn't load image with error: \(err.localizedDescription)")
+                            }
+                        }
+                
+                
+                placeNameLabel.text = searchResult.name //Make Sentence Case
+                placeNameLabel.textColor = .white
+
             } else {
                 //Set a default image
+                return
+//                placeNameLabel.text = "OOOPS"
+//                placeNameLabel.textColor = .red
             }
         }
     }
@@ -44,7 +56,7 @@ class SearchCell: UICollectionViewCell {
     
     let placeNameLabel: UILabel = {
         let lbl = UILabel(frame: .zero)
-        lbl.text = "Burj Al-Arab"
+        lbl.text = ""
         lbl.font = .boldSystemFont(ofSize: 28)
         lbl.textAlignment = .center
         lbl.textColor = .white

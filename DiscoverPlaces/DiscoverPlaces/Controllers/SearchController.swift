@@ -34,7 +34,16 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
                         
             Service.shared.fetchSearchResults(for: searchText) { (results, error) in
                 
-                self.searchResults = results?.results ?? []
+                var filteredResults = [Result]()
+                
+                results?.results.forEach({ (result) in
+                    if result.containsPhotos() {
+                        filteredResults.append(result)
+                    }
+                })
+                
+                self.searchResults = filteredResults
+                
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -61,6 +70,12 @@ extension SearchController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchCell
         cell.searchResult = searchResults[indexPath.item]
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let alertVC = UIAlertController(title: searchResults[indexPath.row].name, message: searchResults[indexPath.row].photos?.first?.photo_reference, preferredStyle: .alert)
+        alertVC.addAction(.init(title: "Dismiss", style: .default, handler: nil))
+        present(alertVC, animated: true, completion: nil)
     }
     
     //Layout

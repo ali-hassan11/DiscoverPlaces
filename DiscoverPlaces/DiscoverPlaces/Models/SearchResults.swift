@@ -21,3 +21,13 @@ struct Photo: Decodable {
     let height: Int
     let width: Int
 }
+
+extension Result {
+    func containsPhotos() -> Bool {
+        if photos != nil && photos?.first != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+}
