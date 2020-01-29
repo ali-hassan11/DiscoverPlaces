@@ -1,33 +1,33 @@
 //
-//  DiscoverGroupController.swift
+//  NearbyController.swift
 //  DiscoverPlaces
 //
-//  Created by user on 28/01/2020.
+//  Created by user on 29/01/2020.
 //  Copyright © 2020 AHApps. All rights reserved.
 //
 
 import UIKit
 
-class DiscoverGroupHorizontalController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class NearbyHorizontalController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var placeResults = [Result]()
+    var results = [Result]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
-        collectionView.register(DicoverCardCell.self, forCellWithReuseIdentifier: "id")
+        collectionView.register(NearbyHeaderCell.self, forCellWithReuseIdentifier: "id")
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
         }
         
-        fetchPlaces(for: "restaurant") //Will get this from DiscoverController (So will be able to set section title)
+        fetchNearbyPlaces()
     }
-    
-    fileprivate func fetchPlaces(for category: String) {
-        Service.shared.fetchPlacesForCategory(for: category) { (results, error) in
+
+    fileprivate func fetchNearbyPlaces() {
+        Service.shared.fetchNearbyPlaces { (results, error) in
             
-            if let error = error {
+             if let error = error {
                 print("Failed to Fetch: \(error.localizedDescription)")
                 return
             }
@@ -41,7 +41,7 @@ class DiscoverGroupHorizontalController: BaseCollectionViewController, UICollect
                 }
             })
             
-            self.placeResults = filteredResults
+            self.results = filteredResults
             
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -49,31 +49,22 @@ class DiscoverGroupHorizontalController: BaseCollectionViewController, UICollect
         }
     }
     
-    //Delegate & DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return placeResults.count
+        return results.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! DicoverCardCell
-        cell.result = placeResults[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! NearbyHeaderCell
+        cell.result = results[indexPath.item]
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = placeDetailController()
-        vc.name = placeResults[indexPath.item].name ?? "Error"
-        show(vc, sender: self)
-    }
-    
-    //Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: 180, height: view.frame.height - 16)
+        return .init(width: view.frame.width - 24 - 24, height: view.frame.height - 24)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 8, left: 12, bottom: 8, right: 12)
+        return .init(top: 12, left: 12, bottom: 12, right: 12)
     }
+    
 }
-
-

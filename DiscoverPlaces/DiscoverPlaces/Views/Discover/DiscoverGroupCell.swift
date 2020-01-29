@@ -10,10 +10,12 @@ import UIKit
 
 class DiscoverGroupCell: UICollectionViewCell {
     
+    
+    
     let sectionTitle: UILabel! = {
         let lbl = UILabel()
         lbl.text = "Section Title"
-        lbl.font = .boldSystemFont(ofSize: 18)
+        lbl.font = .systemFont(ofSize: 18, weight: .light)
         return lbl
     }()
     
