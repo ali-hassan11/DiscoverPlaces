@@ -85,9 +85,10 @@ extension SearchController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let alertVC = UIAlertController(title: searchResults[indexPath.row].name, message: searchResults[indexPath.row].photos?.first?.photoReference, preferredStyle: .alert)
-        alertVC.addAction(.init(title: "Dismiss", style: .default, handler: nil))
-        present(alertVC, animated: true, completion: nil)
+        let vc = placeDetailController()
+        vc.modalPresentationStyle = .currentContext
+        vc.result = searchResults[indexPath.item]
+        show(vc, sender: self)
     }
     
     //Layout

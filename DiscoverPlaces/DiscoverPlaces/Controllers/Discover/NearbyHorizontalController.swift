@@ -59,6 +59,12 @@ class NearbyHorizontalController: BaseCollectionViewController, UICollectionView
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = placeDetailController()
+        vc.result = results[indexPath.item]
+        show(vc, sender: self)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width - 24 - 24, height: view.frame.height - 24)
     }

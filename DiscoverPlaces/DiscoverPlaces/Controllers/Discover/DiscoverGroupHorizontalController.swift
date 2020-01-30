@@ -62,7 +62,7 @@ class DiscoverGroupHorizontalController: BaseCollectionViewController, UICollect
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = placeDetailController()
-        vc.name = placeResults[indexPath.item].name ?? "Error"
+        vc.result = placeResults[indexPath.item]
         show(vc, sender: self)
     }
     

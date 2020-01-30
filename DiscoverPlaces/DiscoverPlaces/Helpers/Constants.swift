@@ -6,8 +6,12 @@
 //  Copyright © 2020 AHApps. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Constants {
     static let key = "AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+    
+    static let placeImageControllerHeight: CGFloat = 250
 }
+
+
