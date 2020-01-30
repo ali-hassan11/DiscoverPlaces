@@ -22,7 +22,7 @@ class placeDetailController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .yellow
+        view.backgroundColor = .black
         view.addSubview(placeImageController.view)
         placeImageController.view.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor)
         placeImageController.view.constrainHeight(constant: Constants.placeImageControllerHeight)

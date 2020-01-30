@@ -11,7 +11,12 @@ import UIKit
 struct Constants {
     static let key = "AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
     
-    static let placeImageControllerHeight: CGFloat = 250
+    static let placeImageControllerHeight: CGFloat = 200
+    
+    static let nearbyHeaderCellHeight: CGFloat = 220
+    
+    static let discoverGroupSectionHeight: CGFloat = 160
+
 }
 
 
