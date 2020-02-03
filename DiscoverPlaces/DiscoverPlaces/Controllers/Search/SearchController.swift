@@ -31,11 +31,19 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
 //        if searchText == "" { return }
+        
+        let queryText = searchText.replacingOccurrences(of: " ", with: "+")
+        
         timer?.invalidate()
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (_) in
                         
-            Service.shared.fetchSearchResults(for: searchText) { (results, error) in
+            Service.shared.fetchSearchResults(for: queryText) { (results, error) in
+                
+                if let error = error {
+                    print("Failed to fetch: ", error.localizedDescription)
+                    return //Error message
+                }
                 
                 var filteredResults = [Result]()
                 
@@ -45,6 +53,10 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
                     }
                 })
                 self.searchResults = filteredResults
+                
+                if self.searchResults.isEmpty {
+                    print("NO RESULTS")
+                }
                 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()

@@ -14,8 +14,9 @@ class NearbyHorizontalController: HorizontalSnappingController, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .gray
         collectionView.register(NearbyHeaderCell.self, forCellWithReuseIdentifier: "id")
+        collectionView.contentInset = .init(top: 12, left: 12, bottom: 12, right: 12)
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
@@ -62,9 +63,4 @@ class NearbyHorizontalController: HorizontalSnappingController, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width - 24 - 24, height: view.frame.height - 24)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 12, left: 12, bottom: 12, right: 12)
-    }
-    
 }
