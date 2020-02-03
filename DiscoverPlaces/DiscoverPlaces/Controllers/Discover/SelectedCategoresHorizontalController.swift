@@ -14,16 +14,24 @@ import UIKit
 
 class SelectedCategoresHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
         
+    public func toggleSelectedState(index: Int) {
+        if collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.backgroundColor == .red {
+            collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.backgroundColor = .blue
+        } else {
+            collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.backgroundColor = .red
+        }
+    }
+    
     var categories: [Categoryy]! {
           didSet {
             collectionView.reloadData()
           }
       }
     
-    var didSelectHandler: ((Categoryy) -> ())?
+    var didSelectHandler: ((Categoryy, Int) -> ())?
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectHandler?(categories[indexPath.item])
+        didSelectHandler?(categories[indexPath.item], indexPath.item)
     }
     
     override func viewDidLoad() {
@@ -66,7 +74,7 @@ class SelectCategoryCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .yellow
+        backgroundColor = .blue
         
         layer.cornerRadius = 12 //Standardize
         clipsToBounds = true
@@ -75,6 +83,14 @@ class SelectCategoryCell: UICollectionViewCell {
         categoryLabel.fillSuperview()
         
     }
+    
+    public func toggleSelectedState() {
+          if backgroundColor == .red {
+              backgroundColor = .blue
+          } else {
+              backgroundColor = .red
+          }
+      }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
