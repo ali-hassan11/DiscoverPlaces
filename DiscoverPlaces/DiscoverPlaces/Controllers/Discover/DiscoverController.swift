@@ -14,10 +14,19 @@ class DiscoverController: BaseCollectionViewController, UICollectionViewDelegate
     fileprivate let nearbyCellId = "headerId"
     fileprivate let cellId = "cellId"
     
-    let selectedCategories = ["Restaurants", "Restaurants", "Restaurants"] //Make enum or su'um
+    var selectedCategories: [String]! { //[Category]?!
+        didSet {
+            //Trigger reloadData, which will set selected categories and trigger action in GroupHorizontalController
+            collectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Fetch selected categories from userDefaults
+        selectedCategories = ["amusement_park", "museum", "mosque", "clothing_store", "tourist_attraction"]
+        
         collectionView.backgroundColor = .white
         //Header step 1
         collectionView.register(NearbyHolder.self, forCellWithReuseIdentifier: nearbyCellId)
@@ -47,12 +56,11 @@ extension DiscoverController {
         default:
             //Category results
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! DiscoverCardsHolder
-            cell.sectionTitle.text = selectedCategories.first
+            cell.sectionTitle.text = selectedCategories[indexPath.item - 2]
+            cell.horizontalController.category = selectedCategories[indexPath.item - 2]
             return cell
         }
     }
-    
-    
     
     //Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

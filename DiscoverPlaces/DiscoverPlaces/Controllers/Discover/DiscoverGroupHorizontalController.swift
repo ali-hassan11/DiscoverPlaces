@@ -10,6 +10,12 @@ import UIKit
 
 class DiscoverGroupHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
+    var category: String! {
+        didSet {
+            fetchPlaces(for: category)
+        }
+    }
+    
     var placeResults = [Result]()
     
     override func viewDidLoad() {
@@ -22,7 +28,6 @@ class DiscoverGroupHorizontalController: HorizontalSnappingController, UICollect
             layout.scrollDirection = .horizontal
         }
         
-        fetchPlaces(for: "restaurant") //Will get this from DiscoverController (So will be able to set section title)
     }
     
     fileprivate func fetchPlaces(for category: String) {
