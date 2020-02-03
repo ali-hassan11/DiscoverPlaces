@@ -1,12 +1,31 @@
 //
-//  ConvenienceInitialisers.swift
-//  AppStoreLBTA
+//  File.swift
+//  DiscoverPlaces
 //
-//  Created by user on 24/01/2020.
+//  Created by user on 28/01/2020.
 //  Copyright © 2020 AHApps. All rights reserved.
 //
 
 import UIKit
+
+extension UIView {
+    
+    func addOverlay(color: UIColor, alpha: CGFloat) {
+        let overlay = UIView(frame: frame)
+        overlay.backgroundColor = color.withAlphaComponent(alpha)
+        addSubview(overlay)
+        overlay.fillSuperview()
+    }
+    
+    func addShadow() {
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 1)
+        layer.shadowRadius = 4
+        layer.shadowOpacity = 0.7
+        layer.masksToBounds = false
+    }
+    
+}
 
 extension UILabel {
     convenience init(text: String, font: UIFont? = nil, numberOfLines: Int = 1) {

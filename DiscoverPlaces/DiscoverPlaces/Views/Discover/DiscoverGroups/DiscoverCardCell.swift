@@ -56,6 +56,9 @@ class DicoverCardCell: UICollectionViewCell {
    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        addShadow()
+        
         addSubview(placeImageView)
         placeImageView.fillSuperview()
         

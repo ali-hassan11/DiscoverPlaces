@@ -23,8 +23,7 @@ class DiscoverController: BaseCollectionViewController, UICollectionViewDelegate
         collectionView.register(NearbyHolder.self, forCellWithReuseIdentifier: nearbyCellId)
         collectionView.register(DiscoverCardsHolder.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(SelectedCategoriesHolder.self, forCellWithReuseIdentifier: selectedCellId)
-    }
-    
+    }    
 }
 
 extension DiscoverController {
@@ -53,6 +52,8 @@ extension DiscoverController {
         }
     }
     
+    
+    
     //Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -68,9 +69,9 @@ extension DiscoverController {
             return .init(width: view.frame.width, height: 160)
         }
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 12, left: 0, bottom: 12, right: 0)
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
     }
     
 }

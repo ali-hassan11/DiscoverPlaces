@@ -16,6 +16,7 @@ class DiscoverGroupHorizontalController: HorizontalSnappingController, UICollect
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.register(DicoverCardCell.self, forCellWithReuseIdentifier: "id")
+        collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
@@ -63,10 +64,6 @@ class DiscoverGroupHorizontalController: HorizontalSnappingController, UICollect
     //Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: 180, height: view.frame.height - 16)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 8, left: 12, bottom: 8, right: 12)
     }
 }
 

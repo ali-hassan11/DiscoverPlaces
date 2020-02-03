@@ -31,7 +31,7 @@ class NearbyHolder: UICollectionViewCell {
         super.init(frame: frame)
         
         addSubview(captionLabel)
-        captionLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 12, bottom: 0, right: 16), size: .zero)
+        captionLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: 16), size: .zero)
         
         addSubview(nearbyHeaderController.view)
         nearbyHeaderController.view.anchor(top: captionLabel.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .zero)

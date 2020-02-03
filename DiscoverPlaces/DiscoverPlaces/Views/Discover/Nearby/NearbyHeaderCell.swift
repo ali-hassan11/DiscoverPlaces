@@ -52,6 +52,8 @@ class NearbyHeaderCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        addShadow()
+
         addSubview(placeImageView)
         placeImageView.fillSuperview()
         
@@ -60,7 +62,6 @@ class NearbyHeaderCell: UICollectionViewCell {
         
         cardView.addSubview(placeNameLabel)
         placeNameLabel.fillSuperview(padding: .init(top: 12, left: 12, bottom: 12, right: 12))
-        
     }
     
     required init?(coder: NSCoder) {

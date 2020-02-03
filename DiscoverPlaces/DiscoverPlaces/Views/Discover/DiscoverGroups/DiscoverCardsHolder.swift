@@ -10,8 +10,6 @@ import UIKit
 
 class DiscoverCardsHolder: UICollectionViewCell {
     
-    
-    
     let sectionTitle: UILabel! = {
         let lbl = UILabel()
         lbl.text = "Section Title"
@@ -21,22 +19,26 @@ class DiscoverCardsHolder: UICollectionViewCell {
     
     let moreButton: UIButton! = {
         let btn = UIButton(type: .system)
-        btn.backgroundColor = .blue
-        btn.constrainWidth(constant: 40)
+        btn.constrainHeight(constant: 25)
+        btn.constrainWidth(constant: 25)
+        btn.setImage(UIImage(named: "rightArrow"), for: .normal)
+        btn.contentMode = .scaleAspectFit
+        btn.tintColor = .black
+        btn.addShadow()
         return btn
     }()
     
     let hackSpacingView: UIView! = {
         let v = UIView()
         v.backgroundColor = .clear
-        v.constrainWidth(constant: 12)
+        v.constrainWidth(constant: 16)
         return v
     }()
     
     let hackSpacingView2: UIView! = {
         let v = UIView()
         v.backgroundColor = .clear
-        v.constrainWidth(constant: 12)
+        v.constrainWidth(constant: 16)
         return v
     }()
     
@@ -44,6 +46,9 @@ class DiscoverCardsHolder: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        backgroundColor = .white
+        
         let topStackView = UIStackView(arrangedSubviews: [hackSpacingView, sectionTitle, moreButton, hackSpacingView2])
         topStackView.alignment = .fill
         
