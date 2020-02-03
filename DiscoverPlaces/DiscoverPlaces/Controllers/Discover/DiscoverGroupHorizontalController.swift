@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DiscoverGroupHorizontalController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class DiscoverGroupHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     var placeResults = [Result]()
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NearbyHorizontalController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class NearbyHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     var results = [Result]()
     

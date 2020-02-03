@@ -8,13 +8,13 @@
 
 import UIKit
 
-class NearbyHolder: UICollectionReusableView {
+class NearbyHolder: UICollectionViewCell {
     
     let nearbyHeaderController = NearbyHorizontalController()
     
     let captionLabel: UILabel! = {
        let lbl = UILabel()
-        lbl.text = "Nearby places you may like..."
+        lbl.text = "You may like..."
         lbl.textColor = .darkText
         lbl.font = .systemFont(ofSize: 18, weight: .light)
         return lbl
