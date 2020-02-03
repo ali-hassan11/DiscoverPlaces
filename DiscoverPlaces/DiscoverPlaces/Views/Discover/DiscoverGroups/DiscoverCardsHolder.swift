@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DiscoverGroupCell: UICollectionViewCell {
+class DiscoverCardsHolder: UICollectionViewCell {
     
     
     

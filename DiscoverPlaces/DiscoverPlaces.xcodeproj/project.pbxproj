@@ -37,7 +37,8 @@
 		CE5835DB23DF1B7A00C89622 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DA23DF1B7A00C89622 /* Service.swift */; };
 		CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */; };
 		CE5835DF23E0C2C500C89622 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DE23E0C2C500C89622 /* DiscoverController.swift */; };
-		CE734D3123E0CB3C005AE0EB /* DiscoverGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE734D3023E0CB3C005AE0EB /* DiscoverGroupCell.swift */; };
+		CE734D3123E0CB3C005AE0EB /* DiscoverCardsHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE734D3023E0CB3C005AE0EB /* DiscoverCardsHolder.swift */; };
+		CE7B98DF23E84DDD00CF90F6 /* SelectedCategoriesHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B98DE23E84DDD00CF90F6 /* SelectedCategoriesHolder.swift */; };
 		CEEB4D5923E84978006D79E6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5523E84977006D79E6 /* Extensions.swift */; };
 		CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */; };
 		CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5723E84978006D79E6 /* Spacing.swift */; };
@@ -101,7 +102,8 @@
 		CE5835DA23DF1B7A00C89622 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlBuilder.swift; sourceTree = "<group>"; };
 		CE5835DE23E0C2C500C89622 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
-		CE734D3023E0CB3C005AE0EB /* DiscoverGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverGroupCell.swift; sourceTree = "<group>"; };
+		CE734D3023E0CB3C005AE0EB /* DiscoverCardsHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCardsHolder.swift; sourceTree = "<group>"; };
+		CE7B98DE23E84DDD00CF90F6 /* SelectedCategoriesHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCategoriesHolder.swift; sourceTree = "<group>"; };
 		CEEB4D5523E84977006D79E6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalStackView.swift; sourceTree = "<group>"; };
 		CEEB4D5723E84978006D79E6 /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
@@ -304,10 +306,9 @@
 		CE734D2F23E0CB2E005AE0EB /* Discover */ = {
 			isa = PBXGroup;
 			children = (
-				CE319CDE23E0EE910088B9D1 /* DiscoverCardCell.swift */,
-				CE734D3023E0CB3C005AE0EB /* DiscoverGroupCell.swift */,
-				CE319CE023E10A350088B9D1 /* NearbyHolder.swift */,
-				CE319CE223E10A410088B9D1 /* NearbyHeaderCell.swift */,
+				CEEB4D5D23E84BB0006D79E6 /* SelectedCategories */,
+				CEEB4D5F23E84BC7006D79E6 /* DiscoverGroups */,
+				CEEB4D5E23E84BC1006D79E6 /* Nearby */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -318,6 +319,32 @@
 				CE5835D323DEB7C500C89622 /* SearchCell.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		CEEB4D5D23E84BB0006D79E6 /* SelectedCategories */ = {
+			isa = PBXGroup;
+			children = (
+				CE7B98DE23E84DDD00CF90F6 /* SelectedCategoriesHolder.swift */,
+			);
+			path = SelectedCategories;
+			sourceTree = "<group>";
+		};
+		CEEB4D5E23E84BC1006D79E6 /* Nearby */ = {
+			isa = PBXGroup;
+			children = (
+				CE319CE023E10A350088B9D1 /* NearbyHolder.swift */,
+				CE319CE223E10A410088B9D1 /* NearbyHeaderCell.swift */,
+			);
+			path = Nearby;
+			sourceTree = "<group>";
+		};
+		CEEB4D5F23E84BC7006D79E6 /* DiscoverGroups */ = {
+			isa = PBXGroup;
+			children = (
+				CE734D3023E0CB3C005AE0EB /* DiscoverCardsHolder.swift */,
+				CE319CDE23E0EE910088B9D1 /* DiscoverCardCell.swift */,
+			);
+			path = DiscoverGroups;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -595,7 +622,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE734D3123E0CB3C005AE0EB /* DiscoverGroupCell.swift in Sources */,
+				CE734D3123E0CB3C005AE0EB /* DiscoverCardsHolder.swift in Sources */,
 				CE319CE523E10BE30088B9D1 /* NearbyHorizontalController.swift in Sources */,
 				CE319CDB23E0D8100088B9D1 /* DiscoverGroupHorizontalController.swift in Sources */,
 				CE5835C923DE173800C89622 /* BaseTabBarController.swift in Sources */,
@@ -605,6 +632,7 @@
 				CE5835D423DEB7C500C89622 /* SearchCell.swift in Sources */,
 				CE5835DF23E0C2C500C89622 /* DiscoverController.swift in Sources */,
 				CE5835CC23DE1F5E00C89622 /* SearchController.swift in Sources */,
+				CE7B98DF23E84DDD00CF90F6 /* SelectedCategoriesHolder.swift in Sources */,
 				CE58359D23DE16B000C89622 /* ViewController.swift in Sources */,
 				CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */,
 				CE5835CE23DE204B00C89622 /* BaseCollectionViewController.swift in Sources */,

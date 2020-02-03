@@ -13,34 +13,23 @@ class DiscoverController: BaseCollectionViewController, UICollectionViewDelegate
     fileprivate let cellId = "cellId"
     fileprivate let nearbyCellId = "headerId"
     
-    let types = ["Restaurants", "Restaurants", "Restaurants"]
+    let selectedCategories = ["Restaurants", "Restaurants", "Restaurants"] //Make enum or su'um
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         //Header step 1
         collectionView.register(NearbyHolder.self, forCellWithReuseIdentifier: nearbyCellId)
-        collectionView.register(DiscoverGroupCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(DiscoverCardsHolder.self, forCellWithReuseIdentifier: cellId)
     }
     
 }
 
 extension DiscoverController {
-    
-//    //Header
-//    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: nearbyCellId, for: indexPath) as! NearbyHolder
-//        return cell
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        return .init(width: view.frame.width, height: Constants.nearbyHeaderCellHeight)
-//    }
-//
-    
+  
     //Delegate & DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return types.count + 2 //(The 2 is the categories selector and nearby controller)
+        return selectedCategories.count + 2 //(The 2 is the categories selector + nearby controller)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -56,8 +45,8 @@ extension DiscoverController {
                 return cell
         default:
             //Category results
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! DiscoverGroupCell
-            cell.sectionTitle.text = types.first
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! DiscoverCardsHolder
+            cell.sectionTitle.text = selectedCategories.first
             return cell
         }
     }
