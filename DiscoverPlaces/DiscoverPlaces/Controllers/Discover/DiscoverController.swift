@@ -10,8 +10,9 @@ import UIKit
 
 class DiscoverController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    fileprivate let cellId = "cellId"
+    fileprivate let selectedCellId = "selectedId"
     fileprivate let nearbyCellId = "headerId"
+    fileprivate let cellId = "cellId"
     
     let selectedCategories = ["Restaurants", "Restaurants", "Restaurants"] //Make enum or su'um
     
@@ -21,6 +22,7 @@ class DiscoverController: BaseCollectionViewController, UICollectionViewDelegate
         //Header step 1
         collectionView.register(NearbyHolder.self, forCellWithReuseIdentifier: nearbyCellId)
         collectionView.register(DiscoverCardsHolder.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(SelectedCategoriesHolder.self, forCellWithReuseIdentifier: selectedCellId)
     }
     
 }
@@ -37,7 +39,7 @@ extension DiscoverController {
         switch indexPath.item {
         case 0:
             //Categories Selector
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nearbyCellId, for: indexPath) as! NearbyHolder
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: selectedCellId, for: indexPath) as! SelectedCategoriesHolder
             return cell
         case 1:
             //Nearby header
@@ -57,7 +59,7 @@ extension DiscoverController {
         switch indexPath.item {
         case 0:
             //Categories Selector
-            return .init(width: view.frame.width, height: 80)
+            return .init(width: view.frame.width, height: 40)
         case 1:
             //Nearby header
             return .init(width: view.frame.width, height: 220)
