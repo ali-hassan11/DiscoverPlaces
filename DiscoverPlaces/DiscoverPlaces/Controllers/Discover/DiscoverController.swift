@@ -60,6 +60,11 @@ extension DiscoverController {
             //Categories Selector
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: selectedCellId, for: indexPath) as! SelectedCategoriesHolder
             cell.horizontalController.categories = categories
+            cell.horizontalController.didSelectHandler = { [weak self] category in
+                print("Tapped on: \(String(describing: category.name))")
+//                func updateCategories()
+                self?.collectionView.reloadData()
+            }
             return cell
         case 1:
             //Nearby header

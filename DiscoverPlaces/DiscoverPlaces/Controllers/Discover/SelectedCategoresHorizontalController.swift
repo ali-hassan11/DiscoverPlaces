@@ -20,6 +20,12 @@ class SelectedCategoresHorizontalController: HorizontalSnappingController, UICol
           }
       }
     
+    var didSelectHandler: ((Categoryy) -> ())?
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectHandler?(categories[indexPath.item])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
