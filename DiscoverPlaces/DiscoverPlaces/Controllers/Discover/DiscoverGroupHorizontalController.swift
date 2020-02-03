@@ -49,8 +49,14 @@ class DiscoverGroupHorizontalController: HorizontalSnappingController, UICollect
             
             self.placeResults = filteredResults
             
+            
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                if self.placeResults.count == 0 {
+                    //PlaceHolder or alternative?
+                    return
+                } else {
+                    self.collectionView.reloadData()
+                }
             }
         }
     }

@@ -296,9 +296,9 @@
 			isa = PBXGroup;
 			children = (
 				CE5835DE23E0C2C500C89622 /* DiscoverController.swift */,
+				CE7B98E023E84EAD00CF90F6 /* SelectedCategoresHorizontalController.swift */,
 				CE319CE423E10BE30088B9D1 /* NearbyHorizontalController.swift */,
 				CE319CDA23E0D8100088B9D1 /* DiscoverGroupHorizontalController.swift */,
-				CE7B98E023E84EAD00CF90F6 /* SelectedCategoresHorizontalController.swift */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -307,8 +307,8 @@
 			isa = PBXGroup;
 			children = (
 				CEEB4D5D23E84BB0006D79E6 /* SelectedCategories */,
-				CEEB4D5F23E84BC7006D79E6 /* DiscoverGroups */,
 				CEEB4D5E23E84BC1006D79E6 /* Nearby */,
+				CEEB4D5F23E84BC7006D79E6 /* DiscoverGroups */,
 			);
 			path = Discover;
 			sourceTree = "<group>";

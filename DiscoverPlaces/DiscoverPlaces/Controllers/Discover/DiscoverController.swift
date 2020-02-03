@@ -14,9 +14,8 @@ class DiscoverController: BaseCollectionViewController, UICollectionViewDelegate
     fileprivate let nearbyCellId = "headerId"
     fileprivate let cellId = "cellId"
     
-    var selectedCategories: [String]! { //[Category]?!
+    var categories: [Categoryy]! {
         didSet {
-            //Trigger reloadData, which will set selected categories and trigger action in GroupHorizontalController
             collectionView.reloadData()
         }
     }
@@ -24,22 +23,34 @@ class DiscoverController: BaseCollectionViewController, UICollectionViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Fetch selected categories from userDefaults
-        selectedCategories = ["amusement_park", "museum", "mosque", "clothing_store", "tourist_attraction"]
+        categories = getCategories()
         
         collectionView.backgroundColor = .white
         //Header step 1
         collectionView.register(NearbyHolder.self, forCellWithReuseIdentifier: nearbyCellId)
         collectionView.register(DiscoverCardsHolder.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(SelectedCategoriesHolder.self, forCellWithReuseIdentifier: selectedCellId)
-    }    
+    }
+    
+    func getCategories() -> [Categoryy] {
+        
+        //Get fron user defaults
+        let cats = [Categoryy(name: "amusement_park", isSelected: true),
+                    Categoryy(name: "museum", isSelected: true),
+                    Categoryy(name: "mosque", isSelected: true),
+                    Categoryy(name: "clothing_store", isSelected: true),
+                    Categoryy(name: "tourist_attraction", isSelected: true)
+        ]
+        
+        return cats
+    }
 }
 
 extension DiscoverController {
   
     //Delegate & DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return selectedCategories.count + 2 //(The 2 is the categories selector + nearby controller)
+        return categories.count + 2 //(The 2 is the categories selector + nearby controller)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -48,6 +59,7 @@ extension DiscoverController {
         case 0:
             //Categories Selector
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: selectedCellId, for: indexPath) as! SelectedCategoriesHolder
+            cell.horizontalController.categories = categories
             return cell
         case 1:
             //Nearby header
@@ -56,8 +68,8 @@ extension DiscoverController {
         default:
             //Category results
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! DiscoverCardsHolder
-            cell.sectionTitle.text = selectedCategories[indexPath.item - 2]
-            cell.horizontalController.category = selectedCategories[indexPath.item - 2]
+            cell.sectionTitle.text = categories[indexPath.item - 2].name
+            cell.horizontalController.category = categories[indexPath.item - 2].name
             return cell
         }
     }
@@ -68,7 +80,7 @@ extension DiscoverController {
         switch indexPath.item {
         case 0:
             //Categories Selector
-            return .init(width: view.frame.width, height: 40)
+            return .init(width: view.frame.width, height: 60)
         case 1:
             //Nearby header
             return .init(width: view.frame.width, height: 220)
