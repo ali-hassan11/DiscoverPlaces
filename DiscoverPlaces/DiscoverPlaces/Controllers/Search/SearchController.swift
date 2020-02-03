@@ -85,10 +85,10 @@ extension SearchController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = placeDetailController()
-        vc.modalPresentationStyle = .currentContext
-        vc.result = searchResults[indexPath.item]
-        show(vc, sender: self)
+        let result = searchResults[indexPath.row]
+        let placeDetailController = PlaceDetailController()
+        placeDetailController.result = result
+        navigationController?.pushViewController(placeDetailController, animated: true)
     }
     
     //Layout

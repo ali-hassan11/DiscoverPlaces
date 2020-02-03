@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NearbyHeader: UICollectionReusableView {
+class NearbyHolder: UICollectionReusableView {
     
     let nearbyHeaderController = NearbyHorizontalController()
     

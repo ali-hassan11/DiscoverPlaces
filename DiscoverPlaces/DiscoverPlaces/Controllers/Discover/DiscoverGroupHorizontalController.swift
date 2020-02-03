@@ -59,13 +59,7 @@ class DiscoverGroupHorizontalController: BaseCollectionViewController, UICollect
         cell.result = placeResults[indexPath.row]
         return cell
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = placeDetailController()
-        vc.result = placeResults[indexPath.item]
-        show(vc, sender: self)
-    }
-    
+
     //Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: 180, height: view.frame.height - 16)
