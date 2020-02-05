@@ -89,7 +89,7 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
     
     fileprivate let categoryCellId = "categoryCellId"
     fileprivate let numberOfRows:CGFloat = 3
-    fileprivate let numberOfColumns:CGFloat = 3
+    fileprivate let numberOfColumns:CGFloat = 2
     fileprivate let lineSpacing: CGFloat = 10
     
     

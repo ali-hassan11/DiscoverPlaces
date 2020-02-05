@@ -37,6 +37,8 @@
 		CE5835DB23DF1B7A00C89622 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DA23DF1B7A00C89622 /* Service.swift */; };
 		CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */; };
 		CE5835DF23E0C2C500C89622 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DE23E0C2C500C89622 /* DiscoverController.swift */; };
+		CE6599ED23EA68D100E531CD /* VerticalStackview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6599EC23EA68D000E531CD /* VerticalStackview.swift */; };
+		CE6599F023EA692500E531CD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6599EF23EA692500E531CD /* HomeController.swift */; };
 		CE734D3123E0CB3C005AE0EB /* DiscoverCardsHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE734D3023E0CB3C005AE0EB /* DiscoverCardsHolder.swift */; };
 		CE7B98DF23E84DDD00CF90F6 /* SelectedCategoriesHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B98DE23E84DDD00CF90F6 /* SelectedCategoriesHolder.swift */; };
 		CE7B98E123E84EAE00CF90F6 /* SelectedCategoresHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B98E023E84EAD00CF90F6 /* SelectedCategoresHorizontalController.swift */; };
@@ -102,6 +104,8 @@
 		CE5835DA23DF1B7A00C89622 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlBuilder.swift; sourceTree = "<group>"; };
 		CE5835DE23E0C2C500C89622 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
+		CE6599EC23EA68D000E531CD /* VerticalStackview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalStackview.swift; sourceTree = "<group>"; };
+		CE6599EF23EA692500E531CD /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		CE734D3023E0CB3C005AE0EB /* DiscoverCardsHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCardsHolder.swift; sourceTree = "<group>"; };
 		CE7B98DE23E84DDD00CF90F6 /* SelectedCategoriesHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCategoriesHolder.swift; sourceTree = "<group>"; };
 		CE7B98E023E84EAD00CF90F6 /* SelectedCategoresHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCategoresHorizontalController.swift; sourceTree = "<group>"; };
@@ -199,6 +203,7 @@
 		CE58359723DE16B000C89622 /* DiscoverPlaces */ = {
 			isa = PBXGroup;
 			children = (
+				CE6599EE23EA692500E531CD /* NewLayout */,
 				CE5835C823DE173800C89622 /* BaseTabBarController.swift */,
 				CE5835D923DF1B6900C89622 /* Service */,
 				CE5835CA23DE17E200C89622 /* Controllers */,
@@ -248,6 +253,7 @@
 		CE5835CF23DE223800C89622 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CE6599EC23EA68D000E531CD /* VerticalStackview.swift */,
 				CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */,
 				CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */,
 				CEEB4D5723E84978006D79E6 /* Spacing.swift */,
@@ -282,6 +288,14 @@
 				CE5835DA23DF1B7A00C89622 /* Service.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		CE6599EE23EA692500E531CD /* NewLayout */ = {
+			isa = PBXGroup;
+			children = (
+				CE6599EF23EA692500E531CD /* HomeController.swift */,
+			);
+			path = NewLayout;
 			sourceTree = "<group>";
 		};
 		CE734D2B23E0CADE005AE0EB /* Search */ = {
@@ -636,6 +650,8 @@
 				CE7B98DF23E84DDD00CF90F6 /* SelectedCategoriesHolder.swift in Sources */,
 				CE58359D23DE16B000C89622 /* ViewController.swift in Sources */,
 				CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */,
+				CE6599F023EA692500E531CD /* HomeController.swift in Sources */,
+				CE6599ED23EA68D100E531CD /* VerticalStackview.swift in Sources */,
 				CE5835CE23DE204B00C89622 /* BaseCollectionViewController.swift in Sources */,
 				CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */,
 				CEEB4D5C23E84978006D79E6 /* HorizontalSnappingController.swift in Sources */,
