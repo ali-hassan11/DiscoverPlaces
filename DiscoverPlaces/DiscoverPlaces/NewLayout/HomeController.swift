@@ -18,14 +18,46 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     fileprivate let largeCellHolderId = "largeCellHeaderId"
     fileprivate let categoriesHolderId = "categoriesHolderId"
 
+    var results = [Result]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let button = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addTapped))
+        button.tintColor = .label
+        navigationItem.rightBarButtonItem = button
         
         collectionView.backgroundColor = .systemBackground
         collectionView.register(CategoriesHolder.self, forCellWithReuseIdentifier: categoriesHolderId)
         //Header 1
         collectionView.register(HomeLargeCellHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: largeCellHolderId)
+        
+        fetchData()
+    }
+    
+    fileprivate func fetchData() {
+
+        Service.shared.fetchNearbyPlaces { (res, error) in
+            
+            if let error = error {
+                print("Failed to fetch games: ", error)
+                return
+            }
+            
+            //success
+            guard let res = res else { return }
+            
+            self.results = res.results
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    @objc func addTapped() {
+        let locationSearchVC = UIViewController()
+        locationSearchVC.view.backgroundColor = .blue
+        show(locationSearchVC, sender: self)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -44,6 +76,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     //Header 2
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: largeCellHolderId, for: indexPath) as! HomeLargeCellHolder
+        cell.horizontalController.results = results
         return cell
     }
     
@@ -86,6 +119,12 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     
     fileprivate let largeCellId = "largeCellId"
     
+    var results: [Result]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -95,11 +134,13 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return results?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: largeCellId, for: indexPath)
+        guard let result = results?[indexPath.item] else { return UICollectionViewCell() }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: largeCellId, for: indexPath) as! HomeLargeCell
+        cell.result = result
         return cell
     }
     
@@ -117,13 +158,20 @@ let primaryHighlightColor = UIColor(displayP3Red: 255/255, green: 52/255, blue: 
 class HomeLargeCell: UICollectionViewCell {
     
     let placeImageView = UIImageView(image: UIImage(named: "hotel"))
-    let planeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 26, weight: .semibold), color: .white, numberOfLines: 3)
+    let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 26, weight: .semibold), color: .white, numberOfLines: 3)
     let distanceLabel = UILabel(text: "1.7 Km", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
     let undicededButton = UIButton(title: "Details", textColor: .white, width: 100, height: 40, font: .systemFont(ofSize: 18, weight: .medium), backgroundColor: primaryHighlightColor, cornerRadius: 10)
     
+    var result: Result! {
+        didSet {
+            let url = UrlBuilder.buildImageUrl(with: result.photos?.first?.photoReference ?? "")
+            placeImageView.sd_setImage(with: url)
+            placeNameLabel.text = result.name
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         
         backgroundColor = .lightGray
         layer.cornerRadius = 10
@@ -134,7 +182,7 @@ class HomeLargeCell: UICollectionViewCell {
         placeImageView.fillSuperview()
 
         let stackView = HorizontalStackView(arrangedSubviews: [
-            VerticalStackView(arrangedSubviews: [planeNameLabel, distanceLabel], spacing: 8),
+            VerticalStackView(arrangedSubviews: [placeNameLabel, distanceLabel], spacing: 8),
             undicededButton
         ])
         placeImageView.addSubview(stackView)
