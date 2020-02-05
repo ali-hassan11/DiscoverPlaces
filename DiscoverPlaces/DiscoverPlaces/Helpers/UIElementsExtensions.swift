@@ -41,6 +41,16 @@ extension UIView {
         layer.masksToBounds = false
     }
     
+    func addGradientBackground(firstColor: UIColor, secondColor: UIColor){
+        clipsToBounds = true
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [firstColor.cgColor, secondColor.withAlphaComponent(0.85).cgColor]
+        gradientLayer.frame = self.bounds
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.3)
+        gradientLayer.endPoint = CGPoint(x: 0, y: 0.45)
+        self.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
 }
 
 extension UILabel {
