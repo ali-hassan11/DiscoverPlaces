@@ -8,6 +8,22 @@
 
 import UIKit
 
+public class PaddingView: UIView {
+    convenience init(width: CGFloat? = nil, height: CGFloat? = nil) {
+        self.init()
+        backgroundColor = .clear
+        
+        if let width = width {
+            constrainWidth(constant: width)
+        }
+        
+        if let height = height {
+            constrainHeight(constant: height)
+        }
+    }
+}
+
+
 extension UIView {
     
     func addOverlay(color: UIColor, alpha: CGFloat) {
@@ -21,17 +37,18 @@ extension UIView {
         layer.shadowColor = UIColor.gray.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 1)
         layer.shadowRadius = 4
-        layer.shadowOpacity = 0.7
+        layer.shadowOpacity = 1
         layer.masksToBounds = false
     }
     
 }
 
 extension UILabel {
-    convenience init(text: String, font: UIFont? = nil, numberOfLines: Int = 1) {
+    convenience init(text: String, font: UIFont? = nil, color: UIColor? = nil, numberOfLines: Int = 1) {
         self.init(frame: .zero)
         self.text = text
         self.font = font
+        self.textColor = color
         self.numberOfLines = numberOfLines
     }
 }
