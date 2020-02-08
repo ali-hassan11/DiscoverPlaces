@@ -154,7 +154,6 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
 }
 
 let primaryHighlightColor = UIColor(displayP3Red: 255/255, green: 52/255, blue: 102/255, alpha: 1)
-
 class HomeLargeCell: UICollectionViewCell {
     
     let placeImageView = UIImageView(image: UIImage(named: "hotel"))
@@ -271,7 +270,7 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
 class CategoryCell: UICollectionViewCell {
     
     let categoryLabel = UILabel(text: "Food", font: .systemFont(ofSize: 20, weight: .semibold), color: .white, numberOfLines: 0)
-    let categoryImageView = UIImageView(image: UIImage(named: "cafe"))
+    let categoryImageView = UIImageView(image: UIImage(named: "food"))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
