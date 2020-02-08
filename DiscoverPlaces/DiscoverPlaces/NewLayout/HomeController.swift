@@ -5,6 +5,7 @@
 //  Created by user on 05/02/2020.
 //  Copyright © 2020 AHApps. All rights reserved.
 //
+let primaryHighlightColor = UIColor(displayP3Red: 255/255, green: 52/255, blue: 102/255, alpha: 1)
 
 import UIKit
 
@@ -169,7 +170,6 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     }
 }
 
-let primaryHighlightColor = UIColor(displayP3Red: 255/255, green: 52/255, blue: 102/255, alpha: 1)
 class HomeLargeCell: UICollectionViewCell {
     
     let placeImageView = UIImageView(image: UIImage(named: "hotel"))

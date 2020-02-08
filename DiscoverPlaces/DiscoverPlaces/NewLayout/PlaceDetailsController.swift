@@ -13,10 +13,12 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     fileprivate let placeImagesHolderId = "placeImagesHolderId"
     
     var place: Result?
+    var numberOfImages = 0
     
     var placeId: String! {
         didSet {
             print(place?.photos)
+            numberOfImages = 8
         }
     }
         
@@ -33,7 +35,9 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     //Header 2
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: placeImagesHolderId, for: indexPath)
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: placeImagesHolderId, for: indexPath) as! PlaceImagesHolder
+//      cell.didEndAccelerating = { [weak self] index in  ... cell.pageControlView.currentPage = index }
+        cell.pageControlView.numberOfPages = numberOfImages
         return cell
     }
     
@@ -56,6 +60,14 @@ class PlaceImagesHolder: UICollectionReusableView {
     
     let horizontalController = ImagesHorizontalController()
     
+    let pageControlView: UIPageControl! = {
+        let pc = UIPageControl()
+        pc.currentPageIndicatorTintColor = primaryHighlightColor
+        pc.tintColor = .black
+        pc.currentPage = 0
+        return pc
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -63,6 +75,9 @@ class PlaceImagesHolder: UICollectionReusableView {
         
         addSubview(horizontalController.view)
         horizontalController.view.fillSuperview()
+        
+        horizontalController.view.addSubview(pageControlView)
+        pageControlView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 20, bottom: 20, right: 20), size: .zero)
         
     }
     
@@ -94,7 +109,13 @@ class ImagesHorizontalController: HorizontalSnappingController, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 1
+    }
+    
+    //didEndAccelerating: (index) -> () ???
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        //Set pageControllVoew
+        //didEndAccelerating(calc index and send to main controller)
     }
     
 }
