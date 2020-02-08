@@ -60,6 +60,25 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         show(locationSearchVC, sender: self)
     }
     
+    //Header 2
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: largeCellHolderId, for: indexPath) as! HomeLargeCellHolder
+        cell.horizontalController.results = results
+        cell.horizontalController.didSelectHandler = { [weak self] result in
+            let detailsController = PlaceDetailsController()
+//            detailsController.title = result.name
+            detailsController.place = result
+            detailsController.placeId = result.id
+            self?.navigationController?.pushViewController(detailsController, animated: true)
+        }
+        return cell
+    }
+    
+    //Header 3
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return .init(width: view.frame.width, height: 480)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
@@ -72,19 +91,6 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width, height: 380)
     }
-    
-    //Header 2
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: largeCellHolderId, for: indexPath) as! HomeLargeCellHolder
-        cell.horizontalController.results = results
-        return cell
-    }
-    
-    //Header 3
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: 480)
-    }
- 
 }
 
 //--------------------------HEADER--------------------------
@@ -119,9 +125,16 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     
     fileprivate let largeCellId = "largeCellId"
     
-    //Add didselect ting here, pass result[indexPath.row]
+    //Add didselect ting here & call in didSelectItemAt with (result[indexPath.row])
     //Add closure to HomeController cellForItem
+    var didSelectHandler: ((Result) -> ())?
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let result = results?[indexPath.item] {
+            didSelectHandler?(result)
+        }
+    }
+        
     var results: [Result]? {
         didSet {
             collectionView.reloadData()
