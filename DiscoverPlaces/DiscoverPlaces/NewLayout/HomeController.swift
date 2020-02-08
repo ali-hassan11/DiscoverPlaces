@@ -119,6 +119,9 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     
     fileprivate let largeCellId = "largeCellId"
     
+    //Add didselect ting here, pass result[indexPath.row]
+    //Add closure to HomeController cellForItem
+    
     var results: [Result]? {
         didSet {
             collectionView.reloadData()
