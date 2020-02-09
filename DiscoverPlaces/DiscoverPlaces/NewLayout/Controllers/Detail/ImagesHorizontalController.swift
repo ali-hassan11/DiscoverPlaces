@@ -12,8 +12,7 @@ class ImagesHorizontalController: HorizontalSnappingController, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView.backgroundColor = .blue
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "imageCell")
     }
     

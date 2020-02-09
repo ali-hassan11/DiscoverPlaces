@@ -10,11 +10,12 @@ import UIKit
 
 class ImageCell: UICollectionViewCell {
     
+
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .lightText
-        
+        backgroundColor = .gray
     }
     
     required init?(coder: NSCoder) {

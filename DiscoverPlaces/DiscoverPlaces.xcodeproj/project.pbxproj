@@ -372,7 +372,6 @@
 			isa = PBXGroup;
 			children = (
 				CE659A0A23EF882300E531CD /* PlaceImagesHolder.swift */,
-				CE659A0C23EF884700E531CD /* ImagesHorizontalController.swift */,
 				CE659A0E23EF888900E531CD /* ImageCell.swift */,
 				CE659A1023EF897000E531CD /* PlaceDetailsCell.swift */,
 			);
@@ -383,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				CE6599F123EC96A200E531CD /* PlaceDetailsController.swift */,
+				CE659A0C23EF884700E531CD /* ImagesHorizontalController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
