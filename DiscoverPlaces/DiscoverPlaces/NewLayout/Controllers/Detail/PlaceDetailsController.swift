@@ -11,6 +11,7 @@ import UIKit
 class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     fileprivate let placeImagesHolderId = "placeImagesHolderId"
+    fileprivate let placeDetailsCellId = "placeDetailsCellId"
     
     var place: Result?
     var numberOfImages = 0
@@ -27,9 +28,10 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         collectionView.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .never
         
+        collectionView.register(PlaceDetailsCell.self, forCellWithReuseIdentifier: placeDetailsCellId)
+        
         //Header 1
         collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: placeImagesHolderId)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "id")
     }
     
     //Header 2
@@ -50,7 +52,10 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.item {
         case 0:
-            return UICollectionViewCell()//Details
+            //Details
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: placeDetailsCellId, for: indexPath) as! PlaceDetailsCell
+            cell.place = place
+            return cell
         case 1:
             return UICollectionViewCell()//Similar Places
         default:
@@ -58,8 +63,27 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.item {
+        case 0:
+            //Details
+            let dummyCell = PlaceDetailsCell(frame: .init(x: 0, y: 0, width: 0, height: 0))
+            dummyCell.place = place
+            dummyCell.layoutIfNeeded()
+            
+            let esitmatedSize = dummyCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 1000))
+            
+            return .init(width: view.frame.width, height: esitmatedSize.height)
+        case 1:
+            //Similar Places
+            return .init(width: view.frame.width, height: 400)
+        default:
+            return .zero
+        }
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return 1
     }
     
 }
