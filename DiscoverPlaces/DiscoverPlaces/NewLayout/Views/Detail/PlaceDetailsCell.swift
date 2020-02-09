@@ -12,7 +12,9 @@ class PlaceDetailsCell: UICollectionViewCell {
     
     var place: Result? {
         didSet {
-            
+            placeNameLabel.text = place?.name
+            addressLabel.text = place?.vicinity
+            openingTimesLabel.text = hoursText
         }
     }
     
@@ -60,7 +62,7 @@ class PlaceDetailsCell: UICollectionViewCell {
         return btn
     }()
     
-    let openingTimesTileLabel = UILabel(text: "Opening Times", font: .systemFont(ofSize: 23), color: .label, alignment: .center, numberOfLines: 0)
+    let openingTimesTileLabel = UILabel(text: "Opening Times", font: .systemFont(ofSize: 23), color: .label, alignment: .center, numberOfLines: 7)
     
     let openingTimesLabel = UILabel(text: hoursText, font: .systemFont(ofSize: 19), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
     
@@ -85,12 +87,22 @@ class PlaceDetailsCell: UICollectionViewCell {
         return v
     }()
     
+    let bottomView: UIView! = {
+        let v = UIView()
+        v.constrainHeight(constant: 80)
+        v.backgroundColor = .opaqueSeparator
+        return v
+    }()
+    
     let padding1 = UIView()
     let padding2 = UIView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        //Create alg to calculate labelHeight based on line height and number of days present in data i.e. if
+        //contains mon: x1, mon&tue x2, mon&tue&wed: x4 ,..., default: ?
+        openingTimesLabel.constrainHeight(constant: 165)
         backgroundColor = .systemBackground
         
         //TopStack
@@ -110,16 +122,19 @@ class PlaceDetailsCell: UICollectionViewCell {
         let buttonStackView = HorizontalStackView(arrangedSubviews: [websiteButton, navigateButton, shareButton], spacing: 0)
         buttonStackView.distribution = .equalCentering
         
-        let middleStackView = VerticalStackView(arrangedSubviews: [line1, buttonStackView, line2], spacing: 4)
+        let middleStackView = VerticalStackView(arrangedSubviews: [line1, buttonStackView, line2], spacing: 8)
        
         addSubview(middleStackView)
         middleStackView.anchor(top: topStackView.bottomAnchor, leading: topStackView.leadingAnchor, bottom: nil, trailing: topStackView.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
         
         //BottomStack
-        let bottomStack = VerticalStackView(arrangedSubviews: [openingTimesTileLabel, openingTimesLabel], spacing: 8)
+        let bottomStack = VerticalStackView(arrangedSubviews: [openingTimesTileLabel, openingTimesLabel, PaddingView(height: 4), line3], spacing: 8)
         
         addSubview(bottomStack)
         bottomStack.anchor(top: middleStackView.bottomAnchor, leading: topStackView.leadingAnchor, bottom: nil, trailing: topStackView.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
+        
+        addSubview(bottomView)
+        bottomView.anchor(top: bottomStack.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 20, left: 16, bottom: 16, right: 16))
     }
     
     required init?(coder: NSCoder) {
