@@ -48,7 +48,7 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width - (Constants.leftPadding + Constants.rightPadding), height: view.frame.height - (Constants.topPadding + Constants.bottomPadding))
+        return .init(width: view.frame.width - (Constants.leftPadding + Constants.rightPadding), height: view.frame.height - (Constants.topPadding + Constants.bottomPadding + 1))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

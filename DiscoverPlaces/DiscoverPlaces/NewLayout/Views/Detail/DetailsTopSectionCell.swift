@@ -17,7 +17,8 @@ class DetailsTopSectionCell: UICollectionViewCell {
         }
     }
     
-    let placeNameLabel = UILabel(text: "Burj Al Arab", font: .boldSystemFont(ofSize: 24), color: .label, alignment: .center, numberOfLines: 3)
+    //Sync label font with cell
+    let placeNameLabel = UILabel(text: "Burj Al Arab", font: .boldSystemFont(ofSize: 24), color: .label, alignment: .center, numberOfLines: 0)
     
     let addressLabel = UILabel(text: "123 Buckingham Place Place, Victoria, London, United Kingdom, E17 7AJ", font: .systemFont(ofSize: 19), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
     
@@ -36,14 +37,11 @@ class DetailsTopSectionCell: UICollectionViewCell {
         btn.constrainWidth(constant: 80)
         return btn
     }()
-    
-//    let padding1 = UIView()
-//    let padding2 = UIView()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = Constants.primaryHighlightColor
+        backgroundColor = .lightGray
         
         let ratingsStackView = UIStackView(arrangedSubviews: [UIView(), starView, reviewsButton, UIView()])
         ratingsStackView.spacing = 6
@@ -53,11 +51,8 @@ class DetailsTopSectionCell: UICollectionViewCell {
                                                                        ratingsStackView], spacing: 8)
         topStackView.alignment = .center
         
-        
         addSubview(topStackView)
-        topStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 16, left: 24, bottom: 0, right: 24))
-        
-        
+        topStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 24, bottom: 0, right: 24))
     }
     
     required init?(coder: NSCoder) {

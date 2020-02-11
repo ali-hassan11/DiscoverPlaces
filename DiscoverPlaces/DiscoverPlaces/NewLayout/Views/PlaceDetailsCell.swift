@@ -102,14 +102,9 @@ class PlaceDetailsCell: UICollectionViewCell {
         
         //Create alg to calculate labelHeight based on line height and number of days present in data i.e. if
         //contains mon: x1, mon&tue x2, mon&tue&wed: x4 ,..., default: ?
-//        openingTimesLabel.constrainHeight(constant: 165)
-//        openingTimesTileLabel.constrainHeight(constant: 28)
-//        addressLabel.translatesAutoresizingMaskIntoConstraints = false
-//        addressLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 28).isActive = true
-//        placeNameLabel.translatesAutoresizingMaskIntoConstraints = false
-//        placeNameLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 29).isActive = true
-//        placeNameLabel.backgroundColor = .systemPink
-//        openingTimesTileLabel.backgroundColor = .systemPink
+        openingTimesLabel.constrainHeight(constant: 165) //Must
+        openingTimesTileLabel.constrainHeight(constant: 28) //Must
+
         backgroundColor = .systemBackground
         
         //TopStack
@@ -120,14 +115,12 @@ class PlaceDetailsCell: UICollectionViewCell {
                                                                        addressLabel,
                                                                        ratingsStackView], spacing: 8)
         topStackView.alignment = .center
-        
-        
+            
         addSubview(topStackView)
         topStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 16, left: 24, bottom: 0, right: 24))
         
         //MiddleStack
         let buttonStackView = HorizontalStackView(arrangedSubviews: [websiteButton, navigateButton, shareButton], spacing: 0)
-        buttonStackView.distribution = .equalCentering
         
         let middleStackView = VerticalStackView(arrangedSubviews: [line1, buttonStackView, line2], spacing: 8)
        
@@ -139,6 +132,11 @@ class PlaceDetailsCell: UICollectionViewCell {
         
         addSubview(bottomStack)
         bottomStack.anchor(top: middleStackView.bottomAnchor, leading: topStackView.leadingAnchor, bottom: bottomAnchor, trailing: topStackView.trailingAnchor, padding: .init(top: 16, left: 0, bottom: 8, right: 0))
+        
+        
+//        placeNameLabel.backgroundColor = .gray
+//        addressLabel.backgroundColor = .lightGray
+        
     }
     
     required init?(coder: NSCoder) {

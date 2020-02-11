@@ -11,7 +11,8 @@ import UIKit
 class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     fileprivate let placeImagesHolderId = "placeImagesHolderId"
-    fileprivate let placeDetailsCellId = "placeDetailsCellId"
+    fileprivate let placeDetailsCellId = "detailsTopSectionCellId"
+    fileprivate let morePlacesHolderId = "morePlacesHolderId"
     
     var place: Result?
     var numberOfImages = 0
@@ -29,7 +30,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         navigationItem.largeTitleDisplayMode = .never
         
         collectionView.register(PlaceDetailsCell.self, forCellWithReuseIdentifier: placeDetailsCellId)
-        
+        collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: morePlacesHolderId)
         //Header 1
         collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: placeImagesHolderId)
     }
@@ -56,10 +57,16 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: placeDetailsCellId, for: indexPath) as! PlaceDetailsCell
             cell.place = place
             return cell
+            
+            //+ Address
+            
+            //+ Rating
         case 1:
-            return UICollectionViewCell()//Similar Places
+            //More Places
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: morePlacesHolderId, for: indexPath) as! MorePlacesHolder
+            return cell
         default:
-            return UICollectionViewCell()
+            fatalError("🟥 Too many items in section 🟥")
         }
     }
     
@@ -73,17 +80,16 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             
             let esitmatedSize = dummyCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 1000))
             
-            return .init(width: view.frame.width, height: esitmatedSize.height)
+            return .init(width: view.frame.width, height: esitmatedSize.height) 
         case 1:
-            //Similar Places
-            return .init(width: view.frame.width, height: 400)
+            //More Places
+            return .init(width: view.frame.width, height: 220)
         default:
             return .zero
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
-    
 }
