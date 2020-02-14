@@ -60,7 +60,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         cell.horizontalController.results = results
         cell.horizontalController.didSelectHandler = { [weak self] result in
             let detailsController = PlaceDetailsController()
-//            detailsController.title = result.name
+            detailsController.title = result.name
             detailsController.place = result
             detailsController.placeId = result.id
             self?.navigationController?.pushViewController(detailsController, animated: true)
@@ -74,7 +74,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

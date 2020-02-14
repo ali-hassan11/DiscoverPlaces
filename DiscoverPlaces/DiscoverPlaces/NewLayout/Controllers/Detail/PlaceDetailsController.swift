@@ -11,7 +11,7 @@ import UIKit
 class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     fileprivate let placeImagesHolderId = "placeImagesHolderId"
-    fileprivate let placeDetailsCellId = "detailsTopSectionCellId"
+    fileprivate let placeAddressCellId = "placeAddressCellId"
     fileprivate let morePlacesHolderId = "morePlacesHolderId"
     
     var place: Result?
@@ -29,7 +29,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         collectionView.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .never
         
-        collectionView.register(PlaceDetailsCell.self, forCellWithReuseIdentifier: placeDetailsCellId)
+        collectionView.register(PlaceAddressCell.self, forCellWithReuseIdentifier: placeAddressCellId)
         collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: morePlacesHolderId)
         //Header 1
         collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: placeImagesHolderId)
@@ -53,14 +53,17 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.item {
         case 0:
-            //Details
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: placeDetailsCellId, for: indexPath) as! PlaceDetailsCell
-            cell.place = place
+            //Address
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: placeAddressCellId, for: indexPath) as! PlaceAddressCell
             return cell
             
-            //+ Address
+            //Hours
             
-            //+ Rating
+            //Buttons
+            
+            // Reviews
+            
+            //More Places
         case 1:
             //More Places
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: morePlacesHolderId, for: indexPath) as! MorePlacesHolder
@@ -73,14 +76,8 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.item {
         case 0:
-            //Details
-            let dummyCell = PlaceDetailsCell(frame: .init(x: 0, y: 0, width: 0, height: 0))
-            dummyCell.place = place
-            dummyCell.layoutIfNeeded()
-            
-            let esitmatedSize = dummyCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 1000))
-            
-            return .init(width: view.frame.width, height: esitmatedSize.height) 
+            //Address
+            return .init(width: view.frame.width, height: 60)
         case 1:
             //More Places
             return .init(width: view.frame.width, height: 220)
