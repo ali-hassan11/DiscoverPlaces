@@ -15,8 +15,23 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
 
     var placeId: String! {
         didSet {
-            //FETCH PLACE DATA
+            fetchData(placeId: placeId)
             numberOfImages = 5 //Temp
+        }
+    }
+
+    func fetchData(placeId: String) {
+        Service.shared.fetchPlaceDetails(placeId: placeId) { (res, err) in
+
+            if let err = err {
+                print("Failed to fetch place details: ", err)
+                return
+            }
+
+            //success
+            guard let res = res else { return }
+            print(res)
+
         }
     }
 

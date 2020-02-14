@@ -34,6 +34,11 @@ class Service {
         
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
+
+    func fetchPlaceDetails(placeId: String, completion: @escaping (PlaceDetailResponse?, Error?) -> Void) {
+        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(placeId)&fields=name,photo,formatted_address,opening_hours,formatted_phone_number,website,review&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+        fetchGenericJSONData(urlString: urlString, completion: completion)
+    }
     
     func fetchGenericJSONData<T: Decodable>(urlString: String, completion: @escaping (T?, Error?) -> ()) {
         
