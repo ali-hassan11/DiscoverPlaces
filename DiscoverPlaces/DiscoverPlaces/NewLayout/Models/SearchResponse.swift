@@ -64,8 +64,8 @@ struct Location: Decodable {
 }
 
 struct OpeningHours: Codable {
-    let openNow: Bool
-    let weekdayText: [String]
+    let openNow: Bool?
+    let weekdayText: [String]?
 
     enum CodingKeys: String, CodingKey {
         case openNow = "open_now"
@@ -87,24 +87,20 @@ struct Photo: Decodable {
 }
 
 struct Review: Codable {
-    let authorName: String
-    let authorURL: String
-    let language: String
-    let profilePhotoURL: String
-    let rating: Int
-    let relativeTimeDescription: String
-    let text: String
-    let time: Int
+    let authorName: String?
+    let language: String?
+    let profilePhotoURL: String?
+    let rating: Int?
+    let relativeTimeDescription: String?
+    let text: String?
 
     enum CodingKeys: String, CodingKey {
         case authorName = "author_name"
-        case authorURL = "author_url"
         case language = "language"
         case profilePhotoURL = "profile_photo_url"
         case rating = "rating"
         case relativeTimeDescription = "relative_time_description"
         case text = "text"
-        case time = "time"
     }
 }
 
