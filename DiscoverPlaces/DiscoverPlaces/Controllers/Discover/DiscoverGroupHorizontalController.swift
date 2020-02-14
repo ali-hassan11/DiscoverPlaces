@@ -16,7 +16,7 @@ class DiscoverGroupHorizontalController: HorizontalSnappingController, UICollect
         }
     }
     
-    var placeResults = [Result]()
+    var placeResults = [PlaceResult]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class DiscoverGroupHorizontalController: HorizontalSnappingController, UICollect
             }
             
             //success
-            var filteredResults = [Result]()
+            var filteredResults = [PlaceResult]()
             
             results?.results.forEach({ (result) in
                 if result.containsPhotos() {

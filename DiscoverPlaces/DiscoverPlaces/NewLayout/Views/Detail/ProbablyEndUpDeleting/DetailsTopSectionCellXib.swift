@@ -10,7 +10,7 @@ import UIKit
 
 class DetailsTopSectionCellXib: UICollectionViewCell {
     
-    var place: Result? {
+    var place: PlaceResult? {
         didSet {
 //            placeNameLabel.text = place?.name
 //            addressLabel.text = place?.vicinity
@@ -41,7 +41,7 @@ class DetailsTopSectionCellXib: UICollectionViewCell {
 //    }()
 
     
-    func configure(with place: Result?) {
+    func configure(with place: PlaceResult?) {
         placeNameLabel.text = place?.name
         addressLabel.text = place?.vicinity
     }

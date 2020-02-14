@@ -7,7 +7,7 @@
 //
 
 struct Response: Decodable {
-    let results: [Result]
+    let results: [PlaceResult]
     let status: String?
 
     enum CodingKeys: String, CodingKey {
@@ -15,7 +15,7 @@ struct Response: Decodable {
     }
 }
 
-struct Result: Decodable {
+struct PlaceResult: Decodable {
     let geometry: Geometry?
     let icon: String?
     let id: String?
@@ -76,7 +76,7 @@ struct Photo: Decodable {
     }
 }
 
-extension Result {
+extension PlaceResult {
     func containsPhotos() -> Bool {
         if photos != nil && photos?.first != nil {
             return true

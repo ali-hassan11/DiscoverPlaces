@@ -15,6 +15,7 @@
 		60EADA8323F6D96B0095DBF9 /* ReviewsHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EADA8223F6D96B0095DBF9 /* ReviewsHorizontalController.swift */; };
 		60EADA8523F6DA370095DBF9 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EADA8423F6DA360095DBF9 /* ReviewCell.swift */; };
 		60EADA8723F6E1EB0095DBF9 /* ActionButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EADA8623F6E1EB0095DBF9 /* ActionButtonsCell.swift */; };
+		60EADA8923F706EB0095DBF9 /* PlaceDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EADA8823F706EB0095DBF9 /* PlaceDetailResponse.swift */; };
 		AAEB4ED4D2CBA033B4653B8D /* Pods_DiscoverPlaces_DiscoverPlacesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45BD1A0734859715269A27F /* Pods_DiscoverPlaces_DiscoverPlacesUITests.framework */; };
 		C6538ED96D942F3B3B93E7DC /* Pods_DiscoverPlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBEB45643518974E8DC13C17 /* Pods_DiscoverPlaces.framework */; };
 		CE15104423E21F4E00A88220 /* PlaceDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15104323E21F4E00A88220 /* PlaceDetailController.swift */; };
@@ -101,6 +102,7 @@
 		60EADA8223F6D96B0095DBF9 /* ReviewsHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsHorizontalController.swift; sourceTree = "<group>"; };
 		60EADA8423F6DA360095DBF9 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		60EADA8623F6E1EB0095DBF9 /* ActionButtonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonsCell.swift; sourceTree = "<group>"; };
+		60EADA8823F706EB0095DBF9 /* PlaceDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaceDetailResponse.swift; path = DiscoverPlaces/NewLayout/Views/Detail/PlaceDetailResponse.swift; sourceTree = SOURCE_ROOT; };
 		8B6B6E0A619307781EE1292A /* Pods-DiscoverPlaces.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscoverPlaces.debug.xcconfig"; path = "Target Support Files/Pods-DiscoverPlaces/Pods-DiscoverPlaces.debug.xcconfig"; sourceTree = "<group>"; };
 		A45BD1A0734859715269A27F /* Pods_DiscoverPlaces_DiscoverPlacesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DiscoverPlaces_DiscoverPlacesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AECB8B9B789646550A651780 /* Pods-DiscoverPlaces-DiscoverPlacesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscoverPlaces-DiscoverPlacesUITests.release.xcconfig"; path = "Target Support Files/Pods-DiscoverPlaces-DiscoverPlacesUITests/Pods-DiscoverPlaces-DiscoverPlacesUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -331,7 +333,6 @@
 		CE5835D623DF143700C89622 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CE5835D723DF145900C89622 /* SearchResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -366,6 +367,8 @@
 		CE6599F823EF848A00E531CD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CE5835D723DF145900C89622 /* SearchResponse.swift */,
+				60EADA8823F706EB0095DBF9 /* PlaceDetailResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -422,8 +425,8 @@
 		CE6599FD23EF869200E531CD /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				CE659A0C23EF884700E531CD /* ImagesHorizontalController.swift */,
 				CE6599F123EC96A200E531CD /* PlaceDetailsController.swift */,
+				CE659A0C23EF884700E531CD /* ImagesHorizontalController.swift */,
 				60EADA8223F6D96B0095DBF9 /* ReviewsHorizontalController.swift */,
 				CE8A2FCA23F088D200CDF866 /* MorePlacesHorizontalController.swift */,
 			);
@@ -827,6 +830,7 @@
 				CE659A0F23EF888900E531CD /* ImageCell.swift in Sources */,
 				CE8A2FCB23F088D200CDF866 /* MorePlacesHorizontalController.swift in Sources */,
 				CE659A0523EF87A200E531CD /* CategoriesHolder.swift in Sources */,
+				60EADA8923F706EB0095DBF9 /* PlaceDetailResponse.swift in Sources */,
 				60EADA8323F6D96B0095DBF9 /* ReviewsHorizontalController.swift in Sources */,
 				CE659A0123EF874C00E531CD /* HomeLargeCellsHorizontalController.swift in Sources */,
 				CE5835D123DE224C00C89622 /* UIView+Layout.swift in Sources */,

@@ -12,7 +12,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     fileprivate let largeCellHolderId = "largeCellHeaderId"
     fileprivate let categoriesHolderId = "categoriesHolderId"
 
-    var results = [Result]()
+    var results = [PlaceResult]()
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,7 +10,7 @@ import UIKit
 
 class DicoverCardCell: UICollectionViewCell {
     
-    var result: Result! {
+    var result: PlaceResult! {
         didSet{
             placeNameLabel.text = result.name
             

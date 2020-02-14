@@ -14,7 +14,7 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     
     //Add didselect ting here & call in didSelectItemAt with (result[indexPath.row])
     //Add closure to HomeController cellForItem
-    var didSelectHandler: ((Result) -> ())?
+    var didSelectHandler: ((PlaceResult) -> ())?
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let result = results?[indexPath.item] {
@@ -22,7 +22,7 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
         }
     }
         
-    var results: [Result]? {
+    var results: [PlaceResult]? {
         didSet {
             collectionView.reloadData()
         }

@@ -11,7 +11,7 @@ import SDWebImage
 
 class SearchCell: UICollectionViewCell {
     
-    var searchResult: Result! {
+    var searchResult: PlaceResult! {
         didSet {
             
             placeNameLabel.text = searchResult.name

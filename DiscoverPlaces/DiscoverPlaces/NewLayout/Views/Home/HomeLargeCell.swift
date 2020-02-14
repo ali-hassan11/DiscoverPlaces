@@ -15,7 +15,7 @@ class HomeLargeCell: UICollectionViewCell {
     let distanceLabel = UILabel(text: "1.7 Km", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
     let undicededButton = UIButton(title: "Details", textColor: .white, width: 100, height: 40, font: .systemFont(ofSize: 18, weight: .medium), backgroundColor: UIColor.systemPink, cornerRadius: 10)
     
-    var result: Result! {
+    var result: PlaceResult! {
         didSet {
             let url = UrlBuilder.buildImageUrl(with: result.photos?.first?.photoReference ?? "")
             placeImageView.sd_setImage(with: url)

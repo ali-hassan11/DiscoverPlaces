@@ -10,7 +10,17 @@ import UIKit
 
 class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    //Move Ids to cells
+    var place: PlaceResult?
+    var numberOfImages = 0 //Temp
+
+    var placeId: String! {
+        didSet {
+            //FETCH PLACE DATA
+            numberOfImages = 5 //Temp
+        }
+    }
+
+    //MOVE CELL ID'S TO CELLS AS STATIC LETS
     fileprivate let placeImagesHolderId = "placeImagesHolderId"
     fileprivate let addressCellId = "addressCellId"
     fileprivate let openingTimeCellId = "openingTimeCellId"
@@ -23,15 +33,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     fileprivate let morePlacesHolderId = "morePlacesHolderId"
 
     fileprivate let errorCellId = "errorCellId"
-    
-    var place: Result?
-    var numberOfImages = 0
-    
-    var placeId: String! {
-        didSet {
-            numberOfImages = 5
-        }
-    }
         
     override func viewDidLoad() {
         super.viewDidLoad()

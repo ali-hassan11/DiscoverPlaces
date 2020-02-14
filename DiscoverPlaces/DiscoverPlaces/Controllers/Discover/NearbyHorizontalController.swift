@@ -10,7 +10,7 @@ import UIKit
 
 class NearbyHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
-    var results = [Result]()
+    var results = [PlaceResult]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class NearbyHorizontalController: HorizontalSnappingController, UICollectionView
             }
             
             //success
-            var filteredResults = [Result]()
+            var filteredResults = [PlaceResult]()
             
             results?.results.forEach({ (result) in
                 if result.containsPhotos() {

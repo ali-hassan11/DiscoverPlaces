@@ -12,7 +12,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     fileprivate let cellId = "cellId"
     fileprivate let searchController = UISearchController(searchResultsController: nil)
-    fileprivate var searchResults = [Result]()
+    fileprivate var searchResults = [PlaceResult]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
                     return //Error message
                 }
                 
-                var filteredResults = [Result]()
+                var filteredResults = [PlaceResult]()
                 
                 results?.results.forEach({ (result) in
                     if result.containsPhotos() {

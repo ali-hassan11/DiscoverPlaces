@@ -10,7 +10,7 @@ import UIKit
 
 class PlaceDetailController: UIViewController {
     
-    var result: Result? { //Or just id to do fetch
+    var result: PlaceResult? { //Or just id to do fetch
         didSet {
             //Fetch Data & Populate cells
             navigationItem.title = result?.name
