@@ -35,7 +35,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         Service.shared.fetchNearbyPlaces { (res, error) in
             
             if let error = error {
-                print("Failed to fetch games: ", error)
+                print("Failed to fetch places: ", error)
                 return
             }
             
