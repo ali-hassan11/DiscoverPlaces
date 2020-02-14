@@ -10,6 +10,7 @@ import UIKit
 
 class AddressCell: UICollectionViewCell {
 
+    //USE VICINITY, NOT FORMATTED ADDRESS HERE
 
     let iconVimageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "mappin.circle.fill"))
