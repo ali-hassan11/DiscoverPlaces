@@ -15,7 +15,6 @@ class BaseTabBarController: UITabBarController {
 
         viewControllers = [
             createNavController(viewController: HomeController(), title: "Discover"),
-            createNavController(viewController: DiscoverController(), title: "Discover"),
             createNavController(viewController: SearchController(), title: "Search")
         ]
         
@@ -26,6 +25,8 @@ class BaseTabBarController: UITabBarController {
         
         navController.navigationBar.prefersLargeTitles = true
         navController.tabBarItem.title = title
+
+        navController.navigationBar.tintColor = Constants.primaryHighlightColor
         
         viewController.navigationItem.title = title
         viewController.view.backgroundColor = .white

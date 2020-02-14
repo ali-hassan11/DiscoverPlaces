@@ -8,6 +8,18 @@
 
 import UIKit
 
+
+extension UICollectionViewCell {
+    func addBottomSeparator() {
+        let separator = UIView()
+        separator.backgroundColor = .quaternaryLabel
+        separator.constrainHeight(constant: 1)
+        addSubview(separator)
+        separator.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: 16))
+
+    }
+}
+
 public class PaddingView: UIView {
     convenience init(width: CGFloat? = nil, height: CGFloat? = nil) {
         self.init()
