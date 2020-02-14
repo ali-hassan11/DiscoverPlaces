@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class MorePlacesHolder: UICollectionViewCell {
     
     let horizontalController = MorePlacesHorizontalController()

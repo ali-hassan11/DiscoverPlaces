@@ -12,8 +12,12 @@ class MorePlacesCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+
+        layer.cornerRadius = 10
+        clipsToBounds = true
+
+        backgroundColor = .systemGray
         
-        backgroundColor = .gray
         
     }
     

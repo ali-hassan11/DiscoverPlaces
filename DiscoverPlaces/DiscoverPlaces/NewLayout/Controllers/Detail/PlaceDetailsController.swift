@@ -17,6 +17,9 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     fileprivate let phoneNumberCellId = "phoneNumberCellId"
     fileprivate let webAddressCellId = "webAddressCellId"
 
+    fileprivate let actionButtonsCellId = "actionButtonsCellId"
+
+    fileprivate let reviewsHolderId = "reviewsHolderId"
     fileprivate let morePlacesHolderId = "morePlacesHolderId"
 
     fileprivate let errorCellId = "errorCellId"
@@ -36,22 +39,29 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         collectionView.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .never
 
+        //Header
+        collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: placeImagesHolderId)
 
+        //DetailCells
         collectionView.register(AddressCell.self, forCellWithReuseIdentifier: addressCellId)
         collectionView.register(OpeningTimeCell.self, forCellWithReuseIdentifier: openingTimeCellId)
         collectionView.register(PhoneNumberCell.self, forCellWithReuseIdentifier: phoneNumberCellId)
         collectionView.register(WebAddressCell.self, forCellWithReuseIdentifier: webAddressCellId)
 
-        //More Places
+        //ButtonsCell
+        collectionView.register(ActionButtonsCell.self, forCellWithReuseIdentifier: actionButtonsCellId)
+
+        //ReviewsHolder
+        collectionView.register(ReviewsHolder.self, forCellWithReuseIdentifier: reviewsHolderId)
+
+        //MorePlacesHolder
         collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: morePlacesHolderId)
-        //Header 1
-        collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: placeImagesHolderId)
 
         //Error
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
     }
     
-    //Header 2
+    //Header
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: placeImagesHolderId, for: indexPath) as! PlaceImagesHolder
         cell.pageControlView.numberOfPages = numberOfImages
@@ -61,7 +71,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         return cell
     }
     
-    //Header 3
+    //Header
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return .init(width: view.frame.width, height: 280)
     }
@@ -85,6 +95,13 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: webAddressCellId, for: indexPath) as! WebAddressCell
             return cell
         case 4:
+            //Reviews
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: actionButtonsCellId, for: indexPath) as! ActionButtonsCell
+            return cell
+        case 5:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reviewsHolderId, for: indexPath) as! ReviewsHolder
+            return cell
+        case 6:
             //More Places
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: morePlacesHolderId, for: indexPath) as! MorePlacesHolder
             return cell
@@ -113,6 +130,12 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             //Website
             return .init(width: view.frame.width, height: 60)
         case 4:
+            //ActionButtons
+            return .init(width: view.frame.width, height: 60)
+        case 5:
+            //Reviews
+            return .init(width: view.frame.width, height: 180)
+        case 6:
             //More Places
             return .init(width: view.frame.width, height: 220)
         default:
@@ -125,6 +148,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 7
     }
 }

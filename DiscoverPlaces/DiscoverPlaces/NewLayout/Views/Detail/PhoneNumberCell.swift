@@ -18,11 +18,11 @@ class PhoneNumberCell: UICollectionViewCell {
         return iv
     }()
 
-    let phoneNumberLabel = UILabel(text: "+44 800 00 1066", font: .systemFont(ofSize: 17, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
+    let phoneNumberLabel = UILabel(text: "+44 800 00 1066", font: .systemFont(ofSize: 16, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
 
     let chevronImageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "chevron.right"))
-        iv.constrainWidth(constant: 14)
+        iv.constrainWidth(constant: 10)
         iv.tintColor = .label
         iv.contentMode = .scaleAspectFit
         return iv

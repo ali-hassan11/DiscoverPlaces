@@ -16,10 +16,11 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let button = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(addTapped))
-        button.tintColor = .label
-        navigationItem.rightBarButtonItem = button
+
+        let locationBarButton = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(addTapped))
+
+        locationBarButton.tintColor = .label
+        navigationItem.rightBarButtonItem = locationBarButton
         
         collectionView.backgroundColor = .systemBackground
         collectionView.register(CategoriesHolder.self, forCellWithReuseIdentifier: categoriesHolderId)

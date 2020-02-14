@@ -18,11 +18,11 @@ class OpeningTimeCell: UICollectionViewCell {
         return iv
     }()
 
-    let openingHoursLabel = UILabel(text: "Today: 09:00 - 15:00", font: .systemFont(ofSize: 17, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
+    let openingHoursLabel = UILabel(text: "Today: 09:00 - 15:00", font: .systemFont(ofSize: 16, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
 
     let arrowIconImageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "chevron.right"))
-        iv.constrainWidth(constant: 14)
+        iv.constrainWidth(constant: 10)
         iv.tintColor = .label
         iv.contentMode = .scaleAspectFit
         return iv
