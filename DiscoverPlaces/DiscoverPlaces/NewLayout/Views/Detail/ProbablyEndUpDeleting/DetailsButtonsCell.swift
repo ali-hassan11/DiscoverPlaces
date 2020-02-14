@@ -13,7 +13,7 @@ class DetailsButtonsCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = Constants.primaryHighlightColor
+        backgroundColor = UIColor.systemPink
         
     }
     

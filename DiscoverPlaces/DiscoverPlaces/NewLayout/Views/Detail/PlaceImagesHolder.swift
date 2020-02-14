@@ -23,7 +23,7 @@ class PlaceImagesHolder: UICollectionReusableView {
     
     let pageControlView: UIPageControl! = {
         let pc = UIPageControl()
-        pc.currentPageIndicatorTintColor = Constants.primaryHighlightColor
+        pc.currentPageIndicatorTintColor = UIColor.systemPink
         pc.tintColor = .black
         pc.currentPage = 0
         return pc

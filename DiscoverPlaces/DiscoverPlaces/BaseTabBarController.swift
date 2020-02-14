@@ -26,7 +26,7 @@ class BaseTabBarController: UITabBarController {
         navController.navigationBar.prefersLargeTitles = true
         navController.tabBarItem.title = title
 
-        navController.navigationBar.tintColor = Constants.primaryHighlightColor
+        navController.navigationBar.tintColor = UIColor.systemPink
         
         viewController.navigationItem.title = title
         viewController.view.backgroundColor = .white

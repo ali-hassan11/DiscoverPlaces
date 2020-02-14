@@ -16,7 +16,7 @@ class MorePlacesCell: UICollectionViewCell {
         layer.cornerRadius = 10
         clipsToBounds = true
 
-        backgroundColor = .systemGray
+        backgroundColor = .secondarySystemBackground
         
         
     }

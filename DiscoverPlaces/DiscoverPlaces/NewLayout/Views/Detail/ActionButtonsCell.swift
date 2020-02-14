@@ -15,8 +15,7 @@ class ActionButtonsCell: UICollectionViewCell {
         btn.setTitle(" Favourite", for: .normal)
         btn.setImage(UIImage(systemName: "heart"), for: .normal)
         btn.tintColor = .white
-        btn.backgroundColor = .systemPink
-//        btn.constrainWidth(constant: 120)
+        btn.backgroundColor = UIColor.systemPink
         btn.layer.cornerRadius = 10
         btn.clipsToBounds = true
         return btn
@@ -27,8 +26,7 @@ class ActionButtonsCell: UICollectionViewCell {
         btn.setTitle(" To-Do", for: .normal)
         btn.setImage(UIImage(systemName: "list.dash"), for: .normal)
         btn.tintColor = .white
-        btn.backgroundColor = .systemPink
-//        btn.constrainWidth(constant: 120)
+        btn.backgroundColor = UIColor.systemPink
         btn.layer.cornerRadius = 10
         btn.clipsToBounds = true
         return btn
@@ -37,10 +35,9 @@ class ActionButtonsCell: UICollectionViewCell {
     let shareButton: UIButton! = {
         let btn = UIButton(type: .system)
         btn.setTitle(" Share", for: .normal)
-        btn.setImage(UIImage(systemName: "square.and.arrow.up.fill"), for: .normal)
+        btn.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         btn.tintColor = .white
-        btn.backgroundColor = .systemPink
-//        btn.constrainWidth(constant: 120)
+        btn.backgroundColor = UIColor.systemPink
         btn.layer.cornerRadius = 10
         btn.clipsToBounds = true
         return btn

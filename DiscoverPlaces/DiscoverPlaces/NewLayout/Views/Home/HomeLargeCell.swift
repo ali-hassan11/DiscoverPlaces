@@ -13,7 +13,7 @@ class HomeLargeCell: UICollectionViewCell {
     let placeImageView = UIImageView(image: UIImage(named: "hotel"))
     let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 26, weight: .semibold), color: .white, numberOfLines: 3)
     let distanceLabel = UILabel(text: "1.7 Km", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
-    let undicededButton = UIButton(title: "Details", textColor: .white, width: 100, height: 40, font: .systemFont(ofSize: 18, weight: .medium), backgroundColor: Constants.primaryHighlightColor, cornerRadius: 10)
+    let undicededButton = UIButton(title: "Details", textColor: .white, width: 100, height: 40, font: .systemFont(ofSize: 18, weight: .medium), backgroundColor: UIColor.systemPink, cornerRadius: 10)
     
     var result: Result! {
         didSet {

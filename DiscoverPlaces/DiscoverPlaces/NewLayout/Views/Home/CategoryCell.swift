@@ -10,8 +10,8 @@ import UIKit
 
 class CategoryCell: UICollectionViewCell {
     
-    let categoryLabel = UILabel(text: "Food", font: .systemFont(ofSize: 20, weight: .semibold), color: .white, numberOfLines: 0)
-    let categoryImageView = UIImageView(image: UIImage(named: "food"))
+    let categoryLabel = UILabel(text: "Category", font: .systemFont(ofSize: 20, weight: .semibold), color: .white, alignment: .center, numberOfLines: 0)
+    let categoryImageView = UIImageView(image: UIImage(named: ""))
     
     override init(frame: CGRect) {
         super.init(frame: frame)

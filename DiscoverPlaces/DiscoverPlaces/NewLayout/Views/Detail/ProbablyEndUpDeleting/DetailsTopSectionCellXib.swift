@@ -26,7 +26,7 @@ class DetailsTopSectionCellXib: UICollectionViewCell {
 
 //    let starView: UIView! = {
 //        let v = UIView()
-//        v.backgroundColor = Constants.primaryHighlightColor
+//        v.backgroundColor = UIColor.systemPink
 //        v.constrainHeight(constant: 22)
 //        v.constrainWidth(constant: 115)
 //        return v
