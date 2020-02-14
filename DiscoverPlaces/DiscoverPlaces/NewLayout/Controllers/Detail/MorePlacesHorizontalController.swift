@@ -30,6 +30,6 @@ class MorePlacesHorizontalController: HorizontalSnappingController, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (view.frame.width - 24 - 24 - 10) / 2.2, height: view.frame.height)
+        return .init(width: 160, height: view.frame.height)
     }
 }
