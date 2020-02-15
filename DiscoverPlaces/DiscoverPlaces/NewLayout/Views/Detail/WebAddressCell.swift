@@ -10,6 +10,12 @@ import UIKit
 
 class WebAddressCell: UICollectionViewCell {
 
+    var webAddress: String? {
+        didSet {
+            websiteAddressLabel.text = webAddress
+        }
+    }
+    
     let iconVimageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "globe"))
         iv.constrainWidth(constant: 30)

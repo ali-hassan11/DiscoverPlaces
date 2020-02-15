@@ -10,6 +10,12 @@ import UIKit
 
 class OpeningTimeCell: UICollectionViewCell {
     
+    var todayOpeningTimes: String? {
+        didSet {
+            openingHoursLabel.text = todayOpeningTimes
+        }
+    }
+    
     let iconVimageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "clock.fill"))
         iv.constrainWidth(constant: 30)

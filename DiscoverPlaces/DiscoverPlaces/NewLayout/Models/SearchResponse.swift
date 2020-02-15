@@ -45,7 +45,7 @@ struct Location: Decodable {
     let lng: Double?
 }
 
-struct OpeningHours: Codable {
+struct OpeningHours: Decodable {
     let openNow: Bool?
     let weekdayText: [String]?
 
@@ -68,7 +68,7 @@ struct Photo: Decodable {
     }
 }
 
-struct Review: Codable {
+struct Review: Decodable {
     let authorName: String?
     let language: String?
     let profilePhotoURL: String?

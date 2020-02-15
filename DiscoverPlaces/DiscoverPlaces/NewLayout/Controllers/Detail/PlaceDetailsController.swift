@@ -26,7 +26,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     func fetchData(for id: String) {
-        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,vicinity,formatted_phone_number&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,vicinity&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
         guard let url = URL(string: urlString) else { return }
         
@@ -124,14 +124,17 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case 1:
             //Hours
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: openingTimeCellId, for: indexPath) as! OpeningTimeCell
+            cell.todayOpeningTimes = place?.opening_hours?.weekdayText?.first ?? ""//GET THE CORRECT DOTW
             return cell
         case 2:
             //PhoneNumber
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: phoneNumberCellId, for: indexPath) as! PhoneNumberCell
+            cell.phoneNumber = place?.formatted_Phone_Number
             return cell
         case 3:
             //Website
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: webAddressCellId, for: indexPath) as! WebAddressCell
+            cell.webAddress = place?.website
             return cell
         case 4:
             //Reviews
@@ -164,7 +167,12 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             return .init(width: view.frame.width, height: 60)
         case 2:
             //PhoneNumber
-            return .init(width: view.frame.width, height: 60)
+            //MAKE FUNC TO CHECK IF NIL, IF NOT RETURN 60
+            if place?.formatted_Phone_Number != nil {
+                return .init(width: view.frame.width, height: 60)
+            } else {
+                return .zero
+            }
         case 3:
             //Website
             return .init(width: view.frame.width, height: 60)
@@ -173,9 +181,11 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             return .init(width: view.frame.width, height: 60)
         case 5:
             //Reviews
+            //CHECK IF NIL, IF NOT RETURN 180
             return .init(width: view.frame.width, height: 180)
         case 6:
             //More Places
+            //CHECK IF NIL, IF NOT RETURN 180
             return .init(width: view.frame.width, height: 220)
         default:
             return .zero

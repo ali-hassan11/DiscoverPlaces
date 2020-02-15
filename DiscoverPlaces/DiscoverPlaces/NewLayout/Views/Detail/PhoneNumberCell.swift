@@ -9,7 +9,13 @@
 import UIKit
 
 class PhoneNumberCell: UICollectionViewCell {
-
+    
+    var phoneNumber: String? {
+        didSet {
+            phoneNumberLabel.text = phoneNumber
+        }
+    }
+    
     let iconVimageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "phone.circle.fill"))
         iv.constrainWidth(constant: 30)
