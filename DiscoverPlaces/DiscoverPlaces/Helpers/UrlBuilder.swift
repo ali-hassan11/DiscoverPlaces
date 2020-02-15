@@ -10,8 +10,8 @@ import Foundation
 
 class UrlBuilder {
     
-    static func buildImageUrl(with photoRef: String) -> URL? { //Width, Height?
-        let urlStr = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(500)&photoreference=\(photoRef)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+    static func buildImageUrl(with photoRef: String, width: Int) -> URL? { //Width, Height?
+        let urlStr = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(width)&photoreference=\(photoRef)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
         guard let url = URL(string: urlStr) else { return nil }
         

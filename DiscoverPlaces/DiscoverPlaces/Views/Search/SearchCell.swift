@@ -17,8 +17,8 @@ class SearchCell: UICollectionViewCell {
             placeNameLabel.text = searchResult.name
             placeNameLabel.textColor = .white
             
-            if let photoReference = searchResult.photos?.first?.photoReference {
-                let imageUrl = UrlBuilder.buildImageUrl(with: photoReference)
+            if let photo = searchResult.photos?.first, let reference = photo.photoReference {
+                let imageUrl = UrlBuilder.buildImageUrl(with: reference, width: photo.width ?? 2000)
                 placeImageView.sd_setImage(with: imageUrl)
             } else {
                 //Set a default image

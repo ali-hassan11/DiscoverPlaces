@@ -14,9 +14,9 @@ class NearbyHeaderCell: UICollectionViewCell {
         didSet{
             placeNameLabel.text = result.name
             
-            if let photoReference = result.photos?.first?.photoReference {
-                let imageUrl = UrlBuilder.buildImageUrl(with: photoReference)
-                placeImageView.sd_setImage(with: imageUrl)
+            if let photo = result.photos?.first, let reference = photo.photoReference {
+                guard let url = UrlBuilder.buildImageUrl(with: reference, width: photo.width ?? 2000) else { return /*Default Image*/ }
+                placeImageView.sd_setImage(with: url)
             } else {
                 //Set a default image
                 return

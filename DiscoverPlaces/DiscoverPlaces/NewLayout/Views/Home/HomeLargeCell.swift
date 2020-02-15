@@ -17,15 +17,21 @@ class HomeLargeCell: UICollectionViewCell {
     
     var result: PlaceResult! {
         didSet {
-            let url = UrlBuilder.buildImageUrl(with: result.photos?.first?.photoReference ?? "")
-            placeImageView.sd_setImage(with: url)
+            if let photo = result.photos?.first, let reference = photo.photoReference {
+                guard let url = UrlBuilder.buildImageUrl(with: reference, width: photo.width ?? 2000) else {
+                    return /*Default Image*/
+                }
+                placeImageView.sd_setImage(with: url)
+            } else {
+                //Default Image
+            }
             placeNameLabel.text = result.name
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+    
         backgroundColor = .lightGray
         layer.cornerRadius = 10
         clipsToBounds = true
