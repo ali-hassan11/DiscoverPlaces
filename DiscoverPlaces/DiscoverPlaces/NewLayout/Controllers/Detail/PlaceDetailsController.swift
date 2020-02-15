@@ -26,7 +26,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     func fetchData(for id: String) {
-        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,vicinity&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,photo,vicinity&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
         guard let url = URL(string: urlString) else { return }
         
@@ -98,7 +98,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         //Error
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
     }
-    
+
     //Header
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: placeImagesHolderId, for: indexPath) as! PlaceImagesHolder
@@ -159,15 +159,23 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.item {
+            //REFACTOR THESE IS STATEMENTS
         case 0:
             //Address
-            return .init(width: view.frame.width, height: 60)
+            if place?.vicinity != nil {
+                return .init(width: view.frame.width, height: 60)
+            } else {
+                return .zero
+            }
         case 1:
             //Hours
-            return .init(width: view.frame.width, height: 60)
+            if place?.opening_hours != nil {
+                return .init(width: view.frame.width, height: 60)
+            } else {
+                return .zero
+            }
         case 2:
             //PhoneNumber
-            //MAKE FUNC TO CHECK IF NIL, IF NOT RETURN 60
             if place?.formatted_Phone_Number != nil {
                 return .init(width: view.frame.width, height: 60)
             } else {
@@ -175,7 +183,11 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             }
         case 3:
             //Website
-            return .init(width: view.frame.width, height: 60)
+            if place?.website != nil {
+                return .init(width: view.frame.width, height: 60)
+            } else {
+                return .zero
+            }
         case 4:
             //ActionButtons
             return .init(width: view.frame.width, height: 60)
