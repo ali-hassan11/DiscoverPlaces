@@ -39,7 +39,8 @@ class PlaceImagesHolder: UICollectionReusableView {
         
         horizontalController.view.addSubview(pageControlView)
         
-        pageControlView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 20, bottom: 20, right: 20), size: .zero)
+        pageControlView.isUserInteractionEnabled = false
+        pageControlView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 20), size: .zero)
         
         
         addSubview(faveButton)

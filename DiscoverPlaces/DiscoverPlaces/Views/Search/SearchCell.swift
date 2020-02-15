@@ -13,12 +13,11 @@ class SearchCell: UICollectionViewCell {
     
     var searchResult: PlaceResult! {
         didSet {
-            
             placeNameLabel.text = searchResult.name
             placeNameLabel.textColor = .white
             
-            if let photo = searchResult.photos?.first, let reference = photo.photoReference {
-                let imageUrl = UrlBuilder.buildImageUrl(with: reference, width: photo.width ?? 2000)
+            if let photo = searchResult.photos?.first {
+                let imageUrl = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width)
                 placeImageView.sd_setImage(with: imageUrl)
             } else {
                 //Set a default image

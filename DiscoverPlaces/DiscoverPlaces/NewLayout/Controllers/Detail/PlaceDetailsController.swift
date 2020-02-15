@@ -102,7 +102,8 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     //Header
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: placeImagesHolderId, for: indexPath) as! PlaceImagesHolder
-        cell.pageControlView.numberOfPages = numberOfImages
+        cell.pageControlView.numberOfPages = place?.photos?.count ?? 0
+        cell.horizontalController.photos = place?.photos
         cell.horizontalController.didEndAccelerating = { index in //weak self?
             cell.pageControlView.currentPage = index
         }

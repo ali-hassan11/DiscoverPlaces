@@ -56,9 +56,9 @@ struct OpeningHours: Decodable {
 }
 
 struct Photo: Decodable {
-    let height: Int?
-    let photoReference: String?
-    let width: Int?
+    let height: Int
+    let photoReference: String
+    let width: Int
     //HTML Attrs?
 
     enum CodingKeys: String, CodingKey {

@@ -10,6 +10,12 @@ import UIKit
 
 class ImagesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
+    var photos: [Photo]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .systemBackground
@@ -17,11 +23,12 @@ class ImagesHorizontalController: HorizontalSnappingController, UICollectionView
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return photos?.count ?? 0 // or 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCell
+        cell.photo = photos?[indexPath.item]
         return cell
     }
     

@@ -17,8 +17,8 @@ class HomeLargeCell: UICollectionViewCell {
     
     var result: PlaceResult! {
         didSet {
-            if let photo = result.photos?.first, let reference = photo.photoReference {
-                guard let url = UrlBuilder.buildImageUrl(with: reference, width: photo.width ?? 2000) else {
+            if let photo = result.photos?.first {
+                guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else {
                     return /*Default Image*/
                 }
                 placeImageView.sd_setImage(with: url)
