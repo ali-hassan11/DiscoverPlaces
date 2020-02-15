@@ -11,6 +11,11 @@ import UIKit
 class AddressCell: UICollectionViewCell {
 
     //USE VICINITY, NOT FORMATTED ADDRESS HERE
+    var vicinity: String? {
+        didSet {
+            addressLabel.text = vicinity
+        }
+    }
 
     let iconVimageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "mappin.circle.fill"))

@@ -10,7 +10,7 @@ import UIKit
 
 class PlaceDetailsCell: UICollectionViewCell {
     
-    var place: PlaceResult? {
+    var place: PlaceDetailResult? {
         didSet {
             placeNameLabel.text = place?.name
             addressLabel.text = place?.vicinity

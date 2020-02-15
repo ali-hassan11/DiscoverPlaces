@@ -10,12 +10,12 @@ import UIKit
 
 class DetailsTopSectionCell: UICollectionViewCell {
     
-    var place: PlaceResult? {
-        didSet {
-            placeNameLabel.text = place?.name
-            addressLabel.text = place?.vicinity
-        }
-    }
+//    var place: PlaceDetailResult? {
+//        didSet {
+//            placeNameLabel.text = place?.name
+//            addressLabel.text = place?.vicinity
+//        }
+//    }
     
     //Sync label font with cell
     let placeNameLabel = UILabel(text: "Burj Al Arab", font: .boldSystemFont(ofSize: 24), color: .label, alignment: .center, numberOfLines: 0)

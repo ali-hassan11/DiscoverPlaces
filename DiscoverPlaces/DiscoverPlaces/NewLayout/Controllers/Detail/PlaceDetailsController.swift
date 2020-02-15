@@ -10,19 +10,23 @@ import UIKit
 
 class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var place: PlaceResult?
+    var place: PlaceDetailResult?
     var numberOfImages = 0 //Temp
 
-    var placeId: String! {
+    var placeId: String? {
         didSet {
-            //FETCH PLACE DATA
-            fetchData()
+            //SHOW PLACEHOLDERS UNTIL ALL DATA IS LOADED, WHEN LOADED PASS INTO CELL'S DID SET PROPERTY 💯
+            //MOVE FETCH TO SERVICE
+            if let id = placeId {
+                fetchData(for: id)
+            }
+            
             numberOfImages = 5 //Temp
         }
     }
     
-    func fetchData() {
-        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name,formatted_phone_number&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+    func fetchData(for id: String) {
+        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,vicinity,formatted_phone_number&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
         guard let url = URL(string: urlString) else { return }
         
@@ -32,13 +36,18 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
                 print("Falied to fetch: ", error)
                 return
             }
-            
+            //success
             guard let data = data else { return }
             print(data)
             
             do {
-                let objects = try JSONDecoder().decode(Root.self, from: data)
-                print(objects)
+                let placeResponse = try JSONDecoder().decode(PlaceDetailResponse.self, from: data)
+                print(placeResponse.result ?? "WHOOPS")
+                self.place = placeResponse.result
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
             } catch let jsonErr {
                 print(jsonErr)
                 return
@@ -46,15 +55,8 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         }.resume()
     }
 
-    struct Root: Decodable {
-        let status: String
-        let results: [DtailResult]?
-    }
-    
-    struct DtailResult: Decodable {
-        let name: String
-    }
-    
+    // MARK: - Result
+
     //MOVE CELL ID'S TO CELLS AS STATIC LETS
     fileprivate let placeImagesHolderId = "placeImagesHolderId"
     fileprivate let addressCellId = "addressCellId"
@@ -117,6 +119,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case 0:
             //Address
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addressCellId, for: indexPath) as! AddressCell
+            cell.vicinity = place?.vicinity
             return cell
         case 1:
             //Hours

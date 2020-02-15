@@ -55,21 +55,20 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         show(locationSearchVC, sender: self)
     }
     
-    //Header 2
+    //Header (Large Cell)
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: largeCellHolderId, for: indexPath) as! HomeLargeCellHolder
         cell.horizontalController.results = results
         cell.horizontalController.didSelectHandler = { [weak self] result in
             let detailsController = PlaceDetailsController()
             detailsController.title = result.name
-            detailsController.place = result
-            detailsController.placeId = result.id
+            detailsController.placeId = result.place_id
             self?.navigationController?.pushViewController(detailsController, animated: true)
         }
         return cell
     }
     
-    //Header 3
+    //Header (Large Cell)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return .init(width: view.frame.width, height: 480)
     }

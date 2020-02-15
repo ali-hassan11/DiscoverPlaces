@@ -41,7 +41,7 @@ class DetailsTopSectionCellXib: UICollectionViewCell {
 //    }()
 
     
-    func configure(with place: PlaceResult?) {
+    func configure(with place: PlaceDetailResult?) {
         placeNameLabel.text = place?.name
         addressLabel.text = place?.vicinity
     }

@@ -6,7 +6,7 @@
 //  Copyright © 2020 AHApps. All rights reserved.
 //
 
-struct Response: Decodable {
+struct SearchResponse: Decodable {
     let results: [PlaceResult]
     let status: String?
 
@@ -19,38 +19,20 @@ struct Response: Decodable {
 struct PlaceResult: Decodable {
     let geometry: Geometry?
     let icon: String? //Probably won't need this
-    let id: String?
+    let place_id: String?
     let name: String?
     let photos: [Photo]?
-//    let placeID: String?
     let types: [String]?
-    let vicinity: String? //USE THIS IN DETAIL CELL
     let rating: Double?
-
-    let userRatingsTotal: Int?
-    let openingHours: OpeningHours?
-    let formattedAddress: String?
-    let formattedPhoneNumber: String?
-    let reviews: [Review]?
-    let website: String?
 
     enum CodingKeys: String, CodingKey {
         case geometry
         case icon
-        case id
+        case place_id
         case name
-        case openingHours = "opening_hours"
         case photos
-//        case placeID = "place_id"
-        case rating,types
-        case userRatingsTotal = "user_ratings_total"
-        case vicinity
-
-        case formattedAddress = "formatted_address"
-        case formattedPhoneNumber = "formatted_phone_number"
-        case reviews = "reviews"
-        case website = "website"
-
+        case rating
+        case types
     }
 }
 

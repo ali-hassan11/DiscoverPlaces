@@ -98,8 +98,8 @@ extension SearchController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let result = searchResults[indexPath.row]
-        let placeDetailController = PlaceDetailController()
-        placeDetailController.result = result
+        let placeDetailController = PlaceDetailsController()
+        placeDetailController.placeId = result.place_id
         navigationController?.pushViewController(placeDetailController, animated: true)
     }
     

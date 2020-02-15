@@ -9,19 +9,26 @@
 import Foundation
 
 struct PlaceDetailResponse: Decodable {
-    let result: [PlaceDetailResult]
-    let status: String
-    
+    let result: PlaceDetailResult?
+    let status: String?
+
     enum CodingKeys: String, CodingKey {
         case result = "result"
-        case status
+        case status = "status"
     }
 }
 
 struct PlaceDetailResult: Decodable {
     let name: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case name
-    }
+    let user_Ratings_Total: Int?
+    let opening_Hours: OpeningHours?
+    let formatted_Address: String?
+    let formatted_PhoneNumber: String?
+    let reviews: [Review]?
+    let website: String?
+    let photos: [Photo]?
+    let rating: Double?
+    let types: [String]?
+    let vicinity: String?
 }
+
