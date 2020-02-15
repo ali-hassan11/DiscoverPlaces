@@ -14,7 +14,7 @@ class PlaceDetailController: UIViewController {
         didSet {
             //Fetch Data & Populate cells
             navigationItem.title = result?.name
-            let label = UILabel(text: result?.placeID ?? "Check if theres a place id", font: .systemFont(ofSize: 20), numberOfLines: 0)
+            let label = UILabel(text: result?.id ?? "Check if theres a place id", font: .systemFont(ofSize: 20), numberOfLines: 0)
             view.addSubview(label)
             label.fillSuperview()
         }

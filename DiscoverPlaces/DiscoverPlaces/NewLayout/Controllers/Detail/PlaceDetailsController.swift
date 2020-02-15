@@ -15,26 +15,46 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
 
     var placeId: String! {
         didSet {
-            fetchData(placeId: placeId)
+            //FETCH PLACE DATA
+            fetchData()
             numberOfImages = 5 //Temp
         }
     }
-
-    func fetchData(placeId: String) {
-        Service.shared.fetchPlaceDetails(placeId: placeId) { (res, err) in
-
-            if let err = err {
-                print("Failed to fetch place details: ", err)
+    
+    func fetchData() {
+        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name,formatted_phone_number&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let error = error {
+                print("Falied to fetch: ", error)
                 return
             }
-
-            //success
-            guard let res = res else { return }
-            print(res)
-
-        }
+            
+            guard let data = data else { return }
+            print(data)
+            
+            do {
+                let objects = try JSONDecoder().decode(Root.self, from: data)
+                print(objects)
+            } catch let jsonErr {
+                print(jsonErr)
+                return
+            }
+        }.resume()
     }
 
+    struct Root: Decodable {
+        let status: String
+        let results: [DtailResult]?
+    }
+    
+    struct DtailResult: Decodable {
+        let name: String
+    }
+    
     //MOVE CELL ID'S TO CELLS AS STATIC LETS
     fileprivate let placeImagesHolderId = "placeImagesHolderId"
     fileprivate let addressCellId = "addressCellId"

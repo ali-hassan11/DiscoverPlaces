@@ -22,7 +22,7 @@ struct PlaceResult: Decodable {
     let id: String?
     let name: String?
     let photos: [Photo]?
-    let placeID: String?
+//    let placeID: String?
     let types: [String]?
     let vicinity: String? //USE THIS IN DETAIL CELL
     let rating: Double?
@@ -41,7 +41,7 @@ struct PlaceResult: Decodable {
         case name
         case openingHours = "opening_hours"
         case photos
-        case placeID = "place_id"
+//        case placeID = "place_id"
         case rating,types
         case userRatingsTotal = "user_ratings_total"
         case vicinity
