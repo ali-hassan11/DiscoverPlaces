@@ -10,23 +10,20 @@ import UIKit
 
 class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    
     var place: PlaceDetailResult?
-    var numberOfImages = 0 //Temp
-
+    
     var placeId: String? {
         didSet {
-            //SHOW PLACEHOLDERS UNTIL ALL DATA IS LOADED, WHEN LOADED PASS INTO CELL'S DID SET PROPERTY 💯
-            //MOVE FETCH TO SERVICE
+            //SHOW PLACEHOLDERS VIEW UNIL ALL DATA IS LOADED, WHEN LOADED PASS INTO CELL'S DID SET PROPERTY 💯
             if let id = placeId {
                 fetchData(for: id)
             }
-            
-            numberOfImages = 5 //Temp
         }
     }
     
     func fetchData(for id: String) {
-        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,photo,vicinity&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,photo,vicinity,review&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
         guard let url = URL(string: urlString) else { return }
         
@@ -42,7 +39,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             
             do {
                 let placeResponse = try JSONDecoder().decode(PlaceDetailResponse.self, from: data)
-                print(placeResponse.result ?? "WHOOPS")
+                print(placeResponse.result ?? "WHOOPS: No Results")
                 self.place = placeResponse.result
                 
                 DispatchQueue.main.async {
@@ -102,6 +99,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     //Header
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: placeImagesHolderId, for: indexPath) as! PlaceImagesHolder
+        
         cell.pageControlView.numberOfPages = place?.photos?.count ?? 0
         cell.horizontalController.photos = place?.photos
         cell.horizontalController.didEndAccelerating = { index in //weak self?
@@ -138,11 +136,13 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             cell.webAddress = place?.website
             return cell
         case 4:
-            //Reviews
+            //ActionButtons
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: actionButtonsCellId, for: indexPath) as! ActionButtonsCell
             return cell
         case 5:
+            //Reviews
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reviewsHolderId, for: indexPath) as! ReviewsHolder
+            cell.horizontalController.reviews = place?.reviews
             return cell
         case 6:
             //More Places
@@ -195,7 +195,11 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case 5:
             //Reviews
             //CHECK IF NIL, IF NOT RETURN 180
-            return .init(width: view.frame.width, height: 180)
+            if place?.reviews != nil {
+                return .init(width: view.frame.width, height: 180)
+            } else {
+                return .zero
+            }
         case 6:
             //More Places
             //CHECK IF NIL, IF NOT RETURN 180

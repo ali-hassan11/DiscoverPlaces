@@ -11,6 +11,12 @@ import UIKit
 class ReviewsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
 
     fileprivate let reviewCellId = "reviewCellId"
+    
+    var reviews: [Review]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,16 +27,21 @@ class ReviewsHorizontalController: HorizontalSnappingController, UICollectionVie
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return reviews?.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reviewCellId, for: indexPath) as! ReviewCell
+        cell.review = reviews?[indexPath.row]
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (view.frame.width - (Constants.leftPadding + Constants.rightPadding + 10)), height: view.frame.height)
+        if reviews != nil { // > 0?
+            return .init(width: (view.frame.width - (Constants.leftPadding + Constants.rightPadding + 10)), height: view.frame.height)
+        } else {
+            return.zero
+        }
     }
 }
 

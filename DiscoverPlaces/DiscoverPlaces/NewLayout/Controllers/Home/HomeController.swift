@@ -40,7 +40,10 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             }
             
             //success
-            guard let res = res else { return }
+            guard let res = res else {
+                print("No results?")
+                return
+            }
             
             self.results = res.results
             DispatchQueue.main.async {

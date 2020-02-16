@@ -12,8 +12,6 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     
     fileprivate let largeCellId = "largeCellId"
     
-    //Add didselect ting here & call in didSelectItemAt with (result[indexPath.row])
-    //Add closure to HomeController cellForItem
     var didSelectHandler: ((PlaceResult) -> ())?
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

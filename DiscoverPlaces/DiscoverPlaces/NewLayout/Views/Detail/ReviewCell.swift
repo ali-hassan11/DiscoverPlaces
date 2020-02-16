@@ -10,7 +10,17 @@ import UIKit
 
 class ReviewCell: UICollectionViewCell {
 
-    let authorNameLabel = UILabel(text: "Author", font: .systemFont(ofSize: 16, weight: .regular), color: .label, alignment: .left, numberOfLines: 2)
+    var review: Review? {
+          didSet {
+            authorNameLabel.text = review?.authorName
+            timeAgoLabel.text = review?.relativeTimeDescription
+            reviewTextLabel.text = review?.text
+              
+            //- Try self.width = 0 for all, see if there are no cells -//
+          }
+      }
+    
+    let authorNameLabel = UILabel(text: "Author", font: .systemFont(ofSize: 16, weight: .regular), color: .label, alignment: .left, numberOfLines: 1)
 
     let timeAgoLabel = UILabel(text: "2 days Ago", font: .systemFont(ofSize: 14, weight: .light), color: .secondaryLabel, alignment: .right, numberOfLines: 2)
 
