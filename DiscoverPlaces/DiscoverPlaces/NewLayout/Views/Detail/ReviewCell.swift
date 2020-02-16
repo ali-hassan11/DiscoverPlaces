@@ -49,17 +49,15 @@ class ReviewCell: UICollectionViewCell {
         backgroundColor = .secondarySystemBackground
 
         let nameAndStarStackView = VerticalStackView(arrangedSubviews: [authorNameLabel, starsView], spacing: 2)
+        nameAndStarStackView.alignment = .leading
 
         let topStackView = HorizontalStackView(arrangedSubviews: [nameAndStarStackView, timeAgoLabel])
         topStackView.alignment = .top
+        
+        let stackView = VerticalStackView(arrangedSubviews: [topStackView, reviewTextLabel, UIView()], spacing: 4)
 
-        addSubview(topStackView)
-        topStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 12, left: 12, bottom: 0, right: 12))
-
-        addSubview(reviewTextLabel)
-        reviewTextLabel.anchor(top: topStackView.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0
-            , left: 12, bottom: 12, right: 12))
-
+        addSubview(stackView)
+        stackView.fillSuperview(padding: .init(top: 12, left: 12, bottom: 12, right: 12))
     }
 
     required init?(coder: NSCoder) {
