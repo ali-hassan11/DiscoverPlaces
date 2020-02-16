@@ -21,7 +21,14 @@ class HomeLargeCell: UICollectionViewCell {
                 guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else {
                     return /*Default Image*/
                 }
-                placeImageView.sd_setImage(with: url)
+                placeImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "transparentBlock"), options: .continueInBackground) { (image, error, _, _) in
+                    
+                    if let error = error {
+                        print("Falied to load image: ", error)
+                        self.placeImageView.image = UIImage(named: "noPhotosFound")
+                        return
+                    }
+                }
             } else {
                 //Default Image
             }
@@ -32,7 +39,7 @@ class HomeLargeCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
     
-        backgroundColor = .lightGray
+        backgroundColor = .secondarySystemBackground
         layer.cornerRadius = 10
         clipsToBounds = true
 
