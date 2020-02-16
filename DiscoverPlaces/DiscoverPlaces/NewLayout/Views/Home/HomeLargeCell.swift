@@ -15,22 +15,27 @@ class HomeLargeCell: UICollectionViewCell {
     let distanceLabel = UILabel(text: "1.7 Km", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
     let undicededButton = UIButton(title: "Details", textColor: .white, width: 100, height: 40, font: .systemFont(ofSize: 18, weight: .medium), backgroundColor: UIColor.systemPink, cornerRadius: 10)
     
+    var image: UIImage?
+    
     var result: PlaceResult! {
         didSet {
-            if let photo = result.photos?.first {
-                guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else {
-                    return /*Default Image*/
+            guard let photo = result.photos?.first else {
+                return //Default Image
+            }
+            
+            guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else {
+                return /*Default Image*/
+            }
+            
+            placeImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "transparentBlock"), options: .continueInBackground) { (image, error, _, _) in
+                
+                if let error = error {
+                    print("Falied to load image: ", error)
+                    self.placeImageView.image = UIImage(named: "noPhotosFound")
+                    return
                 }
-                placeImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "transparentBlock"), options: .continueInBackground) { (image, error, _, _) in
-                    
-                    if let error = error {
-                        print("Falied to load image: ", error)
-                        self.placeImageView.image = UIImage(named: "noPhotosFound")
-                        return
-                    }
-                }
-            } else {
-                //Default Image
+                
+                self.image = image
             }
             placeNameLabel.text = result.name
         }
