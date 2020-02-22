@@ -32,7 +32,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     fileprivate func fetchData() {
 
-        Service.shared.fetchNearbyPlaces { (res, error) in
+        Service.shared.fetchNearbyPlaces { (results, error) in
             
             if let error = error {
                 print("Failed to fetch places: ", error)
@@ -40,12 +40,21 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             }
             
             //success
-            guard let res = res else {
+            guard let results = results else {
                 print("No results?")
                 return
             }
             
-            self.results = res.results
+            var filteredResults = [PlaceResult]()
+            
+            results.results.forEach({ (result) in
+                if result.containsPhotos() {
+                    filteredResults.append(result)
+                }
+            })
+            
+            self.results = filteredResults
+            
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }

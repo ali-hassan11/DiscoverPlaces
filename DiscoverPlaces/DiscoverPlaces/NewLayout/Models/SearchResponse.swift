@@ -36,6 +36,12 @@ struct PlaceResult: Decodable {
     }
 }
 
+extension PlaceResult {
+    func containsPhotos() -> Bool {
+        return photos != nil && photos?.first != nil
+    }
+}
+
 struct Geometry: Decodable {
     let location: Location?
 }
@@ -83,15 +89,5 @@ struct Review: Decodable {
         case rating = "rating"
         case relativeTimeDescription = "relative_time_description"
         case text = "text"
-    }
-}
-
-extension PlaceResult {
-    func containsPhotos() -> Bool {
-        if photos != nil && photos?.first != nil {
-            return true
-        } else {
-            return false
-        }
     }
 }
