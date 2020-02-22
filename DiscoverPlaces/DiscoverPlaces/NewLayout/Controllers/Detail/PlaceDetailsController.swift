@@ -194,7 +194,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             return .init(width: view.frame.width, height: 60)
         case 5:
             //Reviews
-            //CHECK IF NIL, IF NOT RETURN 180
             if place?.reviews != nil {
                 return .init(width: view.frame.width, height: 180)
             } else {

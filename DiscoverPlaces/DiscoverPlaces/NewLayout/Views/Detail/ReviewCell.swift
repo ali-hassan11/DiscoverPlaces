@@ -15,22 +15,15 @@ class ReviewCell: UICollectionViewCell {
             authorNameLabel.text = review?.authorName
             timeAgoLabel.text = review?.relativeTimeDescription
             reviewTextLabel.text = review?.text
-              
-            //- Try self.width = 0 for all, see if there are no cells -//
-          }
+            starsView.populateStarView(rating: review?.rating ?? 0)
+        }
       }
     
     let authorNameLabel = UILabel(text: "Author", font: .systemFont(ofSize: 16, weight: .regular), color: .label, alignment: .left, numberOfLines: 1)
 
     let timeAgoLabel = UILabel(text: "2 days Ago", font: .systemFont(ofSize: 14, weight: .light), color: .secondaryLabel, alignment: .right, numberOfLines: 2)
 
-    let starsView: UIView! = {
-        let v = UIView()
-        v.backgroundColor = .systemPink
-        v.constrainHeight(constant: 20)
-        v.constrainWidth(constant: 100)
-        return v
-    }()
+    let starsView = StarsView()
 
     let reviewTextLabel = UILabel(text: "Example review text here, Example review text here, Example review text here, Example review text here, Example review text here, ", font: .systemFont(ofSize: 16, weight: .light), color: .label, alignment: .left, numberOfLines: 0)
 
@@ -42,13 +35,12 @@ class ReviewCell: UICollectionViewCell {
 
         reviewTextLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
 
-        
         layer.cornerRadius = 10
         clipsToBounds = true
 
         backgroundColor = .secondarySystemBackground
 
-        let nameAndStarStackView = VerticalStackView(arrangedSubviews: [authorNameLabel, starsView], spacing: 2)
+        let nameAndStarStackView = VerticalStackView(arrangedSubviews: [authorNameLabel, starsView], spacing: 4)
         nameAndStarStackView.alignment = .leading
 
         let topStackView = HorizontalStackView(arrangedSubviews: [nameAndStarStackView, timeAgoLabel])
@@ -59,9 +51,8 @@ class ReviewCell: UICollectionViewCell {
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 12, left: 12, bottom: 12, right: 12))
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
