@@ -21,7 +21,8 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
 
         locationBarButton.tintColor = .label
         navigationItem.rightBarButtonItem = locationBarButton
-        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         collectionView.backgroundColor = .systemBackground
         collectionView.register(CategoriesHolder.self, forCellWithReuseIdentifier: categoriesHolderId)
         //Header 1
@@ -73,7 +74,6 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         cell.horizontalController.results = results
         cell.horizontalController.didSelectHandler = { [weak self] result in
             let detailsController = PlaceDetailsController()
-            detailsController.title = result.name
             detailsController.placeId = result.place_id
             self?.navigationController?.pushViewController(detailsController, animated: true)
         }

@@ -82,8 +82,9 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         super.viewDidLoad()
         
         collectionView.backgroundColor = .systemBackground
-        navigationItem.largeTitleDisplayMode = .never
-
+        collectionView.contentInsetAdjustmentBehavior = .never
+        navigationController?.navigationBar.prefersLargeTitles = false
+        
         //Header
         collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: placeImagesHolderId)
 
@@ -105,6 +106,14 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         //Error
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+    }
 
     //Header
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -120,7 +129,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     //Header
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: 280)
+        return .init(width: view.frame.width, height:  (view.layoutMarginsGuide.layoutFrame.height / 2) + 64)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
