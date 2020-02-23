@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
 
@@ -32,7 +33,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     func fetchData(for id: String) {
-        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,photo,vicinity,review&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,photo,vicinity,geometry,review&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
         guard let url = URL(string: urlString) else { return }
         
@@ -225,7 +226,14 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case Detail.address.rawValue:
-            print("Address")
+            
+            guard let place = place,
+            let name = place.name,
+            let longitude = place.geometry?.location?.lng,
+            let latitude = place.geometry?.location?.lat else { return }
+            
+            openInMaps(placeName: name, longitude: longitude, latitude: latitude)
+            
         case Detail.openingHours.rawValue:
             print("Opening Hours")
             let openingHoursController = OpeningHoursController()
@@ -242,5 +250,14 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7
+    }
+    
+    private func openInMaps(placeName: String, longitude: Double, latitude: Double) {
+        let coordinate = CLLocationCoordinate2DMake(longitude, latitude)
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
+        mapItem.name = placeName
+        mapItem.phoneNumber = place?.formatted_Phone_Number
+        mapItem.url = URL(string: place?.website ?? "")
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
 }
