@@ -19,6 +19,18 @@ class ReviewCell: UICollectionViewCell {
         }
       }
     
+    let highlightView: UIView! = {
+       let v = UIView()
+        v.backgroundColor = UIColor.quaternarySystemFill
+        return v
+    }()
+    
+    override var isHighlighted: Bool {
+        didSet {
+            highlightView.isHidden = self.isHighlighted ? false : true
+        }
+    }
+    
     let authorNameLabel = UILabel(text: "Author", font: .systemFont(ofSize: 16, weight: .regular), color: .label, alignment: .left, numberOfLines: 1)
 
     let timeAgoLabel = UILabel(text: "2 days Ago", font: .systemFont(ofSize: 14, weight: .light), color: .secondaryLabel, alignment: .right, numberOfLines: 2)
@@ -30,6 +42,10 @@ class ReviewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        addSubview(highlightView)
+        highlightView.isHidden = true
+        highlightView.fillSuperview()
+        
         authorNameLabel.setContentCompressionResistancePriority(.defaultHigh,
                                                                 for: .vertical)
 
