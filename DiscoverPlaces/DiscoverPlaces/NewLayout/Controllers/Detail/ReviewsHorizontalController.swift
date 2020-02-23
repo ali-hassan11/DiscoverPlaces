@@ -17,6 +17,14 @@ class ReviewsHorizontalController: HorizontalSnappingController, UICollectionVie
             collectionView.reloadData()
         }
     }
+    
+    var didSelectHandler: ((Review) -> ())?
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let review = reviews?[indexPath.item] {
+            didSelectHandler?(review)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

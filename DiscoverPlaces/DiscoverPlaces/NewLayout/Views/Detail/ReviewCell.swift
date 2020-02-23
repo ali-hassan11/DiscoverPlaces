@@ -14,7 +14,7 @@ class ReviewCell: UICollectionViewCell {
           didSet {
             authorNameLabel.text = review?.authorName
             timeAgoLabel.text = review?.relativeTimeDescription
-            reviewTextLabel.text = review?.text
+            reviewBodyLabel.text = review?.text
             starsView.populateStarView(rating: review?.rating ?? 0)
         }
       }
@@ -25,7 +25,7 @@ class ReviewCell: UICollectionViewCell {
 
     let starsView = StarsView()
 
-    let reviewTextLabel = UILabel(text: "Example review text here, Example review text here, Example review text here, Example review text here, Example review text here, ", font: .systemFont(ofSize: 16, weight: .light), color: .label, alignment: .left, numberOfLines: 0)
+    let reviewBodyLabel = UILabel(text: "Example review text here, Example review text here, Example review text here, Example review text here, Example review text here, ", font: .systemFont(ofSize: 16, weight: .light), color: .label, alignment: .left, numberOfLines: 0)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,7 +33,7 @@ class ReviewCell: UICollectionViewCell {
         authorNameLabel.setContentCompressionResistancePriority(.defaultHigh,
                                                                 for: .vertical)
 
-        reviewTextLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        reviewBodyLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
 
         layer.cornerRadius = 10
         clipsToBounds = true
@@ -46,7 +46,7 @@ class ReviewCell: UICollectionViewCell {
         let topStackView = HorizontalStackView(arrangedSubviews: [nameAndStarStackView, timeAgoLabel])
         topStackView.alignment = .top
         
-        let stackView = VerticalStackView(arrangedSubviews: [topStackView, reviewTextLabel, UIView()], spacing: 4)
+        let stackView = VerticalStackView(arrangedSubviews: [topStackView, reviewBodyLabel, UIView()], spacing: 4)
 
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 12, left: 12, bottom: 12, right: 12))
