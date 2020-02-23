@@ -83,8 +83,8 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         
         collectionView.backgroundColor = .systemBackground
         collectionView.contentInsetAdjustmentBehavior = .never
-        navigationController?.navigationBar.prefersLargeTitles = false
-        
+        navigationItem.largeTitleDisplayMode = .never
+
         //Header
         collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: placeImagesHolderId)
 
