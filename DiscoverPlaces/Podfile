@@ -3,10 +3,11 @@
 
 target 'DiscoverPlaces' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+  #use_frameworks!
+  use_modular_headers!
 
-  pod 'GooglePlaces', '~> 3.7'
-  pod 'SDWebImage', '~> 5.5'
+  pod 'GooglePlaces', '3.7'
+  pod 'SDWebImage', '5.5'
 
   target 'DiscoverPlacesTests' do
     inherit! :search_paths
