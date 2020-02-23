@@ -19,6 +19,21 @@ class ReviewCell: UICollectionViewCell {
         }
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(highlightView)
+        highlightView.isHidden = true
+        highlightView.fillSuperview()
+        
+        layer.cornerRadius = 10
+        clipsToBounds = true
+        
+        backgroundColor = .secondarySystemBackground
+        
+        layoutCellViews()
+    }
+    
     let highlightView: UIView! = {
         let v = UIView()
         v.backgroundColor = UIColor.quaternarySystemFill
@@ -39,31 +54,14 @@ class ReviewCell: UICollectionViewCell {
     
     let reviewBodyLabel = UILabel(text: "Example review text here, Example review text here, Example review text here, Example review text here, Example review text here, ", font: .systemFont(ofSize: 16, weight: .light), color: .label, alignment: .left, numberOfLines: 0)
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        addSubview(highlightView)
-        highlightView.isHidden = true
-        highlightView.fillSuperview()
-        
-        authorNameLabel.setContentCompressionResistancePriority(.defaultHigh,
-                                                                for: .vertical)
-        
+    private func layoutCellViews() {
+        authorNameLabel.setContentCompressionResistancePriority(.defaultHigh,for: .vertical)
         reviewBodyLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        
-        layer.cornerRadius = 10
-        clipsToBounds = true
-        
-        backgroundColor = .secondarySystemBackground
-        
         let nameAndStarStackView = VerticalStackView(arrangedSubviews: [authorNameLabel, starsView], spacing: 4)
         nameAndStarStackView.alignment = .leading
-        
         let topStackView = HorizontalStackView(arrangedSubviews: [nameAndStarStackView, timeAgoLabel])
         topStackView.alignment = .top
-        
         let stackView = VerticalStackView(arrangedSubviews: [topStackView, reviewBodyLabel, UIView()], spacing: 4)
-        
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 12, left: 12, bottom: 12, right: 12))
     }
