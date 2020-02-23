@@ -24,8 +24,24 @@ class OpeningTimeCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubview(highlightView)
+        highlightView.isHidden = true
+        highlightView.fillSuperview()
+        
         backgroundColor = .systemBackground
         layoutCellViews()
+    }
+    
+    let highlightView: UIView! = {
+        let v = UIView()
+        v.backgroundColor = UIColor.quaternarySystemFill
+        return v
+    }()
+    
+    override var isHighlighted: Bool {
+        didSet {
+            highlightView.isHidden = self.isHighlighted ? false : true
+        }
     }
     
     let iconVimageView: UIImageView! = {

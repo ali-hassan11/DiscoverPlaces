@@ -10,6 +10,15 @@ import UIKit
 
 class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    private enum Detail: Int {
+        case address
+        case openingHours
+        case phoneNumber
+        case website
+        case actionButtons
+        case reviews
+        case morePlaces
+    }
     
     var place: PlaceDetailResult?
     
@@ -210,6 +219,20 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             return .init(width: view.frame.width, height: 220)
         default:
             return .zero
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.item {
+        case Detail.address.rawValue:
+            print("Address")
+        case Detail.openingHours.rawValue:
+            print("Opening Hours")
+            let openingHoursController = OpeningHoursController()
+            openingHoursController.openingHours = place?.opening_hours
+            navigationController?.show(openingHoursController, sender: self)
+        default:
+            print("Other one pressed")
         }
     }
 
