@@ -123,7 +123,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case 1:
             //Hours
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: openingTimeCellId, for: indexPath) as! OpeningTimeCell
-            cell.todayOpeningTimes = place?.opening_hours?.weekdayText?.first ?? ""//GET THE CORRECT DOTW
+            cell.openingTimes = place?.opening_hours?.weekdayText ?? []//GET THE CORRECT DOTW
             return cell
         case 2:
             //PhoneNumber
@@ -143,6 +143,11 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             //Reviews
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reviewsHolderId, for: indexPath) as! ReviewsHolder
             cell.horizontalController.reviews = place?.reviews
+            cell.horizontalController.didSelectHandler = { [weak self] review in
+                let reviewViewController = ReviewDetailViewController()
+                reviewViewController.review = review
+                self?.navigationController?.show(reviewViewController, sender: self)
+            }
             return cell
         case 6:
             //More Places
