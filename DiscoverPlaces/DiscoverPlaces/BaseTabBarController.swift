@@ -14,17 +14,28 @@ class BaseTabBarController: UITabBarController {
         super.viewDidLoad()
 
         viewControllers = [
-            createNavController(viewController: HomeController(), title: "Discover"),
-            createNavController(viewController: SearchController(), title: "Search")
+            createNavController(viewController: HomeController(),
+                                title: "Discover",
+                                selectedImageName: "house.fill",
+                                deselectedImageName: "house"),
+            
+            createNavController(viewController: SearchController(),
+                                title: "Search",
+                                selectedImageName: "magnifyingglass",
+                                deselectedImageName: "magnifyingglass")
         ]
+        
+        tabBar.tintColor = .systemPink
         
     }
 
-    fileprivate func createNavController(viewController: UIViewController, title: String, imageIconName: String? = nil) -> UIViewController {
+    fileprivate func createNavController(viewController: UIViewController, title: String, selectedImageName: String, deselectedImageName: String) -> UIViewController {
         let navController = UINavigationController(rootViewController: viewController)
         
         navController.navigationBar.prefersLargeTitles = true
         navController.tabBarItem.title = title
+        navController.tabBarItem.selectedImage = UIImage(systemName: selectedImageName)
+        navController.tabBarItem.image = UIImage(systemName: deselectedImageName)
 
         navController.navigationBar.tintColor = UIColor.systemPink
         

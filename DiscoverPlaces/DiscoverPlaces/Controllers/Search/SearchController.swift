@@ -22,7 +22,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
         setupSearchBar()
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: cellId)
     }
     
@@ -84,7 +84,6 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
 
 extension SearchController {
     
-    //Delegate & DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         enterSearchTextlabel.isHidden = searchResults.count != 0
         return searchResults.count
@@ -103,9 +102,8 @@ extension SearchController {
         navigationController?.pushViewController(placeDetailController, animated: true)
     }
     
-    //Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width - 12 - 12, height: 180)
+        return .init(width: (view.frame.width - 12 - 12 - 10) / 2, height: 200)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

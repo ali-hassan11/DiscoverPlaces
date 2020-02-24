@@ -33,16 +33,14 @@ class SearchCell: UICollectionViewCell {
         iv.layer.cornerRadius = 16 //Standardize
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
-        iv.layer.borderColor = UIColor(white: 0.9, alpha: 0.7).cgColor //Standardize
-        iv.layer.borderWidth = 0.5 //Standardize?
-        iv.addOverlay(color: .black, alpha: 0.25)
+        iv.addGradientBackground(firstColor: .clear, secondColor: .black)
         return iv
     }()
     
     let placeNameLabel: UILabel = {
         let lbl = UILabel(frame: .zero)
         lbl.text = ""
-        lbl.font = .boldSystemFont(ofSize: 28)
+        lbl.font = .boldSystemFont(ofSize: 20)
         lbl.textAlignment = .center
         lbl.textColor = .white
         lbl.numberOfLines = 2
