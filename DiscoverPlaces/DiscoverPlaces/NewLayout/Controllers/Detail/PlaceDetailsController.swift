@@ -33,7 +33,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     func fetchData(for id: String) {
-        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,photo,vicinity,geometry,review,website,url&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,photo,vicinity,geometry,review,website,url,formatted_phone_number&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
         guard let url = URL(string: urlString) else { return }
         
@@ -288,10 +288,11 @@ extension PlaceDetailsController: ActionButtonsCellDelegate {
         
         guard let urlStr = urlString else { return }
         guard let url = URL(string: urlStr) else { return }
+//        guard let name = place?.name else { return }
         
-        let items = [url]
-        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        present(ac, animated: true)
+        let items: [Any] = [url]
+        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(activityController, animated: true)
     }
     
 }
