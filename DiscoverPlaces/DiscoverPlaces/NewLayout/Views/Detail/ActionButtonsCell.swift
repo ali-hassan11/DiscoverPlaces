@@ -14,31 +14,31 @@ class ActionButtonsCell: UICollectionViewCell {
     let heartOutline = UIImage(systemName: "heart")
     let heartFilled = UIImage(systemName: "heart.fill")
     
-    let defaults = FavouriteDefaultsManager()
+    let addToDoImage = UIImage(systemName: "text.badge.plus")
+    let removeToDoImage = UIImage(systemName: "text.badge.minus")
+    
+    let defaults = DefaultsManager()
     
     var placeId: String! {
         didSet {
-            isFavourite = defaults.isFavourite(placeId: placeId)
+            isFavourite = defaults.isInList(placeId: placeId, listKey: .favourites)
+            isToDo = defaults.isInList(placeId: placeId, listKey: .toDo)
         }
     }
     
     var isFavourite: Bool! {
         didSet {
             toggleFavourites(placeId: placeId)
-            print(defaults.getFavourites())
+            print("FAVOURITES LIST:")
+            print(defaults.getList(listKey: .favourites))
         }
     }
     
     var isToDo: Bool! {
         didSet {
-            let addToDoImage = UIImage(systemName: "text.badge.plus"), removeToDoImage = UIImage(systemName: "text.badge.minus")
-            toDoButton.setImage(isToDo ? removeToDoImage : addToDoImage, for: .normal)
-            
-            if isToDo {
-                //remove from user defauls
-            } else {
-                //add to user defaults
-            }
+            toggleToDo(placeId: placeId)
+            print("TO DO LIST:")
+            print(defaults.getList(listKey: .toDo))
         }
     }
     
@@ -99,18 +99,25 @@ class ActionButtonsCell: UICollectionViewCell {
     @objc private func favouritePressed() {
         isFavourite = isFavourite ? false : true
     }
+    
+    @objc private func toDoPressed() {
+        isToDo = isToDo ? false : true
+    }
         
     func toggleFavourites(placeId: String) {
-        let isFave = defaults.isFavourite(placeId: placeId)
+        let isFave = defaults.isInList(placeId: placeId, listKey: .favourites)
         
-        isFave ? defaults.removeFromFavourites(placeId: placeId) : defaults.addToFavourites(placeId: placeId)
+        isFave ? defaults.removeFromList(placeId: placeId, listKey: .favourites) : defaults.addToList(placeId: placeId, listKey: .favourites)
         favouritesButton.setImage(isFave ? heartOutline : heartFilled, for: .normal)
     }
     
-    @objc private func toDoPressed() {
-        //Check if id is in list of faves
-        toggleToDoButton()
+    func toggleToDo(placeId: String) {
+        let isToDo = defaults.isInList(placeId: placeId, listKey: .toDo)
+              
+        isToDo ? defaults.removeFromList(placeId: placeId, listKey: .toDo) : defaults.addToList(placeId: placeId, listKey: .toDo)
+        toDoButton.setImage(isToDo ? addToDoImage : removeToDoImage, for: .normal)
     }
+ 
 
     private func toggleToDoButton() {
         isToDo = isToDo ? false : true
@@ -122,53 +129,46 @@ class ActionButtonsCell: UICollectionViewCell {
 
 }
 
-class FavouriteDefaultsManager {
+public enum ListType: String {
+    case favourites
+    case toDo
+}
+
+class DefaultsManager {
     
-    private let favouritesKey = "faveKey"
-    func addToFavourites(placeId: String) {
+    func addToList(placeId: String, listKey: ListType) {
         //CAN MAKE THIS ALOT SIMPLE: LOOK AT ADD TO CATEGORIES
-        if var favourites = UserDefaults.standard.object(forKey: favouritesKey) as? [String] {
+        if var favourites = UserDefaults.standard.object(forKey: listKey.rawValue) as? [String] {
             if !favourites.contains(placeId) {
                 favourites.append(placeId)
-                UserDefaults.standard.set(favourites, forKey: favouritesKey)
-//                print("Added to faves, new Faves: \(favourites)")
-            } else {
-//                print("Already in Faves")
+                UserDefaults.standard.set(favourites, forKey: listKey.rawValue)
             }
         } else {
             let newFavourites = [placeId]
-            UserDefaults.standard.set(newFavourites, forKey: favouritesKey)
-//            print("First Fave added, new Faves: \(newFavourites)")
+            UserDefaults.standard.set(newFavourites, forKey: listKey.rawValue)
         }
     }
     
-    func removeFromFavourites(placeId: String) {
+    func removeFromList(placeId: String, listKey: ListType) {
         //CAN MAKE THIS ALOT SIMPLE: LOOK AT ADD TO CATEGORIES
-        if var favourites = UserDefaults.standard.object(forKey: favouritesKey) as? [String] {
+        if var favourites = UserDefaults.standard.object(forKey: listKey.rawValue) as? [String] {
             if favourites.contains(placeId) {
                 favourites = favourites.filter{$0 != placeId}
-                UserDefaults.standard.set(favourites, forKey: favouritesKey)
-//                print("\(placeId) removed, new Faves: \(favourites)")
-            } else {
-//                print("Tried to remove \(placeId), but wasnt found in Faves.")
+                UserDefaults.standard.set(favourites, forKey: listKey.rawValue)
             }
-        } else {
-//            print("No faves yet")
         }
     }
     
-    func getFavourites() -> [String] {
-        if let favourites = UserDefaults.standard.object(forKey: favouritesKey) as? [String] {
-//            print("getFaves: \(favourites)")
+    func getList(listKey: ListType) -> [String] {
+        if let favourites = UserDefaults.standard.object(forKey: listKey.rawValue) as? [String] {
             return favourites
         } else {
-//            print("No Faves yet!")
             return []
         }
     }
     
-    func isFavourite(placeId: String) -> Bool {
-        if let favourites = UserDefaults.standard.object(forKey: favouritesKey) as? [String] {
+    func isInList(placeId: String, listKey: ListType) -> Bool {
+        if let favourites = UserDefaults.standard.object(forKey: listKey.rawValue) as? [String] {
             if favourites.contains(placeId) {
                 return true
             } else {
