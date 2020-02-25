@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ActionButtonsCellDelegate: class {
+    func sharePressed(cell: ActionButtonsCell)
+}
+
 class ActionButtonsCell: UICollectionViewCell {
     
     //Move this to an icon enum
@@ -19,6 +23,8 @@ class ActionButtonsCell: UICollectionViewCell {
     
     let defaults = DefaultsManager()
     
+    var delegate: ActionButtonsCellDelegate?
+    
     var placeId: String! {
         didSet {
             isFavourite = defaults.isInList(placeId: placeId, listKey: .favourites)
@@ -26,18 +32,16 @@ class ActionButtonsCell: UICollectionViewCell {
         }
     }
     
-    var isFavourite: Bool! {
+    var isFavourite: Bool? {
         didSet {
             toggleFavourites(placeId: placeId)
-            print("FAVOURITES LIST:")
             print(defaults.getList(listKey: .favourites))
         }
     }
     
-    var isToDo: Bool! {
+    var isToDo: Bool? {
         didSet {
             toggleToDo(placeId: placeId)
-            print("TO DO LIST:")
             print(defaults.getList(listKey: .toDo))
         }
     }
@@ -92,16 +96,21 @@ class ActionButtonsCell: UICollectionViewCell {
     }
     
     private func addbuttonActions() {
-        favouritesButton.addTarget(self, action: #selector(favouritePressed), for: .touchUpInside)
-        toDoButton.addTarget(self, action: #selector(toDoPressed), for: .touchUpInside)
-    }
-
-    @objc private func favouritePressed() {
-        isFavourite = isFavourite ? false : true
+        favouritesButton.addTarget(self, action: #selector(favouriteTapped), for: .touchUpInside)
+        toDoButton.addTarget(self, action: #selector(toDoTapped), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(shareTapped), for: .touchUpInside)
     }
     
-    @objc private func toDoPressed() {
-        isToDo = isToDo ? false : true
+    @objc func shareTapped(sender: UIButton) {
+        delegate?.sharePressed(cell: self)
+    }
+
+    @objc private func favouriteTapped() {
+        isFavourite = isFavourite ?? false ? false : true
+    }
+    
+    @objc private func toDoTapped() {
+        isToDo = isToDo ?? false ? false : true
     }
         
     func toggleFavourites(placeId: String) {
@@ -118,11 +127,6 @@ class ActionButtonsCell: UICollectionViewCell {
         toDoButton.setImage(isToDo ? addToDoImage : removeToDoImage, for: .normal)
     }
  
-
-    private func toggleToDoButton() {
-        isToDo = isToDo ? false : true
-    }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -161,8 +165,12 @@ class DefaultsManager {
     
     func getList(listKey: ListType) -> [String] {
         if let favourites = UserDefaults.standard.object(forKey: listKey.rawValue) as? [String] {
+            print(listKey.rawValue)
+            print(favourites)
             return favourites
         } else {
+            print(listKey.rawValue)
+            print([])
             return []
         }
     }

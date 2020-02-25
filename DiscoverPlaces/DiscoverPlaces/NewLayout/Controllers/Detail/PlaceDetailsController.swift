@@ -157,6 +157,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             //ActionButtons
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: actionButtonsCellId, for: indexPath) as! ActionButtonsCell
             cell.placeId = placeId
+            cell.delegate = self
             return cell
         case 5:
             //Reviews
@@ -269,4 +270,28 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         mapItem.url = URL(string: place?.website ?? "")
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
+}
+
+extension PlaceDetailsController: ActionButtonsCellDelegate {
+    
+    func sharePressed(cell: ActionButtonsCell) {
+        let urlString: String?
+        
+        if let websiteString = place?.website {
+            urlString = websiteString
+        } else if let googleMapsUrlString = place?.url {
+            urlString = googleMapsUrlString
+        } else {
+            //Unable to retrieve info or something...
+            return
+        }
+        
+        guard let urlStr = urlString else { return }
+        guard let url = URL(string: urlStr) else { return }
+        
+        let items = [url]
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
+    }
+    
 }
