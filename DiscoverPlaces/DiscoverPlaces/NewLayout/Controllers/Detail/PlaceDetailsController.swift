@@ -101,19 +101,25 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
 
         //MorePlacesHolder
         collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: morePlacesHolderId)
-
+        
         //Error
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        super.viewWillAppear(false)
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.navigationBar.isTranslucent = false
     }
 
     //Header
