@@ -26,6 +26,7 @@ struct PlaceDetailResult: Decodable {
     let formatted_Phone_Number: String?
     let reviews: [Review]?
     let website: String?
+    let url: String?
     let photos: [Photo]?
     let rating: Double?
     let types: [String]?
