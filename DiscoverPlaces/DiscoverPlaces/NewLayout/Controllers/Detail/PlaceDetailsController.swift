@@ -45,11 +45,10 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             }
             //success
             guard let data = data else { return }
-            print(data)
             
             do {
                 let placeResponse = try JSONDecoder().decode(PlaceDetailResponse.self, from: data)
-                print(placeResponse.result ?? "WHOOPS: No Results")
+//                print(placeResponse.result ?? "WHOOPS: No Results")
                 self.place = placeResponse.result
                 
                 DispatchQueue.main.async {
@@ -157,6 +156,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case 4:
             //ActionButtons
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: actionButtonsCellId, for: indexPath) as! ActionButtonsCell
+            cell.placeId = placeId
             return cell
         case 5:
             //Reviews
@@ -244,10 +244,10 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             openInMaps(placeName: name, longitude: longitude, latitude: latitude)
             
         case Detail.openingHours.rawValue:
-            print("Opening Hours")
             let openingHoursController = OpeningHoursController()
             openingHoursController.openingHours = place?.opening_hours
             navigationController?.show(openingHoursController, sender: self)
+            
         default:
             print("Other one pressed")
         }
