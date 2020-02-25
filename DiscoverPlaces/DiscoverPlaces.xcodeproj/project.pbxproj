@@ -46,6 +46,7 @@
 		CE5835DB23DF1B7A00C89622 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DA23DF1B7A00C89622 /* Service.swift */; };
 		CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */; };
 		CE5835DF23E0C2C500C89622 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DE23E0C2C500C89622 /* DiscoverController.swift */; };
+		CE616D002405BE28008E7067 /* WebsiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE616CFF2405BE28008E7067 /* WebsiteViewController.swift */; };
 		CE6599ED23EA68D100E531CD /* VerticalStackview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6599EC23EA68D000E531CD /* VerticalStackview.swift */; };
 		CE6599F023EA692500E531CD /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6599EF23EA692500E531CD /* HomeController.swift */; };
 		CE6599F223EC96A200E531CD /* PlaceDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6599F123EC96A200E531CD /* PlaceDetailsController.swift */; };
@@ -146,6 +147,7 @@
 		CE5835DA23DF1B7A00C89622 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlBuilder.swift; sourceTree = "<group>"; };
 		CE5835DE23E0C2C500C89622 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
+		CE616CFF2405BE28008E7067 /* WebsiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteViewController.swift; sourceTree = "<group>"; };
 		CE6599EC23EA68D000E531CD /* VerticalStackview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalStackview.swift; sourceTree = "<group>"; };
 		CE6599EF23EA692500E531CD /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		CE6599F123EC96A200E531CD /* PlaceDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsController.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 				CE8A2FCA23F088D200CDF866 /* MorePlacesHorizontalController.swift */,
 				CECDA14724025896005F85FB /* ReviewDetailViewController.swift */,
 				CE2267DA2402A14E00E6385F /* OpeningHoursController.swift */,
+				CE616CFF2405BE28008E7067 /* WebsiteViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -818,6 +821,7 @@
 				CE5835D823DF145900C89622 /* SearchResponse.swift in Sources */,
 				CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */,
 				CE15104723E23A0E00A88220 /* PlaceImageController.swift in Sources */,
+				CE616D002405BE28008E7067 /* WebsiteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

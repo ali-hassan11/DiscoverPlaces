@@ -249,6 +249,11 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             openingHoursController.openingHours = place?.opening_hours
             navigationController?.show(openingHoursController, sender: self)
             
+        case Detail.website.rawValue:
+            let websiteViewController = WebsiteViewController()
+            websiteViewController.urlString = place?.website
+            navigationController?.show(websiteViewController, sender: self)
+            
         default:
             print("Other one pressed")
         }
