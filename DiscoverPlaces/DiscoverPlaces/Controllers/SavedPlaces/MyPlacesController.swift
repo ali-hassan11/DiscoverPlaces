@@ -11,8 +11,6 @@ import UIKit
 class MyPlacesController: UIViewController {
     
     let listSelector = UISegmentedControl(items: ["Favourites", "To-Do"])
-    //MAKE IT RESPOND BEFORE YOU LET GO
-    
     let horizontalController = MyListsHorizontalController()
     
     override func viewDidLoad() {
@@ -80,11 +78,14 @@ class MyListsHorizontalController: HorizontalSnappingController, UICollectionVie
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         if indexPath.row == 0 {
+            //First tab: Favourites
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myPlaceListHolderCellId, for: indexPath) as! MyListHolderCell
             cell.type = .favourites
             return cell
         } else if indexPath.row == 1 {
+            //Second tab: To-Do
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myPlaceListHolderCellId, for: indexPath) as! MyListHolderCell
             cell.type = .toDo
             return cell
@@ -121,6 +122,11 @@ class MyListController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     var listType: ListType!
     
+    required init(listType: ListType) {
+        self.listType = listType
+        super.init()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.id)
@@ -140,18 +146,12 @@ class MyListController: BaseCollectionViewController, UICollectionViewDelegateFl
         return .init(width: view.frame.width - 16 - 16, height: 100)
     }
     
-    required init(listType: ListType) {
-        self.listType = listType
-        super.init()
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
 }
 
-//CUSTOM PLACE LIST CELL
 class MyListCell: UICollectionViewCell {
     
     static public let id = "myListCell"
@@ -159,7 +159,7 @@ class MyListCell: UICollectionViewCell {
     var listType: ListType! {
         didSet {
             if listType == ListType.favourites {
-                placeNameLabel.text = "Favourite"
+                placeNameLabel.text = "Favourites"
             } else if listType == ListType.toDo {
                 placeNameLabel.text = "To-Do"
             }
