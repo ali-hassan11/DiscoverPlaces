@@ -15,7 +15,7 @@ class MyPlacesController: UIViewController {
 //    let favourtiesController = SavedPlacesTableViewController(listType: .favourites)
 //    let toDoController = SavedPlacesTableViewController(listType: .toDo)
     
-    let horizontalController = SavedListsHorizontalController()
+    let horizontalController = MyListsHorizontalController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +66,7 @@ class MyPlacesController: UIViewController {
     
 }
 
-class SavedListsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
+class MyListsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     private let myPlaceListHolderCellId = "myPlaceListHolderCellId"
     
@@ -74,7 +74,7 @@ class SavedListsHorizontalController: HorizontalSnappingController, UICollection
         super.viewDidLoad()
         collectionView.backgroundColor = .systemBackground
         
-        collectionView.register(MyPlaceListHolderCell.self, forCellWithReuseIdentifier: myPlaceListHolderCellId)
+        collectionView.register(MyListHolderCell.self, forCellWithReuseIdentifier: myPlaceListHolderCellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -82,7 +82,8 @@ class SavedListsHorizontalController: HorizontalSnappingController, UICollection
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myPlaceListHolderCellId, for: indexPath) as! MyPlaceListHolderCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myPlaceListHolderCellId, for: indexPath) as! MyListHolderCell
+        cell.type = .favourites
         return cell
     }
     
@@ -96,9 +97,11 @@ class SavedListsHorizontalController: HorizontalSnappingController, UICollection
     
 }
 
-class MyPlaceListHolderCell: UICollectionViewCell {
+class MyListHolderCell: UICollectionViewCell {
     
-    let listController = MyPlaceListController()
+    let listController = MyListController()//Inject type here
+    
+    var type: ListType!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -112,13 +115,16 @@ class MyPlaceListHolderCell: UICollectionViewCell {
     
 }
 
-class MyPlaceListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class MyListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    private let savedPlaceCellId = "savedPlaceCellId"
+    //Need to know which list
+    var type: ListType!
+    
+    private let myListCell = "myListCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: savedPlaceCellId)
+        collectionView.register(MyListCell.self, forCellWithReuseIdentifier: myListCell)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -126,8 +132,8 @@ class MyPlaceListController: BaseCollectionViewController, UICollectionViewDeleg
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: savedPlaceCellId, for: indexPath)
-        cell.backgroundColor = .systemRed
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myListCell, for: indexPath) as! MyListCell
+        cell.type = type
         return cell
     }
     
@@ -138,3 +144,31 @@ class MyPlaceListController: BaseCollectionViewController, UICollectionViewDeleg
 }
 
 //CUSTOM PLACE LIST CELL
+class MyListCell: UICollectionViewCell {
+    
+    var type: ListType!
+
+    let placeImageView = UIImageView(conrnerRadius: 10)
+    let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 26, weight: .semibold), color: .label, numberOfLines: 1)
+    let addressLabel = UILabel(text: "123 Palace Road, London", font: .systemFont(ofSize: 16, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
+    let starView = StarsView()
+    
+    //If type == fave, icon = fave, else icon = toDo
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        layer.cornerRadius = 10
+        clipsToBounds = true
+        
+        backgroundColor = .systemBackground
+        
+        
+        
+        addBottomSeparator()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
