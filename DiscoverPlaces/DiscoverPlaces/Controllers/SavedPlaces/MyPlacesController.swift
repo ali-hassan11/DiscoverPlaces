@@ -42,14 +42,14 @@ class MyPlacesController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             if collectionView.contentOffset.x > 1 {
-                UIView.animate(withDuration: 0.25, animations: {
+                UIView.animate(withDuration: 0.2, animations: {
                     collectionView.contentOffset.x -= self.view.frame.width
                 })
                 self.view.layoutIfNeeded()
             }
         case 1:
             if collectionView.contentOffset.x < 1 {
-                UIView.animate(withDuration: 0.25, animations: {
+                UIView.animate(withDuration: 0.2, animations: {
                     collectionView.contentOffset.x += self.view.frame.width
                 })
                 self.view.layoutIfNeeded()
