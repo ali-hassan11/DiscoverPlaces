@@ -11,10 +11,6 @@ import UIKit
 class MyPlacesController: UIViewController {
     
     let listSelector = UISegmentedControl(items: ["Favourites", "To-Do"])
-    
-//    let favourtiesController = SavedPlacesTableViewController(listType: .favourites)
-//    let toDoController = SavedPlacesTableViewController(listType: .toDo)
-    
     let horizontalController = MyListsHorizontalController()
     
     override func viewDidLoad() {
@@ -82,9 +78,17 @@ class MyListsHorizontalController: HorizontalSnappingController, UICollectionVie
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myPlaceListHolderCellId, for: indexPath) as! MyListHolderCell
-        cell.type = .favourites
-        return cell
+        if indexPath.row == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myPlaceListHolderCellId, for: indexPath) as! MyListHolderCell
+            cell.type = .favourites
+            return cell
+        } else if indexPath.row == 1 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myPlaceListHolderCellId, for: indexPath) as! MyListHolderCell
+            cell.type = .toDo
+            return cell
+        } else {
+            fatalError("Should only be 2 tabs!")
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -99,14 +103,44 @@ class MyListsHorizontalController: HorizontalSnappingController, UICollectionVie
 
 class MyListHolderCell: UICollectionViewCell {
     
-    let listController = MyListController()//Inject type here
+    var listController: MyListController!
     
-    var type: ListType!
+    var type: ListType! {
+        didSet {
+            listController = MyListController(listType: type)
+            addSubview(listController.view)
+            listController.view.fillSuperview()
+        }
+    }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        addSubview(listController.view)
-        listController.view.fillSuperview()
+}
+
+class MyListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var listType: ListType!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.id)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyListCell.id, for: indexPath) as! MyListCell
+        cell.listType = listType
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: view.frame.width - 16 - 16, height: 100)
+    }
+    
+    required init(listType: ListType) {
+        self.listType = listType
+        super.init()
     }
     
     required init?(coder: NSCoder) {
@@ -115,38 +149,20 @@ class MyListHolderCell: UICollectionViewCell {
     
 }
 
-class MyListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
-    
-    //Need to know which list
-    var type: ListType!
-    
-    private let myListCell = "myListCell"
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        collectionView.register(MyListCell.self, forCellWithReuseIdentifier: myListCell)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myListCell, for: indexPath) as! MyListCell
-        cell.type = type
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width - 16 - 16, height: 100)
-    }
-    
-}
-
 //CUSTOM PLACE LIST CELL
 class MyListCell: UICollectionViewCell {
     
-    var type: ListType!
+    static public let id = "myListCell"
+    
+    var listType: ListType! {
+        didSet {
+            if listType == ListType.favourites {
+                placeNameLabel.text = "Favourites"
+            } else if listType == ListType.toDo {
+                placeNameLabel.text = "To-Do"
+            }
+        }
+    }
 
     let placeImageView = UIImageView(conrnerRadius: 10)
     let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 26, weight: .semibold), color: .label, numberOfLines: 1)
@@ -162,7 +178,8 @@ class MyListCell: UICollectionViewCell {
         
         backgroundColor = .systemBackground
         
-        
+        addSubview(placeNameLabel)
+        placeNameLabel.fillSuperview()
         
         addBottomSeparator()
     }
