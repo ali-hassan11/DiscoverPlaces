@@ -41,19 +41,23 @@ class MyPlacesController: UIViewController {
     
     @objc private func toggleList(sender: UISegmentedControl) {
  
+        guard let collectionView = self.horizontalController.collectionView else { return }
+        
         switch sender.selectedSegmentIndex {
         case 0:
-            UIView.animate(withDuration: 0.25, animations: {
-                self.horizontalController.collectionView.contentOffset.x -= self.view.frame.width
-            })
-            self.view.layoutIfNeeded()
-
+            if collectionView.contentOffset.x > 1 {
+                UIView.animate(withDuration: 0.25, animations: {
+                    collectionView.contentOffset.x -= self.view.frame.width
+                })
+                self.view.layoutIfNeeded()
+            }
         case 1:
-            UIView.animate(withDuration: 0.25, animations: {
-                self.horizontalController.collectionView.contentOffset.x += self.view.frame.width
-            })
-            self.view.layoutIfNeeded()
-
+            if collectionView.contentOffset.x < 1 {
+                UIView.animate(withDuration: 0.25, animations: {
+                    collectionView.contentOffset.x += self.view.frame.width
+                })
+                self.view.layoutIfNeeded()
+            }
         default:
             break
         }
@@ -94,12 +98,12 @@ class SavedListsHorizontalController: HorizontalSnappingController, UICollection
 
 class MyPlaceListHolderCell: UICollectionViewCell {
     
-    let tableView = MyPlaceListController()
+    let listController = MyPlaceListController()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(tableView.view)
-        tableView.view.fillSuperview()
+        addSubview(listController.view)
+        listController.view.fillSuperview()
     }
     
     required init?(coder: NSCoder) {
@@ -108,24 +112,29 @@ class MyPlaceListHolderCell: UICollectionViewCell {
     
 }
 
-class MyPlaceListController: UITableViewController {
+class MyPlaceListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private let savedPlaceCellId = "savedPlaceCellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: savedPlaceCellId)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: savedPlaceCellId)
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 20
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: savedPlaceCellId, for: indexPath)
-        cell.backgroundColor = .systemTeal
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: savedPlaceCellId, for: indexPath)
+        cell.backgroundColor = .systemRed
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: view.frame.width - 16 - 16, height: 100)
+    }
+    
 }
+
+//CUSTOM PLACE LIST CELL
