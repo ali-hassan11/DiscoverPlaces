@@ -11,6 +11,8 @@ import UIKit
 class MyPlacesController: UIViewController {
     
     let listSelector = UISegmentedControl(items: ["Favourites", "To-Do"])
+    //MAKE IT RESPOND BEFORE YOU LET GO
+    
     let horizontalController = MyListsHorizontalController()
     
     override func viewDidLoad() {
@@ -157,7 +159,7 @@ class MyListCell: UICollectionViewCell {
     var listType: ListType! {
         didSet {
             if listType == ListType.favourites {
-                placeNameLabel.text = "Favourites"
+                placeNameLabel.text = "Favourite"
             } else if listType == ListType.toDo {
                 placeNameLabel.text = "To-Do"
             }
