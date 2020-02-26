@@ -22,7 +22,12 @@ class BaseTabBarController: UITabBarController {
             createNavController(viewController: SearchController(),
                                 title: "Search",
                                 selectedImageName: "magnifyingglass",
-                                deselectedImageName: "magnifyingglass")
+                                deselectedImageName: "magnifyingglass"),
+            
+            createNavController(viewController: MyPlacesController(),
+                                title: "My Places",
+                                selectedImageName: "person.fill",
+                                deselectedImageName: "person")
         ]
         
         tabBar.tintColor = .systemPink
