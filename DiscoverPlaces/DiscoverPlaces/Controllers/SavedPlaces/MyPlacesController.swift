@@ -1,3 +1,4 @@
+
 //
 //  SavedPlacesController.swift
 //  DiscoverPlaces
@@ -22,7 +23,7 @@ class MyPlacesController: UIViewController {
         v.fillSuperview()
         
         navigationItem.largeTitleDisplayMode = .always
-        view.backgroundColor = .green
+        v.backgroundColor = .systemBackground
         
         v.addSubview(listSelector)
         v.addSubview(horizontalController.view)
@@ -33,6 +34,11 @@ class MyPlacesController: UIViewController {
 
         listSelector.anchor(top: view.layoutMarginsGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
         horizontalController.view.anchor(top: listSelector.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        horizontalController.collectionView.reloadData()
     }
     
     @objc private func toggleList(sender: UISegmentedControl) {
@@ -69,7 +75,6 @@ class MyListsHorizontalController: HorizontalSnappingController, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .systemBackground
-        
         collectionView.register(MyListHolderCell.self, forCellWithReuseIdentifier: myPlaceListHolderCellId)
     }
     
@@ -108,12 +113,22 @@ class MyListHolderCell: UICollectionViewCell {
     
     var listController: MyListController!
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .systemBackground
+    }
+    
     var type: ListType! {
         didSet {
             listController = MyListController(listType: type)
+            self.subviews.forEach({$0.removeFromSuperview()})
             addSubview(listController.view)
             listController.view.fillSuperview()
         }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }
@@ -121,6 +136,9 @@ class MyListHolderCell: UICollectionViewCell {
 class MyListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var listType: ListType!
+    var placeIdList: [String]?
+    
+    let defaults = DefaultsManager()
     
     required init(listType: ListType) {
         self.listType = listType
@@ -129,16 +147,20 @@ class MyListController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        placeIdList = defaults.getList(listKey: listType)
+        collectionView.backgroundColor = .systemBackground
+        collectionView.reloadData()
         collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.id)
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return placeIdList?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyListCell.id, for: indexPath) as! MyListCell
         cell.listType = listType
+        cell.placeId = placeIdList?[indexPath.item]
         return cell
     }
     
@@ -155,24 +177,45 @@ class MyListController: BaseCollectionViewController, UICollectionViewDelegateFl
 class MyListCell: UICollectionViewCell {
     
     static public let id = "myListCell"
-    
+        
     var listType: ListType! {
         didSet {
-            if listType == ListType.favourites {
-                placeNameLabel.text = "Favourites"
-            } else if listType == ListType.toDo {
-                placeNameLabel.text = "To-Do"
-            }
+           displayLabel()
         }
+    }
+    
+    var placeId: String? {
+        didSet {
+            //Load Data
+        }
+    }
+    
+    func displayLabel() {
+        if listType == ListType.favourites {
+            placeNameLabel.text = "Favourites"
+        } else if listType == ListType.toDo {
+            placeNameLabel.text = "To-Do"
+        }
+    }
+    
+    func displayIcon() {
+        if listType == ListType.favourites {
+            setIconForState(type: .favourites)
+        } else if listType == ListType.toDo {
+            
+        }
+    }
+    
+    func setIconForState(type: ListType) {
+        
     }
 
     let placeImageView = UIImageView(conrnerRadius: 10)
     let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 26, weight: .semibold), color: .label, numberOfLines: 1)
     let addressLabel = UILabel(text: "123 Palace Road, London", font: .systemFont(ofSize: 16, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
     let starView = StarsView()
+    let iconImageView = UIImageView(conrnerRadius: 0, width: 44, height: 44)
     
-    //If type == fave, icon = fave, else icon = toDo
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 10
@@ -191,3 +234,4 @@ class MyListCell: UICollectionViewCell {
     }
     
 }
+
