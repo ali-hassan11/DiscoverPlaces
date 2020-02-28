@@ -9,10 +9,10 @@
 
 import UIKit
 
-class MyPlacesController: UIViewController {
+class MyPlacesViewController: UIViewController {
     
     let listSelector = UISegmentedControl(items: ["Favourites", "To-Do"])
-    let horizontalController = MyListsHorizontalController()
+    let horizontalController = MyPlacesHorizontalController()
     
     override func viewDidLoad() {
         super.viewDidLoad()

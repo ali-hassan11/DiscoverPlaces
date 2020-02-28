@@ -8,9 +8,9 @@
 
 import UIKit
 
-class FavouritesHolderCell: UICollectionViewCell {
+class FavouritesListHolderCell: UICollectionViewCell {
     
-    var listController = FavouritesController()
+    var listController = FavouritesListController()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

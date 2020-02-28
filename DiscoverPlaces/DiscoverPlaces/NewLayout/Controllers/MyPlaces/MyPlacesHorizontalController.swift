@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyListsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
+class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     private let favouritesHolderCellId = "favouritesHolderCellId"
     private let toDoHolderCellId = "toDoHolderCellId"
@@ -16,8 +16,8 @@ class MyListsHorizontalController: HorizontalSnappingController, UICollectionVie
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(FavouritesHolderCell.self, forCellWithReuseIdentifier: favouritesHolderCellId)
-        collectionView.register(ToDoHolderCell.self, forCellWithReuseIdentifier: toDoHolderCellId)
+        collectionView.register(FavouritesListHolderCell.self, forCellWithReuseIdentifier: favouritesHolderCellId)
+        collectionView.register(ToDoListHolderCell.self, forCellWithReuseIdentifier: toDoHolderCellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -27,13 +27,13 @@ class MyListsHorizontalController: HorizontalSnappingController, UICollectionVie
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         if indexPath.row == 0 {
-            //First tab: Favourites
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: favouritesHolderCellId, for: indexPath) as! FavouritesHolderCell
+            //Favourites
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: favouritesHolderCellId, for: indexPath) as! FavouritesListHolderCell
             cell.refreshData()
             return cell
         } else if indexPath.row == 1 {
-            //Second tab: To-Do
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: toDoHolderCellId, for: indexPath) as! ToDoHolderCell
+            //To-Do
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: toDoHolderCellId, for: indexPath) as! ToDoListHolderCell
             cell.refreshData()
             return cell
         } else {

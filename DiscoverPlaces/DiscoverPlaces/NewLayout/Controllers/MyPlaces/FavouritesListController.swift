@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavouritesController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class FavouritesListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var placeIdList: [String]?
     

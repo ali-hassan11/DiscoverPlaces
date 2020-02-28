@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ToDoController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class ToDoListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var placeIdList: [String]?
     

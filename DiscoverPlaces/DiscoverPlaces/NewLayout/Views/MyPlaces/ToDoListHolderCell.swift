@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ToDoHolderCell: UICollectionViewCell {
+class ToDoListHolderCell: UICollectionViewCell {
     
-    var listController = ToDoController()
+    var listController = ToDoListController()
     
        override init(frame: CGRect) {
         super.init(frame: frame)

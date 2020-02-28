@@ -47,7 +47,7 @@
 		CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */; };
 		CE5835DF23E0C2C500C89622 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DE23E0C2C500C89622 /* DiscoverController.swift */; };
 		CE616D002405BE28008E7067 /* WebsiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE616CFF2405BE28008E7067 /* WebsiteViewController.swift */; };
-		CE616D032405D46D008E7067 /* MyPlacesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE616D022405D46D008E7067 /* MyPlacesController.swift */; };
+		CE616D032405D46D008E7067 /* MyPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE616D022405D46D008E7067 /* MyPlacesViewController.swift */; };
 		CE616D052405D94D008E7067 /* ListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE616D042405D94D008E7067 /* ListType.swift */; };
 		CE616D072405D96D008E7067 /* DefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE616D062405D96D008E7067 /* DefaultsManager.swift */; };
 		CE6599ED23EA68D100E531CD /* VerticalStackview.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6599EC23EA68D000E531CD /* VerticalStackview.swift */; };
@@ -63,11 +63,11 @@
 		CE659A0D23EF884700E531CD /* ImagesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A0C23EF884700E531CD /* ImagesHorizontalController.swift */; };
 		CE659A0F23EF888900E531CD /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A0E23EF888900E531CD /* ImageCell.swift */; };
 		CE659A1123EF897000E531CD /* PlaceDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A1023EF897000E531CD /* PlaceDetailsCell.swift */; };
-		CE694B8724097DD400F37ED6 /* MyListsHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8624097DD300F37ED6 /* MyListsHorizontalController.swift */; };
-		CE694B8924097E0500F37ED6 /* FavouritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8824097E0500F37ED6 /* FavouritesController.swift */; };
-		CE694B8B24097E2700F37ED6 /* ToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8A24097E2700F37ED6 /* ToDoController.swift */; };
-		CE694B8E24097EC400F37ED6 /* FavouritesHolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8D24097EC400F37ED6 /* FavouritesHolderCell.swift */; };
-		CE694B9024097ECF00F37ED6 /* ToDoHolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8F24097ECF00F37ED6 /* ToDoHolderCell.swift */; };
+		CE694B8724097DD400F37ED6 /* MyPlacesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8624097DD300F37ED6 /* MyPlacesHorizontalController.swift */; };
+		CE694B8924097E0500F37ED6 /* FavouritesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8824097E0500F37ED6 /* FavouritesListController.swift */; };
+		CE694B8B24097E2700F37ED6 /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8A24097E2700F37ED6 /* ToDoListController.swift */; };
+		CE694B8E24097EC400F37ED6 /* FavouritesListHolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8D24097EC400F37ED6 /* FavouritesListHolderCell.swift */; };
+		CE694B9024097ECF00F37ED6 /* ToDoListHolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8F24097ECF00F37ED6 /* ToDoListHolderCell.swift */; };
 		CE694B9224097FD200F37ED6 /* MyPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B9124097FD200F37ED6 /* MyPlaceCell.swift */; };
 		CE6F17FD23F66E73003D8D89 /* OpeningTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F17FC23F66E72003D8D89 /* OpeningTimeCell.swift */; };
 		CE734D3123E0CB3C005AE0EB /* DiscoverCardsHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE734D3023E0CB3C005AE0EB /* DiscoverCardsHolder.swift */; };
@@ -157,7 +157,7 @@
 		CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlBuilder.swift; sourceTree = "<group>"; };
 		CE5835DE23E0C2C500C89622 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
 		CE616CFF2405BE28008E7067 /* WebsiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteViewController.swift; sourceTree = "<group>"; };
-		CE616D022405D46D008E7067 /* MyPlacesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacesController.swift; sourceTree = "<group>"; };
+		CE616D022405D46D008E7067 /* MyPlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacesViewController.swift; sourceTree = "<group>"; };
 		CE616D042405D94D008E7067 /* ListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListType.swift; sourceTree = "<group>"; };
 		CE616D062405D96D008E7067 /* DefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsManager.swift; sourceTree = "<group>"; };
 		CE6599EC23EA68D000E531CD /* VerticalStackview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalStackview.swift; sourceTree = "<group>"; };
@@ -173,11 +173,11 @@
 		CE659A0C23EF884700E531CD /* ImagesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesHorizontalController.swift; sourceTree = "<group>"; };
 		CE659A0E23EF888900E531CD /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		CE659A1023EF897000E531CD /* PlaceDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsCell.swift; sourceTree = "<group>"; };
-		CE694B8624097DD300F37ED6 /* MyListsHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyListsHorizontalController.swift; sourceTree = "<group>"; };
-		CE694B8824097E0500F37ED6 /* FavouritesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesController.swift; sourceTree = "<group>"; };
-		CE694B8A24097E2700F37ED6 /* ToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoController.swift; sourceTree = "<group>"; };
-		CE694B8D24097EC400F37ED6 /* FavouritesHolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesHolderCell.swift; sourceTree = "<group>"; };
-		CE694B8F24097ECF00F37ED6 /* ToDoHolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoHolderCell.swift; sourceTree = "<group>"; };
+		CE694B8624097DD300F37ED6 /* MyPlacesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacesHorizontalController.swift; sourceTree = "<group>"; };
+		CE694B8824097E0500F37ED6 /* FavouritesListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesListController.swift; sourceTree = "<group>"; };
+		CE694B8A24097E2700F37ED6 /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
+		CE694B8D24097EC400F37ED6 /* FavouritesListHolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesListHolderCell.swift; sourceTree = "<group>"; };
+		CE694B8F24097ECF00F37ED6 /* ToDoListHolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListHolderCell.swift; sourceTree = "<group>"; };
 		CE694B9124097FD200F37ED6 /* MyPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlaceCell.swift; sourceTree = "<group>"; };
 		CE6F17FC23F66E72003D8D89 /* OpeningTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningTimeCell.swift; sourceTree = "<group>"; };
 		CE734D3023E0CB3C005AE0EB /* DiscoverCardsHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCardsHolder.swift; sourceTree = "<group>"; };
@@ -367,10 +367,10 @@
 			isa = PBXGroup;
 			children = (
 				CE616D042405D94D008E7067 /* ListType.swift */,
-				CE616D022405D46D008E7067 /* MyPlacesController.swift */,
-				CE694B8624097DD300F37ED6 /* MyListsHorizontalController.swift */,
-				CE694B8824097E0500F37ED6 /* FavouritesController.swift */,
-				CE694B8A24097E2700F37ED6 /* ToDoController.swift */,
+				CE616D022405D46D008E7067 /* MyPlacesViewController.swift */,
+				CE694B8624097DD300F37ED6 /* MyPlacesHorizontalController.swift */,
+				CE694B8824097E0500F37ED6 /* FavouritesListController.swift */,
+				CE694B8A24097E2700F37ED6 /* ToDoListController.swift */,
 			);
 			path = MyPlaces;
 			sourceTree = "<group>";
@@ -471,8 +471,8 @@
 		CE694B8C24097E8400F37ED6 /* MyPlaces */ = {
 			isa = PBXGroup;
 			children = (
-				CE694B8D24097EC400F37ED6 /* FavouritesHolderCell.swift */,
-				CE694B8F24097ECF00F37ED6 /* ToDoHolderCell.swift */,
+				CE694B8D24097EC400F37ED6 /* FavouritesListHolderCell.swift */,
+				CE694B8F24097ECF00F37ED6 /* ToDoListHolderCell.swift */,
 				CE694B9124097FD200F37ED6 /* MyPlaceCell.swift */,
 			);
 			path = MyPlaces;
@@ -807,7 +807,7 @@
 				CE734D3123E0CB3C005AE0EB /* DiscoverCardsHolder.swift in Sources */,
 				CE659A0B23EF882300E531CD /* PlaceImagesHolder.swift in Sources */,
 				CE319CE523E10BE30088B9D1 /* NearbyHorizontalController.swift in Sources */,
-				CE694B9024097ECF00F37ED6 /* ToDoHolderCell.swift in Sources */,
+				CE694B9024097ECF00F37ED6 /* ToDoListHolderCell.swift in Sources */,
 				CE659A0923EF87E800E531CD /* CategoryCell.swift in Sources */,
 				CE8A2FD323F08AA900CDF866 /* DetailsOpeningTimesCell.swift in Sources */,
 				CE8A2FC923F088B800CDF866 /* MorePlacesHolder.swift in Sources */,
@@ -817,10 +817,10 @@
 				60EADA8123F6D91B0095DBF9 /* ReviewsHolder.swift in Sources */,
 				CE5835C923DE173800C89622 /* BaseTabBarController.swift in Sources */,
 				CECDA1462401C51A005F85FB /* StarsView.swift in Sources */,
-				CE616D032405D46D008E7067 /* MyPlacesController.swift in Sources */,
+				CE616D032405D46D008E7067 /* MyPlacesViewController.swift in Sources */,
 				CE7B98E123E84EAE00CF90F6 /* SelectedCategoresHorizontalController.swift in Sources */,
 				CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */,
-				CE694B8924097E0500F37ED6 /* FavouritesController.swift in Sources */,
+				CE694B8924097E0500F37ED6 /* FavouritesListController.swift in Sources */,
 				CE6599FF23EF872900E531CD /* HomeLargeCellHolder.swift in Sources */,
 				CE319CE323E10A410088B9D1 /* NearbyHeaderCell.swift in Sources */,
 				CE8A2FD523F1CE0800CDF866 /* DetailsTopSectionCellXib.swift in Sources */,
@@ -837,7 +837,7 @@
 				60EADA8723F6E1EB0095DBF9 /* ActionButtonsCell.swift in Sources */,
 				CE659A1123EF897000E531CD /* PlaceDetailsCell.swift in Sources */,
 				CE58359D23DE16B000C89622 /* ViewController.swift in Sources */,
-				CE694B8724097DD400F37ED6 /* MyListsHorizontalController.swift in Sources */,
+				CE694B8724097DD400F37ED6 /* MyPlacesHorizontalController.swift in Sources */,
 				60EADA7F23F6C19B0095DBF9 /* WebAddressCell.swift in Sources */,
 				CE659A0D23EF884700E531CD /* ImagesHorizontalController.swift in Sources */,
 				CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */,
@@ -853,12 +853,12 @@
 				CE8A2FD123F08A7C00CDF866 /* DetailsButtonsCell.swift in Sources */,
 				CE58359923DE16B000C89622 /* AppDelegate.swift in Sources */,
 				CE319CDF23E0EE910088B9D1 /* DiscoverCardCell.swift in Sources */,
-				CE694B8E24097EC400F37ED6 /* FavouritesHolderCell.swift in Sources */,
+				CE694B8E24097EC400F37ED6 /* FavouritesListHolderCell.swift in Sources */,
 				CE319CDD23E0ECBD0088B9D1 /* UIElementsExtensions.swift in Sources */,
 				CE6599F223EC96A200E531CD /* PlaceDetailsController.swift in Sources */,
 				CE659A0F23EF888900E531CD /* ImageCell.swift in Sources */,
 				CE8A2FCB23F088D200CDF866 /* MorePlacesHorizontalController.swift in Sources */,
-				CE694B8B24097E2700F37ED6 /* ToDoController.swift in Sources */,
+				CE694B8B24097E2700F37ED6 /* ToDoListController.swift in Sources */,
 				CE659A0523EF87A200E531CD /* CategoriesHolder.swift in Sources */,
 				60EADA8923F706EB0095DBF9 /* PlaceDetailResponse.swift in Sources */,
 				60EADA8323F6D96B0095DBF9 /* ReviewsHorizontalController.swift in Sources */,
