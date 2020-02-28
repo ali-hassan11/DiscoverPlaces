@@ -32,6 +32,12 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         }
     }
     
+    let splashScreen: UIView! = {
+        let v = UIView()
+        v.backgroundColor = .systemBackground
+        return v
+    }()
+    
     // -------------------- ADD TO SERVICE, PASS IN ARRAY OF FIELD THAT YOU WANT -------------------- //
     func fetchData(for id: String) {
         let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,photo,vicinity,geometry,review,website,url,formatted_phone_number,formatted_address&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
@@ -54,6 +60,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
                 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                    self.fadeOutSplashScreen()
                 }
             } catch let jsonErr {
                 print(jsonErr)
@@ -70,6 +77,9 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         collectionView.backgroundColor = .systemBackground
         collectionView.contentInsetAdjustmentBehavior = .never
         navigationItem.largeTitleDisplayMode = .never
+        
+        self.view.addSubview(splashScreen)
+        splashScreen.fillSuperview()
         
         registerCells()
     }
@@ -264,6 +274,14 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         collectionView.register(ReviewsHolder.self, forCellWithReuseIdentifier: ReviewsHolder.id)
         collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: MorePlacesHolder.id)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
+    }
+    
+    func fadeOutSplashScreen() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.splashScreen.alpha = 0
+        }) { (true) in
+            self.splashScreen.removeFromSuperview()
+        }
     }
 }
 
