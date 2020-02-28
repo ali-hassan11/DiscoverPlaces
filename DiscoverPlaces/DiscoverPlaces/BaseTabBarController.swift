@@ -24,7 +24,7 @@ class BaseTabBarController: UITabBarController {
                                 selectedImageName: "magnifyingglass",
                                 deselectedImageName: "magnifyingglass"),
             
-            createNavController(viewController: MyPlacesController(),
+            createNavController(viewController: MyPlacesViewController(),
                                 title: "My Places",
                                 selectedImageName: "person.fill",
                                 deselectedImageName: "person")
