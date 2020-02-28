@@ -298,6 +298,11 @@ class FavouritesController: BaseCollectionViewController, UICollectionViewDelega
         collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.id)
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        refreshData()
+//    }
+    
     func refreshData() {
         placeIdList = defaults.getList(listKey: .favourites)
         collectionView.reloadData()
@@ -312,6 +317,12 @@ class FavouritesController: BaseCollectionViewController, UICollectionViewDelega
         cell.listType = .favourites
         cell.placeId = placeIdList?[indexPath.item]
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailsController = PlaceDetailsController()
+        detailsController.placeId = placeIdList?[indexPath.item]
+        present(detailsController, animated: true, completion: nil)//Change to push
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -334,6 +345,11 @@ class ToDoController: BaseCollectionViewController, UICollectionViewDelegateFlow
         collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.id)
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        refreshData()
+//    }
+    
     func refreshData() {
         placeIdList = defaults.getList(listKey: .toDo)
         collectionView.reloadData()
@@ -348,6 +364,12 @@ class ToDoController: BaseCollectionViewController, UICollectionViewDelegateFlow
         cell.listType = .toDo
         cell.placeId = placeIdList?[indexPath.item]
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailsController = PlaceDetailsController()
+        detailsController.placeId = placeIdList?[indexPath.item]
+        present(detailsController, animated: true, completion: nil)//Change to push
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
