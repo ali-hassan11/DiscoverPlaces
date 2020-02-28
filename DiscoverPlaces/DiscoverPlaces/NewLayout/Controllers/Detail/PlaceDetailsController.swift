@@ -127,7 +127,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case 1:
             //Hours
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OpeningTimeCell.id, for: indexPath) as! OpeningTimeCell
-            cell.openingTimes = place?.opening_hours?.weekdayText ?? []//GET THE CORRECT DOTW
+            cell.openingTimes = place?.opening_hours?.weekdayText ?? []
             return cell
         case 2:
             //PhoneNumber
@@ -171,50 +171,36 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.item {
-            //REFACTOR THESE IS STATEMENTS
         case 0:
-            //Address
-            if place?.vicinity != nil {
-                return .init(width: view.frame.width, height: 60)
-            } else {
-                return .zero
-            }
+            return cellHeight(for: place?.vicinity, desiredHeight: 60)
         case 1:
             //Hours
-            if place?.opening_hours != nil {
-                return .init(width: view.frame.width, height: 60)
-            } else {
-                return .zero
-            }
+            return cellHeight(for: place?.opening_hours, desiredHeight: 60)
         case 2:
             //PhoneNumber
-            if place?.formatted_Phone_Number != nil {
-                return .init(width: view.frame.width, height: 60)
-            } else {
-                return .zero
-            }
+            return cellHeight(for: place?.formatted_Phone_Number, desiredHeight: 60)
         case 3:
             //Website
-            if place?.website != nil {
-                return .init(width: view.frame.width, height: 60)
-            } else {
-                return .zero
-            }
+            return cellHeight(for: place?.website, desiredHeight: 60)
         case 4:
             //ActionButtons
             return .init(width: view.frame.width, height: 60)
         case 5:
             //Reviews
-            if place?.reviews != nil {
-                return .init(width: view.frame.width, height: 180)
-            } else {
-                return .zero
-            }
+            return cellHeight(for: place?.reviews, desiredHeight: 180)
         case 6:
             //More Places
             //CHECK IF NIL, IF NOT RETURN 180
             return .init(width: view.frame.width, height: 220)
         default:
+            return .zero
+        }
+    }
+    
+    func cellHeight(for item: Any?, desiredHeight: CGFloat) -> CGSize {
+        if item != nil {
+            return .init(width: view.frame.width, height: desiredHeight)
+        } else {
             return .zero
         }
     }
