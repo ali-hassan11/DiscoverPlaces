@@ -75,31 +75,42 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         super.viewDidLoad()
         
         collectionView.backgroundColor = .systemBackground
-        collectionView.contentInsetAdjustmentBehavior = .never
         navigationItem.largeTitleDisplayMode = .never
-        
-        self.view.addSubview(splashScreen)
-        splashScreen.fillSuperview()
-        
+        addSplashScreen()
         registerCells()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
+    
+    private func addSplashScreen() {
+        self.view.addSubview(splashScreen)
+        splashScreen.fillSuperview()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    private func registerCells() {
+        //Header
+        collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PlaceImagesHolder.id)
         
-        self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.navigationBar.isTranslucent = false
+        collectionView.register(AddressCell.self, forCellWithReuseIdentifier: AddressCell.id)
+        collectionView.register(OpeningTimeCell.self, forCellWithReuseIdentifier: OpeningTimeCell.id)
+        collectionView.register(PhoneNumberCell.self, forCellWithReuseIdentifier: PhoneNumberCell.id)
+        collectionView.register(WebAddressCell.self, forCellWithReuseIdentifier: WebAddressCell.id)
+        collectionView.register(ActionButtonsCell.self, forCellWithReuseIdentifier: ActionButtonsCell.id)
+        collectionView.register(ReviewsHolder.self, forCellWithReuseIdentifier: ReviewsHolder.id)
+        collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: MorePlacesHolder.id)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
     }
+    
+    private func fadeOutSplashScreen() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.splashScreen.alpha = 0
+        }) { (true) in
+            self.splashScreen.removeFromSuperview()
+        }
+    }
+}
 
+extension PlaceDetailsController {
+    
     //Header
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PlaceImagesHolder.id, for: indexPath) as! PlaceImagesHolder
@@ -197,14 +208,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         }
     }
     
-    func cellHeight(for item: Any?, desiredHeight: CGFloat) -> CGSize {
-        if item != nil {
-            return .init(width: view.frame.width, height: desiredHeight)
-        } else {
-            return .zero
-        }
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case Detail.address.rawValue:
@@ -239,6 +242,14 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         return 7
     }
     
+    func cellHeight(for item: Any?, desiredHeight: CGFloat) -> CGSize {
+        if item != nil {
+            return .init(width: view.frame.width, height: desiredHeight)
+        } else {
+            return .zero
+        }
+    }
+    
     private func openInMaps(placeName: String, longitude: Double, latitude: Double) {
         let coordinate = CLLocationCoordinate2DMake(longitude, latitude)
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
@@ -246,28 +257,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         mapItem.phoneNumber = place?.formatted_Phone_Number
         mapItem.url = URL(string: place?.website ?? "")
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
-    }
-    
-    func registerCells() {
-        //Header
-        collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PlaceImagesHolder.id)
-        
-        collectionView.register(AddressCell.self, forCellWithReuseIdentifier: AddressCell.id)
-        collectionView.register(OpeningTimeCell.self, forCellWithReuseIdentifier: OpeningTimeCell.id)
-        collectionView.register(PhoneNumberCell.self, forCellWithReuseIdentifier: PhoneNumberCell.id)
-        collectionView.register(WebAddressCell.self, forCellWithReuseIdentifier: WebAddressCell.id)
-        collectionView.register(ActionButtonsCell.self, forCellWithReuseIdentifier: ActionButtonsCell.id)
-        collectionView.register(ReviewsHolder.self, forCellWithReuseIdentifier: ReviewsHolder.id)
-        collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: MorePlacesHolder.id)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
-    }
-    
-    func fadeOutSplashScreen() {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.splashScreen.alpha = 0
-        }) { (true) in
-            self.splashScreen.removeFromSuperview()
-        }
     }
 }
 
