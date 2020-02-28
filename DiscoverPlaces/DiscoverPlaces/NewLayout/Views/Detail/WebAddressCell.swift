@@ -10,6 +10,8 @@ import UIKit
 
 class WebAddressCell: UICollectionViewCell {
 
+    public static let id = "webAddressCellId"
+
     var webAddress: String? {
         didSet {
             websiteAddressLabel.text = webAddress

@@ -14,6 +14,8 @@ protocol ActionButtonsCellDelegate: class {
 
 class ActionButtonsCell: UICollectionViewCell {
     
+    public static let id = "actionButtonsCellId"
+
     //Move this to an icon enum
     let heartOutline = UIImage(systemName: "heart")
     let heartFilled = UIImage(systemName: "heart.fill")

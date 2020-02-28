@@ -10,6 +10,8 @@ import UIKit
 
 class PhoneNumberCell: UICollectionViewCell {
     
+    public static let id = "phoneNumberCellId"
+    
     var phoneNumber: String? {
         didSet {
             phoneNumberLabel.text = phoneNumber

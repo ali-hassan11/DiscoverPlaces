@@ -61,18 +61,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         }.resume()
     }
 
-    // MARK: - Result
-
-    //MOVE CELL ID'S TO CELLS AS STATIC LETS
-    fileprivate let openingTimeCellId = "openingTimeCellId"
-    fileprivate let phoneNumberCellId = "phoneNumberCellId"
-    fileprivate let webAddressCellId = "webAddressCellId"
-
-    fileprivate let actionButtonsCellId = "actionButtonsCellId"
-
-    fileprivate let reviewsHolderId = "reviewsHolderId"
-    fileprivate let morePlacesHolderId = "morePlacesHolderId"
-
     fileprivate let errorCellId = "errorCellId"
         
     override func viewDidLoad() {
@@ -82,26 +70,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         collectionView.contentInsetAdjustmentBehavior = .never
         navigationItem.largeTitleDisplayMode = .never
         
-        //Header
-        collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PlaceImagesHolder.id)
-
-        //DetailCells
-        collectionView.register(AddressCell.self, forCellWithReuseIdentifier: AddressCell.id)
-        collectionView.register(OpeningTimeCell.self, forCellWithReuseIdentifier: openingTimeCellId)
-        collectionView.register(PhoneNumberCell.self, forCellWithReuseIdentifier: phoneNumberCellId)
-        collectionView.register(WebAddressCell.self, forCellWithReuseIdentifier: webAddressCellId)
-
-        //ButtonsCell
-        collectionView.register(ActionButtonsCell.self, forCellWithReuseIdentifier: actionButtonsCellId)
-
-        //ReviewsHolder
-        collectionView.register(ReviewsHolder.self, forCellWithReuseIdentifier: reviewsHolderId)
-
-        //MorePlacesHolder
-        collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: morePlacesHolderId)
-        
-        //Error
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
+        registerCells()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,28 +115,28 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             return cell
         case 1:
             //Hours
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: openingTimeCellId, for: indexPath) as! OpeningTimeCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OpeningTimeCell.id, for: indexPath) as! OpeningTimeCell
             cell.openingTimes = place?.opening_hours?.weekdayText ?? []//GET THE CORRECT DOTW
             return cell
         case 2:
             //PhoneNumber
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: phoneNumberCellId, for: indexPath) as! PhoneNumberCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhoneNumberCell.id, for: indexPath) as! PhoneNumberCell
             cell.phoneNumber = place?.formatted_Phone_Number
             return cell
         case 3:
             //Website
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: webAddressCellId, for: indexPath) as! WebAddressCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WebAddressCell.id, for: indexPath) as! WebAddressCell
             cell.webAddress = place?.website
             return cell
         case 4:
             //ActionButtons
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: actionButtonsCellId, for: indexPath) as! ActionButtonsCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActionButtonsCell.id, for: indexPath) as! ActionButtonsCell
             cell.placeId = placeId
             cell.delegate = self
             return cell
         case 5:
             //Reviews
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reviewsHolderId, for: indexPath) as! ReviewsHolder
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewsHolder.id, for: indexPath) as! ReviewsHolder
             cell.horizontalController.reviews = place?.reviews
             cell.horizontalController.didSelectHandler = { [weak self] review in
                 let reviewViewController = ReviewDetailViewController()
@@ -177,7 +146,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             return cell
         case 6:
             //More Places
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: morePlacesHolderId, for: indexPath) as! MorePlacesHolder
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
             return cell
         default:
             #if DEBUG
@@ -280,6 +249,20 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         mapItem.phoneNumber = place?.formatted_Phone_Number
         mapItem.url = URL(string: place?.website ?? "")
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+    }
+    
+    func registerCells() {
+        //Header
+        collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PlaceImagesHolder.id)
+        
+        collectionView.register(AddressCell.self, forCellWithReuseIdentifier: AddressCell.id)
+        collectionView.register(OpeningTimeCell.self, forCellWithReuseIdentifier: OpeningTimeCell.id)
+        collectionView.register(PhoneNumberCell.self, forCellWithReuseIdentifier: PhoneNumberCell.id)
+        collectionView.register(WebAddressCell.self, forCellWithReuseIdentifier: WebAddressCell.id)
+        collectionView.register(ActionButtonsCell.self, forCellWithReuseIdentifier: ActionButtonsCell.id)
+        collectionView.register(ReviewsHolder.self, forCellWithReuseIdentifier: ReviewsHolder.id)
+        collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: MorePlacesHolder.id)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
     }
 }
 

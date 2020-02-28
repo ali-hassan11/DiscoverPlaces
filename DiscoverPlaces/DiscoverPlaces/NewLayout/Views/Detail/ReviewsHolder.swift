@@ -10,6 +10,8 @@ import UIKit
 
 class ReviewsHolder: UICollectionViewCell {
 
+    public static let id = "reviewsHolderId"
+    
     let horizontalController = ReviewsHorizontalController()
     let sectionTitle = UILabel(text: "Reviews", font: .systemFont(ofSize: 19, weight: .medium), color: .label, numberOfLines: 1)
 

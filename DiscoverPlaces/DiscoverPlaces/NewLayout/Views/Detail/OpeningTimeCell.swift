@@ -10,6 +10,8 @@ import UIKit
 
 class OpeningTimeCell: UICollectionViewCell {
     
+    public static let id = "openingTimeCellId"
+    
     var openingTimes: [String]? {
         didSet {
             let today = Date().dayOfWeek()

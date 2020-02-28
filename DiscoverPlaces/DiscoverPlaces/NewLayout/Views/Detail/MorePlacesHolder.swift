@@ -10,6 +10,8 @@ import UIKit
 
 class MorePlacesHolder: UICollectionViewCell {
     
+    public static let id = "morePlacesHolderId"
+    
     let horizontalController = MorePlacesHorizontalController()
     let sectionTitle = UILabel(text: "Similar Places", font: .systemFont(ofSize: 19, weight: .medium), color: .label, numberOfLines: 1)
     
