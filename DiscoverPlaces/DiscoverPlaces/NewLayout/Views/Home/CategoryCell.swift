@@ -10,6 +10,8 @@ import UIKit
 
 class CategoryCell: UICollectionViewCell {
     
+    public static let id = "categoryCellId"
+
     let categoryLabel = UILabel(text: "Category", font: .systemFont(ofSize: 20, weight: .semibold), color: .white, alignment: .center, numberOfLines: 0)
     let categoryImageView = UIImageView()
     

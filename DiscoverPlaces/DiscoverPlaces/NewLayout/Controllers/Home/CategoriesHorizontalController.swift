@@ -10,7 +10,6 @@ import UIKit
 
 class CategoriesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
-    fileprivate let categoryCellId = "categoryCellId"
     fileprivate let numberOfRows:CGFloat = 3
     fileprivate let numberOfColumns:CGFloat = 2
     fileprivate let lineSpacing: CGFloat = 10
@@ -20,7 +19,7 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
         super.viewDidLoad()
         
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: categoryCellId)
+        collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.id)
         collectionView.contentInset = .init(top: Constants.topPadding, left: Constants.leftPadding, bottom: Constants.bottomPadding, right: Constants.rightPadding)
     }
     
@@ -29,7 +28,7 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: categoryCellId, for: indexPath) as! CategoryCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.id, for: indexPath) as! CategoryCell
         return cell
     }
     

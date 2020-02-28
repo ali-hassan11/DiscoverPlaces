@@ -10,6 +10,8 @@ import UIKit
 
 class AddressCell: UICollectionViewCell {
 
+    public static let id = "addressCellId"
+    
     //USE VICINITY, NOT FORMATTED ADDRESS HERE
     var vicinity: String? {
         didSet {

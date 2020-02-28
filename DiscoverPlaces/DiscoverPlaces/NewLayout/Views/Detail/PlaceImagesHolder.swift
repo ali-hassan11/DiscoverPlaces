@@ -10,6 +10,8 @@ import UIKit
 
 class PlaceImagesHolder: UICollectionReusableView {
     
+    public static let id = "placeImagesHolderId"
+    
     let horizontalController = ImagesHorizontalController()
     
     let faveButton: UIButton! = {

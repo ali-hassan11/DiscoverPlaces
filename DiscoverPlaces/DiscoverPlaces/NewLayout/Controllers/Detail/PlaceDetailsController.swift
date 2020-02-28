@@ -64,8 +64,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     // MARK: - Result
 
     //MOVE CELL ID'S TO CELLS AS STATIC LETS
-    fileprivate let placeImagesHolderId = "placeImagesHolderId"
-    fileprivate let addressCellId = "addressCellId"
     fileprivate let openingTimeCellId = "openingTimeCellId"
     fileprivate let phoneNumberCellId = "phoneNumberCellId"
     fileprivate let webAddressCellId = "webAddressCellId"
@@ -85,10 +83,10 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         navigationItem.largeTitleDisplayMode = .never
         
         //Header
-        collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: placeImagesHolderId)
+        collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PlaceImagesHolder.id)
 
         //DetailCells
-        collectionView.register(AddressCell.self, forCellWithReuseIdentifier: addressCellId)
+        collectionView.register(AddressCell.self, forCellWithReuseIdentifier: AddressCell.id)
         collectionView.register(OpeningTimeCell.self, forCellWithReuseIdentifier: openingTimeCellId)
         collectionView.register(PhoneNumberCell.self, forCellWithReuseIdentifier: phoneNumberCellId)
         collectionView.register(WebAddressCell.self, forCellWithReuseIdentifier: webAddressCellId)
@@ -124,7 +122,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
 
     //Header
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: placeImagesHolderId, for: indexPath) as! PlaceImagesHolder
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PlaceImagesHolder.id, for: indexPath) as! PlaceImagesHolder
         
         cell.pageControlView.numberOfPages = place?.photos?.count ?? 0
         cell.horizontalController.photos = place?.photos
@@ -143,7 +141,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         switch indexPath.item {
         case 0:
             //Address
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addressCellId, for: indexPath) as! AddressCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddressCell.id, for: indexPath) as! AddressCell
             cell.vicinity = place?.vicinity
             return cell
         case 1:
