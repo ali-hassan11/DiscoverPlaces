@@ -70,12 +70,14 @@ class MyPlacesController: UIViewController {
 
 class MyListsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
-    private let myPlaceListHolderCellId = "myPlaceListHolderCellId"
+    private let favouritesHolderCellId = "favouritesHolderCellId"
+    private let toDoHolderCellId = "toDoHolderCellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(MyListHolderCell.self, forCellWithReuseIdentifier: myPlaceListHolderCellId)
+        collectionView.register(FavouritesHolderCell.self, forCellWithReuseIdentifier: favouritesHolderCellId)
+        collectionView.register(ToDoHolderCell.self, forCellWithReuseIdentifier: toDoHolderCellId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -86,13 +88,13 @@ class MyListsHorizontalController: HorizontalSnappingController, UICollectionVie
 
         if indexPath.row == 0 {
             //First tab: Favourites
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myPlaceListHolderCellId, for: indexPath) as! MyListHolderCell
-            cell.type = .favourites
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: favouritesHolderCellId, for: indexPath) as! FavouritesHolderCell
+            cell.refreshData()
             return cell
         } else if indexPath.row == 1 {
             //Second tab: To-Do
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: myPlaceListHolderCellId, for: indexPath) as! MyListHolderCell
-            cell.type = .toDo
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: toDoHolderCellId, for: indexPath) as! ToDoHolderCell
+            cell.refreshData()
             return cell
         } else {
             fatalError("Should only be 2 tabs!")
@@ -109,71 +111,42 @@ class MyListsHorizontalController: HorizontalSnappingController, UICollectionVie
     
 }
 
-class MyListHolderCell: UICollectionViewCell {
+class FavouritesHolderCell: UICollectionViewCell {
     
-    var listController: MyListController!
+    var listController = FavouritesController()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
-    }
-    
-    var type: ListType! {
-        didSet {
-            guard let listController = listController else {
-                self.listController = MyListController(listType: type)
-                addSubview(self.listController.view)
-                self.listController.view.fillSuperview()
-                return
-            }
-            
-            listController.refreshData()
-        }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
-class MyListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
-    
-    var listType: ListType!
-    var placeIdList: [String]?
-    
-    let defaults = DefaultsManager()
-    
-    required init(listType: ListType) {
-        self.listType = listType
-        super.init()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        collectionView.backgroundColor = .systemBackground
-        refreshData()
-        collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.id)
+        
+        addSubview(listController.view)
+        listController.view.fillSuperview()
     }
     
     func refreshData() {
-        placeIdList = defaults.getList(listKey: listType)
-        collectionView.reloadData()
+        listController.refreshData()
     }
+ 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return placeIdList?.count ?? 0
+class ToDoHolderCell: UICollectionViewCell {
+    
+    var listController = ToDoController()
+    
+       override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .systemBackground
+        
+        addSubview(listController.view)
+        listController.view.fillSuperview()
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyListCell.id, for: indexPath) as! MyListCell
-        cell.listType = listType
-        cell.placeId = placeIdList?[indexPath.item]
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width - 16 - 16, height: 100)
+    func refreshData() {
+        listController.refreshData()
     }
     
     required init?(coder: NSCoder) {
@@ -181,6 +154,51 @@ class MyListController: BaseCollectionViewController, UICollectionViewDelegateFl
     }
     
 }
+
+//class MyListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+//
+//    var listType: ListType!
+//    var placeIdList: [String]?
+//
+//    let defaults = DefaultsManager()
+//
+//    required init(listType: ListType) {
+//        self.listType = listType
+//        super.init()
+//    }
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        collectionView.backgroundColor = .systemBackground
+//        refreshData()
+//        collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.id)
+//    }
+//
+//    func refreshData() {
+//        placeIdList = defaults.getList(listKey: listType)
+//        collectionView.reloadData()
+//    }
+//
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return placeIdList?.count ?? 0
+//    }
+//
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyListCell.id, for: indexPath) as! MyListCell
+//        cell.listType = listType
+//        cell.placeId = placeIdList?[indexPath.item]
+//        return cell
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return .init(width: view.frame.width - 16 - 16, height: 100)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//
+//}
 
 class MyListCell: UICollectionViewCell {
     
@@ -264,3 +282,76 @@ class MyListCell: UICollectionViewCell {
     
 }
 
+
+
+
+class FavouritesController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var placeIdList: [String]?
+    
+    let defaults = DefaultsManager()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.backgroundColor = .systemBackground
+        refreshData()
+        collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.id)
+    }
+    
+    func refreshData() {
+        placeIdList = defaults.getList(listKey: .favourites)
+        collectionView.reloadData()
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return placeIdList?.count ?? 0
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyListCell.id, for: indexPath) as! MyListCell
+        cell.listType = .favourites
+        cell.placeId = placeIdList?[indexPath.item]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: view.frame.width - 16 - 16, height: 100)
+    }
+    
+}
+
+
+class ToDoController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var placeIdList: [String]?
+    
+    let defaults = DefaultsManager()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.backgroundColor = .systemBackground
+        refreshData()
+        collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.id)
+    }
+    
+    func refreshData() {
+        placeIdList = defaults.getList(listKey: .toDo)
+        collectionView.reloadData()
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return placeIdList?.count ?? 0
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyListCell.id, for: indexPath) as! MyListCell
+        cell.listType = .toDo
+        cell.placeId = placeIdList?[indexPath.item]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: view.frame.width - 16 - 16, height: 100)
+    }
+    
+}
