@@ -32,6 +32,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         }
     }
     
+    // -------------------- ADD TO SERVICE, PASS IN ARRAY OF FIELD THAT YOU WANT -------------------- //
     func fetchData(for id: String) {
         let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,photo,vicinity,geometry,review,website,url,formatted_phone_number,formatted_address&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
