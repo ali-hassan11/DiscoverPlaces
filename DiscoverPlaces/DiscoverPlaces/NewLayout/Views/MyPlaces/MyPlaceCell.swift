@@ -11,10 +11,11 @@ import UIKit
 class MyPlaceCell: UICollectionViewCell {
     
     static public let id = "myListCell"
-        
+    
     var listType: ListType! {
         didSet {
-           displayLabel()
+            displayIcon()
+            displayLabel()
         }
     }
     
@@ -34,9 +35,9 @@ class MyPlaceCell: UICollectionViewCell {
     
     func displayIcon() {
         if listType == ListType.favourites {
-            setIconForState(type: .favourites)
+            iconImageView.image = UIImage(systemName: "heart.fill")
         } else if listType == ListType.toDo {
-            
+            iconImageView.image = UIImage(systemName: "text.badge.minus")
         }
     }
     
@@ -48,7 +49,7 @@ class MyPlaceCell: UICollectionViewCell {
     let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 18, weight: .semibold), color: .label, numberOfLines: 1)
     let addressLabel = UILabel(text: "123 Palace Road, London", font: .systemFont(ofSize: 15, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
     let starView = UIView() //STARSVIEW
-    let iconImageView = UIImageView(image: UIImage(systemName: "heart"))
+    let iconImageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,8 +67,8 @@ class MyPlaceCell: UICollectionViewCell {
         starView.constrainWidth(constant: 100)
         
         iconImageView.tintColor = .systemPink
-        iconImageView.constrainWidth(constant: 30)
-        iconImageView.constrainHeight(constant: 30)
+        iconImageView.constrainWidth(constant: 25)
+        iconImageView.constrainHeight(constant: 25)
         
         
         let labelsStackView = VerticalStackView(arrangedSubviews: [placeNameLabel, addressLabel, starView])
