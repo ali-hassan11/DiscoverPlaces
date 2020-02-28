@@ -120,10 +120,14 @@ class MyListHolderCell: UICollectionViewCell {
     
     var type: ListType! {
         didSet {
-            listController = MyListController(listType: type)
-            self.subviews.forEach({$0.removeFromSuperview()})
-            addSubview(listController.view)
-            listController.view.fillSuperview()
+            guard let listController = listController else {
+                self.listController = MyListController(listType: type)
+                addSubview(self.listController.view)
+                self.listController.view.fillSuperview()
+                return
+            }
+            
+            listController.refreshData()
         }
     }
     
@@ -147,10 +151,14 @@ class MyListController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        placeIdList = defaults.getList(listKey: listType)
         collectionView.backgroundColor = .systemBackground
-        collectionView.reloadData()
+        refreshData()
         collectionView.register(MyListCell.self, forCellWithReuseIdentifier: MyListCell.id)
+    }
+    
+    func refreshData() {
+        placeIdList = defaults.getList(listKey: listType)
+        collectionView.reloadData()
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
