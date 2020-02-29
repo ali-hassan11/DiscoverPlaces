@@ -37,14 +37,12 @@ class ActionButtonsCell: UICollectionViewCell {
     var isFavourite: Bool? {
         didSet {
             toggleFavourites(placeId: placeId)
-            print(defaults.getList(listKey: .favourites))
         }
     }
     
     var isToDo: Bool? {
         didSet {
             toggleToDo(placeId: placeId)
-            print(defaults.getList(listKey: .toDo))
         }
     }
     

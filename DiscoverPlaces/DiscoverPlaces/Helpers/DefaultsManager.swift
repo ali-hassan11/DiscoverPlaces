@@ -35,12 +35,8 @@ class DefaultsManager {
     
     func getList(listKey: ListType) -> [String] {
         if let favourites = UserDefaults.standard.object(forKey: listKey.rawValue) as? [String] {
-            print(listKey.rawValue)
-            print(favourites)
             return favourites
         } else {
-            print(listKey.rawValue)
-            print([])
             return []
         }
     }
