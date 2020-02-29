@@ -36,12 +36,18 @@ class Service {
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
 
-    func fetchPlaceDetails(placeId: String, completion: @escaping (PlaceDetailResult?, Error?) -> Void) {
-        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(placeId)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+    func fetchPlaceDetails(placeId: String, fields: [String]? = nil, completion: @escaping (PlaceDetailResponse?, Error?) -> Void) {
+        var urlString = String()
+        
+        if let fields = fields {
+            urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(placeId)&fields=\(fields.joined(separator: ","))&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+            
+        } else {
+            urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(placeId)&fields=name,opening_hours,photo,vicinity,geometry,review,website,url,formatted_phone_number,formatted_address&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+        }
+        
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
-    
-    
     
     func fetchGenericJSONData<T: Decodable>(urlString: String, completion: @escaping (T?, Error?) -> ()) {
         
@@ -66,4 +72,7 @@ class Service {
             
         }.resume()
     }
+    
+    
+    
 }

@@ -25,7 +25,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     var placeId: String? {
         didSet {
-            //SHOW PLACEHOLDERS VIEW UNIL ALL DATA IS LOADED, WHEN LOADED PASS INTO CELL'S DID SET PROPERTY 💯
             if let id = placeId {
                 fetchData(for: id)
             }
@@ -37,37 +36,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         v.backgroundColor = .systemBackground
         return v
     }()
-    
-    // -------------------- ADD TO SERVICE, PASS IN ARRAY OF FIELD THAT YOU WANT -------------------- //
-    func fetchData(for id: String) {
-        let urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(id)&fields=name,opening_hours,photo,vicinity,geometry,review,website,url,formatted_phone_number,formatted_address&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
-        
-        guard let url = URL(string: urlString) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            if let error = error {
-                print("Falied to fetch: ", error)
-                return
-            }
-            //success
-            guard let data = data else { return }
-            
-            do {
-                let placeResponse = try JSONDecoder().decode(PlaceDetailResponse.self, from: data)
-//                print(placeResponse.result ?? "WHOOPS: No Results")
-                self.place = placeResponse.result
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                    self.fadeOutSplashScreen()
-                }
-            } catch let jsonErr {
-                print(jsonErr)
-                return
-            }
-        }.resume()
-    }
 
     fileprivate let errorCellId = "errorCellId"
         
@@ -79,7 +47,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         addSplashScreen()
         registerCells()
     }
-    
     
     private func addSplashScreen() {
         self.view.addSubview(splashScreen)
@@ -105,6 +72,29 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             self.splashScreen.alpha = 0
         }) { (true) in
             self.splashScreen.removeFromSuperview()
+        }
+    }
+    
+    func fetchData(for id: String) {
+        Service.shared.fetchPlaceDetails(placeId: id) { (placeResponse, error) in
+            
+            if let error = error {
+                print("Falied to fetch: ", error)
+                return
+            }
+            
+            //success
+            guard let placeResponse = placeResponse else {
+                print("No results?")
+                return
+            }
+            
+            self.place = placeResponse.result
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                self.fadeOutSplashScreen()
+            }
         }
     }
 }

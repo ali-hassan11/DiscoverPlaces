@@ -19,7 +19,7 @@ class MyPlaceCell: UICollectionViewCell {
         }
     }
     
-    var placeId: String? {
+    var place: PlaceDetailResult? {
         didSet {
             //Load Data
         }

@@ -38,7 +38,7 @@ class ToDoListController: BaseCollectionViewController, UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPlaceCell.id, for: indexPath) as! MyPlaceCell
         cell.listType = .toDo
-        cell.placeId = placeIdList?[indexPath.item]
+//        cell.placeId = placeIdList?[indexPath.item]
         return cell
     }
     

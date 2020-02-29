@@ -10,7 +10,16 @@ import UIKit
 
 class FavouritesListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var placeIdList: [String]?
+    var placeIdList: [String]? {
+        didSet {
+            if placeIdList != oldValue {
+                fetchDataForPlaceIds()
+                collectionView.reloadData()
+            }
+        }
+    }
+    
+    var placeResults: [PlaceDetailResult]?
     
     let defaults = DefaultsManager()
     
@@ -20,11 +29,6 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
         refreshData()
         collectionView.register(MyPlaceCell.self, forCellWithReuseIdentifier: MyPlaceCell.id)
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        refreshData()
-//    }
     
     func refreshData() {
         placeIdList = defaults.getList(listKey: .favourites)
@@ -38,7 +42,7 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPlaceCell.id, for: indexPath) as! MyPlaceCell
         cell.listType = .favourites
-        cell.placeId = placeIdList?[indexPath.item]
+        cell.place = placeResults?[indexPath.item]
         return cell
     }
     
@@ -50,6 +54,28 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width - 16 - 16, height: 100)
+    }
+    
+    func fetchDataForPlaceIds() {
+        placeIdList?.forEach({ (id) in
+            fetchData(for: id)
+        })
+    }
+    
+    func fetchData(for id: String) {
+        let fields = ["name", "vicinity", "rating"]
+        Service.shared.fetchPlaceDetails(placeId: id, fields: fields) { (response, error) in
+            
+            if let error = error {
+                print("Failed to fetch: \(error)")
+                return
+            }
+            
+            //success
+            guard let placeResponse = response else { return }
+            guard let result = placeResponse.result else { return }
+            self.placeResults?.append(result)
+        }
     }
     
 }
