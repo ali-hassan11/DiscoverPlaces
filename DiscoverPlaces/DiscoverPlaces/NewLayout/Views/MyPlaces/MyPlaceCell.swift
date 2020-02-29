@@ -21,7 +21,7 @@ class MyPlaceCell: UICollectionViewCell {
     
     var place: PlaceDetailResult? {
         didSet {
-            //Load Data
+            populateCell()
         }
     }
     
@@ -45,7 +45,7 @@ class MyPlaceCell: UICollectionViewCell {
         
     }
 
-    let placeImageView = UIImageView(image: UIImage(named: "pool"))
+    let placeImageView = UIImageView()
     let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 18, weight: .semibold), color: .label, numberOfLines: 1)
     let addressLabel = UILabel(text: "123 Palace Road, London", font: .systemFont(ofSize: 15, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
     let starView = UIView() //STARSVIEW
@@ -86,6 +86,30 @@ class MyPlaceCell: UICollectionViewCell {
         
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func populateCell() {
+        loadImage()
+        configureLabels()
+        configureStars()
+    }
+    
+    func loadImage() {
+        guard let photo = place?.photos?.first else { return }
+        guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else { return }
+        placeImageView.sd_setImage(with: url)
+    }
+    
+    func configureLabels() {
+        guard let name = place?.name else { return }
+        placeNameLabel.text = name
+        
+        guard let address = place?.vicinity else { return }
+        addressLabel.text = address
+    }
+    
+    func configureStars() {
+        
     }
     
 }

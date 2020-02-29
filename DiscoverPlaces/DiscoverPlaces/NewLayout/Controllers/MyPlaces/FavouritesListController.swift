@@ -14,12 +14,17 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
         didSet {
             if placeIdList != oldValue {
                 fetchDataForPlaceIds()
-                collectionView.reloadData()
             }
         }
     }
     
-    var placeResults: [PlaceDetailResult]?
+    var placeResults: [PlaceDetailResult]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     
     let defaults = DefaultsManager()
     
