@@ -11,7 +11,7 @@ import UIKit
 class MorePlacesCell: UICollectionViewCell {
     
     let placeImageView = UIImageView()
-     let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai", font: .systemFont(ofSize: 17, weight: .semibold), color: .white, numberOfLines: 3)
+    let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai", font: .systemFont(ofSize: 17, weight: .semibold), color: .white, numberOfLines: 3)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

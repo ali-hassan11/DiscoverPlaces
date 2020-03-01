@@ -13,6 +13,7 @@ class MorePlacesHolder: UICollectionViewCell {
     public static let id = "morePlacesHolderId"
     
     let horizontalController = MorePlacesHorizontalController()
+    
     let sectionTitle = UILabel(text: "Similar Places", font: .systemFont(ofSize: 19, weight: .medium), color: .label, numberOfLines: 1)
     
     override init(frame: CGRect) {
@@ -31,4 +32,5 @@ class MorePlacesHolder: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
