@@ -50,7 +50,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             var filteredResults = [PlaceResult]()
             
             results.results.forEach({ (result) in
-                if result.containsPhotos() {
+                if result.containsPhotos() && !(result.types?.contains("locality") ?? true){ //May need to add more to this...
                     filteredResults.append(result)
                 }
             })

@@ -11,7 +11,7 @@ import UIKit
 class CategoriesHolder: UICollectionViewCell {
     
     let sectionTitleLabel = UILabel(text: "Feeling Adventurous", font: .systemFont(ofSize: 24, weight: .bold),color: .label, numberOfLines: 0)
-    let sectionDescriptionLabel = UILabel(text: "Get inspiration from our range of categories, why not try something new...", font: .systemFont(ofSize: 16, weight: .medium),color: .secondaryLabel , numberOfLines: 0)
+    let sectionDescriptionLabel = UILabel(text: "Why not try something new, get inspiration from our range of categories...", font: .systemFont(ofSize: 16, weight: .medium),color: .secondaryLabel , numberOfLines: 0)
     
     let horizontalController = CategoriesHorizontalController()
  
