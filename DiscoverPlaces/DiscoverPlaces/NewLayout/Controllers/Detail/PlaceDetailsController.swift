@@ -44,13 +44,20 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         
         collectionView.backgroundColor = .systemBackground
         navigationItem.largeTitleDisplayMode = .never
-        addSplashScreen()
+        setUpSplashScreen()
         registerCells()
     }
     
-    private func addSplashScreen() {
+    private func setUpSplashScreen() {
+
         self.view.addSubview(splashScreen)
         splashScreen.fillSuperview()
+        
+        let imagePlaceHolder = UIView()
+        imagePlaceHolder.backgroundColor = .secondarySystemBackground
+        splashScreen.addSubview(imagePlaceHolder)
+        imagePlaceHolder.anchor(top: splashScreen.topAnchor, leading: splashScreen.leadingAnchor, bottom: nil, trailing: splashScreen.trailingAnchor)
+        imagePlaceHolder.constrainHeight(constant: view.frame.height / 1.7)
     }
     
     private func registerCells() {
