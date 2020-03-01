@@ -31,7 +31,6 @@ class Service {
     
     func fetchNearbyPlaces(location: Location?, completion: @escaping (SearchResponse?, Error?) -> Void) {
         let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(location?.lat ?? 41.0082),\(location?.lng ?? 28.9784)&radius=5000&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
-        //Show touristy places
         
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
@@ -43,7 +42,7 @@ class Service {
             urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(placeId)&fields=\(fields.joined(separator: ","))&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
             
         } else {
-            urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(placeId)&fields=name,opening_hours,photo,vicinity,geometry,review,website,url,formatted_phone_number,formatted_address&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+            urlString = "https://maps.googleapis.com/maps/api/place/details/json?place_id=\(placeId)&fields=name,place_id,opening_hours,photo,vicinity,geometry,review,website,url,formatted_phone_number,formatted_address&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         }
         
         fetchGenericJSONData(urlString: urlString, completion: completion)

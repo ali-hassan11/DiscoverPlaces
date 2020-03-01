@@ -14,8 +14,7 @@ class MorePlacesCell: UICollectionViewCell {
     let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai", font: .systemFont(ofSize: 17, weight: .semibold), color: .white, numberOfLines: 3)
     
     override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+        super.init(frame: frame)        
         backgroundColor = .secondarySystemBackground
 
         layer.cornerRadius = 10

@@ -12,6 +12,8 @@ class MorePlacesHorizontalController: HorizontalSnappingController, UICollection
     
     fileprivate let morePlacesCellId = "morePlacesCellId"
     
+    var didSelectHandler: ((String) -> ())?
+    
     var place: PlaceDetailResult? {
         didSet {
             let location = place?.geometry?.location
@@ -64,11 +66,16 @@ class MorePlacesHorizontalController: HorizontalSnappingController, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: morePlacesCellId, for: indexPath) as! MorePlacesCell
         let place = morePlaces?[indexPath.item]
         cell.placeNameLabel.text = place?.name
-        cell.placeImageView.sd_setImage(with: UrlBuilder.buildImageUrl(with: place?.photos?.first?.photoReference ?? "", width: place?.photos?.first?.width ?? 1000))
+        cell.placeImageView.sd_setImage(with: UrlBuilder.buildImageUrl(with: place?.photos?.first?.photoReference ?? "", width: place?.photos?.first?.width ?? 1000),placeholderImage: UIImage())
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: 160, height: view.frame.height)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let placeId = morePlaces?[indexPath.item].place_id else { return }
+        didSelectHandler?(placeId)
     }
 }
