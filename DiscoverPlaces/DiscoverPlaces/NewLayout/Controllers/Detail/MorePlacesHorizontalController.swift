@@ -14,15 +14,39 @@ class MorePlacesHorizontalController: HorizontalSnappingController, UICollection
     
     var place: PlaceDetailResult? {
         didSet {
-//            Service.shared.fetchNearbyPlaces(completion: <#T##(SearchResponse?, Error?) -> Void#>)
+            let location = place?.geometry?.location
+            Service.shared.fetchNearbyPlaces(location: location) { (results, error) in
+                
+                if let error = error {
+                    print("Failed to fetch places: ", error)
+                    return
+                }
+                
+                //success
+                guard let results = results else {
+                    print("No results?")
+                    return
+                }
+                
+                var filteredResults = [PlaceResult]()
+                
+                results.results.forEach({ (result) in
+                    if result.containsPhotos() && result.types?.contains("point_of_interest") ?? true { //Exclude types???
+                        filteredResults.append(result)
+                    }
+                })
+                
+                self.morePlaces = filteredResults
+                
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
         }
     }
     
-    var morePlaces: [PlaceDetailResult]? {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    var morePlaces: [PlaceResult]?
     
     override func viewDidLoad() {
         super.viewDidLoad()

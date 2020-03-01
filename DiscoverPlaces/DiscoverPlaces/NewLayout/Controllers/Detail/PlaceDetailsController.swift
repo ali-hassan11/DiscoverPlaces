@@ -166,6 +166,7 @@ extension PlaceDetailsController {
         case 6:
             //More Places
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
+            cell.place = self.place
             return cell
         default:
             #if DEBUG
@@ -199,7 +200,7 @@ extension PlaceDetailsController {
         case 6:
             //More Places
             //CHECK IF NIL, IF NOT RETURN 180
-            return .init(width: view.frame.width, height: 220)
+            return .init(width: view.frame.width, height: 220 + 16)
         default:
             return .zero
         }

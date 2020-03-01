@@ -33,8 +33,10 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     }
     
     fileprivate func fetchData() {
+        
+        let location = Location(lat: 25.1972, lng: 55.2744)
 
-        Service.shared.fetchNearbyPlaces { (results, error) in
+        Service.shared.fetchNearbyPlaces(location: location) { (results, error) in
             
             if let error = error {
                 print("Failed to fetch places: ", error)
@@ -50,7 +52,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             var filteredResults = [PlaceResult]()
             
             results.results.forEach({ (result) in
-                if result.containsPhotos() && !(result.types?.contains("locality") ?? true){ //May need to add more to this...
+                if result.containsPhotos() && result.types?.contains("point_of_interest") ?? true { //Exclude types???
                     filteredResults.append(result)
                 }
             })
