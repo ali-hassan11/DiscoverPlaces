@@ -179,7 +179,7 @@ extension PlaceDetailsController {
         case 2:
             //PhoneNumber
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhoneNumberCell.id, for: indexPath) as! PhoneNumberCell
-            cell.phoneNumber = place?.formatted_Phone_Number
+            cell.phoneNumber = place?.formatted_phone_number
             return cell
         case 3:
             //Website
@@ -232,7 +232,7 @@ extension PlaceDetailsController {
             return cellHeight(for: place?.opening_hours, desiredHeight: 60)
         case 2:
             //PhoneNumber
-            return cellHeight(for: place?.formatted_Phone_Number, desiredHeight: 60)
+            return cellHeight(for: place?.formatted_phone_number, desiredHeight: 60)
         case 3:
             //Website
             return cellHeight(for: place?.website, desiredHeight: 60)
@@ -297,7 +297,7 @@ extension PlaceDetailsController {
         let coordinate = CLLocationCoordinate2DMake(longitude, latitude)
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
         mapItem.name = placeName
-        mapItem.phoneNumber = place?.formatted_Phone_Number
+        mapItem.phoneNumber = place?.formatted_phone_number
         mapItem.url = URL(string: place?.website ?? "")
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }

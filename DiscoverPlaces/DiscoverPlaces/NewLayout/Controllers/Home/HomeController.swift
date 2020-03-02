@@ -29,10 +29,10 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         //Header 1
         collectionView.register(HomeLargeCellHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: largeCellHolderId)
         
-        fetchData()
+        fetchPlacesData()
     }
     
-    fileprivate func fetchData() {
+    fileprivate func fetchPlacesData() {
         
         let location = Location(lat: 25.1972, lng: 55.2744)
 
