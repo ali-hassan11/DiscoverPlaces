@@ -11,16 +11,10 @@ import UIKit
 class MorePlacesHolder: UICollectionViewCell {
     
     public static let id = "morePlacesHolderId"
-    
-    var place: PlaceDetailResult? {
-        didSet {
-            horizontalController.place = place
-        }
-    }
-    
+
     let horizontalController = MorePlacesHorizontalController()
     
-    let sectionTitle = UILabel(text: "Similar Places", font: .systemFont(ofSize: 19, weight: .medium), color: .label, numberOfLines: 1)
+    let sectionTitle = UILabel(text: "Nearby", font: .systemFont(ofSize: 19, weight: .medium), color: .label, numberOfLines: 1)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

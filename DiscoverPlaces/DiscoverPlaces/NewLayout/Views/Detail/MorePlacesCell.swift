@@ -10,6 +10,21 @@ import UIKit
 
 class MorePlacesCell: UICollectionViewCell {
     
+    var place: PlaceResult? {
+        didSet {
+            guard let photo = place?.photos?.first else {
+                return //Default Image
+            }
+            
+            guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else {
+                return /*Default Image*/
+            }
+            
+            placeImageView.sd_setImage(with: url)
+            placeNameLabel.text = place?.name
+        }
+    }
+    
     let placeImageView = UIImageView()
     let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai", font: .systemFont(ofSize: 17, weight: .semibold), color: .white, numberOfLines: 3)
     

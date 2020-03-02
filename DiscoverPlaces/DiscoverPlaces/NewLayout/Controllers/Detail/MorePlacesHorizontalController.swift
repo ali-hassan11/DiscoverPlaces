@@ -14,41 +14,11 @@ class MorePlacesHorizontalController: HorizontalSnappingController, UICollection
     
     var didSelectHandler: ((String, String) -> ())?
     
-    var place: PlaceDetailResult? {
+    var morePlaces: [PlaceResult]? {
         didSet {
-            let location = place?.geometry?.location
-            Service.shared.fetchNearbyPlaces(location: location) { (results, error) in
-                
-                if let error = error {
-                    print("Failed to fetch places: ", error)
-                    return
-                }
-                
-                //success
-                guard let results = results else {
-                    print("No results?")
-                    return
-                }
-                
-                var filteredResults = [PlaceResult]()
-                
-                results.results.forEach({ (result) in
-                    if result.containsPhotos() && result.types?.contains("point_of_interest") ?? true { //Exclude types???
-                        filteredResults.append(result)
-                    }
-                })
-                
-                self.morePlaces = filteredResults
-                
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            }
+            collectionView.reloadData()
         }
     }
-    
-    var morePlaces: [PlaceResult]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,8 +35,7 @@ class MorePlacesHorizontalController: HorizontalSnappingController, UICollection
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: morePlacesCellId, for: indexPath) as! MorePlacesCell
         let place = morePlaces?[indexPath.item]
-        cell.placeNameLabel.text = place?.name
-        cell.placeImageView.sd_setImage(with: UrlBuilder.buildImageUrl(with: place?.photos?.first?.photoReference ?? "", width: place?.photos?.first?.width ?? 1000),placeholderImage: UIImage())
+        cell.place = place
         return cell
     }
     

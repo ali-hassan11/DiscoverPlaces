@@ -29,8 +29,8 @@ class Service {
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
     
-    func fetchNearbyPlaces(location: Location?, completion: @escaping (SearchResponse?, Error?) -> Void) {
-        let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(location?.lat ?? 41.0082),\(location?.lng ?? 28.9784)&radius=5000&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+    func fetchNearbyPlaces(location: Location, radius: Int? = nil, completion: @escaping (SearchResponse?, Error?) -> Void) {
+        let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(location.lat),\(location.lng)&radius=\(radius ?? 5000)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }

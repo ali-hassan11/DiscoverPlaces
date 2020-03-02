@@ -21,13 +21,20 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case morePlaces
     }
     
-    var place: PlaceDetailResult?
+    var morePlaces: [PlaceResult]?
     
     var placeId: String? {
         didSet {
             if let id = placeId {
-                fetchData(for: id)
+                fetchPlaceData(for: id)
             }
+        }
+    }
+    
+    var place: PlaceDetailResult? {
+        didSet {
+            guard let location = place?.geometry?.location else { return }
+            fetchMorePlacesData(location: location)
         }
     }
     
@@ -82,7 +89,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         }
     }
     
-    func fetchData(for id: String) {
+    func fetchPlaceData(for id: String) {
         Service.shared.fetchPlaceDetails(placeId: id) { (placeResponse, error) in
             
             if let error = error {
@@ -101,6 +108,38 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.fadeOutSplashScreen()
+            }
+        }
+    }
+    
+    func fetchMorePlacesData(location: Location) {
+        
+        Service.shared.fetchNearbyPlaces(location: location, radius: 3000) { (results, error) in
+            
+            if let error = error {
+                print("Failed to fetch places: ", error)
+                return
+            }
+            
+            //success
+            guard let results = results else {
+                print("No results?")
+                return
+            }
+            
+            var filteredResults = [PlaceResult]()
+            
+            results.results.forEach({ (result) in
+                if result.containsPhotos() && result.types?.contains("point_of_interest") ?? true { //Exclude types???
+                    filteredResults.append(result)
+                }
+            })
+            
+            self.morePlaces = filteredResults
+            
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
             }
         }
     }
@@ -166,7 +205,7 @@ extension PlaceDetailsController {
         case 6:
             //More Places
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
-            cell.place = self.place
+            cell.horizontalController.morePlaces = morePlaces
             cell.horizontalController.didSelectHandler = { [weak self] id, name in
                 let detailController = PlaceDetailsController()
                 detailController.placeId = id
