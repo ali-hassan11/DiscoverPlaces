@@ -12,7 +12,7 @@ class MorePlacesHorizontalController: HorizontalSnappingController, UICollection
     
     fileprivate let morePlacesCellId = "morePlacesCellId"
     
-    var didSelectHandler: ((String) -> ())?
+    var didSelectHandler: ((String, String) -> ())?
     
     var place: PlaceDetailResult? {
         didSet {
@@ -75,7 +75,7 @@ class MorePlacesHorizontalController: HorizontalSnappingController, UICollection
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let placeId = morePlaces?[indexPath.item].place_id else { return }
-        didSelectHandler?(placeId)
+        guard let placeId = morePlaces?[indexPath.item].place_id, let name = morePlaces?[indexPath.item].name else { return }
+        didSelectHandler?(placeId, name)
     }
 }

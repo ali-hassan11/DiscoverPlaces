@@ -167,9 +167,10 @@ extension PlaceDetailsController {
             //More Places
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
             cell.place = self.place
-            cell.horizontalController.didSelectHandler = { [weak self] id in
+            cell.horizontalController.didSelectHandler = { [weak self] id, name in
                 let detailController = PlaceDetailsController()
                 detailController.placeId = id
+                detailController.title = name
                 self?.navigationController?.show(detailController, sender: self)
             }
             return cell
