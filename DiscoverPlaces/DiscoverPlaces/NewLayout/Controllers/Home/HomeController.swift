@@ -36,7 +36,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         
         let location = Location(lat: 25.1972, lng: 55.2744)
 
-        Service.shared.fetchNearbyPlaces(location: location) { (results, error) in
+        Service.shared.fetchNearbyPlaces(location: location, radius: 5000) { (results, error) in
             
             if let error = error {
                 print("Failed to fetch places: ", error)
@@ -84,11 +84,11 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         return cell
     }
     
+    //Header (Large Cell)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return .init(width: view.frame.width, height: 450)
     }
     
-    //Categories
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }

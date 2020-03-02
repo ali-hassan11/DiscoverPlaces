@@ -89,8 +89,8 @@ struct Geometry: Decodable {
 }
 
 struct Location: Decodable {
-    let lat: Double?
-    let lng: Double?
+    let lat: Double
+    let lng: Double
 }
 
 struct OpeningHours: Decodable {
