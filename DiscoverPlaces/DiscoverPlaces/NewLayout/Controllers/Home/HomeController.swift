@@ -84,11 +84,11 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         return cell
     }
     
-    //Header (Large Cell)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return .init(width: view.frame.width, height: 450)
     }
     
+    //Categories
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }

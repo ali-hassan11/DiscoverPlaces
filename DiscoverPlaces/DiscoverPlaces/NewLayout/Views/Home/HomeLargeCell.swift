@@ -29,16 +29,7 @@ class HomeLargeCell: UICollectionViewCell {
                 return /*Default Image*/
             }
             
-            placeImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "transparentBlock"), options: .continueInBackground) { (image, error, _, _) in
-                
-                if let error = error {
-                    print("Falied to load image: ", error)
-                    self.placeImageView.image = UIImage(named: "noPhotosFound")
-                    return
-                }
-                
-                self.image = image
-            }
+            placeImageView.sd_setImage(with: url)
             placeNameLabel.text = result.name
         }
     }
