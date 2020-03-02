@@ -254,7 +254,6 @@ extension PlaceDetailsController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case Detail.address.rawValue:
-            
             guard let place = place,
             let name = place.name,
             let longitude = place.geometry?.location?.lng,
@@ -271,6 +270,10 @@ extension PlaceDetailsController {
             let websiteViewController = WebsiteViewController()
             websiteViewController.urlString = place?.website
             navigationController?.show(websiteViewController, sender: self)
+            
+        case Detail.phoneNumber.rawValue:
+            guard let number = place?.formatted_phone_number else { return }
+            callNumber(phoneNumber: number)
             
         default:
             print("Other one pressed")
@@ -300,6 +303,19 @@ extension PlaceDetailsController {
         mapItem.phoneNumber = place?.formatted_phone_number
         mapItem.url = URL(string: place?.website ?? "")
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+    }
+    
+    func callNumber(phoneNumber: String) {
+        if let phoneURL = URL(string: ("tel://" + phoneNumber)) {
+            let alert = UIAlertController(title: ("Call " + phoneNumber + "?"), message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Call", style: .default, handler: { (action) in
+                UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+            }))
+      
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                    
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
