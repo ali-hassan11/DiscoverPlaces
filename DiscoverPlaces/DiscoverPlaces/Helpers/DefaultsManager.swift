@@ -8,6 +8,30 @@
 
 import UIKit
 
+// // // ------------------- LOOK MORE INTO THIS ------------------- // // //
+class ListObject: NSObject, NSCoding {
+    
+    let timeStamp: Int
+    let placeId: String
+    
+    init(timeStamp: Int, placeId: String) {
+           self.timeStamp = timeStamp
+           self.placeId = placeId
+       }
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(timeStamp, forKey: "timeStamp")
+        coder.encode(placeId, forKey: "placeId")
+    }
+    
+    required convenience init?(coder: NSCoder) {
+        let timeStamp = coder.decodeInteger(forKey: "timeStamp")
+        let placeId = coder.decodeObject(forKey: "placeId") as! String
+        self.init(timeStamp: timeStamp, placeId: placeId)
+    }
+}
+// // // ------------------- LOOK MORE INTO THIS ------------------- // // //
+
 class DefaultsManager {
     
     func addToList(placeId: String, listKey: ListType) {
