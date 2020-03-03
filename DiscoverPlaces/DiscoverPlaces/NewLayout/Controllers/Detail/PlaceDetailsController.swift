@@ -260,7 +260,7 @@ extension PlaceDetailsController {
             let longitude = place.geometry?.location?.lng,
             let latitude = place.geometry?.location?.lat else { return }
             
-            openInMaps(placeName: name, longitude: longitude, latitude: latitude)
+            openInMaps(place: place, longitude: longitude, latitude: latitude)
             
         case Detail.openingHours.rawValue:
             let openingHoursController = OpeningHoursController()
@@ -297,12 +297,14 @@ extension PlaceDetailsController {
         }
     }
     
-    private func openInMaps(placeName: String, longitude: Double, latitude: Double) {
-        let coordinate = CLLocationCoordinate2DMake(longitude, latitude)
+    private func openInMaps(place: PlaceDetailResult, longitude: Double, latitude: Double) {
+        let coordinate = CLLocationCoordinate2DMake(latitude,longitude)
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
-        mapItem.name = placeName
-        mapItem.phoneNumber = place?.international_phone_number
-        mapItem.url = URL(string: place?.website ?? "")
+        mapItem.name = place.name
+        mapItem.phoneNumber = place.international_phone_number
+        if let urlString = place.website, let url = URL(string: urlString) {
+            mapItem.url = url
+        }
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
     
