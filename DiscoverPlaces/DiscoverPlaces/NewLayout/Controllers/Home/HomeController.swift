@@ -34,7 +34,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     fileprivate func fetchPlacesData() {
         
-        let location = Location(lat: 25.1972, lng: 55.2744)
+        let location = Location(lat: 31.625502, lng: -7.988936)
 
         Service.shared.fetchNearbyPlaces(location: location, radius: 5000) { (results, error) in
             
@@ -52,10 +52,14 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             var filteredResults = [PlaceResult]()
             
             results.results.forEach({ (result) in
-                if result.containsPhotos() && result.types?.contains("point_of_interest") ?? true { //Exclude types???
+                if result.containsPhotos()
+                    && !(result.types?.contains("locality") ?? true)
+                {
                     filteredResults.append(result)
                 }
             })
+            
+            //If results < 5, load other places
             
             self.results = filteredResults
             

@@ -90,7 +90,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     func fetchPlaceData(for id: String) {
-        let fields = ["name" , "place_id", "opening_hours", "photo", "vicinity" ,"geometry" ,"review" ,"website" ,"url" ,"international_phone_number" ,"formatted_address"]
+        let fields = ["name" , "place_id", "opening_hours", "photo", "vicinity" ,"geometry" ,"review" ,"website" ,"url" ,"international_phone_number", "formatted_phone_number" ,"formatted_address"]
         Service.shared.fetchPlaceDetails(placeId: id, fields: fields) { (placeResponse, error) in
             
             if let error = error {
@@ -274,7 +274,7 @@ extension PlaceDetailsController {
             
         case Detail.phoneNumber.rawValue:
             guard let number = place?.international_phone_number else { return }
-            callNumber(phoneNumber: number)
+            callNumber(number: number)
             
         default:
             print("Other one pressed")
@@ -306,16 +306,18 @@ extension PlaceDetailsController {
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
     
-    func callNumber(phoneNumber: String) {
-        if let phoneURL = URL(string: ("tel://" + phoneNumber)) {
-            let alert = UIAlertController(title: ("Call " + phoneNumber + "?"), message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Call", style: .default, handler: { (action) in
-                UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
-            }))
-      
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-                    
-            self.present(alert, animated: true, completion: nil)
+    func callNumber(number: String) {
+        let number = number.trimmingCharacters(in: .whitespacesAndNewlines)
+        makeCall(with: number)
+    }
+    
+    func makeCall(with number: String) {
+        
+        if let url = URL(string: "tel://\(number)")  {
+            UIApplication.shared.open(url)
+        } else {
+            UIPasteboard.general.string = number
+            showToastAlert(title: "Copied to clipboard!")
         }
     }
 }
@@ -344,3 +346,5 @@ extension PlaceDetailsController: ActionButtonsCellDelegate {
     }
     
 }
+
+
