@@ -90,7 +90,8 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     func fetchPlaceData(for id: String) {
-        Service.shared.fetchPlaceDetails(placeId: id) { (placeResponse, error) in
+        let fields = ["name" , "place_id", "opening_hours", "photo", "vicinity" ,"geometry" ,"review" ,"website" ,"url" ,"international_phone_number" ,"formatted_address"]
+        Service.shared.fetchPlaceDetails(placeId: id, fields: fields) { (placeResponse, error) in
             
             if let error = error {
                 print("Falied to fetch: ", error)
@@ -179,7 +180,7 @@ extension PlaceDetailsController {
         case 2:
             //PhoneNumber
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhoneNumberCell.id, for: indexPath) as! PhoneNumberCell
-            cell.phoneNumber = place?.formatted_phone_number
+            cell.phoneNumber = place?.international_phone_number
             return cell
         case 3:
             //Website
@@ -232,7 +233,7 @@ extension PlaceDetailsController {
             return cellHeight(for: place?.opening_hours, desiredHeight: 60)
         case 2:
             //PhoneNumber
-            return cellHeight(for: place?.formatted_phone_number, desiredHeight: 60)
+            return cellHeight(for: place?.international_phone_number, desiredHeight: 60)
         case 3:
             //Website
             return cellHeight(for: place?.website, desiredHeight: 60)
@@ -272,7 +273,7 @@ extension PlaceDetailsController {
             navigationController?.show(websiteViewController, sender: self)
             
         case Detail.phoneNumber.rawValue:
-            guard let number = place?.formatted_phone_number else { return }
+            guard let number = place?.international_phone_number else { return }
             callNumber(phoneNumber: number)
             
         default:
@@ -300,7 +301,7 @@ extension PlaceDetailsController {
         let coordinate = CLLocationCoordinate2DMake(longitude, latitude)
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
         mapItem.name = placeName
-        mapItem.phoneNumber = place?.formatted_phone_number
+        mapItem.phoneNumber = place?.international_phone_number
         mapItem.url = URL(string: place?.website ?? "")
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }

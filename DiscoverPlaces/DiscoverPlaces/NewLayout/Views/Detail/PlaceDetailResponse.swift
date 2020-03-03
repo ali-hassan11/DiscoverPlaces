@@ -24,7 +24,7 @@ struct PlaceDetailResult: Decodable {
     let user_Ratings_Total: Int?
     let opening_hours: OpeningHours?
     let formatted_address: String?
-    let formatted_phone_number: String?
+    let international_phone_number: String?
     let reviews: [Review]?
     let website: String?
     let url: String?
