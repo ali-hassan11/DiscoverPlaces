@@ -120,7 +120,7 @@ struct Review: Decodable {
     let authorName: String?
     let language: String?
     let profilePhotoURL: String?
-    let rating: Int?
+    let rating: Int
     let relativeTimeDescription: String?
     let text: String?
 
