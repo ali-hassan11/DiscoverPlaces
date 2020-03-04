@@ -24,26 +24,6 @@ class MyPlaceCell: UICollectionViewCell {
             populateCell()
         }
     }
-    
-    func displayLabel() {
-        if listType == ListType.favourites {
-            placeNameLabel.text = "Favourites"
-        } else if listType == ListType.toDo {
-            placeNameLabel.text = "To-Do"
-        }
-    }
-    
-    func displayIcon() {
-        if listType == ListType.favourites {
-            iconImageView.image = UIImage(systemName: "heart.fill")
-        } else if listType == ListType.toDo {
-            iconImageView.image = UIImage(systemName: "text.badge.minus")
-        }
-    }
-    
-    func setIconForState(type: ListType) {
-        
-    }
 
     let placeImageView = UIImageView(image: UIImage(named: "cafe"))
     let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 17, weight: .semibold), color: .label, numberOfLines: 1)
@@ -56,31 +36,11 @@ class MyPlaceCell: UICollectionViewCell {
         
         backgroundColor = .systemBackground
         
-        placeImageView.layer.cornerRadius = 10
-        placeImageView.clipsToBounds = true
-        placeImageView.contentMode = .scaleAspectFill
-        placeImageView.constrainWidth(constant: 60)
-        placeImageView.constrainHeight(constant: 60)
-        
-        starView.backgroundColor = .systemPink
-        starView.constrainHeight(constant: 18)
-        starView.constrainWidth(constant: 100)
-        
-        iconImageView.tintColor = .systemPink
-        iconImageView.constrainWidth(constant: 25)
-        iconImageView.constrainHeight(constant: 25)
-        
-        
-        let labelsStackView = VerticalStackView(arrangedSubviews: [placeNameLabel, addressLabel, starView])
-        labelsStackView.setCustomSpacing(6, after: addressLabel)
-        labelsStackView.alignment = .leading
-        
-        let stackView = HorizontalStackView(arrangedSubviews: [placeImageView, labelsStackView, iconImageView], spacing: 12)
-        stackView.alignment = .center
-        
-        addSubview(stackView)
-        stackView.fillSuperview(padding: .init(top: 0, left: 4, bottom: 12, right: 4))
-        
+        setupImageView()
+        setupStarsView()
+        setupIconView()
+    
+        setupStackView()
         addBottomSeparator()
     }
         
@@ -106,6 +66,56 @@ class MyPlaceCell: UICollectionViewCell {
         
         guard let address = place?.vicinity else { return }
         addressLabel.text = address
+    }
+    
+    func displayLabel() {
+           if listType == ListType.favourites {
+               placeNameLabel.text = "Favourites"
+           } else if listType == ListType.toDo {
+               placeNameLabel.text = "To-Do"
+           }
+       }
+       
+       func displayIcon() {
+           if listType == ListType.favourites {
+               iconImageView.image = UIImage(systemName: "heart.fill")
+           } else if listType == ListType.toDo {
+               iconImageView.image = UIImage(systemName: "text.badge.minus")
+           }
+       }
+    
+    func setupImageView() {
+        placeImageView.layer.backgroundColor = UIColor.secondarySystemBackground.cgColor
+        placeImageView.layer.cornerRadius = 10
+        placeImageView.clipsToBounds = true
+        placeImageView.contentMode = .scaleAspectFill
+        placeImageView.constrainWidth(constant: 60)
+        placeImageView.constrainHeight(constant: 60)
+    }
+    
+    func setupStarsView() {
+        starView.backgroundColor = .systemPink
+        starView.constrainHeight(constant: 18)
+        starView.constrainWidth(constant: 100)
+    }
+    
+    func setupIconView() {
+        iconImageView.tintColor = .systemPink
+        iconImageView.constrainWidth(constant: 25)
+        iconImageView.constrainHeight(constant: 25)
+    }
+    
+    
+    private func setupStackView() {
+        let labelsStackView = VerticalStackView(arrangedSubviews: [placeNameLabel, addressLabel, starView])
+        labelsStackView.setCustomSpacing(6, after: addressLabel)
+        labelsStackView.alignment = .leading
+        
+        let stackView = HorizontalStackView(arrangedSubviews: [placeImageView, labelsStackView, iconImageView], spacing: 12)
+        stackView.alignment = .center
+        
+        addSubview(stackView)
+        stackView.fillSuperview(padding: .init(top: 0, left: 4, bottom: 12, right: 4))
     }
     
     func configureStars() {
