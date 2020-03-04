@@ -18,13 +18,7 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
         }
     }
     
-    var placeResults: [PlaceDetailResult]? {
-        didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-    }
+    var placeResults: [PlaceDetailResult]?
     
     let defaults = DefaultsManager()
     
@@ -41,7 +35,7 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return placeIdList?.count ?? 0
+        return placeResults?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -53,7 +47,7 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailsController = PlaceDetailsController()
-        detailsController.placeId = placeIdList?[indexPath.item]
+        detailsController.placeId = placeResults?[indexPath.item].place_id
         present(detailsController, animated: true, completion: nil)//Change to push
     }
     
@@ -62,13 +56,15 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
     }
     
     func fetchDataForPlaceIds() {
+        self.placeResults?.removeAll()
         placeIdList?.forEach({ (id) in
             fetchData(for: id)
         })
     }
     
     func fetchData(for id: String) {
-        let fields = ["name", "vicinity", "rating"]
+        
+        let fields = ["name", "vicinity", "rating", "place_id", "photos"]
         Service.shared.fetchPlaceDetails(placeId: id, fields: fields) { (response, error) in
             
             if let error = error {
@@ -79,8 +75,16 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
             //success
             guard let placeResponse = response else { return }
             guard let result = placeResponse.result else { return }
-            self.placeResults?.append(result)
+            
+            if self.placeResults != nil {
+                self.placeResults?.append(result)
+            } else {
+                self.placeResults = [result]
+            }
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
-    
 }
