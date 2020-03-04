@@ -11,6 +11,7 @@ import UIKit
 class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
         
     var didSelectHandler: ((String) -> ())?
+    var didScrollHandler: ((ListType) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,16 @@ class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionVi
         }
     }
     
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.x)
+        if scrollView.contentOffset.x <= 0 {
+            didScrollHandler?(.favourites)
+        } else {
+            didScrollHandler?(.toDo)
+        }
+    }
+    
+        
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width, height: view.frame.height)
     }

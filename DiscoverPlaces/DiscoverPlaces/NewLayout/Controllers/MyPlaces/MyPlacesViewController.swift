@@ -22,6 +22,7 @@ class MyPlacesViewController: UIViewController {
         setupSegmentedControl()
         setupContraints()
         handlePlaceTap()
+        handleScroll()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,14 +36,14 @@ class MyPlacesViewController: UIViewController {
         
         switch sender.selectedSegmentIndex {
         case 0:
-            if collectionView.contentOffset.x > 1 {
+            if collectionView.contentOffset.x > 0 {
                 UIView.animate(withDuration: 0.2, animations: {
                     collectionView.contentOffset.x -= self.view.frame.width
                 })
                 self.view.layoutIfNeeded()
             }
         case 1:
-            if collectionView.contentOffset.x < 1 {
+            if collectionView.contentOffset.x <= 0 {
                 UIView.animate(withDuration: 0.2, animations: {
                     collectionView.contentOffset.x += self.view.frame.width
                 })
@@ -51,7 +52,6 @@ class MyPlacesViewController: UIViewController {
         default:
             break
         }
-        horizontalController.collectionView.reloadData()
     }
     
     func setupViews() {
@@ -87,4 +87,9 @@ class MyPlacesViewController: UIViewController {
         }
     }
     
+    private func handleScroll() {
+        horizontalController.didScrollHandler = { [weak self] segment in
+            self?.listSelector.selectedSegmentIndex = segment == .favourites ? 0 : 1
+        }
+    }
 }
