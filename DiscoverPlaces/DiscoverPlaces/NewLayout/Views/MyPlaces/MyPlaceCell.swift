@@ -24,13 +24,12 @@ class MyPlaceCell: UICollectionViewCell {
             populateCell()
             guard let rating = place?.rating else { return }
             starView.populate(with: rating)
-            placeNameLabel.text = String(rating)
         }
     }
 
     let placeImageView = UIImageView(image: UIImage(named: "cafe"))
-    let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 17, weight: .semibold), color: .label, numberOfLines: 1)
-    let addressLabel = UILabel(text: "123 Palace Road, London", font: .systemFont(ofSize: 15, weight: .regular), color: .secondaryLabel, alignment: .left, numberOfLines: 1)
+    let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 16, weight: .semibold), color: .label, numberOfLines: 1)
+    let addressLabel = UILabel(text: "123 Palace Road, London", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, alignment: .left, numberOfLines: 1)
     let starView = StarsView()
     let iconImageView = UIImageView()
     
