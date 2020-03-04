@@ -21,6 +21,7 @@ class MyPlacesViewController: UIViewController {
         setupViews()
         setupSegmentedControl()
         setupContraints()
+        handlePlaceTap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +76,15 @@ class MyPlacesViewController: UIViewController {
     private func setupContraints() {
         listSelector.anchor(top: view.layoutMarginsGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
         horizontalController.view.anchor(top: listSelector.bottomAnchor, leading: view.leadingAnchor, bottom: view.layoutMarginsGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0))
+    }
+    
+    private func handlePlaceTap() {
+        horizontalController.didSelectHandler = { [weak self] placeId in
+            print("ACTIONNNNN")
+            let detailController = PlaceDetailsController()
+            detailController.placeId = placeId
+            self?.navigationController?.pushViewController(detailController, animated: true)
+        }
     }
     
 }

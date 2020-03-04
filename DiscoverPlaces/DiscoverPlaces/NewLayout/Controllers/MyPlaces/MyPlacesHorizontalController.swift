@@ -13,6 +13,8 @@ class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionVi
     private let favouritesHolderCellId = "favouritesHolderCellId"
     private let toDoHolderCellId = "toDoHolderCellId"
     
+    var didSelectHandler: ((String) -> ())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .systemBackground
@@ -30,6 +32,9 @@ class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionVi
             //Favourites
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: favouritesHolderCellId, for: indexPath) as! FavouritesListHolderCell
             cell.refreshData()
+            cell.listController.didSelectHandler = { [weak self] placeId in
+                self?.didSelectHandler?(placeId)
+            }
             return cell
         } else if indexPath.row == 1 {
             //To-Do

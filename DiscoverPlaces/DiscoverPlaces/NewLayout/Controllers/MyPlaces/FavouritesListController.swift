@@ -10,6 +10,8 @@ import UIKit
 
 class FavouritesListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    var didSelectHandler: ((String) -> ())?
+
     var placeIdList: [String]? {
         didSet {
             if placeIdList != oldValue {
@@ -44,11 +46,10 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
         cell.place = placeResults?[indexPath.item]
         return cell
     }
-    
+        
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailsController = PlaceDetailsController()
-        detailsController.placeId = placeResults?[indexPath.item].place_id
-        present(detailsController, animated: true, completion: nil)//Change to push
+        guard let placeId = placeResults?[indexPath.item].place_id else { return }
+        didSelectHandler?(placeId)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
