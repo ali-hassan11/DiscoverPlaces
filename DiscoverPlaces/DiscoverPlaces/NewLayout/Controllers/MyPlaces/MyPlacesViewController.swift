@@ -16,24 +16,11 @@ class MyPlacesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TemporaryFix
-        let v = UIView(frame: view.frame)
-        v.backgroundColor = .systemBackground
-        view.addSubview(v)
-        v.fillSuperview()
-        
         navigationItem.largeTitleDisplayMode = .always
-        v.backgroundColor = .systemBackground
         
-        v.addSubview(listSelector)
-        v.addSubview(horizontalController.view)
-
-        listSelector.selectedSegmentTintColor = .systemPink
-        listSelector.selectedSegmentIndex = 0
-        listSelector.addTarget(self, action: #selector(toggleList(sender:)), for: .valueChanged)
-
-        listSelector.anchor(top: view.layoutMarginsGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
-        horizontalController.view.anchor(top: listSelector.bottomAnchor, leading: view.leadingAnchor, bottom: view.layoutMarginsGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0))
+        setupViews()
+        setupSegmentedControl()
+        setupContraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +51,30 @@ class MyPlacesViewController: UIViewController {
             break
         }
         horizontalController.collectionView.reloadData()
+    }
+    
+    func setupViews() {
+        //TemporaryFix
+        let v = UIView(frame: view.frame)
+        v.backgroundColor = .systemBackground
+        view.addSubview(v)
+        v.fillSuperview()
+        
+        v.backgroundColor = .systemBackground
+        
+        v.addSubview(listSelector)
+        v.addSubview(horizontalController.view)
+    }
+    
+    func setupSegmentedControl() {
+        listSelector.selectedSegmentTintColor = .systemPink
+        listSelector.selectedSegmentIndex = 0
+        listSelector.addTarget(self, action: #selector(toggleList(sender:)), for: .valueChanged)
+    }
+    
+    private func setupContraints() {
+        listSelector.anchor(top: view.layoutMarginsGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
+        horizontalController.view.anchor(top: listSelector.bottomAnchor, leading: view.leadingAnchor, bottom: view.layoutMarginsGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0))
     }
     
 }

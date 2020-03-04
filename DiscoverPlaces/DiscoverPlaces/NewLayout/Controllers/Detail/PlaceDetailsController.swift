@@ -34,7 +34,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     var place: PlaceDetailResult? {
         didSet {
             guard let location = place?.geometry?.location else { return }
-            fetchMorePlacesData(location: location)
+            fetchMorePlacesData(near: location)
         }
     }
     
@@ -113,7 +113,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         }
     }
     
-    func fetchMorePlacesData(location: Location) {
+    func fetchMorePlacesData(near location: Location) {
         
         Service.shared.fetchNearbyPlaces(location: location, radius: 3000) { (results, error) in
             
