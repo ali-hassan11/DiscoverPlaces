@@ -80,11 +80,11 @@ class MyPlacesViewController: UIViewController {
     
     private func handlePlaceTap() {
         horizontalController.didSelectHandler = { [weak self] placeId in
-            print("ACTIONNNNN")
             let detailController = PlaceDetailsController()
             detailController.placeId = placeId
             self?.navigationController?.pushViewController(detailController, animated: true)
         }
+        
     }
     
     private func handleScroll() {

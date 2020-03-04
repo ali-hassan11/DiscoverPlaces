@@ -38,6 +38,9 @@ class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionVi
             //To-Do
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoListHolderCell.id, for: indexPath) as! ToDoListHolderCell
             cell.refreshData()
+            cell.listController.didSelectHandler = { [weak self] placeId in
+                  self?.didSelectHandler?(placeId)
+              }
             return cell
         } else {
             fatalError("Should only be 2 tabs!")
