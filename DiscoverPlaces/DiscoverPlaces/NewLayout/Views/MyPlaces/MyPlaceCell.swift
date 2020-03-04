@@ -22,13 +22,16 @@ class MyPlaceCell: UICollectionViewCell {
     var place: PlaceDetailResult? {
         didSet {
             populateCell()
+            guard let rating = place?.rating else { return }
+            starView.populate(with: rating)
+            placeNameLabel.text = String(rating)
         }
     }
 
     let placeImageView = UIImageView(image: UIImage(named: "cafe"))
     let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 17, weight: .semibold), color: .label, numberOfLines: 1)
     let addressLabel = UILabel(text: "123 Palace Road, London", font: .systemFont(ofSize: 15, weight: .regular), color: .secondaryLabel, alignment: .left, numberOfLines: 1)
-    let starView = UIView() //STARSVIEW
+    let starView = StarsView()
     let iconImageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -37,8 +40,9 @@ class MyPlaceCell: UICollectionViewCell {
         backgroundColor = .systemBackground
         
         setupImageView()
-        setupStarsView()
         setupIconView()
+        setupStarsView()
+
     
         setupStackView()
         addBottomSeparator()
@@ -94,8 +98,7 @@ class MyPlaceCell: UICollectionViewCell {
     }
     
     func setupStarsView() {
-        starView.backgroundColor = .systemPink
-        starView.constrainHeight(constant: 18)
+        starView.constrainHeight(constant: 16)
         starView.constrainWidth(constant: 100)
     }
     
