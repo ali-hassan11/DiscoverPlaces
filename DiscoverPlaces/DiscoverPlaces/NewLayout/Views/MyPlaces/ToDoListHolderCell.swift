@@ -10,6 +10,8 @@ import UIKit
 
 class ToDoListHolderCell: UICollectionViewCell {
     
+    public static let id = "toDoHolderCellId"
+    
     var listController = ToDoListController()
     
        override init(frame: CGRect) {

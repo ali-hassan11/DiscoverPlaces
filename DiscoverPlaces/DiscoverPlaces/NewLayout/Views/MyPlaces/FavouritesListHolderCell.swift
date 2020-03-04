@@ -10,6 +10,8 @@ import UIKit
 
 class FavouritesListHolderCell: UICollectionViewCell {
     
+    public static var id = "favouritesHolderCellId"
+    
     var listController = FavouritesListController()
     
     override init(frame: CGRect) {
