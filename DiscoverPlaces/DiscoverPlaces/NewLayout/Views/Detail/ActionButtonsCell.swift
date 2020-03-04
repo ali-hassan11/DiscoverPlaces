@@ -20,8 +20,8 @@ class ActionButtonsCell: UICollectionViewCell {
     let heartOutline = UIImage(systemName: "heart")
     let heartFilled = UIImage(systemName: "heart.fill")
     
-    let addToDoImage = UIImage(systemName: "text.badge.plus")
-    let removeToDoImage = UIImage(systemName: "text.badge.minus")
+//    let addToDoImage = UIImage(systemName: "text.badge.plus")
+//    let removeToDoImage = UIImage(systemName: "text.badge.minus")
     
     let defaults = DefaultsManager()
     
@@ -29,20 +29,11 @@ class ActionButtonsCell: UICollectionViewCell {
     
     var placeId: String! {
         didSet {
-            isFavourite = defaults.isInList(placeId: placeId, listKey: .favourites)
-            isToDo = defaults.isInList(placeId: placeId, listKey: .toDo)
-        }
-    }
-    
-    var isFavourite: Bool? {
-        didSet {
-            toggleFavourites(placeId: placeId)
-        }
-    }
-    
-    var isToDo: Bool? {
-        didSet {
-            toggleToDo(placeId: placeId)
+            let isFavourite = defaults.isInList(placeId: placeId, listKey: .favourites)
+            favouritesButton.setImage(isFavourite ? heartFilled : heartOutline, for: .normal)
+            
+            let isToDo = defaults.isInList(placeId: placeId, listKey: .toDo)
+            toDoButton.setImage(isToDo ? heartFilled : heartOutline, for: .normal)
         }
     }
     
@@ -106,25 +97,25 @@ class ActionButtonsCell: UICollectionViewCell {
     }
 
     @objc private func favouriteTapped() {
-        isFavourite = isFavourite ?? false ? false : true
+        toggleFavourites(placeId: placeId)
     }
     
     @objc private func toDoTapped() {
-        isToDo = isToDo ?? false ? false : true
+        toggleToDo(placeId: placeId)
     }
         
     func toggleFavourites(placeId: String) {
-        let isFave = defaults.isInList(placeId: placeId, listKey: .favourites)
+        let isFavourite = defaults.isInList(placeId: placeId, listKey: .favourites)
         
-        isFave ? defaults.removeFromList(placeId: placeId, listKey: .favourites) : defaults.addToList(placeId: placeId, listKey: .favourites)
-        favouritesButton.setImage(isFave ? heartOutline : heartFilled, for: .normal)
+        isFavourite ? defaults.removeFromList(placeId: placeId, listKey: .favourites) : defaults.addToList(placeId: placeId, listKey: .favourites)
+        favouritesButton.setImage(isFavourite ? heartOutline : heartFilled, for: .normal)
     }
     
     func toggleToDo(placeId: String) {
         let isToDo = defaults.isInList(placeId: placeId, listKey: .toDo)
               
         isToDo ? defaults.removeFromList(placeId: placeId, listKey: .toDo) : defaults.addToList(placeId: placeId, listKey: .toDo)
-        toDoButton.setImage(isToDo ? addToDoImage : removeToDoImage, for: .normal)
+        toDoButton.setImage(isToDo ? heartOutline : heartFilled, for: .normal)
     }
  
     required init?(coder: NSCoder) {
