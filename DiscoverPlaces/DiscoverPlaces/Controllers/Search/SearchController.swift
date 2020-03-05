@@ -14,12 +14,14 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var searchResults = [PlaceResult]()
     
+    private let enterSearchTextlabel = UILabel(text: "Search for\nBeaches in Dubai\nor\nRestaurants in Barcelona...", font: .systemFont(ofSize: 17), color: .label, alignment: .center, numberOfLines: 0)
+    
+    let searchIcon = UIImageView(image: UIImage(systemName: "magnifyingglass.circle.fill"))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.addSubview(enterSearchTextlabel)
-        enterSearchTextlabel.centerXInSuperview()
-        enterSearchTextlabel.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 100).isActive = true
-    
+        
+        addEmptyView()
         setupSearchBar()
         
         collectionView.backgroundColor = .systemBackground
@@ -64,17 +66,20 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             }
         })
     }
-    
-    fileprivate let enterSearchTextlabel: UILabel = {
-        let label = UILabel()
-        label.text = "Enter search term above..."
-        label.font = .systemFont(ofSize: 16)
-        label.textAlignment = .center
-        return label
-    }()
 
+    private func addEmptyView() {
+        searchIcon.constrainHeight(constant: 120)
+        searchIcon.constrainWidth(constant: 120)
+        searchIcon.tintColor = .systemPink
+        
+        let stackView = VerticalStackView(arrangedSubviews: [searchIcon, enterSearchTextlabel], spacing: 8)
+        collectionView.addSubview(stackView)
+        stackView.constrainWidth(constant: view.frame.width)
+        stackView.alignment = .center
+        stackView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 100).isActive = true
+    }
     
-    fileprivate func setupSearchBar() {
+    private func setupSearchBar() {
         definesPresentationContext = true
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -86,6 +91,7 @@ extension SearchController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         enterSearchTextlabel.isHidden = searchResults.count != 0
+        searchIcon.isHidden = searchResults.count != 0
         return searchResults.count
     }
     
