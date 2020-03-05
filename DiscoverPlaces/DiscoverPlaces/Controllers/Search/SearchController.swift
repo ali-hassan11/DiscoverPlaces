@@ -14,12 +14,14 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var searchResults = [PlaceResult]()
     
-    private let enterSearchTextlabel = UILabel(text: "Search for:ar\nBeaches in Dubai\nor\nRestaurants in Barcelona...", font: .systemFont(ofSize: 17), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
+    private let enterSearchTextlabel = UILabel(text: "Search for places", font: .systemFont(ofSize: 17), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
     
     let searchIcon = UIImageView(image: UIImage(systemName: "magnifyingglass.circle.fill"))
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        searchController.searchBar.placeholder = "restaurants in Barcelona..." //Array or different quiries and switch between every 3 seconds?, or just every time loads
         
         addEmptyView()
         setupSearchBar()
@@ -105,6 +107,7 @@ extension SearchController {
         let result = searchResults[indexPath.row]
         let placeDetailController = PlaceDetailsController()
         placeDetailController.placeId = result.place_id
+        placeDetailController.title = result.name
         navigationController?.pushViewController(placeDetailController, animated: true)
     }
     
