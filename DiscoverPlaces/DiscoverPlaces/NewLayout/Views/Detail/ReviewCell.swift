@@ -50,7 +50,7 @@ class ReviewCell: UICollectionViewCell {
     
     let timeAgoLabel = UILabel(text: "2 days Ago", font: .systemFont(ofSize: 14, weight: .light), color: .secondaryLabel, alignment: .right, numberOfLines: 2)
     
-    let starsView = StarsView()
+    let starsView = StarsView(width: 100)
     
     let reviewBodyLabel = UILabel(text: "Example review text here, Example review text here, Example review text here, Example review text here, Example review text here, ", font: .systemFont(ofSize: 16, weight: .light), color: .label, alignment: .left, numberOfLines: 0)
     

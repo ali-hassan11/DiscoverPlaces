@@ -10,13 +10,20 @@ import UIKit
 
 class StarsView: UIView {
     
+    init(width: CGFloat) {
+        super.init(frame: .zero)
+        self.width = width
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     var starStackView = HorizontalStackView(arrangedSubviews: [])
+    var width: CGFloat!
     
-    
-    public func populate(with rating: Double) {
-        
-        
-        
+    public func populate(with rating: Double, displaysNumber: Bool = false) {
+                
         removeAllStars()
         
         //If no full stars
@@ -57,7 +64,14 @@ class StarsView: UIView {
 
         fillRemainderWithEmptyStars()
 
-        starStackView.distribution = .fillEqually
+        if displaysNumber {
+            let numLabel = UILabel(text: String(rating), font: .systemFont(ofSize: 16), color: .lightText, alignment: .center, numberOfLines: 1)
+            let padding = PaddingView(width: 4)
+            starStackView.addArrangedSubview(padding)
+            starStackView.addArrangedSubview(numLabel)
+        }
+        
+        starStackView.distribution = .equalSpacing
         addSubview(starStackView)
         starStackView.fillSuperview()
         
@@ -88,8 +102,8 @@ class StarsView: UIView {
     
     private func configureStarImageView(imageName: String) -> UIImageView {
         let starImageView = UIImageView(image: UIImage(systemName: imageName))
-        starImageView.constrainHeight(constant: 16)
-        starImageView.constrainWidth(constant: 16)
+        starImageView.constrainHeight(constant: width / 5)
+        starImageView.constrainWidth(constant: width / 5)
         starImageView.tintColor = .systemPink
         return starImageView
     }

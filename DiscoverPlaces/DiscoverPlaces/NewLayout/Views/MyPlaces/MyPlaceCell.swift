@@ -30,7 +30,7 @@ class MyPlaceCell: UICollectionViewCell {
     let placeImageView = UIImageView(image: UIImage(named: "cafe"))
     let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 16, weight: .semibold), color: .label, numberOfLines: 1)
     let addressLabel = UILabel(text: "123 Palace Road, London", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, alignment: .left, numberOfLines: 1)
-    let starView = StarsView()
+    let starView = StarsView(width: 90)
     let iconImageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -40,8 +40,6 @@ class MyPlaceCell: UICollectionViewCell {
         
         setupImageView()
         setupIconView()
-        setupStarsView()
-
     
         setupStackView()
         addBottomSeparator()
@@ -94,11 +92,6 @@ class MyPlaceCell: UICollectionViewCell {
         placeImageView.contentMode = .scaleAspectFill
         placeImageView.constrainWidth(constant: 60)
         placeImageView.constrainHeight(constant: 60)
-    }
-    
-    func setupStarsView() {
-        starView.constrainHeight(constant: 16)
-        starView.constrainWidth(constant: 100)
     }
     
     func setupIconView() {

@@ -14,6 +14,7 @@ class PlaceImagesHolder: UICollectionReusableView {
     
     let horizontalController = ImagesHorizontalController()
     
+    let starsView = StarsView(width: 100)
     let faveButton: UIButton! = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "heartEmpty"), for: .normal)

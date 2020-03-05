@@ -40,7 +40,7 @@ class ReviewDetailViewController: UIViewController {
     
     let timeAgoLabel = UILabel(text: "2 days Ago", font: .systemFont(ofSize: 14, weight: .light), color: .secondaryLabel, alignment: .right, numberOfLines: 2)
     
-    let starsView = StarsView()
+    let starsView = StarsView(width: 100)
     
     let reviewBodyTextView: UITextView! = {
         let tv = UITextView()
