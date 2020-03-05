@@ -15,7 +15,28 @@ class StarsView: UIView {
     
     public func populate(with rating: Double) {
         
+        
+        
         removeAllStars()
+        
+        //If no full stars
+        if rating >= 0 && rating <= 0.75 {
+            let starImageView = configureStarImageView(imageName: "star.lefthalf.fill")
+            starStackView.addArrangedSubview(starImageView)
+            fillRemainderWithEmptyStars()
+            return
+        } else if rating > 0.75 && rating <= 1 {
+            let starImageView = configureStarImageView(imageName: "star.fill")
+            starStackView.addArrangedSubview(starImageView)
+            fillRemainderWithEmptyStars()
+            return
+        }
+        
+        //If full stars
+        if rating >= 4.8 {
+            fillRemainderWithFullStars()
+            return
+        }
 
         let fullStars = Int(rating.rounded(.down))
         
@@ -34,12 +55,8 @@ class StarsView: UIView {
             starStackView.addArrangedSubview(starImageView)
         }
 
+        fillRemainderWithEmptyStars()
 
-        while starStackView.arrangedSubviews.count < 5 {
-            let starImageView = configureStarImageView(imageName: "star")
-            starStackView.addArrangedSubview(starImageView)
-        }
-        
         starStackView.distribution = .fillEqually
         addSubview(starStackView)
         starStackView.fillSuperview()
@@ -75,6 +92,20 @@ class StarsView: UIView {
         starImageView.constrainWidth(constant: 16)
         starImageView.tintColor = .systemPink
         return starImageView
+    }
+    
+    private func fillRemainderWithEmptyStars() {
+        while starStackView.arrangedSubviews.count < 5 {
+            let starImageView = configureStarImageView(imageName: "star")
+            starStackView.addArrangedSubview(starImageView)
+        }
+    }
+    
+    private func fillRemainderWithFullStars() {
+        while starStackView.arrangedSubviews.count < 5 {
+            let starImageView = configureStarImageView(imageName: "star.fill")
+            starStackView.addArrangedSubview(starImageView)
+        }
     }
     
     private func removeAllStars() {
