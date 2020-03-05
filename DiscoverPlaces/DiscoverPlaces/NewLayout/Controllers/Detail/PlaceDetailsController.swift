@@ -55,6 +55,11 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         registerCells()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+    
     private func setUpSplashScreen() {
 
         self.view.addSubview(splashScreen)
