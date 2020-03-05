@@ -15,7 +15,7 @@ class HomeLargeCell: UICollectionViewCell {
     let placeImageView = UIImageView(image: UIImage(named: "hotel"))//Try and make empty without loosing gradient
     let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 26, weight: .semibold), color: .white, numberOfLines: 3)
     let distanceLabel = UILabel(text: "1.7 Km", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
-    let undicededButton = UIButton(title: "Details", textColor: .white, width: 100, height: 40, font: .systemFont(ofSize: 18, weight: .medium), backgroundColor: UIColor.systemPink, cornerRadius: 10)
+    let starsView = StarsView(width: 100)
     
     var image: UIImage?
     
@@ -40,6 +40,9 @@ class HomeLargeCell: UICollectionViewCell {
                 self.image = image
             }
             placeNameLabel.text = result.name
+            
+            guard let rating = result.rating else { return }
+            starsView.populate(with: rating)
         }
     }
     
@@ -54,14 +57,16 @@ class HomeLargeCell: UICollectionViewCell {
         addSubview(placeImageView)
         placeImageView.fillSuperview()
 
-        let stackView = HorizontalStackView(arrangedSubviews: [
-            VerticalStackView(arrangedSubviews: [placeNameLabel, distanceLabel], spacing: 8),
-            undicededButton
-        ])
+        let stackView = HorizontalStackView(arrangedSubviews: [starsView, distanceLabel])
         placeImageView.addSubview(stackView)
-        stackView.alignment = .bottom
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
         stackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor,
                          padding: .init(top: 0, left: 24, bottom: 24, right: 24), size: .zero)
+        
+        addSubview(placeNameLabel)
+        placeNameLabel.anchor(top: nil, leading: stackView.leadingAnchor, bottom: stackView.topAnchor, trailing: stackView.trailingAnchor,
+                              padding: .init(top: 0, left: 0, bottom: 8, right: 0))
         
         placeImageView.addGradientBackground(firstColor: .clear, secondColor: .black)
 
