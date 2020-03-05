@@ -90,7 +90,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     func fetchPlaceData(for id: String) {
-        let fields = ["name" , "place_id", "opening_hours", "photo", "vicinity" ,"geometry" ,"review" ,"website" ,"url" ,"international_phone_number", "formatted_phone_number" ,"formatted_address"]
+        let fields = ["name" , "place_id", "opening_hours", "photo", "vicinity" ,"geometry" ,"review" ,"website" ,"url" ,"international_phone_number", "formatted_phone_number" ,"formatted_address", "rating"]
         Service.shared.fetchPlaceDetails(placeId: id, fields: fields) { (placeResponse, error) in
             
             if let error = error {
@@ -154,6 +154,7 @@ extension PlaceDetailsController {
         
         cell.pageControlView.numberOfPages = place?.photos?.count ?? 0
         cell.horizontalController.photos = place?.photos
+        cell.rating = place?.rating
         cell.horizontalController.didEndAccelerating = { index in //weak self?
             cell.pageControlView.currentPage = index
         }

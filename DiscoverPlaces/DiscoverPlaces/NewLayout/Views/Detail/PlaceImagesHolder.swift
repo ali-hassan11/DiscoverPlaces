@@ -15,6 +15,14 @@ class PlaceImagesHolder: UICollectionReusableView {
     let horizontalController = ImagesHorizontalController()
     
     let starsView = StarsView(width: 100)
+    
+    var rating: Double? {
+        didSet {
+            guard let rating = rating else { return }
+            starsView.populate(with: rating, displaysNumber: true)
+        }
+    }
+    
     let faveButton: UIButton! = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "heartEmpty"), for: .normal)
@@ -34,12 +42,21 @@ class PlaceImagesHolder: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+                
         backgroundColor = .red
         
         addSubview(horizontalController.view)
         horizontalController.view.fillSuperview()
         
+        let v = UIView()
+        v.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        v.layer.cornerRadius = 10
+        addSubview(v)
+        
+        v.addSubview(starsView)
+        starsView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 20, bottom: 0, right: 0))
+        
+        v.anchor(top: starsView.topAnchor, leading: starsView.leadingAnchor, bottom: starsView.bottomAnchor, trailing: starsView.trailingAnchor, padding: .init(top: -5, left: -8, bottom: -5, right: -8))
         horizontalController.view.addSubview(pageControlView)
         
         pageControlView.isUserInteractionEnabled = false
