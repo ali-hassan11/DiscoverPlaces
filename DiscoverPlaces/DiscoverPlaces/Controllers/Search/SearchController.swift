@@ -38,6 +38,8 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         
         let queryText = searchText.replacingOccurrences(of: " ", with: "+")
         
+        searchController.searchBar.placeholder = ""
+        
         timer?.invalidate()
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (_) in
@@ -90,7 +92,6 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
 }
 
 extension SearchController {
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         enterSearchTextlabel.isHidden = searchResults.count != 0
         searchIcon.isHidden = searchResults.count != 0
