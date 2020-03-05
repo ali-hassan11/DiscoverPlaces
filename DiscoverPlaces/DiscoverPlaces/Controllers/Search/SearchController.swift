@@ -14,7 +14,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var searchResults = [PlaceResult]()
     
-    private let enterSearchTextlabel = UILabel(text: "Search for\nBeaches in Dubai\nor\nRestaurants in Barcelona...", font: .systemFont(ofSize: 17), color: .label, alignment: .center, numberOfLines: 0)
+    private let enterSearchTextlabel = UILabel(text: "Search for:ar\nBeaches in Dubai\nor\nRestaurants in Barcelona...", font: .systemFont(ofSize: 17), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
     
     let searchIcon = UIImageView(image: UIImage(systemName: "magnifyingglass.circle.fill"))
     
