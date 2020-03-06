@@ -6,12 +6,17 @@
 //  Copyright © 2020 AHApps. All rights reserved.
 //
 import UIKit
+import CoreLocation
 
 class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     fileprivate let largeCellHolderId = "largeCellHeaderId"
     fileprivate let categoriesHolderId = "categoriesHolderId"
 
+    private var locationManager:CLLocationManager!
+    private var locationSettingHasChanged = false
+
+    
     var results = [PlaceResult]()
     
     override func viewDidLoad() {
@@ -28,14 +33,14 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         collectionView.register(CategoriesHolder.self, forCellWithReuseIdentifier: categoriesHolderId)
         //Header 1
         collectionView.register(HomeLargeCellHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: largeCellHolderId)
-        
-        fetchPlacesData()
-    }
     
-    fileprivate func fetchPlacesData() {
+        determineMyCurrentLocation()
+    }
+     
+    //
+    
+    fileprivate func fetchPlacesData(location: Location) {
         
-        let location = Location(lat: 31.625502, lng: -7.988936)
-
         Service.shared.fetchNearbyPlaces(location: location, radius: 5000) { (results, error) in
             
             if let error = error {
@@ -104,5 +109,57 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width, height: 380)
+    }
+}
+
+extension HomeController: CLLocationManagerDelegate {
+              
+    func determineMyCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    
+        guard locationSettingHasChanged == false else { return }
+        
+        switch status {
+        case .restricted, .denied:
+            fetchDefaultLocation()
+            locationSettingHasChanged = true
+            
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+            locationSettingHasChanged = true
+            
+        case .notDetermined:
+            locationManager.requestAlwaysAuthorization()
+            locationSettingHasChanged = true
+            
+        default:
+            fetchDefaultLocation()
+            locationSettingHasChanged = true
+        }
+
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] as CLLocation
+        locationManager.stopUpdatingLocation()
+        
+        let location = Location(lat: userLocation.coordinate.latitude, lng: userLocation.coordinate.longitude)
+        fetchPlacesData(location: location)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error, when trying to get location: \(error)")
+        fetchDefaultLocation()
+    }
+    
+    func fetchDefaultLocation() {
+        fetchPlacesData(location: Location(lat: 24.4539, lng: 54.3773))
+        //Have an array of default locations, Or Save last location and load places from that 🤔🤔🤔
     }
 }
