@@ -113,6 +113,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                self.title = placeResponse.result?.name
                 self.fadeOutSplashScreen()
             }
         }

@@ -65,7 +65,7 @@ class StarsView: UIView {
         fillRemainderWithEmptyStars()
 
         if displaysNumber {
-            let numLabel = UILabel(text: String(rating), font: .systemFont(ofSize: 16), color: .lightText, alignment: .center, numberOfLines: 1)
+            let numLabel = UILabel(text: String(rating), font: .systemFont(ofSize: 16), color: .white, alignment: .center, numberOfLines: 1)
             let padding = PaddingView(width: 4)
             starStackView.addArrangedSubview(padding)
             starStackView.addArrangedSubview(numLabel)

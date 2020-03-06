@@ -9,13 +9,13 @@
 import UIKit
 
 
-extension UICollectionViewCell {
+extension UICollectionReusableView {
     func addBottomSeparator() {
         let separator = UIView()
         separator.backgroundColor = .quaternaryLabel
         separator.constrainHeight(constant: 1)
         addSubview(separator)
-        separator.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: 16))
+        separator.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: 12))
 
     }
 }
@@ -43,6 +43,11 @@ extension UIView {
         overlay.backgroundColor = color.withAlphaComponent(alpha)
         addSubview(overlay)
         overlay.fillSuperview()
+    }
+    
+    func roundCorners() {
+        layer.cornerRadius = 10
+        clipsToBounds = true
     }
     
     func addShadow() {
