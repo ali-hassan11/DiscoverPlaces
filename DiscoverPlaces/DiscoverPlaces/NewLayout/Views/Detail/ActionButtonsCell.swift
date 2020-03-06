@@ -20,8 +20,8 @@ class ActionButtonsCell: UICollectionViewCell {
     let heartOutline = UIImage(systemName: "heart")
     let heartFilled = UIImage(systemName: "heart.fill")
     
-//    let addToDoImage = UIImage(systemName: "text.badge.plus")
-//    let removeToDoImage = UIImage(systemName: "text.badge.minus")
+    let toDoOutline = UIImage(systemName: "bookmark")
+    let toDoFilled = UIImage(systemName: "bookmark.fill")
     
     let defaults = DefaultsManager()
     
@@ -33,7 +33,7 @@ class ActionButtonsCell: UICollectionViewCell {
             favouritesButton.setImage(isFavourite ? heartFilled : heartOutline, for: .normal)
             
             let isToDo = defaults.isInList(placeId: placeId, listKey: .toDo)
-            toDoButton.setImage(isToDo ? heartFilled : heartOutline, for: .normal)
+            toDoButton.setImage(isToDo ? toDoFilled : toDoOutline, for: .normal)
         }
     }
     
@@ -58,7 +58,7 @@ class ActionButtonsCell: UICollectionViewCell {
     let toDoButton: UIButton! = {
         let btn = UIButton(type: .system)
         btn.setTitle(" To-Do", for: .normal)
-        btn.setImage(UIImage(systemName: "text.badge.plus"), for: .normal)
+        btn.setImage(UIImage(systemName: "bookmark"), for: .normal)
         btn.tintColor = .white
         btn.backgroundColor = UIColor.systemPink
         btn.layer.cornerRadius = 10
@@ -115,7 +115,7 @@ class ActionButtonsCell: UICollectionViewCell {
         let isToDo = defaults.isInList(placeId: placeId, listKey: .toDo)
               
         isToDo ? defaults.removeFromList(placeId: placeId, listKey: .toDo) : defaults.addToList(placeId: placeId, listKey: .toDo)
-        toDoButton.setImage(isToDo ? heartOutline : heartFilled, for: .normal)
+        toDoButton.setImage(isToDo ? toDoOutline : toDoFilled, for: .normal)
     }
  
     required init?(coder: NSCoder) {
