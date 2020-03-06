@@ -93,3 +93,15 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
         }
     }
 }
+
+extension FavouritesListController: MyPlaceCellDelegate {
+    
+    func togglePlaceInList(cell: MyPlaceCell) {
+        // // // // // -- -- -- -- -- DELEGATE METHOD NOT BEING CALLED??? -- -- -- -- -- // // // // //
+        guard let placeIds = placeIdList else { return }
+        if placeIds.contains(cell.place!.place_id) {
+            placeIdList = placeIdList?.filter { $0 != cell.place!.place_id }
+            collectionView.reloadData()
+        }
+    }
+}

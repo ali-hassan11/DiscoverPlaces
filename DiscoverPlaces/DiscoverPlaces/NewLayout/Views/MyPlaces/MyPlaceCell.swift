@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol MyPlaceCellDelegate: class {
+    func togglePlaceInList(cell: MyPlaceCell) //Just pass in the cell?
+}
+
 class MyPlaceCell: UICollectionViewCell {
     
     static public let id = "myListCell"
+    
+    var delegate: MyPlaceCellDelegate?
     
     var listType: ListType! {
         didSet {
@@ -35,6 +41,7 @@ class MyPlaceCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
                 
+        listTypeButton.addTarget(self, action: #selector(togglePlaceInList), for: .touchUpInside)
         
         backgroundColor = .systemBackground
   
@@ -47,7 +54,7 @@ class MyPlaceCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func tooglePlaceInList() {
+    @objc func togglePlaceInList() {
         delegate?.togglePlaceInList(cell: self)
     }
     

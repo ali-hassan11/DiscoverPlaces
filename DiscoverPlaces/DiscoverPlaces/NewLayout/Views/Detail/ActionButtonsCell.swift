@@ -16,6 +16,8 @@ class ActionButtonsCell: UICollectionViewCell {
     
     public static let id = "actionButtonsCellId"
 
+    var delegate: ActionButtonsCellDelegate?
+
     //Move this to an icon enum
     let heartOutline = UIImage(systemName: "heart")
     let heartFilled = UIImage(systemName: "heart.fill")
@@ -24,9 +26,7 @@ class ActionButtonsCell: UICollectionViewCell {
     let toDoFilled = UIImage(systemName: "bookmark.fill")
     
     let defaults = DefaultsManager()
-    
-    var delegate: ActionButtonsCellDelegate?
-    
+        
     var placeId: String! {
         didSet {
             let isFavourite = defaults.isInList(placeId: placeId, listKey: .favourites)
