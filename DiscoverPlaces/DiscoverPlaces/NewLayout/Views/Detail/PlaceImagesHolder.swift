@@ -12,10 +12,6 @@ class PlaceImagesHolder: UICollectionReusableView {
     
     public static let id = "placeImagesHolderId"
     
-    let horizontalController = ImagesHorizontalController()
-    
-    let starsView = StarsView(width: 100)
-    
     var rating: Double? {
         didSet {
             guard let rating = rating else { return }
@@ -23,14 +19,10 @@ class PlaceImagesHolder: UICollectionReusableView {
         }
     }
     
-    let faveButton: UIButton! = {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "heartEmpty"), for: .normal)
-        btn.imageView?.contentMode = .scaleAspectFill
-        btn.constrainWidth(constant: 44)
-        btn.constrainHeight(constant: 44)
-        return btn
-    }()
+    let horizontalController = ImagesHorizontalController()
+    let starsView = StarsView(width: 100)
+    
+    let gradView = UIView()
     
     let pageControlView: UIPageControl! = {
         let pc = UIPageControl()
@@ -48,22 +40,31 @@ class PlaceImagesHolder: UICollectionReusableView {
         addSubview(horizontalController.view)
         horizontalController.view.fillSuperview()
         
-        let v = UIView()
-        v.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        v.layer.cornerRadius = 10
-        addSubview(v)
+        //Gradient View
+        addSubview(gradView)
+        gradView.fillSuperview()
+        gradView.isUserInteractionEnabled = false
+        addGradient(firstColor: .clear, secondColor: .black, view: gradView)
         
-        v.addSubview(starsView)
-        starsView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 20, bottom: 0, right: 0))
+        //StackView
+        let stackView = HorizontalStackView(arrangedSubviews: [starsView, pageControlView])
+        addSubview(stackView)
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .bottom
+        stackView.constrainHeight(constant: 20)
+        stackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor,
+                         padding: .init(top: 0, left: 20, bottom: 12, right: 20))
         
-        v.anchor(top: starsView.topAnchor, leading: starsView.leadingAnchor, bottom: starsView.bottomAnchor, trailing: starsView.trailingAnchor, padding: .init(top: -5, left: -8, bottom: -5, right: -8))
-        horizontalController.view.addSubview(pageControlView)
-        
-        pageControlView.isUserInteractionEnabled = false
-        pageControlView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 20), size: .zero)
-        
-        
-        
+    }
+    
+    func addGradient(firstColor: UIColor, secondColor: UIColor, view: UIView) {
+        clipsToBounds = true
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [firstColor.cgColor, secondColor.cgColor]
+        gradientLayer.frame = self.frame
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.85)
+        gradientLayer.endPoint = CGPoint(x: 0, y: 0.98)
+        view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     required init?(coder: NSCoder) {
