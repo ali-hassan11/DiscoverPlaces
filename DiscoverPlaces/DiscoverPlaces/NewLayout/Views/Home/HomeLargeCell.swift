@@ -14,6 +14,7 @@ class HomeLargeCell: UICollectionViewCell {
     
     let placeImageView = UIImageView(image: UIImage(named: "hotel"))//Try and make empty without loosing gradient
     let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 2)
+    //If location not enabled, dont show distance label
     let distanceLabel = UILabel(text: "1.7 Km", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
     let starsView = StarsView(width: 90)
     
