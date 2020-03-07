@@ -29,7 +29,7 @@ class ImageCell: UICollectionViewCell {
         addSubview(imageView)
         imageView.fillSuperview()
         
-        imageView.addGradientBackground(bottomColor: .black, topColor: .clear)
+        imageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.35, end: 0.35)
     }
     
     required init?(coder: NSCoder) {

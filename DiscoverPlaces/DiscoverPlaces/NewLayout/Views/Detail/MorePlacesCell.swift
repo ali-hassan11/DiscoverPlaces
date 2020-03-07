@@ -25,8 +25,8 @@ class MorePlacesCell: UICollectionViewCell {
         }
     }
     
-    let placeImageView = UIImageView()
-    let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai", font: .systemFont(ofSize: 17, weight: .semibold), color: .white, numberOfLines: 3)
+    let placeImageView = UIImageView(image: UIImage(named: "hotel"))
+    let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai", font: .systemFont(ofSize: 16, weight: .medium), color: .white, numberOfLines: 2)
     
     override init(frame: CGRect) {
         super.init(frame: frame)        
@@ -42,6 +42,7 @@ class MorePlacesCell: UICollectionViewCell {
         addSubview(placeNameLabel)
         placeNameLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 12, bottom: 12, right: 12))
         
+        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.06, end: 0.175)
     }
     
     required init?(coder: NSCoder) {

@@ -68,7 +68,7 @@ class HomeLargeCell: UICollectionViewCell {
         placeNameLabel.anchor(top: nil, leading: stackView.leadingAnchor, bottom: stackView.topAnchor, trailing: stackView.trailingAnchor,
                               padding: .init(top: 0, left: 0, bottom: 8, right: 0))
         
-        placeImageView.addGradientBackground(bottomColor: .black, topColor: .clear)
+        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.225, end: 0.35)
         
     }
     

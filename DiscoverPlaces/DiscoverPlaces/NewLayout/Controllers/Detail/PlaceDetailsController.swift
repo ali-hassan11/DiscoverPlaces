@@ -253,7 +253,7 @@ extension PlaceDetailsController {
         case 6:
             //More Places
             //CHECK IF NIL, IF NOT RETURN 180
-            return .init(width: view.frame.width, height: 220 + 16)
+            return .init(width: view.frame.width, height: 200 + 16)
         default:
             return .zero
         }
