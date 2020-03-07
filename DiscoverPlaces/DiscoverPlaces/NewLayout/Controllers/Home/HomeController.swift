@@ -14,7 +14,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     fileprivate let categoriesHolderId = "categoriesHolderId"
 
     private var locationManager:CLLocationManager!
-    private var locationSettingHasChanged = false
+    private var locationSettingIsEnabled = false
 
     
     var results = [PlaceResult]()
@@ -123,34 +123,30 @@ extension HomeController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     
-        guard locationSettingHasChanged == false else { return }
+        guard locationSettingIsEnabled == false else { return }
         
         switch status {
         case .restricted, .denied:
             fetchDefaultLocation()
-            locationSettingHasChanged = true
             
         case .authorizedAlways, .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
-            locationSettingHasChanged = true
+            locationSettingIsEnabled = true
             
         case .notDetermined:
             locationManager.requestAlwaysAuthorization()
-            locationSettingHasChanged = true
             
         default:
             fetchDefaultLocation()
-            locationSettingHasChanged = true
         }
 
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0] as CLLocation
-        locationManager.stopUpdatingLocation()
-        
         let location = Location(lat: userLocation.coordinate.latitude, lng: userLocation.coordinate.longitude)
-        fetchPlacesData(location: location)
+          fetchPlacesData(location: location)
+        locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
