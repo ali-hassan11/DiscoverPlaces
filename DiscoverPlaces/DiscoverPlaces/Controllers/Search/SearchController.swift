@@ -22,6 +22,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         super.viewDidLoad()
         
         searchController.searchBar.placeholder = "restaurants in Barcelona..." //Array or different quiries and switch between every 3 seconds?, or just every time loads
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         addEmptyView()
         setupSearchBar()
@@ -34,7 +35,10 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-//        if searchText == "" { return }
+        if searchText == "" {
+            enterSearchTextlabel.text = "Search for places"
+            return
+        }
         
         let queryText = searchText.replacingOccurrences(of: " ", with: "+")
         
@@ -42,33 +46,46 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         
         timer?.invalidate()
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (_) in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: false, block: { (_) in
                         
             Service.shared.fetchSearchResults(for: queryText) { (results, error) in
                 
                 if let error = error {
                     print("Failed to fetch: ", error.localizedDescription)
-                    return //Error message
+                    return
                 }
                 
+                //success
                 var filteredResults = [PlaceResult]()
                 
-                results?.results.forEach({ (result) in
+                guard let results = results?.results else { return }
+
+                results.forEach({ (result) in
                     if result.containsPhotos() {
                         filteredResults.append(result)
                     }
                 })
+                
                 self.searchResults = filteredResults
-                
-                if self.searchResults.isEmpty {
-                    print("NO RESULTS")
-                }
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
+                self.updateUI(searchText: searchText)
             }
         })
+    }
+    
+    private func updateUI(searchText: String) {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            
+            if self.searchResults.isEmpty {
+                
+                if !searchText.isEmpty {
+                    self.enterSearchTextlabel.text = "Sorry, we couldn't find anything for \"\(searchText)\""
+                }
+                
+            } else {
+                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+            }
+        }
     }
 
     private func addEmptyView() {
@@ -78,7 +95,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         
         let stackView = VerticalStackView(arrangedSubviews: [searchIcon, enterSearchTextlabel], spacing: 8)
         collectionView.addSubview(stackView)
-        stackView.constrainWidth(constant: view.frame.width)
+        stackView.constrainWidth(constant: view.frame.width - 40)
         stackView.alignment = .center
         stackView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 100).isActive = true
     }
