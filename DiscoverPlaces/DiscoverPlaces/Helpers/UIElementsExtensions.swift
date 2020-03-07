@@ -58,13 +58,13 @@ extension UIView {
         layer.masksToBounds = false
     }
     
-    func addGradientBackground(firstColor: UIColor, secondColor: UIColor){
+    func addGradientBackground(bottomColor: UIColor, topColor: UIColor){
         clipsToBounds = true
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [firstColor.cgColor, secondColor.withAlphaComponent(0.85).cgColor]
+        gradientLayer.colors = [bottomColor.cgColor, topColor.cgColor]
         gradientLayer.frame = self.bounds
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0.3)
-        gradientLayer.endPoint = CGPoint(x: 0, y: 0.45)
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.35)
+        gradientLayer.endPoint = CGPoint(x: 0, y: 0.225)
         self.layer.insertSublayer(gradientLayer, at: 0)
     }
     

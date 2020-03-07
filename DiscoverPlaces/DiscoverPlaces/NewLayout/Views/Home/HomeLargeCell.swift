@@ -13,9 +13,9 @@ class HomeLargeCell: UICollectionViewCell {
     public static let id = "largeCellId"
     
     let placeImageView = UIImageView(image: UIImage(named: "hotel"))//Try and make empty without loosing gradient
-    let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 26, weight: .semibold), color: .white, numberOfLines: 3)
+    let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 2)
     let distanceLabel = UILabel(text: "1.7 Km", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
-    let starsView = StarsView(width: 100)
+    let starsView = StarsView(width: 90)
     
     var image: UIImage?
     
@@ -62,14 +62,14 @@ class HomeLargeCell: UICollectionViewCell {
         stackView.alignment = .center
         stackView.distribution = .equalSpacing
         stackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor,
-                         padding: .init(top: 0, left: 24, bottom: 24, right: 24), size: .zero)
+                         padding: .init(top: 0, left: 16, bottom: 16, right: 16))
         
         addSubview(placeNameLabel)
         placeNameLabel.anchor(top: nil, leading: stackView.leadingAnchor, bottom: stackView.topAnchor, trailing: stackView.trailingAnchor,
                               padding: .init(top: 0, left: 0, bottom: 8, right: 0))
         
-        placeImageView.addGradientBackground(firstColor: .clear, secondColor: .black)
-
+        placeImageView.addGradientBackground(bottomColor: .black, topColor: .clear)
+        
     }
     
     required init?(coder: NSCoder) {

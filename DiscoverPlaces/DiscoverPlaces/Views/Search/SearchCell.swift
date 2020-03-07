@@ -33,7 +33,7 @@ class SearchCell: UICollectionViewCell {
         iv.layer.cornerRadius = 16 //Standardize
         iv.clipsToBounds = true
         iv.contentMode = .scaleAspectFill
-        iv.addGradientBackground(firstColor: .clear, secondColor: .black)
+        iv.addGradientBackground(bottomColor: .clear, topColor: .black)
         return iv
     }()
     
