@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 extension UICollectionReusableView {
     func addBottomSeparator() {
         let separator = UIView()
@@ -34,7 +33,6 @@ public class PaddingView: UIView {
         }
     }
 }
-
 
 extension UIView {
     
