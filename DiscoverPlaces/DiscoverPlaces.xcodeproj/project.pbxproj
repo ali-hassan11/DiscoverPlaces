@@ -303,8 +303,6 @@
 		CE5835CA23DE17E200C89622 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CE734D2B23E0CADE005AE0EB /* Search */,
-				CE327AE8241546C00010F400 /* Settings */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -330,7 +328,6 @@
 			isa = PBXGroup;
 			children = (
 				CE734D2F23E0CB2E005AE0EB /* Discover */,
-				CE734D3223E0CB49005AE0EB /* Search */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -378,6 +375,8 @@
 				CE6599FA23EF867100E531CD /* Home */,
 				CE6599FD23EF869200E531CD /* Detail */,
 				CE616D012405D324008E7067 /* MyPlaces */,
+				CE734D2B23E0CADE005AE0EB /* Search */,
+				CE327AE8241546C00010F400 /* Settings */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -397,6 +396,7 @@
 				CE6599FB23EF867A00E531CD /* Home */,
 				CE6599FC23EF868000E531CD /* Detail */,
 				CE694B8C24097E8400F37ED6 /* MyPlaces */,
+				CE734D3223E0CB49005AE0EB /* Search */,
 			);
 			path = Views;
 			sourceTree = "<group>";
