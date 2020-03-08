@@ -16,6 +16,9 @@ class MyPlacesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let settingsBarButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingsTapped))
+        navigationItem.rightBarButtonItem = settingsBarButton
+        
         navigationItem.largeTitleDisplayMode = .always
         
         setupViews()
@@ -53,6 +56,12 @@ class MyPlacesViewController: UIViewController {
             break
         }
     }
+    
+    @objc func settingsTapped() {
+        let settingsVC = SettingsController()
+        show(settingsVC, sender: self)
+    }
+    
     
     func setupViews() {
         //TemporaryFix

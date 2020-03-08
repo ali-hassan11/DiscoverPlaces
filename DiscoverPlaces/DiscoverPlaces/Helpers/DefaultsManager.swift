@@ -80,13 +80,22 @@ class DefaultsManager {
     }
     
     //MARK: Units
+    private static let isKmKey = "isKmKey"
     
     static func isKm() -> Bool {
-        if let isKm = defaults.object(forKey: "isKmKey") as? Bool {
+        if let isKm = defaults.object(forKey: isKmKey) as? Bool {
             return isKm
         } else {
             return true
         }
     }
+    
+    static func setUnits(to unit: Unit) {
+        defaults.set(unit == .km ? true : false, forKey: isKmKey)
+    }
 }
 
+enum Unit {
+    case km
+    case miles
+}

@@ -24,10 +24,12 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         super.viewDidLoad()
 
         let locationBarButton = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(addTapped))
-
+        locationBarButton.tintColor = .systemPink
+        navigationItem.rightBarButtonItem = locationBarButton
+        
+        
         locationBarButton.tintColor = .label
         navigationItem.largeTitleDisplayMode = .always
-        navigationItem.rightBarButtonItem = locationBarButton
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         collectionView.backgroundColor = .systemBackground
@@ -38,7 +40,10 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         determineMyCurrentLocation()
     }
      
-    //
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
     
     fileprivate func fetchPlacesData(location: Location) {
         

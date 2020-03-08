@@ -29,6 +29,7 @@
 		CE319CE323E10A410088B9D1 /* NearbyHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE319CE223E10A410088B9D1 /* NearbyHeaderCell.swift */; };
 		CE319CE523E10BE30088B9D1 /* NearbyHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE319CE423E10BE30088B9D1 /* NearbyHorizontalController.swift */; };
 		CE319CE723E15E1E0088B9D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE319CE623E15E1E0088B9D1 /* Constants.swift */; };
+		CE327AEA241546E10010F400 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AE9241546E10010F400 /* SettingsController.swift */; };
 		CE4883FC23E23C4500DDE5A3 /* PlaceInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4883FB23E23C4500DDE5A3 /* PlaceInfoController.swift */; };
 		CE58359923DE16B000C89622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359823DE16B000C89622 /* AppDelegate.swift */; };
 		CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359A23DE16B000C89622 /* SceneDelegate.swift */; };
@@ -134,6 +135,7 @@
 		CE319CE223E10A410088B9D1 /* NearbyHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyHeaderCell.swift; sourceTree = "<group>"; };
 		CE319CE423E10BE30088B9D1 /* NearbyHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyHorizontalController.swift; sourceTree = "<group>"; };
 		CE319CE623E15E1E0088B9D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CE327AE9241546E10010F400 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		CE4883FB23E23C4500DDE5A3 /* PlaceInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceInfoController.swift; sourceTree = "<group>"; };
 		CE58359523DE16B000C89622 /* DiscoverPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE58359823DE16B000C89622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -252,6 +254,14 @@
 			path = PlaceDetail;
 			sourceTree = "<group>";
 		};
+		CE327AE8241546C00010F400 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CE327AE9241546E10010F400 /* SettingsController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		CE58358C23DE16B000C89622 = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +330,7 @@
 				CE734D2C23E0CAE6005AE0EB /* Discover */,
 				CE734D2B23E0CADE005AE0EB /* Search */,
 				CE15104523E239E300A88220 /* PlaceDetail */,
+				CE327AE8241546C00010F400 /* Settings */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -840,6 +851,7 @@
 				CE6F17FD23F66E73003D8D89 /* OpeningTimeCell.swift in Sources */,
 				60EADA8723F6E1EB0095DBF9 /* ActionButtonsCell.swift in Sources */,
 				CE659A1123EF897000E531CD /* PlaceDetailsCell.swift in Sources */,
+				CE327AEA241546E10010F400 /* SettingsController.swift in Sources */,
 				CE58359D23DE16B000C89622 /* ViewController.swift in Sources */,
 				CE694B8724097DD400F37ED6 /* MyPlacesHorizontalController.swift in Sources */,
 				60EADA7F23F6C19B0095DBF9 /* WebAddressCell.swift in Sources */,
