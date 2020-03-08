@@ -85,12 +85,57 @@ extension PlaceResult {
 
 
 struct Geometry: Decodable {
-    let location: Location?
+    let location: Location
+}
+
+import CoreLocation
+
+extension Geometry {
+    func distanceString(from userLocation: Location? = nil) -> String? {
+        guard let userLocation = userLocation else { return nil }
+        guard userLocation.isNotEmpty() else { return nil }
+        
+        let fromLocation = CLLocation(latitude: location.lat, longitude: location.lng)
+        let toLocation = CLLocation(latitude: userLocation.lat, longitude: userLocation.lng)
+        let distance = fromLocation.distance(from: toLocation)
+        return distance.inUnits()
+    }
+
+}
+
+extension Double {
+//Write tests for this
+    func inUnits() -> String {
+        if DefaultsManager.isKm() {
+            return "\(inKm().rounded(toPlaces: 1)) Km"
+        } else {
+            return "\(inMiles().rounded(toPlaces: 1)) Miles"
+        }
+    }
+    
+    private func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
+        return (self * divisor).rounded() / divisor
+    }
+    
+    private func inKm() -> Double {
+        return self / 1000
+    }
+    
+    private func inMiles() -> Double {
+        return self * 0.000621371
+    }
 }
 
 struct Location: Decodable {
     let lat: Double
     let lng: Double
+}
+
+extension Location {
+    func isNotEmpty() -> Bool {
+        return lat != 0 && lng != 0
+    }
 }
 
 struct OpeningHours: Decodable {

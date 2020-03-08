@@ -21,6 +21,8 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case morePlaces
     }
     
+    var userLocation: Location?
+    
     var morePlaces: [PlaceResult]?
     
     var placeId: String? {
@@ -263,9 +265,8 @@ extension PlaceDetailsController {
         switch indexPath.item {
         case Detail.address.rawValue:
             guard let place = place,
-            let name = place.name,
-            let longitude = place.geometry?.location?.lng,
-            let latitude = place.geometry?.location?.lat else { return }
+                let longitude = place.geometry?.location.lng,
+                let latitude = place.geometry?.location.lat else { return }
             
             openInMaps(place: place, longitude: longitude, latitude: latitude)
             

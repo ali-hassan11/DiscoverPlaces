@@ -20,6 +20,8 @@ class HomeLargeCell: UICollectionViewCell {
     
     var image: UIImage?
     
+    var userLocation: Location?
+    
     var result: PlaceResult! {
         didSet {
             guard let photo = result.photos?.first else {
@@ -44,6 +46,8 @@ class HomeLargeCell: UICollectionViewCell {
             
             guard let rating = result.rating else { return }
             starsView.populate(with: rating)
+            
+            distanceLabel.text = result.geometry?.distanceString(from: userLocation)
         }
     }
     

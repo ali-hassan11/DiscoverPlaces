@@ -14,8 +14,9 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     fileprivate let categoriesHolderId = "categoriesHolderId"
 
     private var locationManager:CLLocationManager!
-    private var locationSettingIsEnabled = false
-
+    private var isLocationSettingEnabled = false
+    
+    private var userLocation: Location?
     
     var results = [PlaceResult]()
     
@@ -83,11 +84,13 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     //Header (Large Cell)
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: largeCellHolderId, for: indexPath) as! HomeLargeCellHolder
+        cell.horizontalController.userLocation = self.userLocation
         cell.horizontalController.results = results
         cell.horizontalController.didSelectHandler = { [weak self] result in
             let detailsController = PlaceDetailsController()
             detailsController.placeId = result.place_id
             detailsController.title = result.name
+            
             self?.navigationController?.pushViewController(detailsController, animated: true)
         }
         return cell
@@ -123,7 +126,7 @@ extension HomeController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     
-        guard locationSettingIsEnabled == false else { return }
+        guard isLocationSettingEnabled == false else { return }
         
         switch status {
         case .restricted, .denied:
@@ -131,7 +134,7 @@ extension HomeController: CLLocationManagerDelegate {
             
         case .authorizedAlways, .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
-            locationSettingIsEnabled = true
+            isLocationSettingEnabled = true
             
         case .notDetermined:
             locationManager.requestAlwaysAuthorization()
@@ -143,9 +146,16 @@ extension HomeController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation:CLLocation = locations[0] as CLLocation
-        let location = Location(lat: userLocation.coordinate.latitude, lng: userLocation.coordinate.longitude)
-          fetchPlacesData(location: location)
+        let location:CLLocation = locations[0] as CLLocation
+        
+        let currentLocation = Location(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
+        
+        if isLocationSettingEnabled {
+            self.userLocation = currentLocation
+        }
+        
+        fetchPlacesData(location: currentLocation)
+        
         locationManager.stopUpdatingLocation()
     }
     

@@ -12,6 +12,8 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     
     var didSelectHandler: ((PlaceResult) -> ())?
     
+    var userLocation: Location?
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let result = results?[indexPath.item] {
             didSelectHandler?(result)
@@ -39,6 +41,7 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let result = results?[indexPath.item] else { return UICollectionViewCell() }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeLargeCell.id, for: indexPath) as! HomeLargeCell
+        cell.userLocation = userLocation
         cell.result = result
         return cell
     }
