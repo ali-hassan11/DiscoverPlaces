@@ -24,15 +24,13 @@ class ActionButtonsCell: UICollectionViewCell {
     
     let toDoOutline = UIImage(systemName: "bookmark")
     let toDoFilled = UIImage(systemName: "bookmark.fill")
-    
-    let defaults = DefaultsManager()
-        
+            
     var placeId: String! {
         didSet {
-            let isFavourite = defaults.isInList(placeId: placeId, listKey: .favourites)
+            let isFavourite = DefaultsManager.isInList(placeId: placeId, listKey: .favourites)
             favouritesButton.setImage(isFavourite ? heartFilled : heartOutline, for: .normal)
             
-            let isToDo = defaults.isInList(placeId: placeId, listKey: .toDo)
+            let isToDo = DefaultsManager.isInList(placeId: placeId, listKey: .toDo)
             toDoButton.setImage(isToDo ? toDoFilled : toDoOutline, for: .normal)
         }
     }
@@ -105,16 +103,16 @@ class ActionButtonsCell: UICollectionViewCell {
     }
         
     func toggleFavourites(placeId: String) {
-        let isFavourite = defaults.isInList(placeId: placeId, listKey: .favourites)
+        let isFavourite = DefaultsManager.isInList(placeId: placeId, listKey: .favourites)
         
-        isFavourite ? defaults.removeFromList(placeId: placeId, listKey: .favourites) : defaults.addToList(placeId: placeId, listKey: .favourites)
+        isFavourite ? DefaultsManager.removeFromList(placeId: placeId, listKey: .favourites) : DefaultsManager.addToList(placeId: placeId, listKey: .favourites)
         favouritesButton.setImage(isFavourite ? heartOutline : heartFilled, for: .normal)
     }
     
     func toggleToDo(placeId: String) {
-        let isToDo = defaults.isInList(placeId: placeId, listKey: .toDo)
+        let isToDo = DefaultsManager.isInList(placeId: placeId, listKey: .toDo)
               
-        isToDo ? defaults.removeFromList(placeId: placeId, listKey: .toDo) : defaults.addToList(placeId: placeId, listKey: .toDo)
+        isToDo ? DefaultsManager.removeFromList(placeId: placeId, listKey: .toDo) : DefaultsManager.addToList(placeId: placeId, listKey: .toDo)
         toDoButton.setImage(isToDo ? toDoOutline : toDoFilled, for: .normal)
     }
  

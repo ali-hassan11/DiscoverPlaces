@@ -32,7 +32,7 @@ class ToDoListController: BaseCollectionViewController, UICollectionViewDelegate
     }
     
     func refreshData() {
-        placeIdList = defaults.getList(listKey: .toDo)
+        placeIdList = DefaultsManager.getList(listKey: .toDo)
         collectionView.reloadData()
     }
 

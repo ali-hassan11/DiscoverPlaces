@@ -32,7 +32,7 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
     }
     
     func refreshData() {
-        placeIdList = defaults.getList(listKey: .favourites)
+        placeIdList = DefaultsManager.getList(listKey: .favourites)
         collectionView.reloadData()
     }
 
