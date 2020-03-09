@@ -53,7 +53,7 @@ class ToDoListController: BaseCollectionViewController, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width - 16 - 16, height: 100)
+        return .init(width: view.frame.width - 16 - 16, height: 120)
     }
     
     func fetchDataForPlaceIds() {
