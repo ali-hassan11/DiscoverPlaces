@@ -86,7 +86,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         show(locationSearchVC, sender: self)
     }
     
-    //Header (Large Cell)
+    //MARK: Home Large Cell
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: largeCellHolderId, for: indexPath) as! HomeLargeCellHolder
         cell.horizontalController.userLocation = self.userLocation
@@ -101,7 +101,6 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         return cell
     }
     
-    //Header (Large Cell)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return .init(width: view.frame.width, height: view.frame.width - 32)
     }
@@ -110,6 +109,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         return 1
     }
     
+    //MARK: Categories Controller
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: categoriesHolderId, for: indexPath) as! CategoriesHolder
         cell.horizontalController.didSelectCategory = { [weak self] category in
@@ -117,6 +117,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
                 print("Will configure SingleCategoryController Soon ISA")
             } else {
                 let multipleCategoriesController = MultipleCategoriesController()
+                multipleCategoriesController.location = self?.userLocation
                 multipleCategoriesController.category = category
                 multipleCategoriesController.title = category.rawValue
                 self?.navigationController?.pushViewController(multipleCategoriesController, animated: true)

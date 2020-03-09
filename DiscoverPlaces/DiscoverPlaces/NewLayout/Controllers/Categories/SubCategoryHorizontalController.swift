@@ -53,12 +53,25 @@ class SmallSquareSpaceCell: UICollectionViewCell {
     public static let id = "smallSquareSpaceCellId"
     
     let placeImageView = UIImageView(image: UIImage(named: "food"))
-    let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai", font: .systemFont(ofSize: 16, weight: .medium), color: .white, numberOfLines: 1)
+    let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai, United Arab Emirates", font: .systemFont(ofSize: 16, weight: .regular), color: .white, numberOfLines: 2)
     let starsView = StarsView(width: 80)
 
     var place: PlaceResult? {
         didSet {
-            print(place?.name!)
+            guard let photo = place?.photos?.first else {
+                return //Default Image
+            }
+            
+            guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else {
+                return /*Default Image*/
+            }
+            
+            placeImageView.backgroundColor = .secondarySystemBackground
+            placeImageView.sd_setImage(with: url)
+            placeNameLabel.text = place?.name
+            
+            guard let rating = place?.rating else { return }
+            starsView.populate(with: rating)
         }
     }
     
@@ -73,12 +86,11 @@ class SmallSquareSpaceCell: UICollectionViewCell {
         placeImageView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 40, right: 0))
         
         addSubview(placeNameLabel)
-        placeNameLabel.anchor(top: placeImageView.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
+        placeNameLabel.anchor(top: placeImageView.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: -42, left: 0, bottom: 0, right: 0))
         
-        starsView.backgroundColor = .systemPink
         addSubview(starsView)
         starsView.populate(with: 4.5)
-        starsView.anchor(top: placeNameLabel.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
+        starsView.anchor(top: placeNameLabel.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
         
         backgroundColor = .systemBackground
     }

@@ -10,21 +10,15 @@ import UIKit
 
 class MultipleCategoriesController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    //Inject This & Category?
+    var location: Location?
     var category: Category! {
         didSet {
-            print("Fetch \(category.subCategories())")
-            places = [PlaceResult(geometry: nil, icon: nil, place_id: "id", name: "TestName 1", photos: nil, types: nil, rating: 1),
-                      PlaceResult(geometry: nil, icon: nil, place_id: "id", name: "TestName 2", photos: nil, types: nil, rating: 2),
-                      PlaceResult(geometry: nil, icon: nil, place_id: "id", name: "TestName 3", photos: nil, types: nil, rating: 3),
-                      PlaceResult(geometry: nil, icon: nil, place_id: "id", name: "TestName 4", photos: nil, types: nil, rating: 4),
-                      PlaceResult(geometry: nil, icon: nil, place_id: "id", name: "TestName 5", photos: nil, types: nil, rating: 5),
-            ]
-            
-            //pass places to horizontalController
+            fetchData()
         }
     }
     
-    var places: [PlaceResult]?
+    var placeResults: [PlaceResult]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +27,59 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         collectionView.register(SubCategoryiesHolder.self, forCellWithReuseIdentifier: SubCategoryiesHolder.id)
     }
     
+    private func fetchData() {
+        guard let location = location else {
+            fatalError("No Location!")
+            return
+        }
+        
+        Service.shared.fetchNearbyPlaces(location: location) { (results, error) in
+            
+            if let error = error {
+                print("Failed to fetch places: ", error)
+                return
+            }
+            
+            //success
+            guard let results = results else {
+                print("No results?")
+                return
+            }
+            
+            var filteredResults = [PlaceResult]()
+            
+            results.results.forEach({ (result) in
+                if result.containsPhotos()
+                    && !(result.types?.contains("locality") ?? true)
+                {
+                    filteredResults.append(result)
+                }
+            })
+            
+            //If results < 5, load other places
+            
+            self.placeResults = filteredResults
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return category.subCategories().count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubCategoryiesHolder.id, for: indexPath) as! SubCategoryiesHolder
-        cell.horizontalController.places = places
+        cell.horizontalController.places = placeResults
+        cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId, name in
+            let detailsController = PlaceDetailsController()
+            detailsController.title = name
+            detailsController.placeId = placeId
+            self?.navigationController?.pushViewController(detailsController, animated: true)
+        }
         return cell
     }
     
@@ -47,6 +87,8 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         return .init(width: view.frame.width, height: 280)
     }
 }
+
+
 
 class SubCategoryiesHolder: UICollectionViewCell {
     
@@ -64,7 +106,7 @@ class SubCategoryiesHolder: UICollectionViewCell {
         subCategoryTitleLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 4, left: 20, bottom: 0, right: 20))
         
         addSubview(horizontalController.view)
-        horizontalController.view.anchor(top: subCategoryTitleLabel.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 10, left: 0, bottom: 42, right: 0))
+        horizontalController.view.anchor(top: subCategoryTitleLabel.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 10, left: 0, bottom: 12, right: 0))
         
         addBottomSeparator()
     }
