@@ -35,17 +35,37 @@ class PhoneNumberCell: UICollectionViewCell {
         iv.contentMode = .scaleAspectFit
         return iv
     }()
+    
+    let highlightView: UIView! = {
+        let v = UIView()
+        v.backgroundColor = UIColor.quaternarySystemFill
+        return v
+    }()
+         
+    override var isHighlighted: Bool {
+        didSet {
+            highlightView.isHidden = self.isHighlighted ? false : true
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         backgroundColor = .systemBackground
 
+        configureHighlightView()
+        
         let stackView = HorizontalStackView(arrangedSubviews: [iconVimageView, phoneNumberLabel, UIView(), chevronImageView], spacing: 12)
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 8, left: 16, bottom: 8, right: 16))
 
         addBottomSeparator()
+    }
+    
+    private func configureHighlightView() {
+        addSubview(highlightView)
+        highlightView.isHidden = true
+        highlightView.fillSuperview()
     }
 
     required init?(coder: NSCoder) {

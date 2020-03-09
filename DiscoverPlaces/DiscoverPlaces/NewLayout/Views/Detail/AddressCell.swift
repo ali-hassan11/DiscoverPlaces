@@ -19,6 +19,18 @@ class AddressCell: UICollectionViewCell {
         }
     }
 
+    let highlightView: UIView! = {
+          let v = UIView()
+          v.backgroundColor = UIColor.quaternarySystemFill
+          return v
+      }()
+      
+      override var isHighlighted: Bool {
+          didSet {
+              highlightView.isHidden = self.isHighlighted ? false : true
+          }
+      }
+    
     let iconVimageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "mappin.circle.fill"))
         iv.constrainWidth(constant: 30)
@@ -42,6 +54,8 @@ class AddressCell: UICollectionViewCell {
 
         iconVimageView.contentMode = .scaleAspectFit
         backgroundColor = .systemBackground
+        
+        configureHighlightView()
 
         let stackView = HorizontalStackView(arrangedSubviews: [iconVimageView, addressLabel, UIView(), chevronImageView], spacing: 12)
         addSubview(stackView)
@@ -49,7 +63,13 @@ class AddressCell: UICollectionViewCell {
 
         addBottomSeparator()
     }
-
+    
+    private func configureHighlightView() {
+        addSubview(highlightView)
+        highlightView.isHidden = true
+        highlightView.fillSuperview()
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

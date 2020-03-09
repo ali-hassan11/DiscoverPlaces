@@ -26,11 +26,8 @@ class OpeningTimeCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(highlightView)
-        highlightView.isHidden = true
-        highlightView.fillSuperview()
-        
         backgroundColor = .systemBackground
+        configureHighlightView()
         layoutCellViews()
     }
     
@@ -74,6 +71,12 @@ class OpeningTimeCell: UICollectionViewCell {
         stackView.fillSuperview(padding: .init(top: 8, left: 16, bottom: 8, right: 16))
         
         addBottomSeparator()
+    }
+    
+    private func configureHighlightView() {
+        addSubview(highlightView)
+        highlightView.isHidden = true
+        highlightView.fillSuperview()
     }
     
 }
