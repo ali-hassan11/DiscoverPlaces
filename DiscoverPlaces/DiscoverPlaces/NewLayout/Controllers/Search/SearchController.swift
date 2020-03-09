@@ -58,10 +58,14 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
                 //success
                 var filteredResults = [PlaceResult]()
                 
-                guard let results = results?.results else { return }
-
-                results.forEach({ (result) in
-                    if result.containsPhotos() {
+                guard let results = results else { return }
+                
+                results.results.forEach({ (result) in
+                    if result.containsPhotos()
+                        && !(result.types?.contains("locality") ?? true)
+                        && !(result.types?.contains("country") ?? true)
+                        && !(result.types?.contains("continent") ?? true)
+                    {
                         filteredResults.append(result)
                     }
                 })
