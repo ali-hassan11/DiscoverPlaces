@@ -43,7 +43,7 @@ class UnitsCell: UICollectionViewCell {
     
     let unitsSwitch: UISegmentedControl! = {
         let sc = UISegmentedControl(items: ["Km", "Miles"])
-        sc.constrainWidth(constant: 120)
+        sc.constrainWidth(constant: 150)
         sc.constrainHeight(constant: 35)
         sc.selectedSegmentTintColor = .systemPink
         sc.selectedSegmentIndex = DefaultsManager.isKm() ? 0 : 1

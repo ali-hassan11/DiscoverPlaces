@@ -12,25 +12,22 @@ class CategoryCell: UICollectionViewCell {
     
     public static let id = "categoryCellId"
 
-    let categoryLabel = UILabel(text: "Category", font: .systemFont(ofSize: 20, weight: .semibold), color: .white, alignment: .center, numberOfLines: 0)
+    let categoryLabel = UILabel(text: "", font: .systemFont(ofSize: 25, weight: .medium), color: .white, alignment: .center, numberOfLines: 0)
     let categoryImageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
                 
-        backgroundColor = .lightGray
         layer.cornerRadius = 10
         clipsToBounds = true
         
         categoryImageView.contentMode = .scaleAspectFill
-        categoryImageView.addOverlay(color: .black, alpha: 0.35)
-
+        categoryImageView.addOverlay(color: .black, alpha: 0.5)
         
         addSubview(categoryImageView)
         categoryImageView.fillSuperview()
         categoryImageView.addSubview(categoryLabel)
-        categoryLabel.centerInSuperview()
-        
+        categoryLabel.fillSuperview(padding: .init(top: 8, left: 8, bottom: 8, right: 8))
     }
     
     required init?(coder: NSCoder) {

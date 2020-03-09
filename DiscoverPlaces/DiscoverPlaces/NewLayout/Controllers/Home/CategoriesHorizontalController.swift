@@ -14,6 +14,7 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
     fileprivate let numberOfColumns:CGFloat = 2
     fileprivate let lineSpacing: CGFloat = 10
     
+    let categories: [Category] = [.Food, .Cafe, .Shopping, .Nature, .Active, .Religion, .Beauty, .Health, .Hotel]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,11 +25,14 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24
+        return categories.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.id, for: indexPath) as! CategoryCell
+        let categoryName = categories[indexPath.item].rawValue
+        cell.categoryLabel.text = categoryName
+        cell.categoryImageView.image = UIImage(named: categoryName)
         return cell
     }
     
@@ -40,4 +44,16 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
         return lineSpacing
     }
     
+}
+
+enum Category: String {
+    case Food
+    case Cafe
+    case Shopping
+    case Nature
+    case Active
+    case Religion
+    case Beauty
+    case Health
+    case Hotel
 }
