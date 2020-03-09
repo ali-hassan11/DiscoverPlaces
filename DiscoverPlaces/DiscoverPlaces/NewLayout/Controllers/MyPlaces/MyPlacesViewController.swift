@@ -58,8 +58,8 @@ class MyPlacesViewController: UIViewController {
     }
     
     @objc func settingsTapped() {
-        let settingsVC = SettingsController()
-        show(settingsVC, sender: self)
+        let settingsController = SettingsController()
+        navigationController?.pushViewController(settingsController, animated: true)
     }
     
     

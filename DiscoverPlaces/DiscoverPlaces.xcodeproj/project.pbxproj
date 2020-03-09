@@ -23,6 +23,8 @@
 		CE319CDD23E0ECBD0088B9D1 /* UIElementsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE319CDC23E0ECBD0088B9D1 /* UIElementsExtensions.swift */; };
 		CE319CE723E15E1E0088B9D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE319CE623E15E1E0088B9D1 /* Constants.swift */; };
 		CE327AEA241546E10010F400 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AE9241546E10010F400 /* SettingsController.swift */; };
+		CE327AF1241696B60010F400 /* MultipleCategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */; };
+		CE327AF324169DD20010F400 /* SubCategoryHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF224169DD20010F400 /* SubCategoryHorizontalController.swift */; };
 		CE58359923DE16B000C89622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359823DE16B000C89622 /* AppDelegate.swift */; };
 		CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359A23DE16B000C89622 /* SceneDelegate.swift */; };
 		CE58359D23DE16B000C89622 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359C23DE16B000C89622 /* ViewController.swift */; };
@@ -117,6 +119,8 @@
 		CE319CDC23E0ECBD0088B9D1 /* UIElementsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElementsExtensions.swift; sourceTree = "<group>"; };
 		CE319CE623E15E1E0088B9D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE327AE9241546E10010F400 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCategoriesController.swift; sourceTree = "<group>"; };
+		CE327AF224169DD20010F400 /* SubCategoryHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryHorizontalController.swift; sourceTree = "<group>"; };
 		CE58359523DE16B000C89622 /* DiscoverPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE58359823DE16B000C89622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE58359A23DE16B000C89622 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -226,6 +230,22 @@
 				CE327AE9241546E10010F400 /* SettingsController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		CE327AED2416960E0010F400 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */,
+				CE327AF224169DD20010F400 /* SubCategoryHorizontalController.swift */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		CE327AEF241696350010F400 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		CE58358C23DE16B000C89622 = {
@@ -342,6 +362,7 @@
 				CE616D012405D324008E7067 /* MyPlaces */,
 				CE734D2B23E0CADE005AE0EB /* Search */,
 				CE327AE8241546C00010F400 /* Settings */,
+				CE327AED2416960E0010F400 /* Categories */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -362,6 +383,7 @@
 				CE6599FC23EF868000E531CD /* Detail */,
 				CE694B8C24097E8400F37ED6 /* MyPlaces */,
 				CE734D3223E0CB49005AE0EB /* Search */,
+				CE327AEF241696350010F400 /* Categories */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -738,10 +760,12 @@
 				CE327AEA241546E10010F400 /* SettingsController.swift in Sources */,
 				CE58359D23DE16B000C89622 /* ViewController.swift in Sources */,
 				CE694B8724097DD400F37ED6 /* MyPlacesHorizontalController.swift in Sources */,
+				CE327AF1241696B60010F400 /* MultipleCategoriesController.swift in Sources */,
 				60EADA7F23F6C19B0095DBF9 /* WebAddressCell.swift in Sources */,
 				CE659A0D23EF884700E531CD /* ImagesHorizontalController.swift in Sources */,
 				CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */,
 				CE6599F023EA692500E531CD /* HomeController.swift in Sources */,
+				CE327AF324169DD20010F400 /* SubCategoryHorizontalController.swift in Sources */,
 				60EADA7D23F6B75D0095DBF9 /* PhoneNumberCell.swift in Sources */,
 				CE616D072405D96D008E7067 /* DefaultsManager.swift in Sources */,
 				CE6599ED23EA68D100E531CD /* VerticalStackview.swift in Sources */,

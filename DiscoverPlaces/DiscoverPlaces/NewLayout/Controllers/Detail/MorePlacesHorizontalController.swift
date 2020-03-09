@@ -11,6 +11,7 @@ import UIKit
 class MorePlacesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     fileprivate let morePlacesCellId = "morePlacesCellId"
+    #warning("Move this")
     
     var didSelectHandler: ((String, String) -> ())?
     

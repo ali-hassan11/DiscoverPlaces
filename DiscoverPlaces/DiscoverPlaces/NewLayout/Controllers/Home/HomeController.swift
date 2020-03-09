@@ -112,11 +112,25 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: categoriesHolderId, for: indexPath) as! CategoriesHolder
+        cell.horizontalController.didSelectCategory = { [weak self] category in
+            if category == .Hotel {
+                print("Will configure SingleCategoryController Soon ISA")
+            } else {
+                let multipleCategoriesController = MultipleCategoriesController()
+                multipleCategoriesController.category = category
+                multipleCategoriesController.title = category.rawValue
+                self?.navigationController?.pushViewController(multipleCategoriesController, animated: true)
+            }
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width, height: 380)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
     }
 }
 

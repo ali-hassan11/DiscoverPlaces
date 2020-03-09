@@ -14,6 +14,8 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
     fileprivate let numberOfColumns:CGFloat = 2
     fileprivate let lineSpacing: CGFloat = 10
     
+    var didSelectCategory: ((Category) -> ())?
+    
     let categories: [Category] = [.Food, .Cafe, .Shopping, .Nature, .Active, .Religion, .Beauty, .Health, .Hotel]
     
     override func viewDidLoad() {
@@ -36,6 +38,10 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectCategory?(categories[indexPath.item])
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: ((view.frame.width - (Constants.leftPadding + Constants.rightPadding + lineSpacing*numberOfColumns)) / numberOfColumns), height: (view.frame.height - (lineSpacing * (numberOfRows - 1))) / numberOfRows)
     }
@@ -56,4 +62,13 @@ enum Category: String {
     case Beauty
     case Health
     case Hotel
+    
+    func subCategories() -> [String] {
+        switch self {
+        case .Food:
+            return ["restaurant", "cafe", "meal_delivery", "meal_takeaway"]
+        default:
+            return ["Not", "Configured", "Yet", "😁"]
+        }
+    }
 }
