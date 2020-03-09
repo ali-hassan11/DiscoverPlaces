@@ -44,7 +44,9 @@ class MyPlaceCell: UICollectionViewCell {
         listTypeButton.addTarget(self, action: #selector(togglePlaceInList), for: .touchUpInside)
         
         backgroundColor = .systemBackground
-  
+        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.15, end: 0.25)
+        placeImageView.contentMode = .scaleAspectFill
+        
         addViews()
         addConstraints()
         addBottomSeparator()
