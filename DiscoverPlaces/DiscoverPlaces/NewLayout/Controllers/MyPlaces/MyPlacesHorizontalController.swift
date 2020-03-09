@@ -47,16 +47,13 @@ class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionVi
         }
     }
     
-    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.x)
-        if scrollView.contentOffset.x <= 0 {
-            didScrollHandler?(.favourites)
-        } else {
-            didScrollHandler?(.toDo)
-        }
+    var didScrollMyPlacesController: ((Int) -> ())?
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let nearestPage = (scrollView.contentOffset.x / UIScreen.main.bounds.width).rounded()
+        didScrollMyPlacesController?(Int(nearestPage))
     }
     
-        
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width, height: view.frame.height)
     }

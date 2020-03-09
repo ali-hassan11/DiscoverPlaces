@@ -41,10 +41,10 @@ class ImagesHorizontalController: HorizontalSnappingController, UICollectionView
         return 1
     }
     
-    var didEndAccelerating: ((Int) -> ())?
+    var didScrollImagesController: ((Int) -> ())?
     
-    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        didEndAccelerating?(Int(scrollView.contentOffset.x / UIScreen.main.bounds.width))
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let nearestPage = (scrollView.contentOffset.x / UIScreen.main.bounds.width).rounded()
+        didScrollImagesController?(Int(nearestPage))
     }
-    
 }

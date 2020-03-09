@@ -97,8 +97,8 @@ class MyPlacesViewController: UIViewController {
     }
     
     private func handleScroll() {
-        horizontalController.didScrollHandler = { [weak self] segment in
-            self?.listSelector.selectedSegmentIndex = segment == .favourites ? 0 : 1
+        horizontalController.didScrollMyPlacesController = { [weak self] nearestPage in
+            self?.listSelector.selectedSegmentIndex = nearestPage
         }
     }
 }

@@ -163,8 +163,8 @@ extension PlaceDetailsController {
         cell.pageControlView.numberOfPages = place?.photos?.count ?? 0
         cell.horizontalController.photos = place?.photos
         cell.rating = place?.rating
-        cell.horizontalController.didEndAccelerating = { index in //weak self?
-            cell.pageControlView.currentPage = index
+        cell.horizontalController.didScrollImagesController = { nearestPage in
+            cell.pageControlView.currentPage = nearestPage
         }
         return cell
     }
