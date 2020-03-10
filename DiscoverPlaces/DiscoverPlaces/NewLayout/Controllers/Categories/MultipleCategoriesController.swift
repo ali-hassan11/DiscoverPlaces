@@ -31,6 +31,11 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         collectionView.register(SubCategoryiesHolder.self, forCellWithReuseIdentifier: SubCategoryiesHolder.id)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+    
     private func fetchData(subCategory: SubCategory) {
         guard let location = location else {
             fatalError("No Location!")
