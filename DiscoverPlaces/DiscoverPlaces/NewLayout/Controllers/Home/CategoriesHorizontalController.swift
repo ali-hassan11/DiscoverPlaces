@@ -63,12 +63,29 @@ enum Category: String {
     case Health
     case Hotel
     
-    func subCategories() -> [String] {
+    func subCategories() -> [SubCategory] {
         switch self {
-        case .Food:
-            return ["restaurant", "cafe", "meal_delivery", "meal_takeaway"]
-        default:
-            return ["Not", "Configured", "Yet", "😁"]
+        case .Food: return [.restaurant, .cafe, .meal_delivery, .meal_takeaway]
+        default: fatalError()
+        }
+    }
+}
+
+enum SubCategory: String {
+    case restaurant
+    case cafe
+    case meal_delivery
+    case meal_takeaway
+    
+    case notConfiguredYet //Remove this
+    
+    func formatted() -> String {
+        switch self {
+        case .restaurant: return "Restaurants"
+        case .cafe: return "Cafes"
+        case .meal_delivery: return "Delivery"
+        case .meal_takeaway: return "Takeaway"
+        case .notConfiguredYet: return "notConfiguredYet"
         }
     }
 }

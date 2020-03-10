@@ -12,13 +12,17 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     
     //Inject This & Category?
     var location: Location?
+    
+    var index = 0
     var category: Category! {
         didSet {
-            fetchData()
+            for subCategory in category.subCategories() {
+                fetchData(subCategory: subCategory, index: index)
+            }
         }
     }
     
-    var placeResults: [PlaceResult]?
+    var placeResults = [[PlaceResult]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +31,12 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         collectionView.register(SubCategoryiesHolder.self, forCellWithReuseIdentifier: SubCategoryiesHolder.id)
     }
     
-    private func fetchData() {
+    private func fetchData(subCategory: SubCategory, index: Int) {
         guard let location = location else {
             fatalError("No Location!")
-            return
         }
         
-        Service.shared.fetchNearbyPlaces(location: location) { (results, error) in
+        Service.shared.fetchNearbyPlaces(location: location, subCategory: subCategory) { (results, error) in
             
             if let error = error {
                 print("Failed to fetch places: ", error)
@@ -46,6 +49,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
                 return
             }
             
+            //This is repeated in a few places, abstact it to a mapper..?
             var filteredResults = [PlaceResult]()
             
             results.results.forEach({ (result) in
@@ -58,7 +62,8 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             
             //If results < 5, load other places
             
-            self.placeResults = filteredResults
+            self.placeResults.append(filteredResults)
+            self.index += 1
             
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -68,12 +73,13 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return category.subCategories().count
+        return placeResults.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubCategoryiesHolder.id, for: indexPath) as! SubCategoryiesHolder
-        cell.horizontalController.places = placeResults
+        cell.subCategoryTitleLabel.text = category.subCategories()[indexPath.item].formatted()
+        cell.horizontalController.places = placeResults[indexPath.item]
         cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId, name in
             let detailsController = PlaceDetailsController()
             detailsController.title = name
@@ -94,7 +100,7 @@ class SubCategoryiesHolder: UICollectionViewCell {
     
     public static let id = "subCategoryiesHolderId"
     
-    let subCategoryTitleLabel = UILabel(text: "Sub-Category", font: .systemFont(ofSize: 20, weight: .semibold),color: .label, numberOfLines: 0)
+    var subCategoryTitleLabel = UILabel(text: "Sub-Category", font: .systemFont(ofSize: 20, weight: .semibold),color: .label, numberOfLines: 0)
     let horizontalController = SubCategoryHorizontalController()
     
     override init(frame: CGRect) {
