@@ -63,10 +63,10 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             //If results < 5, load other places
             
             self.placeResults.append(filteredResults)
-            self.index += 1
             
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                self.index += 1
             }
         }
     }
