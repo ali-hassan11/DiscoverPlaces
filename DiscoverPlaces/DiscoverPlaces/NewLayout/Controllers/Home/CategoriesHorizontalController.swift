@@ -16,7 +16,7 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
     
     var didSelectCategory: ((Category) -> ())?
     
-    let categories: [Category] = [.Food, .Cafe, .Shopping, .Nature, .Active, .Religion, .Beauty, .Health, .Hotel]
+    let categories: [Category] = [.Food, .Cafe, .Nature, .Shopping, .Active, .Religion, .Beauty, .Health, .Hotel]
     
     override func viewDidLoad() {
         super.viewDidLoad()

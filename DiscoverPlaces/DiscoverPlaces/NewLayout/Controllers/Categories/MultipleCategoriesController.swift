@@ -62,8 +62,10 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             
             //If results < 5, load other places
             
-            self.placeResults.append(filteredResults)
-            self.subCategories.append(subCategory)
+            if filteredResults.count > 0 {
+                self.placeResults.append(filteredResults)
+                self.subCategories.append(subCategory)
+            }
             
             DispatchQueue.main.async {
                 self.collectionView.reloadData()

@@ -23,6 +23,7 @@ enum Category: String {
         case .Food: return [.restaurant, .cafe, .meal_delivery, .meal_takeaway]
         case .Cafe: return [.cafe]
         case .Shopping: return [.shopping_mall, .department_store, .clothing_store, .jewelry_store, .convenience_store]
+        case .Nature: return [.zoo, .aquarium, .florist, .park]
         default: fatalError()
         }
     }
@@ -42,6 +43,11 @@ enum SubCategory: String {
     case clothing_store
     case convenience_store
     
+    case aquarium
+    case zoo
+    case park
+    case florist
+    
     case notConfiguredYet //Remove this
     //case drugstore (In health)
     
@@ -59,6 +65,12 @@ enum SubCategory: String {
         case .department_store: return "Department"
         case .clothing_store: return "Clothing"
         case .convenience_store: return "Convenience"
+            
+        case .aquarium: return "Aquarium"
+        case .zoo: return "Zoo"
+        case .park: return "Park"
+        case .florist: return "Florist"
+            
         }
     }
     
