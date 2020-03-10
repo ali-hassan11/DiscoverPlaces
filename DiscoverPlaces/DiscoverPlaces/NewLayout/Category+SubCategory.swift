@@ -46,15 +46,14 @@ enum SubCategory: String {
     //case drugstore (In health)
     
     func formatted() -> String {
+        
         switch self {
-        //Food
         case .restaurant: return "Restaurants"
         case .cafe: return "Cafes"
         case .meal_delivery: return "Delivery"
         case .meal_takeaway: return "Takeaway"
         case .notConfiguredYet: return "notConfiguredYet"
             
-        //Shopping
         case .shopping_mall: return "Malls"
         case .jewelry_store: return "Jewellry"
         case .department_store: return "Department"

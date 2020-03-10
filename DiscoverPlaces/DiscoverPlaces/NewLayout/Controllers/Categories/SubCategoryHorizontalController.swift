@@ -11,6 +11,7 @@ import UIKit
 class SubCategoryHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
         
     var didSelectPlaceInCategoriesHandler: ((String, String) -> ())?
+    var location: Location?
     
     var places: [PlaceResult]? {
         didSet {
@@ -31,6 +32,10 @@ class SubCategoryHorizontalController: HorizontalSnappingController, UICollectio
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallSquareSpaceCell.id, for: indexPath) as! SmallSquareSpaceCell
+        if let location = location {
+            let distanceString = places?[indexPath.item].geometry?.distanceString(from: location)
+            cell.distanceLabel.text = distanceString
+        }
         let place = places?[indexPath.item]
         cell.place = place
         return cell
@@ -53,7 +58,8 @@ class SmallSquareSpaceCell: UICollectionViewCell {
     public static let id = "smallSquareSpaceCellId"
     
     let placeImageView = UIImageView(image: UIImage(named: "food"))
-    let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai, United Arab Emirates", font: .systemFont(ofSize: 16, weight: .regular), color: .white, numberOfLines: 2)
+    let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai, United Arab Emirates", font: .systemFont(ofSize: 16, weight: .regular), color: .label, numberOfLines: 2)
+    let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .label, numberOfLines: 1)
     let starsView = StarsView(width: 80)
 
     var place: PlaceResult? {
@@ -72,25 +78,32 @@ class SmallSquareSpaceCell: UICollectionViewCell {
             
             guard let rating = place?.rating else { return }
             starsView.populate(with: rating)
+            
+//            guard let distance = place?.geometry?.distanceString(from: )
+            
         }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.325, end: 0.425)
+        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.35, end: 0.45)
         
         addSubview(placeImageView)
         placeImageView.roundCorners()
         placeImageView.contentMode = .scaleAspectFill
-        placeImageView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 40, right: 0))
+        placeImageView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
+        placeImageView.constrainHeight(constant: 150)
         
         addSubview(placeNameLabel)
-        placeNameLabel.anchor(top: placeImageView.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: -42, left: 0, bottom: 0, right: 0))
+        placeNameLabel.anchor(top: placeImageView.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 4, left: 4, bottom: 0, right: 4))
         
         addSubview(starsView)
         starsView.populate(with: 4.5)
-        starsView.anchor(top: placeNameLabel.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
+        starsView.anchor(top: placeNameLabel.bottomAnchor, leading: placeNameLabel.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
+        
+        addSubview(distanceLabel)
+        distanceLabel.anchor(top: starsView.bottomAnchor, leading: starsView.leadingAnchor, bottom: nil, trailing: starsView.trailingAnchor, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
         
         backgroundColor = .systemBackground
     }

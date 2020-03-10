@@ -91,8 +91,7 @@ struct Geometry: Decodable {
 import CoreLocation
 
 extension Geometry {
-    func distanceString(from userLocation: Location? = nil) -> String? {
-        guard let userLocation = userLocation else { return nil }
+    func distanceString(from userLocation: Location) -> String? {
         guard userLocation.isNotEmpty() else { return nil }
         
         let fromLocation = CLLocation(latitude: location.lat, longitude: location.lng)

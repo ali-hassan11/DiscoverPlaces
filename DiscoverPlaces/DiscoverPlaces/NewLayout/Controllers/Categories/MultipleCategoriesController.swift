@@ -80,6 +80,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubCategoryiesHolder.id, for: indexPath) as! SubCategoryiesHolder
         cell.subCategoryTitleLabel.text = subCategories[indexPath.item].formatted()
         cell.horizontalController.places = placeResults[indexPath.item]
+        cell.horizontalController.location = location
         cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId, name in
             let detailsController = PlaceDetailsController()
             detailsController.title = name
@@ -91,6 +92,10 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width, height: 280)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
 
@@ -112,9 +117,7 @@ class SubCategoryiesHolder: UICollectionViewCell {
         subCategoryTitleLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 4, left: 20, bottom: 0, right: 20))
         
         addSubview(horizontalController.view)
-        horizontalController.view.anchor(top: subCategoryTitleLabel.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 10, left: 0, bottom: 12, right: 0))
-        
-        addBottomSeparator()
+        horizontalController.view.anchor(top: subCategoryTitleLabel.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
     }
     
     required init?(coder: NSCoder) {

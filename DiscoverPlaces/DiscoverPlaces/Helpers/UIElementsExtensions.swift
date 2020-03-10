@@ -14,7 +14,7 @@ extension UICollectionReusableView {
         separator.backgroundColor = .quaternaryLabel
         separator.constrainHeight(constant: 1)
         addSubview(separator)
-        separator.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: 12))
+        separator.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: 16))
 
     }
 }

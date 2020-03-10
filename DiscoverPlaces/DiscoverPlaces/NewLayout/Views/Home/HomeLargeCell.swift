@@ -47,6 +47,7 @@ class HomeLargeCell: UICollectionViewCell {
             guard let rating = result.rating else { return }
             starsView.populate(with: rating)
             
+            guard let userLocation = userLocation else { return }
             distanceLabel.text = result.geometry?.distanceString(from: userLocation)
         }
     }
