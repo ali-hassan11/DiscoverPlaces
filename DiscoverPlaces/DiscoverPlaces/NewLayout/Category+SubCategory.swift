@@ -22,7 +22,7 @@ enum Category: String {
         switch self {
         case .Food: return [.restaurant, .cafe, .meal_delivery, .meal_takeaway]
         case .Cafe: return [.cafe]
-        case .Shopping: return [.shopping_mall, .jewelry_store, .department_store, .clothing_store, .convenience_store]
+        case .Shopping: return [.shopping_mall, .department_store, .clothing_store, .jewelry_store, .convenience_store]
         default: fatalError()
         }
     }
@@ -57,8 +57,8 @@ enum SubCategory: String {
         //Shopping
         case .shopping_mall: return "Malls"
         case .jewelry_store: return "Jewellry"
-        case .department_store: return "Department Store"
-        case .clothing_store: return "Clothing Stores"
+        case .department_store: return "Department"
+        case .clothing_store: return "Clothing"
         case .convenience_store: return "Convenience"
         }
     }
