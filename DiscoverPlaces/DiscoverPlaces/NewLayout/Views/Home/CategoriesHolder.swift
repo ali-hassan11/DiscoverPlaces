@@ -26,9 +26,9 @@ class CategoriesHolder: UICollectionViewCell {
         
         let stackiew = VerticalStackView(arrangedSubviews: [UIStackView(arrangedSubviews: [PaddingView(width: Constants.leftPadding), sectionTitleLabel]),
                                                             UIStackView(arrangedSubviews: [PaddingView(width: Constants.leftPadding), sectionDescriptionLabel, PaddingView(width: Constants.leftPadding)]),
-                                                            horizontalController.view], spacing: 12)
+                                                            horizontalController.view], spacing: 10)
         addSubview(stackiew)
-        stackiew.fillSuperview(padding: .init(top: 16, left: 0, bottom: 0, right: 0))
+        stackiew.fillSuperview(padding: .init(top: 16, left: 0, bottom: 16, right: 0))
         
     }
     

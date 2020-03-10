@@ -59,7 +59,7 @@ class SmallSquareSpaceCell: UICollectionViewCell {
     
     let placeImageView = UIImageView(image: UIImage(named: "food"))
     let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai, United Arab Emirates", font: .systemFont(ofSize: 16, weight: .regular), color: .label, numberOfLines: 2)
-    let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .label, numberOfLines: 1)
+    let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, numberOfLines: 1)
     let starsView = StarsView(width: 80)
 
     var place: PlaceResult? {
