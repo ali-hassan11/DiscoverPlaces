@@ -18,19 +18,24 @@ enum Category: String {
     case Health
     case Hotel
     case Transport
+    case Family
+    case Attractions
     
     func subCategories() -> [SubCategory] {
+        
         switch self {
         case .Food: return [.restaurant, .cafe, .meal_delivery, .meal_takeaway]
         case .Cafe: return [.cafe]
         case .Shopping: return [.shopping_mall, .department_store, .clothing_store, .jewelry_store, .convenience_store]
         case .Nature: return [.zoo, .aquarium, .florist, .park]
-        case .Active: return [.gym, .park]
+        case .Active: return [.gym, .physiotherapist, .park]
         case .Religion: return [.mosque, .synagogue, .church]
         case .Beauty: return [.spa, .beauty_salon, .hair_care]
-        case .Health: return []
-        case .Hotel: return []
+        case .Health: return [.hospital, .pharmacy, .dentist, .spa]
+        case .Hotel: return [.lodging]
         case .Transport: return [.airport, .train_station, .light_rail_station, .subway_station, .taxi_stand, .bus_station, .car_rental]
+        case .Family: return [.amusement_park, .zoo, .park, .bowling, .aquarium]
+        case .Attractions: return [.tourist_attraction]
         }
     }
     
@@ -67,17 +72,22 @@ enum SubCategory: String {
     case bus_station
     case taxi_stand
     case car_rental
-//    case bus
-    
-    
-    case notConfiguredYet //Remove this
-    //case drugstore (In health)
-    
+    case amusement_park
+    case tourist_attraction
+    case lodging
+    case bus
+    case pharmacy
+    case physiotherapist
+    case hospital
+    case doctor
+    case dentist
+    case drugstore
+        
     func formatted() -> String {
         
         switch self {
-        case .restaurant: return "Restaurants"
-        case .cafe: return "Cafes"
+        case .restaurant: return "Restaurant"
+        case .cafe: return "Cafe"
         case .meal_delivery: return "Delivery"
         case .meal_takeaway: return "Takeaway"
         case .shopping_mall: return "Malls"
@@ -99,18 +109,22 @@ enum SubCategory: String {
         case .beauty_salon: return "Beauty Salon"
         case .hair_care: return "Hair"
         case .airport: return "Airport"
-            
-        case .train_station: return "Train Station"
-        case .light_rail_station: return "Light Train Station?"
+        case .train_station: return "Train"
+        case .light_rail_station: return "Light Rail"
         case .subway_station: return "Subway"
         case .bus_station: return "Bus"
         case .taxi_stand: return "Taxi"
         case .car_rental: return "Car Rental"
-                    
-        
-        
-        case .notConfiguredYet: return "notConfiguredYet"
-
+        case .bus: return "Bus"
+        case .amusement_park: return "Amusement Park"
+        case .tourist_attraction: return "Tourist Attractions"
+        case .lodging: return "Place to Stay"
+        case .pharmacy:  return "Pharmacy"
+        case .physiotherapist: return "Fitness"
+        case .hospital: return "Hospital"
+        case .doctor: return "Doctor"
+        case .dentist: return "Dentist"
+        case .drugstore: return "Drug Store"
         }
     }
     
