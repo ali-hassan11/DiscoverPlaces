@@ -115,6 +115,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             let multipleCategoriesController = MultipleCategoriesController()
             multipleCategoriesController.location = self?.userLocation
             multipleCategoriesController.category = category
+            multipleCategoriesController.title = category.rawValue
             self?.navigationController?.pushViewController(multipleCategoriesController, animated: true)
         }
         return cell
