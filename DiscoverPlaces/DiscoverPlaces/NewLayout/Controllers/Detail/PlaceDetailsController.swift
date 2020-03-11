@@ -115,7 +115,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
-                self.title = placeResponse.result?.name
                 self.fadeOutSplashScreen()
             }
         }
@@ -156,12 +155,13 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
 
 extension PlaceDetailsController {
     
-    //Header
+    //MARK: Place Images
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PlaceImagesHolder.id, for: indexPath) as! PlaceImagesHolder
         
         cell.pageControlView.numberOfPages = place?.photos?.count ?? 0
         cell.horizontalController.photos = place?.photos
+        cell.placeName = place?.name
         cell.rating = place?.rating
         cell.horizontalController.didScrollImagesController = { nearestPage in
             cell.pageControlView.currentPage = nearestPage
@@ -169,11 +169,11 @@ extension PlaceDetailsController {
         return cell
     }
     
-    //Header
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return .init(width: view.frame.width, height:  (view.layoutMarginsGuide.layoutFrame.height / 2) + 64)
     }
     
+    //MARK: Details
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.item {
         case 0:
@@ -219,7 +219,6 @@ extension PlaceDetailsController {
             cell.horizontalController.didSelectHandler = { [weak self] id, name in
                 let detailController = PlaceDetailsController()
                 detailController.placeId = id
-                detailController.title = name
                 self?.navigationController?.show(detailController, sender: self)
             }
             return cell

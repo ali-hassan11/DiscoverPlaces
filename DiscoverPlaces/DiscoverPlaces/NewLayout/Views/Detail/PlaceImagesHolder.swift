@@ -19,11 +19,17 @@ class PlaceImagesHolder: UICollectionReusableView {
         }
     }
     
+    var placeName: String? {
+        didSet {
+            guard let placeName = placeName else { return }
+            placeNameLabel.text = placeName
+        }
+    }
+    
     let horizontalController = ImagesHorizontalController()
+    let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 3)
     let starsView = StarsView(width: 100)
-    
     let gradView = UIView()
-    
     let pageControlView: UIPageControl! = {
         let pc = UIPageControl()
         pc.currentPageIndicatorTintColor = UIColor.systemPink
@@ -44,7 +50,7 @@ class PlaceImagesHolder: UICollectionReusableView {
         addSubview(gradView)
         gradView.fillSuperview()
         gradView.isUserInteractionEnabled = false
-        addGradient(firstColor: .clear, secondColor: .black, view: gradView)
+        addGradient(firstColor: .clear, secondColor: .black, view: gradView, start: 0.75, end: 0.96)
         
         //StackView
         let stackView = HorizontalStackView(arrangedSubviews: [starsView, pageControlView])
@@ -55,15 +61,19 @@ class PlaceImagesHolder: UICollectionReusableView {
         stackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor,
                          padding: .init(top: 0, left: 20, bottom: 12, right: 20))
         
+        addSubview(placeNameLabel)
+        //Make it shrink if needed
+        placeNameLabel.anchor(top: nil, leading: stackView.leadingAnchor, bottom: stackView.topAnchor, trailing: stackView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 8, right: 0))
+        
     }
     
-    func addGradient(firstColor: UIColor, secondColor: UIColor, view: UIView) {
+    func addGradient(firstColor: UIColor, secondColor: UIColor, view: UIView, start: CGFloat, end: CGFloat) {
         clipsToBounds = true
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [firstColor.cgColor, secondColor.cgColor]
         gradientLayer.frame = self.frame
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0.85)
-        gradientLayer.endPoint = CGPoint(x: 0, y: 0.98)
+        gradientLayer.startPoint = CGPoint(x: 0, y: start)
+        gradientLayer.endPoint = CGPoint(x: 0, y: end)
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
     

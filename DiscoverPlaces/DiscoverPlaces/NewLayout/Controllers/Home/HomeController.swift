@@ -94,7 +94,6 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         cell.horizontalController.didSelectHandler = { [weak self] result in
             let detailsController = PlaceDetailsController()
             detailsController.placeId = result.place_id
-            detailsController.title = result.name
             
             self?.navigationController?.pushViewController(detailsController, animated: true)
         }
@@ -116,7 +115,6 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             let multipleCategoriesController = MultipleCategoriesController()
             multipleCategoriesController.location = self?.userLocation
             multipleCategoriesController.category = category
-            multipleCategoriesController.title = category.rawValue
             self?.navigationController?.pushViewController(multipleCategoriesController, animated: true)
         }
         return cell

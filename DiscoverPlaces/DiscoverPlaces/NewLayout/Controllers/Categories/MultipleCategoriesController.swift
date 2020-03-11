@@ -90,7 +90,6 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         cell.horizontalController.location = location
         cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId, name in
             let detailsController = PlaceDetailsController()
-            detailsController.title = name
             detailsController.placeId = placeId
             self?.navigationController?.pushViewController(detailsController, animated: true)
         }

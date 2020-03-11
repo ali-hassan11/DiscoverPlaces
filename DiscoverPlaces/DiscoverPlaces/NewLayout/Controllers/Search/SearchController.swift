@@ -93,13 +93,14 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     }
 
     private func addEmptyView() {
-        searchIcon.constrainHeight(constant: 120)
-        searchIcon.constrainWidth(constant: 120)
+        searchIcon.constrainHeight(constant: 90)
+        searchIcon.constrainWidth(constant: 90)
         searchIcon.tintColor = .systemPink
         
         let stackView = VerticalStackView(arrangedSubviews: [searchIcon, enterSearchTextlabel], spacing: 8)
         collectionView.addSubview(stackView)
         stackView.constrainWidth(constant: view.frame.width - 40)
+        stackView.centerXInSuperview()
         stackView.alignment = .center
         stackView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 100).isActive = true
     }
@@ -129,7 +130,6 @@ extension SearchController {
         let result = searchResults[indexPath.row]
         let placeDetailController = PlaceDetailsController()
         placeDetailController.placeId = result.place_id
-        placeDetailController.title = result.name
         navigationController?.pushViewController(placeDetailController, animated: true)
     }
     
