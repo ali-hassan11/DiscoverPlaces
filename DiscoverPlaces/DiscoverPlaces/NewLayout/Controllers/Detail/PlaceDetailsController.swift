@@ -52,7 +52,9 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         super.viewDidLoad()
         
         collectionView.backgroundColor = .systemBackground
+        collectionView.contentInsetAdjustmentBehavior = .never
         navigationItem.largeTitleDisplayMode = .never
+        
         setUpSplashScreen()
         registerCells()
     }
@@ -60,7 +62,17 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default) //UIImage.init(named: "transparent.png")
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+           self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+           self.navigationController?.navigationBar.shadowImage = UIImage()
+           self.navigationController?.navigationBar.isTranslucent = false
+       }
     
     private func setUpSplashScreen() {
 
@@ -170,7 +182,7 @@ extension PlaceDetailsController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height:  (view.layoutMarginsGuide.layoutFrame.height / 2) + 64)
+        return .init(width: view.frame.width, height:  (view.frame.height / 2))
     }
     
     //MARK: Details
