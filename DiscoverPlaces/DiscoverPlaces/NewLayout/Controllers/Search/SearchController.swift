@@ -31,9 +31,9 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: cellId)
     }
     
-    var timer: Timer?
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        guard let searchText = searchBar.text else { return }
         
         if searchText == "" {
             enterSearchTextlabel.text = "Search for places"
@@ -41,41 +41,44 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         }
         
         let queryText = searchText.replacingOccurrences(of: " ", with: "+")
+        //Take into account special characters
         
+        fetchData(for: queryText)
         searchController.searchBar.placeholder = ""
-        
-        timer?.invalidate()
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: false, block: { (_) in
-                        
-            Service.shared.fetchSearchResults(for: queryText) { (results, error) in
-                
-                if let error = error {
-                    print("Failed to fetch: ", error.localizedDescription)
-                    return
-                }
-                
-                //success
-                var filteredResults = [PlaceResult]()
-                
-                guard let results = results else { return }
-                
-                results.results.forEach({ (result) in
-                    if result.containsPhotos()
-                        && !(result.types?.contains("locality") ?? true)
-                        && !(result.types?.contains("country") ?? true)
-                        && !(result.types?.contains("continent") ?? true)
-                    {
-                        filteredResults.append(result)
-                    }
-                })
-                
-                self.searchResults = filteredResults
-                self.updateUI(searchText: searchText)
-            }
-        })
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print(searchBar.text)
+    }
+    
+    private func fetchData(for queryText: String) {
+        Service.shared.fetchSearchResults(for: queryText) { (results, error) in
+            
+            if let error = error {
+                print("Failed to fetch: ", error.localizedDescription)
+                return
+            }
+            
+            //success
+            var filteredResults = [PlaceResult]()
+            
+            guard let results = results else { return }
+            
+            results.results.forEach({ (result) in
+                if result.containsPhotos()
+                    && !(result.types?.contains("locality") ?? true)
+                    && !(result.types?.contains("country") ?? true)
+                    && !(result.types?.contains("continent") ?? true)
+                {
+                    filteredResults.append(result)
+                }
+            })
+            
+            self.searchResults = filteredResults
+            self.updateUI(searchText: queryText)
+        }
+    }
+
     private func updateUI(searchText: String) {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
