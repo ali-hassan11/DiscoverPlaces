@@ -45,6 +45,14 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         v.backgroundColor = .systemBackground
         return v
     }()
+    
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .medium)
+        aiv.color = .secondaryLabel
+        aiv.startAnimating()
+        aiv.hidesWhenStopped = true
+        return aiv
+    }()
 
     fileprivate let errorCellId = "errorCellId"
         
@@ -83,11 +91,13 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         imagePlaceHolder.backgroundColor = .secondarySystemBackground
         splashScreen.addSubview(imagePlaceHolder)
         imagePlaceHolder.anchor(top: splashScreen.topAnchor, leading: splashScreen.leadingAnchor, bottom: nil, trailing: splashScreen.trailingAnchor)
-        imagePlaceHolder.constrainHeight(constant: view.frame.height / 1.7)
+        imagePlaceHolder.constrainHeight(constant: view.frame.height / 2)
+        
+        imagePlaceHolder.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
     }
     
     private func registerCells() {
-        //Header
         collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PlaceImagesHolder.id)
         
         collectionView.register(AddressCell.self, forCellWithReuseIdentifier: AddressCell.id)
@@ -103,8 +113,10 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     private func fadeOutSplashScreen() {
         UIView.animate(withDuration: 0.2, animations: {
             self.splashScreen.alpha = 0
+            self.activityIndicatorView.alpha = 0
         }) { (true) in
             self.splashScreen.removeFromSuperview()
+            self.activityIndicatorView.removeFromSuperview()
         }
     }
     

@@ -24,11 +24,32 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     var placeResults = [[PlaceResult]]()
     var subCategories = [SubCategory]()
     
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .medium)
+        aiv.color = .secondaryLabel
+        aiv.startAnimating()
+        aiv.hidesWhenStopped = true
+        return aiv
+    }()
+    
+    private let fadeView: UIView = {
+        let v = UIView()
+        v.backgroundColor = .systemBackground
+        return v
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .systemBackground
         collectionView.register(SubCategoryiesHolder.self, forCellWithReuseIdentifier: SubCategoryiesHolder.id)
+        
+        view.addSubview(fadeView)
+        fadeView.alpha = 1
+        fadeView.fillSuperview()
+        
+        fadeView.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,8 +93,16 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
                 self.subCategories.append(subCategory)
             }
             
+            #warning("Not Working yet")
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                UIView.animate(withDuration: 1, animations: {
+                    self.fadeView.alpha = 0
+                    self.activityIndicatorView.stopAnimating()
+                    self.collectionView.reloadData()
+                }) { _ in
+                    self.fadeView.removeFromSuperview()
+                }
+                
             }
         }
     }
@@ -103,31 +132,4 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
-}
-
-
-
-class SubCategoryiesHolder: UICollectionViewCell {
-    
-    public static let id = "subCategoryiesHolderId"
-    
-    var subCategoryTitleLabel = UILabel(text: "Sub-Category", font: .systemFont(ofSize: 20, weight: .semibold),color: .label, numberOfLines: 0)
-    let horizontalController = SmallSquarePlacesHorizontalController()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        backgroundColor = .systemBackground
-        
-        addSubview(subCategoryTitleLabel)
-        subCategoryTitleLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 4, left: 20, bottom: 0, right: 20))
-        
-        addSubview(horizontalController.view)
-        horizontalController.view.anchor(top: subCategoryTitleLabel.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }

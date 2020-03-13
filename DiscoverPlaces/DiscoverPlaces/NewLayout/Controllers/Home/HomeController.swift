@@ -20,9 +20,23 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     var results = [PlaceResult]()
     
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .medium)
+        aiv.color = .secondaryLabel
+        aiv.startAnimating()
+        aiv.hidesWhenStopped = true
+        return aiv
+    }()
+    
+    private let fadeView: UIView = {
+        let v = UIView()
+        v.backgroundColor = .systemBackground
+        return v
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let locationBarButton = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(addTapped))
         locationBarButton.tintColor = .systemPink
         navigationItem.rightBarButtonItem = locationBarButton
@@ -38,6 +52,13 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         collectionView.register(HomeLargeCellHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: largeCellHolderId)
     
         determineMyCurrentLocation()
+        
+        view.addSubview(fadeView)
+        fadeView.alpha = 1
+        fadeView.fillSuperview()
+        
+        fadeView.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
     }
      
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +96,13 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             self.results = filteredResults
             
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.activityIndicatorView.stopAnimating()
+                    self.fadeView.alpha = 0
+                    self.collectionView.reloadData()
+                }) { _ in
+                    self.fadeView.removeFromSuperview()
+                }
             }
         }
     }

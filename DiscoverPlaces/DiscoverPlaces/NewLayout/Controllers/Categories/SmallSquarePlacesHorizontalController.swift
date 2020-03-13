@@ -51,5 +51,3 @@ class SmallSquarePlacesHorizontalController: HorizontalSnappingController, UICol
     }
     
 }
-
-//Use this for morePlaces
