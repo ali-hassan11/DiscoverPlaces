@@ -80,6 +80,7 @@
 		CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5723E84978006D79E6 /* Spacing.swift */; };
 		CEEB4D5C23E84978006D79E6 /* HorizontalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */; };
 		CEFD55C6241B1204001E21AC /* SmallSquarePlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD55C5241B1204001E21AC /* SmallSquarePlaceCell.swift */; };
+		CEFD55C8241B7038001E21AC /* SubCategoryiesHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD55C7241B7038001E21AC /* SubCategoryiesHolder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,6 +185,7 @@
 		CEEB4D5723E84978006D79E6 /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalSnappingController.swift; sourceTree = "<group>"; };
 		CEFD55C5241B1204001E21AC /* SmallSquarePlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSquarePlaceCell.swift; sourceTree = "<group>"; };
+		CEFD55C7241B7038001E21AC /* SubCategoryiesHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryiesHolder.swift; sourceTree = "<group>"; };
 		E9F15C9D76A1D94AC2A574C0 /* Pods-DiscoverPlaces-DiscoverPlacesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscoverPlaces-DiscoverPlacesUITests.debug.xcconfig"; path = "Target Support Files/Pods-DiscoverPlaces-DiscoverPlacesUITests/Pods-DiscoverPlaces-DiscoverPlacesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -249,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				CEFD55C5241B1204001E21AC /* SmallSquarePlaceCell.swift */,
+				CEFD55C7241B7038001E21AC /* SubCategoryiesHolder.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				CE8A2FCF23F08A0E00CDF866 /* DetailsTopSectionCell.swift in Sources */,
 				CE5835DB23DF1B7A00C89622 /* Service.swift in Sources */,
 				CE2267DB2402A14E00E6385F /* OpeningHoursController.swift in Sources */,
+				CEFD55C8241B7038001E21AC /* SubCategoryiesHolder.swift in Sources */,
 				CE5835D823DF145900C89622 /* SearchResponse.swift in Sources */,
 				CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */,
 				CE616D002405BE28008E7067 /* WebsiteViewController.swift in Sources */,
