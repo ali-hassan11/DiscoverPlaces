@@ -32,7 +32,7 @@ class SmallSquarePlaceCell: UICollectionViewCell {
             placeNameLabel.text = place?.name
             
             guard let rating = place?.rating else {
-                print("🤔🤔🤔")
+                print("\(String(describing: self.placeNameLabel.text)): No Rating 🤔🤔🤔")
                 return
             }
             starsView.populate(with: rating)

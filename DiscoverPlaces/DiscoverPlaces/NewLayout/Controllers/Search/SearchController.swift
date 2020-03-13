@@ -48,7 +48,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print(searchBar.text)
+//        print(searchBar.text)
     }
     
     private func fetchData(for queryText: String) {
