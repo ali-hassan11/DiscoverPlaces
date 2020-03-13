@@ -227,8 +227,9 @@ extension PlaceDetailsController {
         case 6:
             //More Places
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
-            cell.horizontalController.morePlaces = morePlaces
-            cell.horizontalController.didSelectHandler = { [weak self] id, name in
+            cell.horizontalController.location = userLocation
+            cell.horizontalController.places = morePlaces
+            cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] id, name in
                 let detailController = PlaceDetailsController()
                 detailController.placeId = id
                 self?.navigationController?.show(detailController, sender: self)
@@ -265,8 +266,7 @@ extension PlaceDetailsController {
             return cellHeight(for: place?.reviews, desiredHeight: 180)
         case 6:
             //More Places
-            //CHECK IF NIL, IF NOT RETURN 180
-            return .init(width: view.frame.width, height: 200 + 16)
+            return .init(width: view.frame.width, height: 350 + 16)
         default:
             return .zero
         }
