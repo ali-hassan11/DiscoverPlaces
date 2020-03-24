@@ -21,7 +21,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         }
     }
     
-    var placeResults = [[PlaceResult]]()
+    var placeGroupResults = [[PlaceResult]]()
     var subCategories = [SubCategory]()
     
     private let activityIndicatorView: UIActivityIndicatorView = {
@@ -85,37 +85,32 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
                     filteredResults.append(result)
                 }
             })
-            
-            //If results < 5, load other places
-            
+                        
             if filteredResults.count > 0 {
-                self.placeResults.append(filteredResults)
+                self.placeGroupResults.append(filteredResults)
                 self.subCategories.append(subCategory)
             }
             
             #warning("Not Working yet")
             DispatchQueue.main.async {
-                UIView.animate(withDuration: 1, animations: {
+                UIView.animate(withDuration: 0.35, animations: {
                     self.fadeView.alpha = 0
                     self.activityIndicatorView.stopAnimating()
                     self.collectionView.reloadData()
-                }) { _ in
-                    self.fadeView.removeFromSuperview()
-                }
-                
+                })
             }
         }
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return placeResults.count
+        return placeGroupResults.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubCategoryiesHolder.id, for: indexPath) as! SubCategoryiesHolder
         cell.subCategoryTitleLabel.text = subCategories[indexPath.item].formatted()
-        cell.horizontalController.places = placeResults[indexPath.item]
+        cell.horizontalController.places = placeGroupResults[indexPath.item]
         cell.horizontalController.location = location
         cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId, name in
             let detailsController = PlaceDetailsController()
