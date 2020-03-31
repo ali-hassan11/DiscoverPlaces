@@ -23,8 +23,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     var userLocation: Location?
     
-    var morePlaces: [PlaceResult]?
-    
     var placeId: String? {
         didSet {
             if let id = placeId {
@@ -32,6 +30,8 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             }
         }
     }
+    
+    var morePlaces: [PlaceResult]?
     
     var place: PlaceDetailResult? {
         didSet {
@@ -320,8 +320,8 @@ extension PlaceDetailsController {
         return 7
     }
     
-    func cellHeight(for item: Any?, desiredHeight: CGFloat) -> CGSize {
-        if item != nil {
+    func cellHeight(for detailCell: Any?, desiredHeight: CGFloat) -> CGSize {
+        if detailCell != nil {
             return .init(width: view.frame.width, height: desiredHeight)
         } else {
             return .zero
