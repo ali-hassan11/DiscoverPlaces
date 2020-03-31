@@ -41,6 +41,7 @@ extension PlaceResult {
         return photos != nil && photos?.first != nil
     }
     
+    // TODO: - Revisit this
     func containsDesiredTypes() -> Bool {
            return !(types?.contains("locality") ?? true)
                && !(types?.contains("accounting") ?? true)
