@@ -10,6 +10,8 @@ import CoreLocation
 
 class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    let searchResponseFilter = SearchResponseFilter()
+    
     fileprivate let largeCellHolderId = "largeCellHeaderId"
     fileprivate let categoriesHolderId = "categoriesHolderId"
 
@@ -68,7 +70,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     fileprivate func fetchPlacesData(location: Location) {
         
-        Service.shared.fetchNearbyPlaces(location: location, radius: 5000) { (results, error) in
+        Service.shared.fetchNearbyPlaces(location: location, radius: 5000) { (response, error) in
             
             if let error = error {
                 print("Failed to fetch places: ", error)
@@ -76,24 +78,13 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             }
             
             //success
-            guard let results = results else {
+            guard let response = response else {
                 print("No results?")
                 return
             }
             
-            var filteredResults = [PlaceResult]()
-            
-            results.results.forEach({ (result) in
-                if result.containsPhotos()
-                    && !(result.types?.contains("locality") ?? true)
-                {
-                    filteredResults.append(result)
-                }
-            })
-            
             //If results < 5, load other places
-            
-            self.results = filteredResults
+            self.results = self.searchResponseFilter.filteredResults(from: response)
             
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 0.5, animations: {

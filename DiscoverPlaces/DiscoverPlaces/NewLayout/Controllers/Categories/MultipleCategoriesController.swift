@@ -10,16 +10,12 @@ import UIKit
 
 class MultipleCategoriesController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    let searchResponseFilter = SearchResponseFilter()
+    
     //Inject This & Category?
     var location: Location?
     
-    var category: Category! {
-        didSet {
-            for subCategory in category.subCategories() {
-                fetchData(subCategory: subCategory)
-            }
-        }
-    }
+    var category: Category!
     
     var placeGroupResults = [[PlaceResult]]()
     var subCategories = [SubCategory]()
@@ -44,48 +40,47 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         collectionView.backgroundColor = .systemBackground
         collectionView.register(SubCategoryiesHolder.self, forCellWithReuseIdentifier: SubCategoryiesHolder.id)
         
-        view.addSubview(fadeView)
-        fadeView.alpha = 1
-        fadeView.fillSuperview()
+//        view.addSubview(fadeView)
+//        fadeView.alpha = 1
+//        fadeView.fillSuperview()
         
         fadeView.addSubview(activityIndicatorView)
         activityIndicatorView.fillSuperview()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        collectionView.reloadData()
-    }
-    
-    private func fetchData(subCategory: SubCategory) {
-        guard let location = location else {
-            fatalError("No Location!")
-        }
         
-        Service.shared.fetchNearbyPlaces(location: location, subCategory: subCategory) { (results, error) in
+        fetchData(for: category)
+    }
+//    let subcats: [SubCategory = [.restaurant, .cafe, .meal_delivery, .meal_takeaway]
+    
+    private func fetchData(for category: Category) {
+        for subcategory in category.subCategories() {
+            fetchData(for: subcategory)
+        }
+    }
+    
+    private func fetchData(for subCategory: SubCategory) {
+        var placeGroups = [[PlaceResult]]()
+          
+          //Sync data fetches
+//        let dispatchGroup = DispatchGroup()
+        
+//        dispatchGroup.enter()
+        
+        Service.shared.fetchPlacesForCategory(for: subCategory.rawValue) { (response, error) in
             
             if let error = error {
-                print("Failed to fetch places: ", error)
+                print("Failed to fetch games: ", error)
                 return
             }
             
             //success
-            guard let results = results else {
+            guard let response = response else {
                 print("No results?")
                 return
             }
             
             //This is repeated in a few places, abstact it to a mapper..?
-            var filteredResults = [PlaceResult]()
-            
-            results.results.forEach({ (result) in
-                if result.containsPhotos()
-                    && !(result.types?.contains("locality") ?? true)
-                {
-                    filteredResults.append(result)
-                }
-            })
-                        
+            let filteredResults = self.searchResponseFilter.filteredResults(from: response)
+
             if filteredResults.count > 0 {
                 self.placeGroupResults.append(filteredResults)
                 self.subCategories.append(subCategory)
@@ -93,15 +88,27 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             
             #warning("Not Working yet")
             DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.35, animations: {
-                    self.fadeView.alpha = 0
-                    self.activityIndicatorView.stopAnimating()
-                    self.collectionView.reloadData()
-                })
+                print("Completed dispatch group tasks..")
+                
+//                self.placeGroupResults = placeGroups
+                self.collectionView.alpha = 0
+
+                UIView.animate(withDuration: 0.35) {
+                    self.collectionView.alpha = 1
+                }
+                
+                self.activityIndicatorView.stopAnimating()
+                self.collectionView.reloadData()
             }
         }
+
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return placeGroupResults.count
@@ -109,7 +116,8 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubCategoryiesHolder.id, for: indexPath) as! SubCategoryiesHolder
-        cell.subCategoryTitleLabel.text = subCategories[indexPath.item].formatted()
+//        cell.subCategoryTitleLabel.text = subCategories[indexPath.item].formatted()
+   
         cell.horizontalController.places = placeGroupResults[indexPath.item]
         cell.horizontalController.location = location
         cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId, name in
