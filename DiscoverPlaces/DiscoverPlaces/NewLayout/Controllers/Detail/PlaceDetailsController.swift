@@ -239,13 +239,13 @@ extension PlaceDetailsController {
         case 6:
             //More Places
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
-            cell.horizontalController.location = userLocation
-            cell.horizontalController.places = morePlaces
-            cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] id, name in
-                let detailController = PlaceDetailsController()
-                detailController.placeId = id
-                self?.navigationController?.show(detailController, sender: self)
-            }
+//            cell.horizontalController.location = userLocation
+////            cell.horizontalController.places = morePlaces
+//            cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] id, name in
+//                let detailController = PlaceDetailsController()
+//                detailController.placeId = id
+//                self?.navigationController?.show(detailController, sender: self)
+//            }
             return cell
         default:
             #if DEBUG

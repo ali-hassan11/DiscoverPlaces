@@ -11,7 +11,7 @@ import UIKit
 class HorizontalSnappingController: UICollectionViewController {
     
     init() {
-        let layout = snappingLayout()
+        let layout = SnappingLayout()
         layout.scrollDirection = .horizontal
         super.init(collectionViewLayout: layout)
         collectionView.decelerationRate = .fast
@@ -23,7 +23,7 @@ class HorizontalSnappingController: UICollectionViewController {
     
 }
 
-class snappingLayout : UICollectionViewFlowLayout {
+class SnappingLayout : UICollectionViewFlowLayout {
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         

@@ -12,13 +12,13 @@ class MorePlacesHolder: UICollectionViewCell {
     
     public static let id = "morePlacesHolderId"
 
-    let horizontalController = SmallSquarePlacesHorizontalController()
+    var horizontalController: SmallSquarePlacesHorizontalController?
     
     let sectionTitle = UILabel(text: "Nearby", font: .systemFont(ofSize: 19, weight: .medium), color: .label, numberOfLines: 1)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        guard let horizontalController = horizontalController else { return }
         backgroundColor = .systemBackground
         
         addSubview(sectionTitle)

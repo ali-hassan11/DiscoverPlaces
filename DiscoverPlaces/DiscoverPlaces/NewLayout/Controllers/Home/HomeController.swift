@@ -73,7 +73,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     fileprivate func fetchPlacesData(location: Location) {
         
-        Service.shared.fetchNearbyPlaces(location: location, radius: 5000) { (response, error) in
+        Service.shared.fetchNearbyPlaces(location: location) { (response, error) in
             
             if let error = error {
                 print("Failed to fetch places: ", error)
