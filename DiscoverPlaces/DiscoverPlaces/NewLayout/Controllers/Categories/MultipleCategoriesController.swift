@@ -34,6 +34,16 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         return v
     }()
     
+    init(category: Category, location: Location) {
+        self.location = location
+        self.category = category
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,7 +113,6 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         }
 
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

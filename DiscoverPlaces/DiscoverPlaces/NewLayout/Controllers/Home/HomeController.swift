@@ -10,15 +10,16 @@ import CoreLocation
 
 class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let searchResponseFilter = SearchResponseFilter()
+    private let searchResponseFilter = SearchResponseFilter()
     
     private var locationManager:CLLocationManager!
     private var isLocationSettingEnabled = false
     
     private var userLocation: Location?
     
-    var results = [PlaceResult]()
+    private var results = [PlaceResult]()
     
+    //Make custom object
     private let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .medium)
         aiv.color = .secondaryLabel
@@ -135,9 +136,8 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesHolder.id, for: indexPath) as! CategoriesHolder
         cell.horizontalController.didSelectCategory = { [weak self] category in
-            let multipleCategoriesController = MultipleCategoriesController()
-            multipleCategoriesController.location = self?.userLocation
-            multipleCategoriesController.category = category
+            guard let location = self?.userLocation else { return }
+            let multipleCategoriesController = MultipleCategoriesController(category: category, location: location)
             multipleCategoriesController.title = category.rawValue
             self?.navigationController?.pushViewController(multipleCategoriesController, animated: true)
         }
