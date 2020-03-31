@@ -79,7 +79,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             }
             
             //This is repeated in a few places, abstact it to a mapper..?
-            let filteredResults = self.searchResponseFilter.filteredResults(from: response)
+            let filteredResults = self.searchResponseFilter.results(from: response)
 
             if filteredResults.count > 0 {
                 self.placeGroupResults.append(filteredResults)

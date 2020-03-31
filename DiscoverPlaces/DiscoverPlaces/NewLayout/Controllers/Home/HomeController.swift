@@ -12,9 +12,6 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     let searchResponseFilter = SearchResponseFilter()
     
-    fileprivate let largeCellHolderId = "largeCellHeaderId"
-    fileprivate let categoriesHolderId = "categoriesHolderId"
-
     private var locationManager:CLLocationManager!
     private var isLocationSettingEnabled = false
     
@@ -38,23 +35,28 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupLoadingView()
+        navigationItem.largeTitleDisplayMode = .always
+        setupBarButtons()
+        setupCollectionView()
+        determineMyCurrentLocation()
+    }
+    
+    private func setupBarButtons() {
         let locationBarButton = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(addTapped))
         locationBarButton.tintColor = .systemPink
         navigationItem.rightBarButtonItem = locationBarButton
-        
-        
         locationBarButton.tintColor = .label
-        navigationItem.largeTitleDisplayMode = .always
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
-        collectionView.backgroundColor = .systemBackground
-        collectionView.register(CategoriesHolder.self, forCellWithReuseIdentifier: categoriesHolderId)
-        //Header 1
-        collectionView.register(HomeLargeCellHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: largeCellHolderId)
+    }
     
-        determineMyCurrentLocation()
-        
+    private func setupCollectionView() {
+        collectionView.backgroundColor = .systemBackground
+        collectionView.register(CategoriesHolder.self, forCellWithReuseIdentifier: CategoriesHolder.id)
+        collectionView.register(HomeLargeCellHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeLargeCellHolder.id)
+    }
+    
+    private func setupLoadingView() {
         view.addSubview(fadeView)
         fadeView.alpha = 1
         fadeView.fillSuperview()
@@ -62,7 +64,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         fadeView.addSubview(activityIndicatorView)
         activityIndicatorView.fillSuperview()
     }
-     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
@@ -84,16 +86,19 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             }
             
             //If results < 5, load other places
-            self.results = self.searchResponseFilter.filteredResults(from: response)
-            
-            DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.activityIndicatorView.stopAnimating()
-                    self.fadeView.alpha = 0
-                    self.collectionView.reloadData()
-                }) { _ in
-                    self.fadeView.removeFromSuperview()
-                }
+            self.results = self.searchResponseFilter.results(from: response)
+            self.handleFetchSuccess()
+        }
+    }
+    
+    private func handleFetchSuccess() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.activityIndicatorView.stopAnimating()
+                self.fadeView.alpha = 0
+                self.collectionView.reloadData()
+            }) { _ in
+                self.fadeView.removeFromSuperview()
             }
         }
     }
@@ -106,7 +111,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     //MARK: Home Large Cell
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: largeCellHolderId, for: indexPath) as! HomeLargeCellHolder
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeLargeCellHolder.id, for: indexPath) as! HomeLargeCellHolder
         cell.horizontalController.userLocation = self.userLocation
         cell.horizontalController.results = results
         cell.horizontalController.didSelectHandler = { [weak self] result in
@@ -128,7 +133,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     //MARK: Categories Controller
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: categoriesHolderId, for: indexPath) as! CategoriesHolder
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesHolder.id, for: indexPath) as! CategoriesHolder
         cell.horizontalController.didSelectCategory = { [weak self] category in
             let multipleCategoriesController = MultipleCategoriesController()
             multipleCategoriesController.location = self?.userLocation

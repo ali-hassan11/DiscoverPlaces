@@ -10,7 +10,7 @@ import Foundation
 
 class SearchResponseFilter {
     
-    public func filteredResults(from response: SearchResponse) -> [PlaceResult] {
+    public func results(from response: SearchResponse) -> [PlaceResult] {
         
         var filteredResults = [PlaceResult]()
         

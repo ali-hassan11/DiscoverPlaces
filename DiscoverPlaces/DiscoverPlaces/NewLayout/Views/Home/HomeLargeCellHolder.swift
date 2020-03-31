@@ -10,6 +10,8 @@ import UIKit
 
 class HomeLargeCellHolder: UICollectionReusableView {
     
+    static let id = "largeCellHolderId"
+    
     let sectionDescriptionLabel = UILabel(text: "Places of interest near You", font: .systemFont(ofSize: 16, weight: .medium),color: .secondaryLabel , numberOfLines: 0)
     
     let paddingView = PaddingView(width: Constants.leftPadding)
