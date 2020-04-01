@@ -31,6 +31,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         setupSearchBar()
         
         collectionView.backgroundColor = .systemBackground
+        collectionView.contentInset = .init(top: 12, left: 0, bottom: 0, right: 0)
         collectionView.register(SmallSquarePlaceCell.self, forCellWithReuseIdentifier: SmallSquarePlaceCell.id)
     }
     
@@ -144,5 +145,9 @@ extension SearchController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: 0, left: 12, bottom: 0, right: 12)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
     }
 }
