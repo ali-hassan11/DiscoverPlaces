@@ -12,7 +12,6 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     private let searchResponseFilter = SearchResponseFilter()
     
-    fileprivate let cellId = "cellId"
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var searchResults = [PlaceResult]()
     
@@ -32,7 +31,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         setupSearchBar()
         
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(SearchCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(SmallSquarePlaceCell.self, forCellWithReuseIdentifier: SmallSquarePlaceCell.id)
     }
     
     override init() {
@@ -127,8 +126,8 @@ extension SearchController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchCell
-        cell.searchResult = searchResults[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallSquarePlaceCell.id, for: indexPath) as! SmallSquarePlaceCell
+        cell.configure(place: searchResults[indexPath.item], userLocation: userLocation)
         return cell
     }
     
@@ -140,7 +139,7 @@ extension SearchController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (view.frame.width - 12 - 12 - 10) / 2, height: 200)
+        return .init(width: (view.frame.width - 12 - 12 - 10) / 2, height: 250)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

@@ -25,6 +25,7 @@ struct PlaceResult: Decodable {
     let types: [String]?
     let rating: Double?
     let vicinity: String?
+    let formatted_address: String?
 
     enum CodingKeys: String, CodingKey {
         case geometry
@@ -35,6 +36,7 @@ struct PlaceResult: Decodable {
         case rating
         case types
         case vicinity
+        case formatted_address
     }
 }
 

@@ -38,8 +38,12 @@ class SmallSquarePlaceCell: UICollectionViewCell {
         }
         starsView.populate(with: rating)
         
-        guard let vicinity = place.vicinity else { return }
-        distanceLabel.text = vicinity
+        if let vicinity = place.vicinity {
+            distanceLabel.text = vicinity
+        } else
+            if let address = place.formatted_address {
+             distanceLabel.text = address
+        }
 //        guard let geometry = place.geometry else { return }
 //        //If no location, use Saved location
 //        let distanceString = geometry.distanceString(from: userLocation!)
