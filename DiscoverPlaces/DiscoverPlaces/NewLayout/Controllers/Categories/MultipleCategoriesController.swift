@@ -16,11 +16,12 @@ struct SubCategoryGroup {
 class MultipleCategoriesController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
         
     private let searchResponseFilter = SearchResponseFilter()
+    private let dispatchGroup = DispatchGroup()
     
     private var location: Location?
     private var category: Category?
     
-    private var subCategoryGroups: [SubCategoryGroup]?
+    private var subCategoryGroups = [SubCategoryGroup]()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +39,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             fetchdata(subCategory: $0, location: location)
         }
     }
-    
-    let dispatchGroup = DispatchGroup()
-    
+        
     private func fetchdata(subCategory: SubCategory, location: Location) {
         print("FetchData for \(subCategory)")
         var subCategoryGroup: SubCategoryGroup?
@@ -60,8 +59,8 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         dispatchGroup.notify(queue: .main) {
             print("➡️ Response for \(String(describing: subCategoryGroup?.title)) : \n\(String(describing: subCategoryGroup?.results.first?.name))\n")
             
-            guard let subCategoryGroup = subCategoryGroup else { return }
-            self.subCategoryGroups?.append(subCategoryGroup)
+            guard let subCategoryGroup = subCategoryGroup, subCategoryGroup.results.count > 0 else { return }
+            self.subCategoryGroups.append(subCategoryGroup)
             self.collectionView.reloadData()
         }
     }
@@ -86,14 +85,21 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
 extension MultipleCategoriesController {
     
         override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return subCategoryGroups?.count ?? 0
+            return subCategoryGroups.count
         }
         
         override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubCategoryiesHolder.id, for: indexPath) as! SubCategoryiesHolder
             
-            guard let subCategory = subCategoryGroups?[indexPath.item] else { return UICollectionViewCell() } //ErrorCell
-            cell.subCategoryTitleLabel.text = subCategory.title
+            let subCategoryGroup = subCategoryGroups[indexPath.item]
+            cell.subCategoryTitleLabel.text = subCategoryGroup.title
+            cell.horizontalController.subCateegoryGroup = subCategoryGroup
+            cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
+                let detailsController = PlaceDetailsController()
+                detailsController.placeId = placeId
+                
+                self?.navigationController?.pushViewController(detailsController, animated: true)
+            }
             return cell
         }
         
