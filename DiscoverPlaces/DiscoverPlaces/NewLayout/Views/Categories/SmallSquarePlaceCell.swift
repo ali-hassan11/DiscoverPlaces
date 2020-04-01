@@ -13,8 +13,8 @@ class SmallSquarePlaceCell: UICollectionViewCell {
     public static let id = "smallSquareSpaceCellId"
     
     let placeImageView = UIImageView(image: UIImage(named: "food"))
-    let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai, United Arab Emirates", font: .systemFont(ofSize: 16, weight: .regular), color: .label, numberOfLines: 2)
-    let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, numberOfLines: 1)
+    let placeNameLabel = UILabel(text: "Burj Khalifah Hotel - Dubai, United Arab Emirates", font: .systemFont(ofSize: 16, weight: .regular), color: .label, numberOfLines: 2) //Can't be more than 2
+    let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, numberOfLines: 1) //Can't be more that 1
     let starsView = StarsView(width: 80)
 
     func configure(place: PlaceResult?, userLocation: Location?) {
@@ -38,10 +38,12 @@ class SmallSquarePlaceCell: UICollectionViewCell {
         }
         starsView.populate(with: rating)
         
-        guard let geometry = place.geometry else { return }
-        //If no location, use Saved location
-        let distanceString = geometry.distanceString(from: userLocation!)
-        distanceLabel.text = distanceString
+        guard let vicinity = place.vicinity else { return }
+        distanceLabel.text = vicinity
+//        guard let geometry = place.geometry else { return }
+//        //If no location, use Saved location
+//        let distanceString = geometry.distanceString(from: userLocation!)
+//        distanceLabel.text = distanceString
     }
 
     
@@ -61,10 +63,10 @@ class SmallSquarePlaceCell: UICollectionViewCell {
         
         addSubview(starsView)
         starsView.populate(with: 4.5)
-        starsView.anchor(top: placeNameLabel.bottomAnchor, leading: placeNameLabel.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
+        starsView.anchor(top: placeNameLabel.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
         
         addSubview(distanceLabel)
-        distanceLabel.anchor(top: starsView.bottomAnchor, leading: starsView.leadingAnchor, bottom: nil, trailing: starsView.trailingAnchor, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
+        distanceLabel.anchor(top: starsView.bottomAnchor, leading: starsView.leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
         
         backgroundColor = .systemBackground
     }
