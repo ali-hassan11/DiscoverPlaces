@@ -24,7 +24,7 @@
 		CE319CE723E15E1E0088B9D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE319CE623E15E1E0088B9D1 /* Constants.swift */; };
 		CE327AEA241546E10010F400 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AE9241546E10010F400 /* SettingsController.swift */; };
 		CE327AF1241696B60010F400 /* MultipleCategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */; };
-		CE327AF324169DD20010F400 /* SmallSquarePlacesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF224169DD20010F400 /* SmallSquarePlacesHorizontalController.swift */; };
+		CE327AF324169DD20010F400 /* PlaceGroupHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */; };
 		CE58359923DE16B000C89622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359823DE16B000C89622 /* AppDelegate.swift */; };
 		CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359A23DE16B000C89622 /* SceneDelegate.swift */; };
 		CE58359D23DE16B000C89622 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359C23DE16B000C89622 /* ViewController.swift */; };
@@ -124,7 +124,7 @@
 		CE319CE623E15E1E0088B9D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE327AE9241546E10010F400 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCategoriesController.swift; sourceTree = "<group>"; };
-		CE327AF224169DD20010F400 /* SmallSquarePlacesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSquarePlacesHorizontalController.swift; sourceTree = "<group>"; };
+		CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceGroupHorizontalController.swift; sourceTree = "<group>"; };
 		CE58359523DE16B000C89622 /* DiscoverPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE58359823DE16B000C89622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE58359A23DE16B000C89622 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };

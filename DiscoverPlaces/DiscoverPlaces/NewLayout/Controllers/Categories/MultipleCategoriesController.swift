@@ -8,9 +8,14 @@
 
 import UIKit
 
-struct SubCategoryGroup {
-    let title: String
+struct PlacesGroup {
+    let title: String?
     let results: [PlaceResult]
+    
+    init(title: String? = nil, results: [PlaceResult]?) {
+        self.title = title
+        self.results = results ?? []
+    }
 }
 
 class MultipleCategoriesController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -21,7 +26,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     private var location: Location?
     private var category: Category?
     
-    private var subCategoryGroups = [SubCategoryGroup]()
+    private var subCategoryGroups = [PlacesGroup]()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +53,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         
     private func fetchdata(subCategory: SubCategory, location: Location) {
         print("FetchData for \(subCategory)")
-        var subCategoryGroup: SubCategoryGroup?
+        var subCategoryGroup: PlacesGroup?
         Service.shared.fetchNearbyPlaces(location: location, subCategory: subCategory) { (response, error) in
             
             if let error = error {
@@ -59,14 +64,14 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             guard let response = response else { return }
             
             let placeResults = self.searchResponseFilter.results(from: response)
-            subCategoryGroup = SubCategoryGroup(title: subCategory.formatted(), results: placeResults)
+            subCategoryGroup = PlacesGroup(title: subCategory.formatted(), results: placeResults)
             self.dispatchGroup.leave()
             
             self.handleSuccess(with: subCategoryGroup)
         }
     }
     
-    private func handleSuccess(with subCategoryGroup: SubCategoryGroup?) {
+    private func handleSuccess(with subCategoryGroup: PlacesGroup?) {
         dispatchGroup.notify(queue: .main) {
             guard let subCategoryGroup = subCategoryGroup, subCategoryGroup.results.count > 0 else { return }
             self.subCategoryGroups.append(subCategoryGroup)
@@ -113,9 +118,8 @@ extension MultipleCategoriesController {
             cell.horizontalController.subCategoryGroup = subCategoryGroup
             cell.horizontalController.location = self.location
             cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
-                let detailsController = PlaceDetailsController()
-                detailsController.placeId = placeId
-                
+                guard let location = self?.location else { return }
+                let detailsController = PlaceDetailsController(placeId: placeId, location: location)
                 self?.navigationController?.pushViewController(detailsController, animated: true)
             }
             return cell
