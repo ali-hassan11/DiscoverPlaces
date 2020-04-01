@@ -93,7 +93,7 @@ import CoreLocation
 
 extension Geometry {
     func distanceString(from userLocation: Location) -> String? {
-        guard userLocation.isNotEmpty() else { return nil }
+//        guard userLocation.isNotEmpty() else { return nil }
         
         let fromLocation = CLLocation(latitude: location.lat, longitude: location.lng)
         let toLocation = CLLocation(latitude: userLocation.lat, longitude: userLocation.lng)
@@ -132,11 +132,11 @@ struct Location: Decodable {
     let lng: Double
 }
 
-extension Location {
-    func isNotEmpty() -> Bool {
-        return lat != 0 && lng != 0
-    }
-}
+//extension Location {
+//    func isNotEmpty() -> Bool {
+//        return lat == 0 && lng == 0
+//    }
+//}
 
 struct OpeningHours: Decodable {
     let openNow: Bool?

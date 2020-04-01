@@ -51,6 +51,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             }
             
             guard let response = response else { return }
+            
             let placeResults = self.searchResponseFilter.results(from: response)
             subCategoryGroup = SubCategoryGroup(title: subCategory.formatted(), results: placeResults)
             self.dispatchGroup.leave()
@@ -65,9 +66,12 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.reloadData()
     }
     
     init(category: Category, location: Location) {

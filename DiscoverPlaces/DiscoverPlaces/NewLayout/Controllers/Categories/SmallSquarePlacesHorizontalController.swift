@@ -34,9 +34,9 @@ class SmallSquarePlacesHorizontalController: HorizontalSnappingController, UICol
         collectionView.contentInset = .init(top: 0, left: 24, bottom: 0, right: 24)
     }
     
-//}
-//
-//extension SmallSquarePlacesHorizontalController {
+}
+
+extension SmallSquarePlacesHorizontalController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return subCateegoryGroup?.results.count ?? 0
     }
