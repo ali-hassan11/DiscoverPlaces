@@ -245,7 +245,7 @@ extension PlaceDetailsController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
             cell.horizontalController.location = userLocation
             
-            cell.horizontalController.subCategoryGroup = PlacesGroup(results: morePlaces)
+            cell.horizontalController.placeGroup = PlacesGroup(results: morePlaces)
             cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
                 guard let location = self?.userLocation else { return }
                 let detailController = PlaceDetailsController(placeId: placeId, location: location)

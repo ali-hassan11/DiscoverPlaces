@@ -19,7 +19,7 @@ class Service {
     //Change to findplacefromtext and only get data you need for cells.
     func fetchSearchResults(for searchText: String, completion: @escaping (SearchResponse?, Error?) -> Void) {
         let urlString = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(searchText)&location=\(25.1413),\(55.1853)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
-        
+        print(urlString)
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
     

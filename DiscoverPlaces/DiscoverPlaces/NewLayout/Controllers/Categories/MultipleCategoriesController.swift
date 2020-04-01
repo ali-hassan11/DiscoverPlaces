@@ -115,7 +115,7 @@ extension MultipleCategoriesController {
             
             let subCategoryGroup = subCategoryGroups[indexPath.item]
             cell.subCategoryTitleLabel.text = subCategoryGroup.title
-            cell.horizontalController.subCategoryGroup = subCategoryGroup
+            cell.horizontalController.placeGroup = subCategoryGroup
             cell.horizontalController.location = self.location
             cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
                 guard let location = self?.location else { return }
