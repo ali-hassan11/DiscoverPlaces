@@ -19,7 +19,9 @@ class SmallSquarePlaceCell: UICollectionViewCell {
 
     var place: PlaceResult? {
         didSet {
-            guard let photo = place?.photos?.first else {
+            guard let place = place else { return } //Error
+            
+            guard let photo = place.photos?.first else {
                 return //Default Image
             }
             
@@ -29,16 +31,17 @@ class SmallSquarePlaceCell: UICollectionViewCell {
             
             placeImageView.backgroundColor = .secondarySystemBackground
             placeImageView.sd_setImage(with: url)
-            placeNameLabel.text = place?.name
+            placeNameLabel.text = place.name
             
-            guard let rating = place?.rating else {
+            guard let rating = place.rating else {
                 print("\(String(describing: self.placeNameLabel.text)): No Rating 🤔🤔🤔")
                 return
             }
             starsView.populate(with: rating)
             
-//            guard let distance = place?.geometry?.distanceString(from: )
-            
+            guard let geometry = place.geometry else { fatalError() }
+            let distanceString = geometry.distanceString(from: Location(lat: 1, lng: 1))
+            distanceLabel.text = distanceString
         }
     }
     

@@ -14,7 +14,7 @@ class SearchResponseFilter {
         
         var filteredResults = [PlaceResult]()
         
-        response.results.forEach({ (result) in
+        response.results.forEach({ result in
             if result.containsPhotos() && result.containsDesiredTypes() {
                 filteredResults.append(result)
             }

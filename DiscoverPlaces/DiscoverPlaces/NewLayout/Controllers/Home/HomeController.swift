@@ -73,7 +73,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     fileprivate func fetchPlacesData(location: Location) {
         
-        Service.shared.fetchNearbyPlaces(location: location, radius: 5000) { (response, error) in
+        Service.shared.fetchNearbyPlaces(location: location) { (response, error) in
             
             if let error = error {
                 print("Failed to fetch places: ", error)
@@ -115,7 +115,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeLargeCellHolder.id, for: indexPath) as! HomeLargeCellHolder
         cell.horizontalController.userLocation = self.userLocation
         cell.horizontalController.results = results
-        cell.horizontalController.didSelectHandler = { [weak self] result in
+        cell.horizontalController.didSelectHandler = { [weak self] result in //Only need placeId
             let detailsController = PlaceDetailsController()
             detailsController.placeId = result.place_id
             
