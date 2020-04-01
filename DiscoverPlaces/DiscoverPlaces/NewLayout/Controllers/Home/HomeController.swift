@@ -109,7 +109,9 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         locationSearchVC.view.backgroundColor = .blue
         show(locationSearchVC, sender: self)
     }
-    
+}
+
+extension HomeController {
     //MARK: Home Large Cell
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeLargeCellHolder.id, for: indexPath) as! HomeLargeCellHolder
@@ -168,7 +170,7 @@ extension HomeController: CLLocationManagerDelegate {
         
         switch status {
         case .restricted, .denied:
-            fetchDefaultLocation()
+            fetchForLastSavedLocation()
             
         case .authorizedAlways, .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
@@ -178,7 +180,7 @@ extension HomeController: CLLocationManagerDelegate {
             locationManager.requestAlwaysAuthorization()
             
         default:
-            fetchDefaultLocation()
+            fetchForLastSavedLocation()
         }
 
     }
@@ -189,6 +191,7 @@ extension HomeController: CLLocationManagerDelegate {
         let currentLocation = Location(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
         
         if isLocationSettingEnabled {
+            updateLastSavedLocation(with: currentLocation)
             self.userLocation = currentLocation
         }
         
@@ -199,11 +202,31 @@ extension HomeController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error, when trying to get location: \(error)")
-        fetchDefaultLocation()
+        fetchForLastSavedLocation()
     }
     
-    func fetchDefaultLocation() {
-        fetchPlacesData(location: Location(lat: 24.4539, lng: 54.3773))
-        //Have an array of default locations, Or Save last location and load places from that 🤔🤔🤔
+    func updateLastSavedLocation(with location: Location) {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(location)
+            UserDefaults.standard.set(data, forKey: "Location")
+        } catch {
+            print("Unable to Encode Note (\(error))")
+        }
+    }
+    
+    func fetchForLastSavedLocation() {
+        if let data = UserDefaults.standard.data(forKey: "Location") {
+            do {
+                let decoder = JSONDecoder()
+                let lastSavedLocation = try decoder.decode(Location.self, from: data)
+                self.userLocation = lastSavedLocation
+                fetchPlacesData(location: lastSavedLocation)
+            } catch {
+                print("Unable to Decode Note (\(error))")
+            }
+        } else {
+            fetchPlacesData(location: Location(lat: 25.1412, lng: 55.1852)) //Decide on a Default location (Currently Dubai)
+        }
     }
 }

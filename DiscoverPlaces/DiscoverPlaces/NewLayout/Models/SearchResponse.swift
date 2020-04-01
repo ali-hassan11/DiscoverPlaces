@@ -43,44 +43,7 @@ extension PlaceResult {
     
     // TODO: - Revisit this
     func containsDesiredTypes() -> Bool {
-           return !(types?.contains("locality") ?? true)
-               && !(types?.contains("accounting") ?? true)
-               && !(types?.contains("lawyer") ?? true)
-               && !(types?.contains("liquor_store") ?? true)
-               && !(types?.contains("locksmith") ?? true)
-               && !(types?.contains("bar") ?? true)
-               && !(types?.contains("book_store") ?? true)
-               && !(types?.contains("bus_station") ?? true)
-               && !(types?.contains("night_club") ?? true)
-               && !(types?.contains("painter") ?? true)
-               && !(types?.contains("car_dealer") ?? true)
-               && !(types?.contains("car_repair") ?? true)
-               && !(types?.contains("pet_store") ?? true)
-               && !(types?.contains("car_wash") ?? true)
-               && !(types?.contains("casino") ?? true)
-               && !(types?.contains("plumber") ?? true)
-               && !(types?.contains("cemetery") ?? true)
-               && !(types?.contains("police") ?? true)
-               && !(types?.contains("post_office") ?? true)
-               && !(types?.contains("primary_school") ?? true)
-               && !(types?.contains("real_estate_agency") ?? true)
-               && !(types?.contains("courthouse") ?? true)
-               && !(types?.contains("dentist") ?? true)
-               && !(types?.contains("roofing_contractor") ?? true)
-               && !(types?.contains("school") ?? true)
-               && !(types?.contains("secondary_school") ?? true)
-               && !(types?.contains("electrician") ?? true)
-               && !(types?.contains("storage") ?? true)
-               && !(types?.contains("florist") ?? true)
-               && !(types?.contains("funeral_home") ?? true)
-               && !(types?.contains("furniture_store") ?? true)
-               && !(types?.contains("hair_care") ?? true)
-               && !(types?.contains("hardware_store") ?? true)
-               && !(types?.contains("home_goods_store") ?? true)
-               && !(types?.contains("insurance_agency") ?? true)
-               && !(types?.contains("laundry") ?? true)
-               && !(types?.contains("veterinary_care") ?? true)
-               && !(types?.contains("university") ?? true)
+           return !(types?.contains("locality") ?? true) //City, town...
        }
 }
 
@@ -127,7 +90,7 @@ extension Double {
     }
 }
 
-struct Location: Decodable {
+struct Location: Codable {
     let lat: Double
     let lng: Double
 }
