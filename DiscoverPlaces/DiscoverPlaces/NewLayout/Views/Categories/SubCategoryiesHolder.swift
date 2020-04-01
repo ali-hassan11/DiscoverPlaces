@@ -13,12 +13,10 @@ class SubCategoryiesHolder: UICollectionViewCell {
     public static let id = "subCategoryiesHolderId"
     
     var subCategoryTitleLabel = UILabel(text: "Sub-Category", font: .systemFont(ofSize: 20, weight: .semibold),color: .label, numberOfLines: 0)
-    var horizontalController: SmallSquarePlacesHorizontalController?
+    var horizontalController = SmallSquarePlacesHorizontalController()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        guard let horizontalController = horizontalController else { return }
-        
         backgroundColor = .systemBackground
         
         addSubview(subCategoryTitleLabel)

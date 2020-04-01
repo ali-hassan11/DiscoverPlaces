@@ -8,39 +8,33 @@
 
 import UIKit
 
-class SmallSquarePlacesHorizontalController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class SmallSquarePlacesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     private let searchResponseFilter = SearchResponseFilter()
     
-    var subCategory: SubCategory?
     var location: Location?
+    var placeGroups: [SubCategoryGroup]? {
+        didSet {
+     
+        }
+    }
     
     var didSelectPlaceInCategoriesHandler: ((String, String) -> ())?
     
-    private var placeResults: [PlaceResult]?
-    
-    init(location: Location, subategory: SubCategory) {
-        self.subCategory = subategory
-        self.location = location
-        
-        let layout = SnappingLayout()
-        layout.scrollDirection = .horizontal
-        super.init(collectionViewLayout: layout)
-        collectionView.decelerationRate = .fast
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private var placeResults: [PlaceResult]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.reloadData()
         setupCollectionView()
-        
-        guard let subCategory = subCategory, let location = location else { return }
-        fetchData(subCategory: subCategory, location: location)
     }
-    
+
     private func fetchData(subCategory: SubCategory, location: Location) {
         Service.shared.fetchNearbyPlaces(location: location, subCategory: subCategory) { (response, error) in
             
@@ -51,10 +45,6 @@ class SmallSquarePlacesHorizontalController: UICollectionViewController, UIColle
             
             guard let response = response else { return }
             self.placeResults = self.searchResponseFilter.results(from: response)
-            
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
         }
     }
 
