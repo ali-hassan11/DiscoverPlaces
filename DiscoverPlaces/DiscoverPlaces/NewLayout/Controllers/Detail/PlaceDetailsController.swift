@@ -283,7 +283,7 @@ extension PlaceDetailsController {
             return cellHeight(for: placeDetailResult?.reviews, desiredHeight: 180)
         case 6:
             //More Places
-            return .init(width: view.frame.width, height: 350 + 16)
+            return cellHeight(for: morePlaces, desiredHeight: 350 + 16)
         default:
             return .zero
         }
@@ -325,8 +325,16 @@ extension PlaceDetailsController {
         return 7
     }
     
-    func cellHeight(for detailCell: Any?, desiredHeight: CGFloat) -> CGSize {
-        if detailCell != nil {
+    func cellHeight(for detail: Any?, desiredHeight: CGFloat) -> CGSize {
+        if detail != nil {
+            return .init(width: view.frame.width, height: desiredHeight)
+        } else {
+            return .zero
+        }
+    }
+    
+    func cellHeight(for morePlaces: [PlaceResult]?, desiredHeight: CGFloat) -> CGSize {
+        if let morePlaces = morePlaces, morePlaces.count > 0 {
             return .init(width: view.frame.width, height: desiredHeight)
         } else {
             return .zero
