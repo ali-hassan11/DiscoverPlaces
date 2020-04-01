@@ -89,8 +89,7 @@ class MyPlacesViewController: UIViewController {
     
     private func handlePlaceTap() {
         horizontalController.didSelectHandler = { [weak self] placeId in
-            let detailController = PlaceDetailsController()
-            detailController.placeId = placeId
+            let detailController = PlaceDetailsController(placeId: placeId, location: Location(lat: 0, lng: 0)) //Get from defaults
             self?.navigationController?.pushViewController(detailController, animated: true)
         }
         

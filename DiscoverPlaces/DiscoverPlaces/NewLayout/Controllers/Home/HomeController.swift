@@ -17,7 +17,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     private var userLocation: Location?
     
-    private var results = [PlaceResult]()
+    private var placeResults = [PlaceResult]()
     
     //Make custom object
     private let activityIndicatorView: UIActivityIndicatorView = {
@@ -87,12 +87,13 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             }
             
             //If results < 5, load other places
-            self.results = self.searchResponseFilter.results(from: response)
-            self.handleFetchSuccess()
+            let placeResults = self.searchResponseFilter.results(from: response)
+            self.handleFetchSuccess(with: placeResults)
         }
     }
     
-    private func handleFetchSuccess() {
+    private func handleFetchSuccess(with placeResults: [PlaceResult]) {
+        self.placeResults = placeResults
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.5, animations: {
                 self.activityIndicatorView.stopAnimating()
@@ -116,11 +117,10 @@ extension HomeController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeLargeCellHolder.id, for: indexPath) as! HomeLargeCellHolder
         cell.horizontalController.userLocation = self.userLocation
-        cell.horizontalController.results = results
+        cell.horizontalController.results = placeResults
         cell.horizontalController.didSelectHandler = { [weak self] result in //Only need placeId
-            let detailsController = PlaceDetailsController()
-            detailsController.placeId = result.place_id
-            
+            guard let placeId = result.place_id, let location = self?.userLocation else { return }
+            let detailsController = PlaceDetailsController(placeId: placeId, location: location)
             self?.navigationController?.pushViewController(detailsController, animated: true)
         }
         return cell

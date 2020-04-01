@@ -21,25 +21,14 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case morePlaces
     }
     
-    var userLocation: Location?
-    
-    var placeId: String? {
-        didSet {
-            if let id = placeId {
-                fetchPlaceData(for: id)
-            }
-        }
-    }
-    
+    let searchResponseFilter = SearchResponseFilter()
+
+    private let userLocation: Location
+    private let placeId: String
+
+    var placeDetailResult: PlaceDetailResult?
     var morePlaces: [PlaceResult]?
-    
-    var place: PlaceDetailResult? {
-        didSet {
-            guard let location = place?.geometry?.location else { return }
-            fetchMorePlacesData(near: location)
-        }
-    }
-    
+
     let splashScreen: UIView! = {
         let v = UIView()
         v.backgroundColor = .systemBackground
@@ -55,16 +44,27 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }()
 
     fileprivate let errorCellId = "errorCellId"
-        
+    
+    init(placeId: String, location: Location) {
+        self.placeId = placeId
+        self.userLocation = location
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collectionView.backgroundColor = .systemBackground
         collectionView.contentInsetAdjustmentBehavior = .never
         navigationItem.largeTitleDisplayMode = .never
         
         setUpSplashScreen()
         registerCells()
+        
+        fetchPlaceData(for: placeId)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,18 +135,24 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
                 return
             }
             
-            self.place = placeResponse.result
-            
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.fadeOutSplashScreen()
-            }
+            guard let detailResult = placeResponse.result else { return }
+            self.handlePlaceDetailSuccess(with: detailResult)
+        }
+    }
+    
+    private func handlePlaceDetailSuccess(with result: PlaceDetailResult) {
+        self.placeDetailResult = result
+        self.fetchMorePlacesData(near: self.userLocation)
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            self.fadeOutSplashScreen()
         }
     }
     
     func fetchMorePlacesData(near location: Location) {
         
-        Service.shared.fetchNearbyPlaces(location: location, radius: 3000) { (results, error) in
+        Service.shared.fetchNearbyPlaces(location: location, radius: 3000) { (response, error) in
             
             if let error = error {
                 print("Failed to fetch places: ", error)
@@ -154,28 +160,26 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             }
             
             //success
-            guard let results = results else {
+            guard let response = response else {
                 print("No results?")
                 return
             }
-            
-            var filteredResults = [PlaceResult]()
-            
-            results.results.forEach({ (result) in
-                if result.containsPhotos() && result.types?.contains("point_of_interest") ?? true { //Exclude types???
-                    filteredResults.append(result)
-                }
-            })
-            
-            self.morePlaces = filteredResults
-            
-            
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+                        
+            let filteredResults = self.searchResponseFilter.results(from: response)
+            self.handleMorePlacesSuccess(with: filteredResults)
+        }
+    }
+    
+    private func handleMorePlacesSuccess(with results: [PlaceResult]) {
+        self.morePlaces = results
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
         }
     }
 }
+
+
 
 extension PlaceDetailsController {
     
@@ -183,10 +187,10 @@ extension PlaceDetailsController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PlaceImagesHolder.id, for: indexPath) as! PlaceImagesHolder
         
-        cell.pageControlView.numberOfPages = place?.photos?.count ?? 0
-        cell.horizontalController.photos = place?.photos
-        cell.placeName = place?.name
-        cell.rating = place?.rating
+        cell.pageControlView.numberOfPages = placeDetailResult?.photos?.count ?? 0
+        cell.horizontalController.photos = placeDetailResult?.photos
+        cell.placeName = placeDetailResult?.name
+        cell.rating = placeDetailResult?.rating
         cell.horizontalController.didScrollImagesController = { nearestPage in
             cell.pageControlView.currentPage = nearestPage
         }
@@ -203,22 +207,22 @@ extension PlaceDetailsController {
         case 0:
             //Address
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddressCell.id, for: indexPath) as! AddressCell
-            cell.vicinity = place?.vicinity
+            cell.vicinity = placeDetailResult?.vicinity
             return cell
         case 1:
             //Hours
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OpeningTimeCell.id, for: indexPath) as! OpeningTimeCell
-            cell.openingTimes = place?.opening_hours?.weekdayText ?? []
+            cell.openingTimes = placeDetailResult?.opening_hours?.weekdayText ?? []
             return cell
         case 2:
             //PhoneNumber
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhoneNumberCell.id, for: indexPath) as! PhoneNumberCell
-            cell.phoneNumber = place?.international_phone_number
+            cell.phoneNumber = placeDetailResult?.international_phone_number
             return cell
         case 3:
             //Website
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WebAddressCell.id, for: indexPath) as! WebAddressCell
-            cell.webAddress = place?.website
+            cell.webAddress = placeDetailResult?.website
             return cell
         case 4:
             //ActionButtons
@@ -229,7 +233,7 @@ extension PlaceDetailsController {
         case 5:
             //Reviews
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewsHolder.id, for: indexPath) as! ReviewsHolder
-            cell.horizontalController.reviews = place?.reviews
+            cell.horizontalController.reviews = placeDetailResult?.reviews
             cell.horizontalController.didSelectHandler = { [weak self] review in
                 let reviewViewController = ReviewDetailViewController()
                 reviewViewController.review = review
@@ -239,13 +243,14 @@ extension PlaceDetailsController {
         case 6:
             //More Places
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
-//            cell.horizontalController.location = userLocation
-////            cell.horizontalController.places = morePlaces
-//            cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] id, name in
-//                let detailController = PlaceDetailsController()
-//                detailController.placeId = id
-//                self?.navigationController?.show(detailController, sender: self)
-//            }
+            cell.horizontalController.location = userLocation
+            
+            cell.horizontalController.subCategoryGroup = PlacesGroup(results: morePlaces)
+            cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
+                guard let location = self?.userLocation else { return }
+                let detailController = PlaceDetailsController(placeId: placeId, location: location)
+                self?.navigationController?.show(detailController, sender: self)
+            }
             return cell
         default:
             #if DEBUG
@@ -260,22 +265,22 @@ extension PlaceDetailsController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.item {
         case 0:
-            return cellHeight(for: place?.vicinity, desiredHeight: 60)
+            return cellHeight(for: placeDetailResult?.vicinity, desiredHeight: 60)
         case 1:
             //Hours
-            return cellHeight(for: place?.opening_hours, desiredHeight: 60)
+            return cellHeight(for: placeDetailResult?.opening_hours, desiredHeight: 60)
         case 2:
             //PhoneNumber
-            return cellHeight(for: place?.international_phone_number, desiredHeight: 60)
+            return cellHeight(for: placeDetailResult?.international_phone_number, desiredHeight: 60)
         case 3:
             //Website
-            return cellHeight(for: place?.website, desiredHeight: 60)
+            return cellHeight(for: placeDetailResult?.website, desiredHeight: 60)
         case 4:
             //ActionButtons
             return .init(width: view.frame.width, height: 60)
         case 5:
             //Reviews
-            return cellHeight(for: place?.reviews, desiredHeight: 180)
+            return cellHeight(for: placeDetailResult?.reviews, desiredHeight: 180)
         case 6:
             //More Places
             return .init(width: view.frame.width, height: 350 + 16)
@@ -287,7 +292,7 @@ extension PlaceDetailsController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case Detail.address.rawValue:
-            guard let place = place,
+            guard let place = placeDetailResult,
                 let longitude = place.geometry?.location.lng,
                 let latitude = place.geometry?.location.lat else { return }
             
@@ -295,16 +300,16 @@ extension PlaceDetailsController {
             
         case Detail.openingHours.rawValue:
             let openingHoursController = OpeningHoursController()
-            openingHoursController.openingHours = place?.opening_hours
+            openingHoursController.openingHours = placeDetailResult?.opening_hours
             navigationController?.show(openingHoursController, sender: self)
             
         case Detail.website.rawValue:
             let websiteViewController = WebsiteViewController()
-            websiteViewController.urlString = place?.website
+            websiteViewController.urlString = placeDetailResult?.website
             navigationController?.show(websiteViewController, sender: self)
             
         case Detail.phoneNumber.rawValue:
-            guard let number = place?.international_phone_number else { return }
+            guard let number = placeDetailResult?.international_phone_number else { return }
             callNumber(number: number)
             
         default:
@@ -360,9 +365,9 @@ extension PlaceDetailsController: ActionButtonsCellDelegate {
     func sharePressed(cell: ActionButtonsCell) {
         let urlString: String?
         
-        if let websiteString = place?.website {
+        if let websiteString = placeDetailResult?.website {
             urlString = websiteString
-        } else if let googleMapsUrlString = place?.url {
+        } else if let googleMapsUrlString = placeDetailResult?.url {
             urlString = googleMapsUrlString
         } else {
             //Unable to retrieve info or something...

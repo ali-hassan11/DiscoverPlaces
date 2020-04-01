@@ -10,18 +10,22 @@ import UIKit
 
 class SearchController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
+    private let searchResponseFilter = SearchResponseFilter()
+    
     fileprivate let cellId = "cellId"
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var searchResults = [PlaceResult]()
     
-    private let enterSearchTextlabel = UILabel(text: "Search for places", font: .systemFont(ofSize: 17), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
+    private var userLocation: Location
+    
+    private let enterSearchTextlabel = UILabel(text: "Search for any place, anywhere!", font: .systemFont(ofSize: 17), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
     
     let searchIcon = UIImageView(image: UIImage(systemName: "magnifyingglass.circle.fill"))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        searchController.searchBar.placeholder = "restaurants in Barcelona..." //Array or different quiries and switch between every 3 seconds?, or just every time loads
+        print(userLocation)
+        searchController.searchBar.placeholder = "Restaurants in Paris..." //Array or different quiries and switch between every 3 seconds?, or just every time loads
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         addEmptyView()
@@ -29,6 +33,20 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         
         collectionView.backgroundColor = .systemBackground
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: cellId)
+    }
+    
+    override init() {
+        self.userLocation = UserLocation.lastSavedLocation()
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        userLocation = UserLocation.lastSavedLocation()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -46,13 +64,9 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         fetchData(for: queryText)
         searchController.searchBar.placeholder = ""
     }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-//        print(searchBar.text)
-    }
-    
+
     private func fetchData(for queryText: String) {
-        Service.shared.fetchSearchResults(for: queryText) { (results, error) in
+        Service.shared.fetchSearchResults(for: queryText) { (response, error) in
             
             if let error = error {
                 print("Failed to fetch: ", error.localizedDescription)
@@ -60,20 +74,9 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             }
             
             //success
-            var filteredResults = [PlaceResult]()
+            guard let response = response else { return }
             
-            guard let results = results else { return }
-            
-            results.results.forEach({ (result) in
-                if result.containsPhotos()
-                    && !(result.types?.contains("locality") ?? true)
-                    && !(result.types?.contains("country") ?? true)
-                    && !(result.types?.contains("continent") ?? true)
-                {
-                    filteredResults.append(result)
-                }
-            })
-            
+            let filteredResults = self.searchResponseFilter.results(from: response)
             self.searchResults = filteredResults
             self.updateUI(searchText: queryText)
         }
@@ -131,8 +134,8 @@ extension SearchController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let result = searchResults[indexPath.row]
-        let placeDetailController = PlaceDetailsController()
-        placeDetailController.placeId = result.place_id
+        guard let placeId = result.place_id else { return }
+        let placeDetailController = PlaceDetailsController(placeId: placeId, location: Location(lat: 0, lng: 0))//Get from defaults
         navigationController?.pushViewController(placeDetailController, animated: true)
     }
     
