@@ -73,6 +73,7 @@
 		CE8A2FD323F08AA900CDF866 /* DetailsOpeningTimesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A2FD223F08AA900CDF866 /* DetailsOpeningTimesCell.swift */; };
 		CE8A2FD523F1CE0800CDF866 /* DetailsTopSectionCellXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A2FD423F1CE0700CDF866 /* DetailsTopSectionCellXib.swift */; };
 		CE8A2FD723F1CE3000CDF866 /* DetailsTopSectionCellXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8A2FD623F1CE3000CDF866 /* DetailsTopSectionCellXib.xib */; };
+		CE9CDF7024352D2C008DF6DE /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CDF6F24352D2C008DF6DE /* UserLocation.swift */; };
 		CEABA02E24177AC90057A955 /* Category+SubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABA02D24177AC90057A955 /* Category+SubCategory.swift */; };
 		CEBEE6DB24333449002C43E8 /* PlaceResultsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */; };
 		CECDA1462401C51A005F85FB /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA1452401C51A005F85FB /* StarsView.swift */; };
@@ -179,6 +180,7 @@
 		CE8A2FD223F08AA900CDF866 /* DetailsOpeningTimesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsOpeningTimesCell.swift; sourceTree = "<group>"; };
 		CE8A2FD423F1CE0700CDF866 /* DetailsTopSectionCellXib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTopSectionCellXib.swift; sourceTree = "<group>"; };
 		CE8A2FD623F1CE3000CDF866 /* DetailsTopSectionCellXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsTopSectionCellXib.xib; sourceTree = "<group>"; };
+		CE9CDF6F24352D2C008DF6DE /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		CEABA02D24177AC90057A955 /* Category+SubCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+SubCategory.swift"; sourceTree = "<group>"; };
 		CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceResultsFilter.swift; sourceTree = "<group>"; };
 		CECDA1452401C51A005F85FB /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
@@ -244,7 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */,
-				CE327AF224169DD20010F400 /* SmallSquarePlacesHorizontalController.swift */,
+				CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -264,6 +266,7 @@
 				CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */,
 				CE616D062405D96D008E7067 /* DefaultsManager.swift */,
 				CECDA1452401C51A005F85FB /* StarsView.swift */,
+				CE9CDF6F24352D2C008DF6DE /* UserLocation.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -785,13 +788,14 @@
 				CE659A0D23EF884700E531CD /* ImagesHorizontalController.swift in Sources */,
 				CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */,
 				CE6599F023EA692500E531CD /* HomeController.swift in Sources */,
-				CE327AF324169DD20010F400 /* SmallSquarePlacesHorizontalController.swift in Sources */,
+				CE327AF324169DD20010F400 /* PlaceGroupHorizontalController.swift in Sources */,
 				60EADA7D23F6B75D0095DBF9 /* PhoneNumberCell.swift in Sources */,
 				CE616D072405D96D008E7067 /* DefaultsManager.swift in Sources */,
 				CE6599ED23EA68D100E531CD /* VerticalStackview.swift in Sources */,
 				CE5835CE23DE204B00C89622 /* BaseCollectionViewController.swift in Sources */,
 				CE659A0723EF87C100E531CD /* CategoriesHorizontalController.swift in Sources */,
 				CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */,
+				CE9CDF7024352D2C008DF6DE /* UserLocation.swift in Sources */,
 				CE8A2FCD23F0890100CDF866 /* MorePlacesCell.swift in Sources */,
 				CEEB4D5C23E84978006D79E6 /* HorizontalSnappingController.swift in Sources */,
 				CE8A2FD123F08A7C00CDF866 /* DetailsButtonsCell.swift in Sources */,
