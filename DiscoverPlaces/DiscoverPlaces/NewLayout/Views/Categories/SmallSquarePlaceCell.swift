@@ -17,33 +17,33 @@ class SmallSquarePlaceCell: UICollectionViewCell {
     let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, numberOfLines: 1)
     let starsView = StarsView(width: 80)
 
-    var place: PlaceResult? {
-        didSet {
-            guard let place = place else { return } //Error
-            
-            guard let photo = place.photos?.first else {
-                return //Default Image
-            }
-            
-            guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else {
-                return /*Default Image*/
-            }
-            
-            placeImageView.backgroundColor = .secondarySystemBackground
-            placeImageView.sd_setImage(with: url)
-            placeNameLabel.text = place.name
-            
-            guard let rating = place.rating else {
-                print("\(String(describing: self.placeNameLabel.text)): No Rating 🤔🤔🤔")
-                return
-            }
-            starsView.populate(with: rating)
-            
-            guard let geometry = place.geometry else { fatalError() }
-            let distanceString = geometry.distanceString(from: Location(lat: 1, lng: 1))
-            distanceLabel.text = distanceString
+    func configure(place: PlaceResult?, userLocation: Location?) {
+        guard let place = place else { return } //Error
+        
+        guard let photo = place.photos?.first else {
+            return //Default Image
         }
+        
+        guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else {
+            return /*Default Image*/
+        }
+        
+        placeImageView.backgroundColor = .secondarySystemBackground
+        placeImageView.sd_setImage(with: url)
+        placeNameLabel.text = place.name
+        
+        guard let rating = place.rating else {
+            print("\(String(describing: self.placeNameLabel.text)): No Rating 🤔🤔🤔")
+            return
+        }
+        starsView.populate(with: rating)
+        
+        guard let geometry = place.geometry else { return }
+        //If no location, use Saved location
+        let distanceString = geometry.distanceString(from: userLocation!)
+        distanceLabel.text = distanceString
     }
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
