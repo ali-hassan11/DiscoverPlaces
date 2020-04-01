@@ -14,7 +14,7 @@ class SmallSquarePlacesHorizontalController: HorizontalSnappingController, UICol
     
     var location: Location?
     
-    var subCateegoryGroup: SubCategoryGroup? {
+    var subCategoryGroup: SubCategoryGroup? {
         didSet {
             collectionView.reloadData()
         }
@@ -24,7 +24,6 @@ class SmallSquarePlacesHorizontalController: HorizontalSnappingController, UICol
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView.reloadData()
         setupCollectionView()
     }
 
@@ -38,12 +37,12 @@ class SmallSquarePlacesHorizontalController: HorizontalSnappingController, UICol
 
 extension SmallSquarePlacesHorizontalController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return subCateegoryGroup?.results.count ?? 0
+        return subCategoryGroup?.results.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallSquarePlaceCell.id, for: indexPath) as! SmallSquarePlaceCell
-        cell.place = subCateegoryGroup?.results[indexPath.item]
+        cell.configure(place: subCategoryGroup?.results[indexPath.item], userLocation: self.location)
         return cell
     }
     
@@ -52,8 +51,7 @@ extension SmallSquarePlacesHorizontalController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected: \(String(describing: subCateegoryGroup?.results[indexPath.item].name))")
-        guard let placeId = subCateegoryGroup?.results[indexPath.item].place_id else { return }
+        guard let placeId = subCategoryGroup?.results[indexPath.item].place_id else { return }
         didSelectPlaceInCategoriesHandler?(placeId)
     }
 }

@@ -25,14 +25,20 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.reloadData()
-        collectionView.backgroundColor = .systemBackground
-        collectionView.register(SubCategoryiesHolder.self, forCellWithReuseIdentifier: SubCategoryiesHolder.id)
+        view.backgroundColor = .systemBackground
+        setupCollectionView()
         
-        guard let category = category, let location = location else { fatalError() }
+        guard let category = category, let location = location else { return } //Show error page
         fetchSubCategoryGroups(category: category, location: location)
     }
 
+    private func setupCollectionView() {
+        collectionView.alpha = 0
+        collectionView.reloadData()
+        collectionView.backgroundColor = .systemBackground
+        collectionView.register(SubCategoryiesHolder.self, forCellWithReuseIdentifier: SubCategoryiesHolder.id)
+    }
+    
     private func fetchSubCategoryGroups(category: Category, location: Location) {
         category.subCategories().forEach {
             dispatchGroup.enter()
@@ -55,14 +61,21 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             let placeResults = self.searchResponseFilter.results(from: response)
             subCategoryGroup = SubCategoryGroup(title: subCategory.formatted(), results: placeResults)
             self.dispatchGroup.leave()
-        }
-        
-        dispatchGroup.notify(queue: .main) {
-            print("➡️ Response for \(String(describing: subCategoryGroup?.title)) : \n\(String(describing: subCategoryGroup?.results.first?.name))\n")
             
+            self.handleSuccess(with: subCategoryGroup)
+        }
+    }
+    
+    private func handleSuccess(with subCategoryGroup: SubCategoryGroup?) {
+        dispatchGroup.notify(queue: .main) {
             guard let subCategoryGroup = subCategoryGroup, subCategoryGroup.results.count > 0 else { return }
             self.subCategoryGroups.append(subCategoryGroup)
+            self.subCategoryGroups.sort{$0.results.count > $1.results.count}
             self.collectionView.reloadData()
+            UIView.animate(withDuration: 0.35) {
+                self.collectionView.alpha = 1
+
+            }
         }
     }
 
@@ -97,7 +110,8 @@ extension MultipleCategoriesController {
             
             let subCategoryGroup = subCategoryGroups[indexPath.item]
             cell.subCategoryTitleLabel.text = subCategoryGroup.title
-            cell.horizontalController.subCateegoryGroup = subCategoryGroup
+            cell.horizontalController.subCategoryGroup = subCategoryGroup
+            cell.horizontalController.location = self.location
             cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
                 let detailsController = PlaceDetailsController()
                 detailsController.placeId = placeId
