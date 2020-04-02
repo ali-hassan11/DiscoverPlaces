@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SmallSquarePlaceCell: UICollectionViewCell {
+class SmallPlaceCell: UICollectionViewCell {
     
     public static let id = "smallSquareSpaceCellId"
     

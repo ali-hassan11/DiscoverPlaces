@@ -29,7 +29,7 @@ class PlaceGroupHorizontalController: HorizontalSnappingController, UICollection
 
     private func setupCollectionView() {
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(SmallSquarePlaceCell.self, forCellWithReuseIdentifier: SmallSquarePlaceCell.id)
+        collectionView.register(SmallPlaceCell.self, forCellWithReuseIdentifier: SmallPlaceCell.id)
         collectionView.contentInset = .init(top: 0, left: 24, bottom: 0, right: 24)
     }
     
@@ -41,7 +41,7 @@ extension PlaceGroupHorizontalController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallSquarePlaceCell.id, for: indexPath) as! SmallSquarePlaceCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallPlaceCell.id, for: indexPath) as! SmallPlaceCell
         cell.configure(place: placeGroup?.results[indexPath.item], userLocation: self.location)
         return cell
     }

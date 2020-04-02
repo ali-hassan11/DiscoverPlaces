@@ -81,7 +81,7 @@
 		CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */; };
 		CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5723E84978006D79E6 /* Spacing.swift */; };
 		CEEB4D5C23E84978006D79E6 /* HorizontalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */; };
-		CEFD55C6241B1204001E21AC /* SmallSquarePlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD55C5241B1204001E21AC /* SmallSquarePlaceCell.swift */; };
+		CEFD55C6241B1204001E21AC /* SmallPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD55C5241B1204001E21AC /* SmallPlaceCell.swift */; };
 		CEFD55C8241B7038001E21AC /* SubCategoryiesHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD55C7241B7038001E21AC /* SubCategoryiesHolder.swift */; };
 /* End PBXBuildFile section */
 
@@ -188,7 +188,7 @@
 		CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalStackView.swift; sourceTree = "<group>"; };
 		CEEB4D5723E84978006D79E6 /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalSnappingController.swift; sourceTree = "<group>"; };
-		CEFD55C5241B1204001E21AC /* SmallSquarePlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSquarePlaceCell.swift; sourceTree = "<group>"; };
+		CEFD55C5241B1204001E21AC /* SmallPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallPlaceCell.swift; sourceTree = "<group>"; };
 		CEFD55C7241B7038001E21AC /* SubCategoryiesHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryiesHolder.swift; sourceTree = "<group>"; };
 		E9F15C9D76A1D94AC2A574C0 /* Pods-DiscoverPlaces-DiscoverPlacesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscoverPlaces-DiscoverPlacesUITests.debug.xcconfig"; path = "Target Support Files/Pods-DiscoverPlaces-DiscoverPlacesUITests/Pods-DiscoverPlaces-DiscoverPlacesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -254,7 +254,7 @@
 		CE327AEF241696350010F400 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				CEFD55C5241B1204001E21AC /* SmallSquarePlaceCell.swift */,
+				CEFD55C5241B1204001E21AC /* SmallPlaceCell.swift */,
 				CEFD55C7241B7038001E21AC /* SubCategoryiesHolder.swift */,
 			);
 			path = Categories;
@@ -810,7 +810,7 @@
 				60EADA8923F706EB0095DBF9 /* PlaceDetailResponse.swift in Sources */,
 				60EADA8323F6D96B0095DBF9 /* ReviewsHorizontalController.swift in Sources */,
 				CEABA02E24177AC90057A955 /* Category+SubCategory.swift in Sources */,
-				CEFD55C6241B1204001E21AC /* SmallSquarePlaceCell.swift in Sources */,
+				CEFD55C6241B1204001E21AC /* SmallPlaceCell.swift in Sources */,
 				CE659A0123EF874C00E531CD /* HomeLargeCellsHorizontalController.swift in Sources */,
 				CE5835D123DE224C00C89622 /* UIView+Layout.swift in Sources */,
 				CE319CE723E15E1E0088B9D1 /* Constants.swift in Sources */,

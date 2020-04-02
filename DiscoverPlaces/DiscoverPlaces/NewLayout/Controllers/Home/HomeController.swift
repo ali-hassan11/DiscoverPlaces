@@ -28,6 +28,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         return aiv
     }()
     
+    //Make custom object
     private let fadeView: UIView = {
         let v = UIView()
         v.backgroundColor = .systemBackground
@@ -40,6 +41,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         navigationItem.largeTitleDisplayMode = .always
         setupBarButtons()
         setupCollectionView()
+        
         determineMyCurrentLocation()
     }
     
@@ -192,6 +194,7 @@ extension HomeController: CLLocationManagerDelegate {
         
         if isLocationSettingEnabled {
             updateLastSavedLocation(with: currentLocation)
+            print(UserLocation.lastSavedLocation())
             self.userLocation = currentLocation
         }
         

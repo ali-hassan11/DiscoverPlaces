@@ -57,11 +57,9 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = .systemBackground
-        collectionView.contentInsetAdjustmentBehavior = .never
         navigationItem.largeTitleDisplayMode = .never
-        
         setUpSplashScreen()
+        setupCollectionView()
         registerCells()
         
         fetchPlaceData(for: placeId)
@@ -80,6 +78,11 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.shadowImage = nil
         navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    private func setupCollectionView() {
+        collectionView.backgroundColor = .systemBackground
+        collectionView.contentInsetAdjustmentBehavior = .never
     }
     
     private func setUpSplashScreen() {

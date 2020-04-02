@@ -17,8 +17,8 @@ class Service {
     /* https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=(searchText)&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg */
     
     //Change to findplacefromtext and only get data you need for cells.
-    func fetchSearchResults(for searchText: String, completion: @escaping (SearchResponse?, Error?) -> Void) {
-        let urlString = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(searchText)&location=\(25.1413),\(55.1853)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+    func fetchSearchResults(for searchText: String, location: Location, completion: @escaping (SearchResponse?, Error?) -> Void) {
+        let urlString = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(searchText)&location=\(location.lat),\(location.lng)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         print(urlString)
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }

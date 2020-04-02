@@ -32,7 +32,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         
         collectionView.backgroundColor = .systemBackground
         collectionView.contentInset = .init(top: 12, left: 0, bottom: 0, right: 0)
-        collectionView.register(SmallSquarePlaceCell.self, forCellWithReuseIdentifier: SmallSquarePlaceCell.id)
+        collectionView.register(SmallPlaceCell.self, forCellWithReuseIdentifier: SmallPlaceCell.id)
     }
     
     override init() {
@@ -47,6 +47,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         userLocation = UserLocation.lastSavedLocation()
+        print(userLocation)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -54,19 +55,19 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         guard let searchText = searchBar.text else { return }
         
         if searchText == "" {
-            enterSearchTextlabel.text = "Search for places"
+            enterSearchTextlabel.text = "Search for any place, anywhere!"
             return
         }
         
         let queryText = searchText.replacingOccurrences(of: " ", with: "+")
         //Take into account special characters
         
-        fetchData(for: queryText)
+        fetchData(for: queryText, location: userLocation)
         searchController.searchBar.placeholder = ""
     }
 
-    private func fetchData(for queryText: String) {
-        Service.shared.fetchSearchResults(for: queryText) { (response, error) in
+    private func fetchData(for searchText: String, location: Location) {
+        Service.shared.fetchSearchResults(for: searchText, location: location) { (response, error) in
             
             if let error = error {
                 print("Failed to fetch: ", error.localizedDescription)
@@ -78,7 +79,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             
             let filteredResults = self.searchResponseFilter.results(from: response)
             self.searchResults = filteredResults
-            self.updateUI(searchText: queryText)
+            self.updateUI(searchText: searchText)
         }
     }
 
@@ -127,7 +128,7 @@ extension SearchController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallSquarePlaceCell.id, for: indexPath) as! SmallSquarePlaceCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallPlaceCell.id, for: indexPath) as! SmallPlaceCell
         cell.configure(place: searchResults[indexPath.item], userLocation: userLocation)
         return cell
     }
