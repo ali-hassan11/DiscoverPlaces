@@ -46,6 +46,8 @@ class PlaceImagesHolder: UICollectionReusableView {
         addSubview(horizontalController.view)
         horizontalController.view.fillSuperview()
         
+        pageControlView.isUserInteractionEnabled = false
+        
         //Gradient View
         addSubview(gradView)
         gradView.fillSuperview()
