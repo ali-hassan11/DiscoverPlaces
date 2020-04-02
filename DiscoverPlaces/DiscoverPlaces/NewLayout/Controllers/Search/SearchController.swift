@@ -134,9 +134,10 @@ extension SearchController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let result = searchResults[indexPath.row]
-        guard let placeId = result.place_id else { return }
-        let placeDetailController = PlaceDetailsController(placeId: placeId, location: Location(lat: 0, lng: 0))//Get from defaults
+        let place = searchResults[indexPath.row]
+        guard let placeId = place.place_id else { return }
+        guard let location = place.geometry?.location else { return }
+        let placeDetailController = PlaceDetailsController(placeId: placeId, location: location)//Get from defaults
         navigationController?.pushViewController(placeDetailController, animated: true)
     }
     
