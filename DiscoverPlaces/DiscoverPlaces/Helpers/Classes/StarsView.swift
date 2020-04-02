@@ -26,6 +26,11 @@ class StarsView: UIView {
                 
         removeAllStars()
         
+        //If 0 stars (No rating)
+        if rating == 0 {
+            return
+        }
+        
         //If no full stars
         if rating >= 0 && rating <= 0.75 {
             let starImageView = configureStarImageView(imageName: "star.lefthalf.fill")
@@ -100,6 +105,13 @@ class StarsView: UIView {
         starStackView.fillSuperview()
     }
     
+    public func removeAllStars() {
+        starStackView.arrangedSubviews.forEach { (view) in
+            starStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+    }
+    
     private func configureStarImageView(imageName: String) -> UIImageView {
         let starImageView = UIImageView(image: UIImage(systemName: imageName))
         starImageView.constrainHeight(constant: width / 5)
@@ -119,13 +131,6 @@ class StarsView: UIView {
         while starStackView.arrangedSubviews.count < 5 {
             let starImageView = configureStarImageView(imageName: "star.fill")
             starStackView.addArrangedSubview(starImageView)
-        }
-    }
-    
-    private func removeAllStars() {
-        starStackView.arrangedSubviews.forEach { (view) in
-            starStackView.removeArrangedSubview(view)
-            view.removeFromSuperview()
         }
     }
 }

@@ -55,7 +55,7 @@ class SmallPlaceCell: UICollectionViewCell {
     
     private func configureRating(using place: PlaceResult) {
         guard let rating = place.rating else {
-            print("\(String(describing: self.placeNameLabel.text)): No Rating 🤔🤔🤔")
+            starsView.removeAllStars()
             return
         }
         starsView.populate(with: rating)
