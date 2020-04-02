@@ -56,9 +56,14 @@ class MyPlaceCell: UICollectionViewCell {
     private func configureLabels() {
         guard let name = place?.name else { return }
         placeNameLabel.text = name
-        
-        guard let address = place?.vicinity else { return }
-        addressLabel.text = address
+        //NEED TO FIND WHERE THE DATA POPULATING THIS CELL IS BEING FETCHED 🤔🤔🤔
+        if let vicinity = place?.vicinity {
+            addressLabel.text = vicinity
+        } else if let address = place?.vicinity {
+            addressLabel.text = address
+        } else if let name = place?.name {
+            addressLabel.text = name
+        }
     }
     
     private func addViews() {
