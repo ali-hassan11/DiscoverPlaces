@@ -12,7 +12,7 @@ class ToDoListHolderCell: UICollectionViewCell {
     
     public static let id = "toDoHolderCellId"
     
-    var listController = ToDoListController()
+    var listController = PlaceListController()
     
        override init(frame: CGRect) {
         super.init(frame: frame)

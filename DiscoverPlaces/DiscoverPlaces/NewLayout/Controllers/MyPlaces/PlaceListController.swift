@@ -8,10 +8,12 @@
 
 import UIKit
 
-class FavouritesListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class PlaceListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var didSelectHandler: ((String) -> ())?
 
+    var listType: ListType?
+    
     var placeIdList: [String]? {
         didSet {
             if placeIdList != oldValue {
@@ -32,7 +34,8 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
     }
     
     func refreshData() {
-        placeIdList = DefaultsManager.getList(listKey: .favourites)
+        guard let listType = listType else { return }
+        placeIdList = DefaultsManager.getList(listKey: listType)
         collectionView.reloadData()
     }
 
@@ -42,7 +45,6 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPlaceCell.id, for: indexPath) as! MyPlaceCell
-        cell.listType = .favourites
         cell.place = placeResults?[indexPath.item]
         return cell
     }
@@ -90,18 +92,6 @@ class FavouritesListController: BaseCollectionViewController, UICollectionViewDe
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
-        }
-    }
-}
-
-extension FavouritesListController: MyPlaceCellDelegate {
-    
-    func togglePlaceInList(cell: MyPlaceCell) {
-        // // // // // -- -- -- -- -- DELEGATE METHOD NOT BEING CALLED??? -- -- -- -- -- // // // // //
-        guard let placeIds = placeIdList else { return }
-        if placeIds.contains(cell.place!.place_id) {
-            placeIdList = placeIdList?.filter { $0 != cell.place!.place_id }
-            collectionView.reloadData()
         }
     }
 }

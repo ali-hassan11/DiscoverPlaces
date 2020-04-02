@@ -59,7 +59,7 @@
 		CE659A0F23EF888900E531CD /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A0E23EF888900E531CD /* ImageCell.swift */; };
 		CE659A1123EF897000E531CD /* PlaceDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A1023EF897000E531CD /* PlaceDetailsCell.swift */; };
 		CE694B8724097DD400F37ED6 /* MyPlacesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8624097DD300F37ED6 /* MyPlacesHorizontalController.swift */; };
-		CE694B8924097E0500F37ED6 /* FavouritesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8824097E0500F37ED6 /* FavouritesListController.swift */; };
+		CE694B8924097E0500F37ED6 /* PlaceListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8824097E0500F37ED6 /* PlaceListController.swift */; };
 		CE694B8B24097E2700F37ED6 /* ToDoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8A24097E2700F37ED6 /* ToDoListController.swift */; };
 		CE694B8E24097EC400F37ED6 /* FavouritesListHolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8D24097EC400F37ED6 /* FavouritesListHolderCell.swift */; };
 		CE694B9024097ECF00F37ED6 /* ToDoListHolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8F24097ECF00F37ED6 /* ToDoListHolderCell.swift */; };
@@ -166,7 +166,7 @@
 		CE659A0E23EF888900E531CD /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		CE659A1023EF897000E531CD /* PlaceDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsCell.swift; sourceTree = "<group>"; };
 		CE694B8624097DD300F37ED6 /* MyPlacesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacesHorizontalController.swift; sourceTree = "<group>"; };
-		CE694B8824097E0500F37ED6 /* FavouritesListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesListController.swift; sourceTree = "<group>"; };
+		CE694B8824097E0500F37ED6 /* PlaceListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListController.swift; sourceTree = "<group>"; };
 		CE694B8A24097E2700F37ED6 /* ToDoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListController.swift; sourceTree = "<group>"; };
 		CE694B8D24097EC400F37ED6 /* FavouritesListHolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesListHolderCell.swift; sourceTree = "<group>"; };
 		CE694B8F24097ECF00F37ED6 /* ToDoListHolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListHolderCell.swift; sourceTree = "<group>"; };
@@ -359,7 +359,7 @@
 				CE616D042405D94D008E7067 /* ListType.swift */,
 				CE616D022405D46D008E7067 /* MyPlacesViewController.swift */,
 				CE694B8624097DD300F37ED6 /* MyPlacesHorizontalController.swift */,
-				CE694B8824097E0500F37ED6 /* FavouritesListController.swift */,
+				CE694B8824097E0500F37ED6 /* PlaceListController.swift */,
 				CE694B8A24097E2700F37ED6 /* ToDoListController.swift */,
 			);
 			path = MyPlaces;
@@ -768,7 +768,7 @@
 				CECDA1462401C51A005F85FB /* StarsView.swift in Sources */,
 				CE616D032405D46D008E7067 /* MyPlacesViewController.swift in Sources */,
 				CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */,
-				CE694B8924097E0500F37ED6 /* FavouritesListController.swift in Sources */,
+				CE694B8924097E0500F37ED6 /* PlaceListController.swift in Sources */,
 				CE6599FF23EF872900E531CD /* HomeLargeCellHolder.swift in Sources */,
 				CE8A2FD523F1CE0800CDF866 /* DetailsTopSectionCellXib.swift in Sources */,
 				CE659A0323EF876600E531CD /* HomeLargeCell.swift in Sources */,

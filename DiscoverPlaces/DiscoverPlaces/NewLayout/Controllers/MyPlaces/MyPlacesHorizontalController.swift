@@ -29,6 +29,7 @@ class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionVi
         if indexPath.row == 0 {
             //Favourites
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavouritesListHolderCell.id, for: indexPath) as! FavouritesListHolderCell
+            cell.listController.listType = .favourites
             cell.refreshData()
             cell.listController.didSelectHandler = { [weak self] placeId in
                 self?.didSelectHandler?(placeId)
@@ -37,6 +38,7 @@ class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionVi
         } else if indexPath.row == 1 {
             //To-Do
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoListHolderCell.id, for: indexPath) as! ToDoListHolderCell
+            cell.listController.listType = .toDo
             cell.refreshData()
             cell.listController.didSelectHandler = { [weak self] placeId in
                   self?.didSelectHandler?(placeId)

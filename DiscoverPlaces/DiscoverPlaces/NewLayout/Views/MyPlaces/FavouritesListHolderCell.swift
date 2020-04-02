@@ -12,7 +12,7 @@ class FavouritesListHolderCell: UICollectionViewCell {
     
     public static var id = "favouritesHolderCellId"
     
-    var listController = FavouritesListController()
+    var listController = PlaceListController()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
