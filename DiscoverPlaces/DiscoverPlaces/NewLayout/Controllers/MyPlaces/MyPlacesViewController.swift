@@ -14,6 +14,8 @@ class MyPlacesViewController: UIViewController {
     let listSelector = UISegmentedControl(items: ["Favourites", "To-Do"])
     let horizontalController = MyPlacesHorizontalController()
     
+    private var userLocation: Location?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         let settingsBarButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingsTapped))
@@ -24,15 +26,15 @@ class MyPlacesViewController: UIViewController {
         setupViews()
         setupSegmentedControl()
         setupContraints()
-        handlePlaceTap()
-        handleScroll()
+        setupDidTapPlaceHandler()
+        setupDidScrollHandler()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         horizontalController.collectionView.reloadData()
     }
-    
+
     @objc private func toggleList(sender: UISegmentedControl) {
  
         guard let collectionView = self.horizontalController.collectionView else { return }
@@ -87,15 +89,15 @@ class MyPlacesViewController: UIViewController {
         horizontalController.view.anchor(top: listSelector.bottomAnchor, leading: view.leadingAnchor, bottom: view.layoutMarginsGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
     }
     
-    private func handlePlaceTap() {
-        horizontalController.didSelectHandler = { [weak self] placeId in
-            let detailController = PlaceDetailsController(placeId: placeId, location: Location(lat: 0, lng: 0)) //Get from defaults
+    private func setupDidTapPlaceHandler() {
+        horizontalController.didReceiveDataToPassOnHandler = { [weak self] placeId, location in
+            let detailController = PlaceDetailsController(placeId: placeId, location: location) //Get from defaults
             self?.navigationController?.pushViewController(detailController, animated: true)
         }
         
     }
     
-    private func handleScroll() {
+    private func setupDidScrollHandler() {
         horizontalController.didScrollMyPlacesController = { [weak self] nearestPage in
             self?.listSelector.selectedSegmentIndex = nearestPage
         }

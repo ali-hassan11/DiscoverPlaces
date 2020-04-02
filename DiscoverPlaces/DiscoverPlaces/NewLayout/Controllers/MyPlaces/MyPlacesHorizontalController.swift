@@ -10,7 +10,7 @@ import UIKit
 
 class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
         
-    var didSelectHandler: ((String) -> ())?
+    var didReceiveDataToPassOnHandler: ((String, Location) -> ())?
     var didScrollHandler: ((ListType) -> ())?
     
     override func viewDidLoad() {
@@ -31,8 +31,8 @@ class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionVi
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavouritesListHolderCell.id, for: indexPath) as! FavouritesListHolderCell
             cell.listController.listType = .favourites
             cell.refreshData()
-            cell.listController.didSelectHandler = { [weak self] placeId in
-                self?.didSelectHandler?(placeId)
+            cell.listController.didSelectPlaceInListHandler = { [weak self] placeId, location in
+                self?.didReceiveDataToPassOnHandler?(placeId, location)
             }
             return cell
         } else if indexPath.row == 1 {
@@ -40,8 +40,8 @@ class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionVi
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ToDoListHolderCell.id, for: indexPath) as! ToDoListHolderCell
             cell.listController.listType = .toDo
             cell.refreshData()
-            cell.listController.didSelectHandler = { [weak self] placeId in
-                  self?.didSelectHandler?(placeId)
+            cell.listController.didSelectPlaceInListHandler = { [weak self] placeId, location in
+                self?.didReceiveDataToPassOnHandler?(placeId, location)
               }
             return cell
         } else {

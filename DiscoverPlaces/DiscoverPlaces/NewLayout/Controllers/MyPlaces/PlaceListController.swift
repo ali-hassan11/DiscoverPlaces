@@ -10,7 +10,7 @@ import UIKit
 
 class PlaceListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var didSelectHandler: ((String) -> ())?
+    var didSelectPlaceInListHandler: ((String, Location) -> ())?
 
     var listType: ListType?
     
@@ -50,8 +50,9 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
     }
         
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let placeId = placeResults?[indexPath.item].place_id else { return }
-        didSelectHandler?(placeId)
+        guard let place = placeResults?[indexPath.item] else { return }
+        guard let location = place.geometry?.location else { return }
+        didSelectPlaceInListHandler?(place.place_id, location)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -71,7 +72,7 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
     
     func fetchData(for id: String) {
         
-        let fields = ["name", "vicinity", "rating", "place_id", "photos"]
+        let fields = ["name", "vicinity", "rating", "place_id", "photos", "geometry"]
         Service.shared.fetchPlaceDetails(placeId: id, fields: fields) { (response, error) in
             
             if let error = error {
