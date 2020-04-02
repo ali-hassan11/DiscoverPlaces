@@ -9,12 +9,12 @@
 import UIKit
 
 extension UICollectionReusableView {
-    func addBottomSeparator() {
+    func addBottomSeparator(edgePadding: CGFloat = 12) {
         let separator = UIView()
         separator.backgroundColor = .quaternaryLabel
         separator.constrainHeight(constant: 1)
         addSubview(separator)
-        separator.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: 16))
+        separator.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: edgePadding, bottom: 0, right: edgePadding))
 
     }
 }

@@ -14,7 +14,9 @@ class PlaceImagesHolder: UICollectionReusableView {
     
     var rating: Double? {
         didSet {
-            guard let rating = rating else { return }
+            guard let rating = rating else {
+                return
+            }
             starsView.populate(with: rating, displaysNumber: true)
         }
     }
@@ -47,26 +49,24 @@ class PlaceImagesHolder: UICollectionReusableView {
         horizontalController.view.fillSuperview()
         
         pageControlView.isUserInteractionEnabled = false
+//        pageControlView.constrainHeight(constant: 8)
         
         //Gradient View
         addSubview(gradView)
         gradView.fillSuperview()
         gradView.isUserInteractionEnabled = false
-        addGradient(firstColor: .clear, secondColor: .black, view: gradView, start: 0.75, end: 0.96)
+        addGradient(firstColor: .clear, secondColor: .black, view: gradView, start: 0.7, end: 0.96)
         
-        //StackView
-        let stackView = HorizontalStackView(arrangedSubviews: [starsView, pageControlView])
+//        Add stars and pageViewTingStackView, if no stars, remove
+        pageControlView.backgroundColor = .blue
+        let h = HorizontalStackView(arrangedSubviews: [starsView])
+        
+        let stackView = VerticalStackView(arrangedSubviews: [h, placeNameLabel], spacing: 4)
         addSubview(stackView)
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .bottom
-        stackView.constrainHeight(constant: 20)
-        stackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor,
-                         padding: .init(top: 0, left: 20, bottom: 12, right: 20))
+        stackView.alignment = .leading
+        stackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 20, bottom: 16, right: 20))
         
-        addSubview(placeNameLabel)
-        //Make it shrink if needed
-        placeNameLabel.anchor(top: nil, leading: stackView.leadingAnchor, bottom: stackView.topAnchor, trailing: stackView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 8, right: 0))
-        
+        addBottomSeparator()
     }
     
     func addGradient(firstColor: UIColor, secondColor: UIColor, view: UIView, start: CGFloat, end: CGFloat) {
