@@ -25,6 +25,7 @@
 		CE327AEA241546E10010F400 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AE9241546E10010F400 /* SettingsController.swift */; };
 		CE327AF1241696B60010F400 /* MultipleCategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */; };
 		CE327AF324169DD20010F400 /* PlaceGroupHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */; };
+		CE42F3862437161800C394EC /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F3852437161800C394EC /* ErrorCell.swift */; };
 		CE58359923DE16B000C89622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359823DE16B000C89622 /* AppDelegate.swift */; };
 		CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359A23DE16B000C89622 /* SceneDelegate.swift */; };
 		CE58359D23DE16B000C89622 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359C23DE16B000C89622 /* ViewController.swift */; };
@@ -128,6 +129,7 @@
 		CE327AE9241546E10010F400 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCategoriesController.swift; sourceTree = "<group>"; };
 		CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceGroupHorizontalController.swift; sourceTree = "<group>"; };
+		CE42F3852437161800C394EC /* ErrorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
 		CE58359523DE16B000C89622 /* DiscoverPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE58359823DE16B000C89622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE58359A23DE16B000C89622 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				CE694B8C24097E8400F37ED6 /* MyPlaces */,
 				CE734D3223E0CB49005AE0EB /* Search */,
 				CE327AEF241696350010F400 /* Categories */,
+				CE42F3852437161800C394EC /* ErrorCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 				CE327AF1241696B60010F400 /* MultipleCategoriesController.swift in Sources */,
 				60EADA7F23F6C19B0095DBF9 /* WebAddressCell.swift in Sources */,
 				CE659A0D23EF884700E531CD /* ImagesHorizontalController.swift in Sources */,
+				CE42F3862437161800C394EC /* ErrorCell.swift in Sources */,
 				CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */,
 				CE6599F023EA692500E531CD /* HomeController.swift in Sources */,
 				CE327AF324169DD20010F400 /* PlaceGroupHorizontalController.swift in Sources */,
@@ -1023,7 +1027,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1042,7 +1046,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.AHApps.DiscoverPlaces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
