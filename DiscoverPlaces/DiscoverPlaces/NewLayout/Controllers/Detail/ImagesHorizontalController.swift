@@ -18,7 +18,7 @@ class ImagesHorizontalController: HorizontalSnappingController, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .secondarySystemBackground
         collectionView.scrollsToTop = true
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "imageCell")
     }

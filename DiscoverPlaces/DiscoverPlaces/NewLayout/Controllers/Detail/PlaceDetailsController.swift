@@ -111,6 +111,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         collectionView.register(ReviewsHolder.self, forCellWithReuseIdentifier: ReviewsHolder.id)
         collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: MorePlacesHolder.id)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
+        collectionView.register(ErrorCell.self, forCellWithReuseIdentifier: ErrorCell.id)
     }
     
     private func fadeOutSplashScreen() {
@@ -182,20 +183,15 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
 }
 
-
-
 extension PlaceDetailsController {
     
     //MARK: Place Images
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PlaceImagesHolder.id, for: indexPath) as! PlaceImagesHolder
-        
-        cell.pageControlView.numberOfPages = placeDetailResult?.photos?.count ?? 0
-        cell.horizontalController.photos = placeDetailResult?.photos
-        cell.placeName = placeDetailResult?.name
-        cell.rating = placeDetailResult?.rating
+        guard let placeDetail = placeDetailResult else { return cell }
+        cell.configure(using: placeDetail)
         cell.horizontalController.didScrollImagesController = { nearestPage in
-            cell.pageControlView.currentPage = nearestPage
+            cell.segmentedControl.selectedSegmentIndex = nearestPage
         }
         return cell
     }
@@ -387,7 +383,6 @@ extension PlaceDetailsController: ActionButtonsCellDelegate {
         
         guard let urlStr = urlString else { return }
         guard let url = URL(string: urlStr) else { return }
-//        guard let name = place?.name else { return }
         
         let items: [Any] = [url]
         let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
