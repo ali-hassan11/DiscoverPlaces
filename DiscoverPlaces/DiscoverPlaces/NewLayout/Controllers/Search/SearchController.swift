@@ -129,7 +129,7 @@ extension SearchController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallPlaceCell.id, for: indexPath) as! SmallPlaceCell
-        cell.configure(place: searchResults[indexPath.item], userLocation: userLocation)
+//        cell.configure(place: searchResults[indexPath.item])
         return cell
     }
     

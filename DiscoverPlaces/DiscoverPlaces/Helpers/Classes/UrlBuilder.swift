@@ -8,9 +8,11 @@
 
 import Foundation
 
+typealias PhotoReference = String
+
 class UrlBuilder {
     
-    static func buildImageUrl(with photoRef: String, width: Int) -> URL? { //Width, Height?
+    static func buildImageUrl(with photoRef: PhotoReference, width: Int) -> URL? { //Width, Height?
         let urlStr = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(width)&photoreference=\(photoRef)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
         guard let url = URL(string: urlStr) else { return nil }

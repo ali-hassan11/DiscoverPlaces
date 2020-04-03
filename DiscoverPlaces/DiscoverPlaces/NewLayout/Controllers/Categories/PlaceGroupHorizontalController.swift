@@ -42,7 +42,9 @@ extension PlaceGroupHorizontalController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallPlaceCell.id, for: indexPath) as! SmallPlaceCell
-        cell.configure(place: placeGroup?.results[indexPath.item], userLocation: self.location)
+        guard let place = placeGroup?.results[indexPath.item] else { return UICollectionViewCell() } //Error Cell
+        let viewModel = PlaceCellViewModel(place: place)
+        cell.configure(using: viewModel)
         return cell
     }
     

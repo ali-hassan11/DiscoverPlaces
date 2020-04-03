@@ -17,50 +17,27 @@ class SmallPlaceCell: UICollectionViewCell {
     let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, numberOfLines: 1) //Can't be more that 1
     let starsView = StarsView(width: 80)
 
-    func configure(place: PlaceResult?, userLocation: Location?) {
-        guard let place = place else { return } //Error
-        configureImage(using: place)
-        configurePlaceName(using: place)
-        configureAddress(using: place)
-        configureRating(using: place)
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
+        placeImageView.backgroundColor = .secondarySystemBackground
         setupPlaceImageView()
         setupStackView()
+    }
+    
+    func configure(using viewModel: PlaceCellViewModel) {
+        placeNameLabel.text = viewModel.placeName
+        addressLabel.text = viewModel.address
+        guard let rating = viewModel.rating else { return }
+        starsView.populate(with: rating)
+        guard let url = viewModel.imageURL else { return }
+        placeImageView.sd_setImage(with: url)
     }
     
     private func configurePlaceName(using place: PlaceResult) {
         placeNameLabel.text = place.name
     }
-    
-    private func configureImage(using place: PlaceResult) {
-        guard let photo = place.photos?.first else { return } //Default Image
-        placeImageView.backgroundColor = .secondarySystemBackground
-        placeImageView.sd_setImage(with: buildImageUrl(using: photo))
-        
-    }
-    
-    private func configureAddress(using place: PlaceResult) {
-        if let vicinity = place.vicinity {
-             addressLabel.text = vicinity
-         } else if let address = place.formatted_address {
-             addressLabel.text = address
-         } else {
-             fatalError("No vicinity or formatted address!")
-         }
-    }
-    
-    private func configureRating(using place: PlaceResult) {
-        guard let rating = place.rating else {
-            starsView.removeAllStars()
-            return
-        }
-        starsView.populate(with: rating)
-    }
-    
+
     private func buildImageUrl(using photo: Photo) -> URL? {
         guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else {
             return nil

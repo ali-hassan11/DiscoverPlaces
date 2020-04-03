@@ -74,6 +74,8 @@
 		CE8A2FD523F1CE0800CDF866 /* DetailsTopSectionCellXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A2FD423F1CE0700CDF866 /* DetailsTopSectionCellXib.swift */; };
 		CE8A2FD723F1CE3000CDF866 /* DetailsTopSectionCellXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8A2FD623F1CE3000CDF866 /* DetailsTopSectionCellXib.xib */; };
 		CE9CDF7024352D2C008DF6DE /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CDF6F24352D2C008DF6DE /* UserLocation.swift */; };
+		CE9CDF7324365B7D008DF6DE /* PlaceCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CDF7224365B7D008DF6DE /* PlaceCellViewModel.swift */; };
+		CE9CDF75243680FF008DF6DE /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CDF74243680FF008DF6DE /* StarRatingView.swift */; };
 		CEABA02E24177AC90057A955 /* Category+SubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABA02D24177AC90057A955 /* Category+SubCategory.swift */; };
 		CEBEE6DB24333449002C43E8 /* PlaceResultsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */; };
 		CECDA1462401C51A005F85FB /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA1452401C51A005F85FB /* StarsView.swift */; };
@@ -181,6 +183,8 @@
 		CE8A2FD423F1CE0700CDF866 /* DetailsTopSectionCellXib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTopSectionCellXib.swift; sourceTree = "<group>"; };
 		CE8A2FD623F1CE3000CDF866 /* DetailsTopSectionCellXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsTopSectionCellXib.xib; sourceTree = "<group>"; };
 		CE9CDF6F24352D2C008DF6DE /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		CE9CDF7224365B7D008DF6DE /* PlaceCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCellViewModel.swift; sourceTree = "<group>"; };
+		CE9CDF74243680FF008DF6DE /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		CEABA02D24177AC90057A955 /* Category+SubCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+SubCategory.swift"; sourceTree = "<group>"; };
 		CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceResultsFilter.swift; sourceTree = "<group>"; };
 		CECDA1452401C51A005F85FB /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 				CE616D062405D96D008E7067 /* DefaultsManager.swift */,
 				CECDA1452401C51A005F85FB /* StarsView.swift */,
 				CE9CDF6F24352D2C008DF6DE /* UserLocation.swift */,
+				CE9CDF74243680FF008DF6DE /* StarRatingView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 			children = (
 				CE6599F723EF847F00E531CD /* Controllers */,
 				CE6599F923EF849000E531CD /* Views */,
+				CE9CDF7124365B4E008DF6DE /* ViewModels */,
 				CE6599F823EF848A00E531CD /* Models */,
 				CEABA02D24177AC90057A955 /* Category+SubCategory.swift */,
 				CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */,
@@ -503,6 +509,14 @@
 				CE5835D323DEB7C500C89622 /* SearchCell.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		CE9CDF7124365B4E008DF6DE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CE9CDF7224365B7D008DF6DE /* PlaceCellViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		CF305D9416D220BB17DC1EAB /* Frameworks */ = {
@@ -770,8 +784,10 @@
 				CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */,
 				CE694B8924097E0500F37ED6 /* PlaceListController.swift in Sources */,
 				CE6599FF23EF872900E531CD /* HomeLargeCellHolder.swift in Sources */,
+				CE9CDF7324365B7D008DF6DE /* PlaceCellViewModel.swift in Sources */,
 				CE8A2FD523F1CE0800CDF866 /* DetailsTopSectionCellXib.swift in Sources */,
 				CE659A0323EF876600E531CD /* HomeLargeCell.swift in Sources */,
+				CE9CDF75243680FF008DF6DE /* StarRatingView.swift in Sources */,
 				CE5835D423DEB7C500C89622 /* SearchCell.swift in Sources */,
 				CECDA14824025896005F85FB /* ReviewDetailViewController.swift in Sources */,
 				CE694B9224097FD200F37ED6 /* MyPlaceCell.swift in Sources */,
