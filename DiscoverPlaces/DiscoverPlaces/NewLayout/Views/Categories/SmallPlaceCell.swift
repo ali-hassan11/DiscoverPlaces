@@ -15,14 +15,28 @@ class SmallPlaceCell: UICollectionViewCell {
     let placeImageView = UIImageView(image: UIImage(named: ""))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .regular), color: .label, numberOfLines: 2) //Can't be more than 2
     let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, numberOfLines: 1) //Can't be more that 1
-    let starsView = StarsView(width: 80)
-
+    let starView = StarsView(width: 80)
+    
+    
+    let highlightView: UIView! = {
+        let v = UIView()
+        v.backgroundColor = UIColor.quaternarySystemFill
+        return v
+    }()
+    
+    override var isHighlighted: Bool {
+        didSet {
+            highlightView.isHidden = self.isHighlighted ? false : true
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
         placeImageView.backgroundColor = .secondarySystemBackground
         setupPlaceImageView()
         setupStackView()
+        configureHighlightView()
     }
     
     func configure(place: PlaceResult?) {
@@ -56,10 +70,10 @@ class SmallPlaceCell: UICollectionViewCell {
     
     private func configureRating(using place: PlaceResult) {
         guard let rating = place.rating else {
-            starsView.removeAllStars()
+            starView.isHidden = true
             return
         }
-        starsView.populate(with: rating)
+        starView.populate(with: rating)
     }
     
     private func buildImageUrl(using photo: Photo) -> URL? {
@@ -79,11 +93,22 @@ class SmallPlaceCell: UICollectionViewCell {
     }
     
     private func setupStackView() {
-        let stackView = VerticalStackView(arrangedSubviews: [placeNameLabel, addressLabel, starsView, UIView()], spacing: 4)
+        let stackView = VerticalStackView(arrangedSubviews: [placeNameLabel, addressLabel, starView, UIView()], spacing: 4)
         stackView.distribution = .fill
         stackView.alignment = .leading
         addSubview(stackView)
         stackView.anchor(top: placeImageView.bottomAnchor, leading: placeImageView.leadingAnchor, bottom: bottomAnchor, trailing: placeImageView.trailingAnchor, padding: .init(top: 4, left: 4, bottom: 0, right: 4))
+    }
+    
+    private func configureHighlightView() {
+        addSubview(highlightView)
+        highlightView.roundCorners()
+        highlightView.isHidden = true
+        if starView.isHidden {
+            highlightView.anchor(top: topAnchor, leading: leadingAnchor, bottom: addressLabel.bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: -8, right: 0))
+        } else {
+            highlightView.anchor(top: topAnchor, leading: leadingAnchor, bottom: starView.bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: -8, right: 0))
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -91,4 +116,3 @@ class SmallPlaceCell: UICollectionViewCell {
     }
     
 }
-

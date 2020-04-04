@@ -18,18 +18,18 @@ class AddressCell: UICollectionViewCell {
             addressLabel.text = vicinity
         }
     }
-
+    
     let highlightView: UIView! = {
-          let v = UIView()
-          v.backgroundColor = UIColor.quaternarySystemFill
-          return v
-      }()
-      
-      override var isHighlighted: Bool {
-          didSet {
-              highlightView.isHidden = self.isHighlighted ? false : true
-          }
-      }
+        let v = UIView()
+        v.backgroundColor = UIColor.quaternarySystemFill
+        return v
+    }()
+    
+    override var isHighlighted: Bool {
+        didSet {
+            highlightView.isHidden = self.isHighlighted ? false : true
+        }
+    }
     
     let iconVimageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "mappin.circle.fill"))

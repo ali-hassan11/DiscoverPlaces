@@ -11,12 +11,24 @@ import UIKit
 class MyPlaceCell: UICollectionViewCell {
     
     static public let id = "myListCell"
-        
+    
     let placeImageView = UIImageView(image: UIImage(named: ""))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 15.5, weight: .semibold), color: .label, numberOfLines: 2)
     let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, alignment: .left, numberOfLines: 1)
     let starView = StarsView(width: 90)
     let chevronIcon = UIImageView(image: UIImage(systemName: "chevron.right"))
+    
+    let highlightView: UIView! = {
+        let v = UIView()
+        v.backgroundColor = UIColor.quaternarySystemFill
+        return v
+    }()
+    
+    override var isHighlighted: Bool {
+        didSet {
+            highlightView.isHidden = self.isHighlighted ? false : true
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,6 +39,7 @@ class MyPlaceCell: UICollectionViewCell {
         addViews()
         addConstraints()
         addBottomSeparator()
+        configureHighlightView()
     }
     
     required init?(coder: NSCoder) {
@@ -65,7 +78,7 @@ class MyPlaceCell: UICollectionViewCell {
     
     private func configureRating(using place: PlaceDetailResult) {
         guard let rating = place.rating else {
-            starView.removeAllStars()
+            starView.isHidden = true
             return
         }
         starView.populate(with: rating)
@@ -78,6 +91,12 @@ class MyPlaceCell: UICollectionViewCell {
         return url
     }
     
+    private func configureHighlightView() {
+        addSubview(highlightView)
+        highlightView.isHidden = true
+        highlightView.fillSuperview()
+    }
+    
     private func addViews() {
         addSubview(placeImageView)
         addSubview(chevronIcon)
@@ -86,18 +105,18 @@ class MyPlaceCell: UICollectionViewCell {
     
     private func addConstraints() {
         // TODO: - Make StackView
-        placeImageView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: .init(top: 16, left: 0, bottom: 16, right: 0))
+        placeImageView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: nil, padding: .init(top: 16, left: 16, bottom: 16, right: 0))
         placeImageView.addConstraint(NSLayoutConstraint(item: placeImageView, attribute: .height, relatedBy: .equal, toItem: placeImageView, attribute: .width, multiplier: 1, constant: 0))
         placeImageView.roundCorners()
         
         chevronIcon.centerYInSuperview()
         chevronIcon.anchor(top: nil, leading: nil, bottom: nil, trailing: trailingAnchor,
-                              padding: .init(top: 0, left: 0, bottom: 0, right: 0))
+                           padding: .init(top: 0, left: 0, bottom: 0, right: 16))
         
         let detailsStackView = VerticalStackView(arrangedSubviews: [placeNameLabel, addressLabel, starView], spacing: 3)
-               detailsStackView.setCustomSpacing(4, after: addressLabel)
-               detailsStackView.alignment = .leading
-               addSubview(detailsStackView)
+        detailsStackView.setCustomSpacing(4, after: addressLabel)
+        detailsStackView.alignment = .leading
+        addSubview(detailsStackView)
         detailsStackView.anchor(top: placeImageView.topAnchor, leading: placeImageView.trailingAnchor, bottom: nil, trailing: chevronIcon.leadingAnchor, padding: .init(top: 4, left: 12, bottom: 0, right: 12))
     }
     
