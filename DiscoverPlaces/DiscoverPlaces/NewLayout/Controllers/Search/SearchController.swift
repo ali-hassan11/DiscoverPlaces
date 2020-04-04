@@ -21,6 +21,22 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     let searchIcon = UIImageView(image: UIImage(systemName: "magnifyingglass.circle.fill"))
     
+    //Make custom object
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .medium)
+        aiv.color = .secondaryLabel
+        aiv.startAnimating()
+        aiv.hidesWhenStopped = true
+        return aiv
+    }()
+    
+    //Make custom object
+    private let fadeView: UIView = {
+        let v = UIView()
+        v.backgroundColor = .systemBackground
+        return v
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(userLocation)
@@ -29,6 +45,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         
         addEmptyView()
         setupSearchBar()
+        prepareLoadingView()
         
         collectionView.backgroundColor = .systemBackground
         collectionView.contentInset = .init(top: 12, left: 0, bottom: 0, right: 0)
@@ -67,6 +84,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     }
 
     private func fetchData(for searchText: String, location: Location) {
+        startLoadingView()
         Service.shared.fetchSearchResults(for: searchText, location: location) { (response, error) in
             
             if let error = error {
@@ -85,6 +103,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
 
     private func updateUI(searchText: String) {
         DispatchQueue.main.async {
+            self.hideLoadingView()
             self.collectionView.reloadData()
             
             if self.searchResults.isEmpty {
@@ -117,6 +136,29 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.delegate = self
+    }
+    
+    private func prepareLoadingView() {
+        view.addSubview(fadeView)
+        fadeView.alpha = 0
+        fadeView.fillSuperview()
+        
+        fadeView.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
+    }
+    
+    private func startLoadingView() {
+        fadeView.alpha = 1
+        activityIndicatorView.startAnimating()
+    }
+    
+    private func hideLoadingView() {
+        //Make consistent animation time constant
+        UIView.animate(withDuration: 0.3, animations: {
+            self.fadeView.alpha = 0
+        }) { (_) in
+            self.activityIndicatorView.stopAnimating()
+        }
     }
 }
 
