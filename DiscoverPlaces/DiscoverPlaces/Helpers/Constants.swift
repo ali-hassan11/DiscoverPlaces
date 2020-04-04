@@ -23,3 +23,4 @@ struct Constants {
 }
 
 let sidePadding: CGFloat = 16
+let imagePlaceHolder = "placeHolderImage"
