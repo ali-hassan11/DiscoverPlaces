@@ -47,8 +47,33 @@ extension PlaceResult {
     
     // TODO: - Revisit this
     func containsDesiredTypes() -> Bool {
-           return !(types?.contains("locality") ?? true) //City, town...
-       }
+        return !(types?.contains("administrative_area_level_1") ?? true) &&
+            !(types?.contains("administrative_area_level_2") ?? true) &&
+            !(types?.contains("administrative_area_level_3") ?? true) &&
+            !(types?.contains("administrative_area_level_4") ?? true) &&
+            !(types?.contains("administrative_area_level_5") ?? true) &&
+            !(types?.contains("colloquial_area") ?? true) &&
+            !(types?.contains("continent") ?? true) &&
+            !(types?.contains("country") ?? true) &&
+            !(types?.contains("floor") ?? true) &&
+            !(types?.contains("intersection") ?? true) &&
+            !(types?.contains("locality") ?? true) &&
+            !(types?.contains("neighborhood") ?? true) &&
+            !(types?.contains("postal_code") ?? true) &&
+            !(types?.contains("postal_code_prefix") ?? true) &&
+            !(types?.contains("postal_code_suffix") ?? true) &&
+            !(types?.contains("postal_town") ?? true) &&
+            !(types?.contains("route") ?? true) &&
+            !(types?.contains("sublocality") ?? true) &&
+            !(types?.contains("sublocality_level_1") ?? true) &&
+            !(types?.contains("sublocality_level_2") ?? true) &&
+            !(types?.contains("sublocality_level_3") ?? true) &&
+            !(types?.contains("sublocality_level_4") ?? true) &&
+            !(types?.contains("sublocality_level_5") ?? true) &&
+            !(types?.contains("subpremise") ?? true) &&
+            !(types?.contains("neighborhood") ?? true) &&
+            !(types?.contains("postal_code") ?? true)
+    }
 }
 
 
