@@ -23,7 +23,7 @@ struct PlaceResult: Decodable {
     let name: String?
     let photos: [Photo]?
     let types: [String]?
-    let rating: Double?
+    var rating: Double?
     let vicinity: String?
     let formatted_address: String?
 

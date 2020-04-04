@@ -23,4 +23,19 @@ class SearchResponseFilter {
         return filteredResults
     }
     
+    public func morePlacesResults(from response: SearchResponse) -> [PlaceResult] {
+        
+        var filteredResults = [PlaceResult]()
+        
+        response.results.forEach({ result in
+            if result.containsPhotos() && result.containsDesiredTypes() {
+                var result = result
+                result.rating = nil // TODO: - This is just a temporary fix! shouldn't make rating mutable!
+
+                filteredResults.append(result)
+            }
+        })
+        
+        return filteredResults
+    }
 }

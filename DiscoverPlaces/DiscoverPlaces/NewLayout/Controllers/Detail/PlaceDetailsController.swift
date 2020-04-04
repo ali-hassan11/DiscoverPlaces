@@ -169,7 +169,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
                 return
             }
                         
-            let filteredResults = self.searchResponseFilter.results(from: response)
+            let filteredResults = self.searchResponseFilter.morePlacesResults(from: response)
             self.handleMorePlacesSuccess(with: filteredResults)
         }
     }
