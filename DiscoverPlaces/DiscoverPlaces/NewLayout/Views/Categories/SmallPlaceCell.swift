@@ -17,19 +17,19 @@ class SmallPlaceCell: UICollectionViewCell {
     let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, numberOfLines: 1) //Can't be more that 1
     let starsView = StarsView(width: 80)
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .systemBackground
+        setupPlaceImageView()
+        setupStackView()
+    }
+    
     func configure(place: PlaceResult?, userLocation: Location?) {
         guard let place = place else { return } //Error
         configureImage(using: place)
         configurePlaceName(using: place)
         configureAddress(using: place)
         configureRating(using: place)
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .systemBackground
-        setupPlaceImageView()
-        setupStackView()
     }
     
     private func configurePlaceName(using place: PlaceResult) {
@@ -45,12 +45,12 @@ class SmallPlaceCell: UICollectionViewCell {
     
     private func configureAddress(using place: PlaceResult) {
         if let vicinity = place.vicinity {
-             addressLabel.text = vicinity
-         } else if let address = place.formatted_address {
-             addressLabel.text = address
-         } else {
-             fatalError("No vicinity or formatted address!")
-         }
+            addressLabel.text = vicinity
+        } else if let address = place.formatted_address {
+            addressLabel.text = address
+        } else if let name = place.name {
+            addressLabel.text = name
+        }
     }
     
     private func configureRating(using place: PlaceResult) {
