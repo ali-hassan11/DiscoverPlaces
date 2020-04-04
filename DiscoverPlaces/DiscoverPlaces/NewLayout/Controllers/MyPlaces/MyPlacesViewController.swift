@@ -20,6 +20,7 @@ class MyPlacesViewController: UIViewController {
         super.viewDidLoad()
         let settingsBarButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingsTapped))
         navigationItem.rightBarButtonItem = settingsBarButton
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         navigationItem.largeTitleDisplayMode = .always
         

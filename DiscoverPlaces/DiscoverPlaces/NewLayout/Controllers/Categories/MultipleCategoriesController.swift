@@ -31,6 +31,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         setupCollectionView()
         
         guard let category = category, let location = location else { return } //Show error page
