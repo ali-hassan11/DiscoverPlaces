@@ -175,12 +175,17 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     private func handleMorePlacesSuccess(with results: [PlaceResult]) {
-        self.morePlaces = results
+        self.morePlaces = remove(currentPlaceId: placeId, from: results)
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
     }
+    
+    private func remove(currentPlaceId: String, from places: [PlaceResult]) -> [PlaceResult] {
+        return places.filter{$0.place_id != currentPlaceId}
+    }
+    
 }
 
 extension PlaceDetailsController {
