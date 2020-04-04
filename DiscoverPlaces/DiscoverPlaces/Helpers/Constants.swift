@@ -22,4 +22,4 @@ struct Constants {
     static let rightPadding: CGFloat = 20
 }
 
-
+let sidePadding: CGFloat = 16

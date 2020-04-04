@@ -104,6 +104,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     private func updateUI(searchText: String) {
         DispatchQueue.main.async {
             self.hideLoadingView()
+            self.searchController.isActive = false
             self.collectionView.reloadData()
             
             if self.searchResults.isEmpty {
@@ -184,14 +185,14 @@ extension SearchController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (view.frame.width - 12 - 12 - 10) / 2, height: 250)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 0, left: 12, bottom: 0, right: 12)
+        return .init(width: (view.frame.width - sidePadding - sidePadding - 12) / 2, height: 250)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10
+          return 12
+      }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .init(top: 0, left: sidePadding, bottom: 0, right: sidePadding)
     }
 }

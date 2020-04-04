@@ -23,7 +23,7 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
         
         collectionView.backgroundColor = .systemBackground
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.id)
-        collectionView.contentInset = .init(top: Constants.topPadding, left: Constants.leftPadding, bottom: Constants.bottomPadding, right: Constants.rightPadding)
+        collectionView.contentInset = .init(top: Constants.topPadding, left: sidePadding, bottom: Constants.bottomPadding, right: sidePadding)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

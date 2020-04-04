@@ -20,7 +20,7 @@ class SubCategoryiesHolder: UICollectionViewCell {
         backgroundColor = .systemBackground
         
         addSubview(subCategoryTitleLabel)
-        subCategoryTitleLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 4, left: 20, bottom: 0, right: 20))
+        subCategoryTitleLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 4, left: sidePadding, bottom: 0, right: sidePadding))
         
         addSubview(horizontalController.view)
         horizontalController.view.anchor(top: subCategoryTitleLabel.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))

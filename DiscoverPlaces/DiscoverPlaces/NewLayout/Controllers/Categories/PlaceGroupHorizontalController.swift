@@ -30,7 +30,7 @@ class PlaceGroupHorizontalController: HorizontalSnappingController, UICollection
     private func setupCollectionView() {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(SmallPlaceCell.self, forCellWithReuseIdentifier: SmallPlaceCell.id)
-        collectionView.contentInset = .init(top: 0, left: 24, bottom: 0, right: 24)
+        collectionView.contentInset = .init(top: 0, left: sidePadding, bottom: 0, right: sidePadding)
     }
     
 }

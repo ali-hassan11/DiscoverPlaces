@@ -14,7 +14,7 @@ class HomeLargeCellHolder: UICollectionReusableView {
     
     let sectionDescriptionLabel = UILabel(text: "Places of interest near You", font: .systemFont(ofSize: 16, weight: .medium),color: .secondaryLabel , numberOfLines: 0)
     
-    let paddingView = PaddingView(width: Constants.leftPadding)
+    let paddingView = PaddingView(width: sidePadding)
     
     let horizontalController = HomeLargeCellsHorizontalController()
     
@@ -23,8 +23,7 @@ class HomeLargeCellHolder: UICollectionReusableView {
         
         backgroundColor = .systemBackground
         
-        let stackView = VerticalStackView(arrangedSubviews: [UIStackView(arrangedSubviews: [paddingView, sectionDescriptionLabel]),
-                                                             horizontalController.view], spacing: 12)
+        let stackView = VerticalStackView(arrangedSubviews: [UIStackView(arrangedSubviews: [paddingView, sectionDescriptionLabel]), horizontalController.view], spacing: 12)
         addSubview(stackView)
         stackView.fillSuperview()
         

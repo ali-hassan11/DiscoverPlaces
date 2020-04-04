@@ -31,7 +31,7 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
         
         collectionView.backgroundColor = .systemBackground
         collectionView.register(HomeLargeCell.self, forCellWithReuseIdentifier: HomeLargeCell.id)
-        collectionView.contentInset = .init(top: Constants.topPadding, left: Constants.leftPadding, bottom: Constants.bottomPadding, right: Constants.rightPadding)
+        collectionView.contentInset = .init(top: Constants.topPadding, left: sidePadding, bottom: Constants.bottomPadding, right: sidePadding)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -47,7 +47,7 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width - (Constants.leftPadding + Constants.rightPadding), height: view.frame.height - (Constants.topPadding + Constants.bottomPadding + 1))
+        return .init(width: view.frame.width - (sidePadding + sidePadding), height: view.frame.height - (Constants.topPadding + Constants.bottomPadding + 1))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

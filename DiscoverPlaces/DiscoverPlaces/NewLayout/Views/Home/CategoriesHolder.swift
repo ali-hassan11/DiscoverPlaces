@@ -17,8 +17,8 @@ class CategoriesHolder: UICollectionViewCell {
     
     let horizontalController = CategoriesHorizontalController()
  
-    let paddingView = PaddingView(width: Constants.leftPadding)
-    let paddingView2 = PaddingView(width: Constants.leftPadding)
+    let paddingView = PaddingView(width: sidePadding)
+    let paddingView2 = PaddingView(width: sidePadding)
     
     
     override init(frame: CGRect) {
@@ -26,8 +26,8 @@ class CategoriesHolder: UICollectionViewCell {
         
         backgroundColor = .systemBackground
         
-        let stackiew = VerticalStackView(arrangedSubviews: [UIStackView(arrangedSubviews: [PaddingView(width: Constants.leftPadding), sectionTitleLabel]),
-                                                            UIStackView(arrangedSubviews: [PaddingView(width: Constants.leftPadding), sectionDescriptionLabel, PaddingView(width: Constants.leftPadding)]),
+        let stackiew = VerticalStackView(arrangedSubviews: [UIStackView(arrangedSubviews: [PaddingView(width: sidePadding), sectionTitleLabel]),
+                                                            UIStackView(arrangedSubviews: [PaddingView(width: sidePadding), sectionDescriptionLabel, PaddingView(width: sidePadding)]),
                                                             horizontalController.view], spacing: 10)
         addSubview(stackiew)
         stackiew.fillSuperview(padding: .init(top: 16, left: 0, bottom: 16, right: 0))
