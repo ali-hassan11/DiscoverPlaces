@@ -51,7 +51,7 @@ class OpeningTimeCell: UICollectionViewCell {
         return iv
     }()
     
-    let openingHoursLabel = UILabel(text: "Today: 09:00 - 15:00", font: .systemFont(ofSize: 16, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
+    let openingHoursLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
     
     let arrowIconImageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "chevron.right"))

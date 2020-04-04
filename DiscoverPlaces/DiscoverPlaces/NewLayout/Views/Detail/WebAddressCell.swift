@@ -53,7 +53,7 @@ class WebAddressCell: UICollectionViewCell {
         return iv
     }()
 
-    let websiteAddressLabel = UILabel(text: "www.mywebsite.com", font: .systemFont(ofSize: 16, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
+    let websiteAddressLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
 
     let arrowIconImageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "chevron.right"))

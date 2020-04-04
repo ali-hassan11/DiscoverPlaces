@@ -18,7 +18,7 @@ class DetailsTopSectionCell: UICollectionViewCell {
 //    }
     
     //Sync label font with cell
-    let placeNameLabel = UILabel(text: "Burj Al Arab", font: .boldSystemFont(ofSize: 24), color: .label, alignment: .center, numberOfLines: 0)
+    let placeNameLabel = UILabel(text: "", font: .boldSystemFont(ofSize: 24), color: .label, alignment: .center, numberOfLines: 0)
     
     let addressLabel = UILabel(text: "123 Buckingham Place Place, Victoria, London, United Kingdom, E17 7AJ", font: .systemFont(ofSize: 19), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
     

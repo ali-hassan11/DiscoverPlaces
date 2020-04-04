@@ -35,16 +35,15 @@ class ReviewDetailViewController: UIViewController {
         return v
     }()
     
-    //Create custom fonts for components
-    let authorNameLabel = UILabel(text: "Author", font: .systemFont(ofSize: 16, weight: .regular), color: .label, alignment: .left, numberOfLines: 1)
+    // TODO: - Create custom fonts for components
+    let authorNameLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .regular), color: .label, alignment: .left, numberOfLines: 1)
     
-    let timeAgoLabel = UILabel(text: "2 days Ago", font: .systemFont(ofSize: 14, weight: .light), color: .secondaryLabel, alignment: .right, numberOfLines: 2)
+    let timeAgoLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .light), color: .secondaryLabel, alignment: .right, numberOfLines: 2)
     
     let starsView = StarsView(width: 100)
     
     let reviewBodyTextView: UITextView! = {
         let tv = UITextView()
-        tv.text = "Example review text here, Example review text here, Example review text here, Example review text here, Example review text here"
         tv.font = .systemFont(ofSize: 16, weight: .light)
         tv.textColor = .label
         tv.textAlignment = .left

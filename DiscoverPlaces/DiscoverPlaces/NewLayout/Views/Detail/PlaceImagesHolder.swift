@@ -13,7 +13,7 @@ final class PlaceImagesHolder: UICollectionReusableView {
     public static let id = "placeImagesHolderId"
     
     let horizontalController = ImagesHorizontalController()
-    let placeNameLabel = UILabel(text: "Burj Khalifah", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 3)
+    let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 3)
     let starsView = StarsView(width: 100)
     let gradView = UIView()
     

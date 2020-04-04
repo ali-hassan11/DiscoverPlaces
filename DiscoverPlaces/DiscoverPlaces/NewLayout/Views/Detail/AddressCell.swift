@@ -39,7 +39,7 @@ class AddressCell: UICollectionViewCell {
         return iv
     }()
 
-    let addressLabel = UILabel(text: "123 Buckingham Palace Road, Victoria, London, AB1 2CD", font: .systemFont(ofSize: 16, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
+    let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .medium), color: .label, alignment: .left, numberOfLines: 1)
 
     let chevronImageView: UIImageView! = {
         let iv = UIImageView(image: UIImage(systemName: "chevron.right"))

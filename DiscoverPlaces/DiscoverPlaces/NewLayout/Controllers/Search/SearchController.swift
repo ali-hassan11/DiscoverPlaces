@@ -40,7 +40,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     override func viewDidLoad() {
         super.viewDidLoad()
         print(userLocation)
-        searchController.searchBar.placeholder = "Restaurants in Paris..." //Array or different quiries and switch between every 3 seconds?, or just every time loads
+        searchController.searchBar.placeholder = "Search..." //Array or different quiries and switch between every 3 seconds?, or just every time loads
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         addEmptyView()
