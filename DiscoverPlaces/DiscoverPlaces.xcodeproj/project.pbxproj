@@ -269,6 +269,8 @@
 		CE4FF630243175CA0090AFA0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CEABA02D24177AC90057A955 /* Category+SubCategory.swift */,
+				CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */,
 				CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */,
 				CE616D062405D96D008E7067 /* DefaultsManager.swift */,
 				CECDA1452401C51A005F85FB /* StarsView.swift */,
@@ -379,8 +381,6 @@
 				CE6599F923EF849000E531CD /* Views */,
 				CE9CDF7124365B4E008DF6DE /* ViewModels */,
 				CE6599F823EF848A00E531CD /* Models */,
-				CEABA02D24177AC90057A955 /* Category+SubCategory.swift */,
-				CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */,
 			);
 			path = NewLayout;
 			sourceTree = "<group>";
