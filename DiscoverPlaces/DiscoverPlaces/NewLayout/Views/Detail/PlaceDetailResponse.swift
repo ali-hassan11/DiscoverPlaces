@@ -21,7 +21,7 @@ struct PlaceDetailResponse: Decodable {
 struct PlaceDetailResult: Decodable {
     let place_id: String
     let name: String?
-    let user_Ratings_Total: Int?
+    let user_Ratings_Total: Int? //Not Used
     let opening_hours: OpeningHours?
     let formatted_address: String?
     let international_phone_number: String?

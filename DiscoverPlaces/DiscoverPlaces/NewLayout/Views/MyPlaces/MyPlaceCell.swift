@@ -32,7 +32,7 @@ class MyPlaceCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        placeImageView.backgroundColor = .secondarySystemBackground
         placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.15, end: 0.25)
         placeImageView.contentMode = .scaleAspectFill
         
