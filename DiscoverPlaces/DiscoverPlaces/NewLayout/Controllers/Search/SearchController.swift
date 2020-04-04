@@ -76,7 +76,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             return
         }
         
-        let queryText = searchText.replacingOccurrences(of: " ", with: "+")
+        let queryText = searchText.replacingOccurrences(of: " ", with: "%20")
         //Take into account special characters
         
         fetchData(for: queryText, location: userLocation)
@@ -109,7 +109,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             if self.searchResults.isEmpty {
                 
                 if !searchText.isEmpty {
-                    self.enterSearchTextlabel.text = "Sorry, we couldn't find anything for \"\(searchText)\""
+                    self.enterSearchTextlabel.text = "Sorry, we couldn't find anything for \"\(searchText.replacingOccurrences(of: "%20", with: " "))\""
                 }
                 
             } else {
