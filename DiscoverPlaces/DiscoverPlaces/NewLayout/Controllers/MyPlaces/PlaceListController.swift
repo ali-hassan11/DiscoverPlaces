@@ -45,10 +45,10 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPlaceCell.id, for: indexPath) as! MyPlaceCell
-        cell.place = placeResults?[indexPath.item]
+        cell.configure(place: placeResults?[indexPath.item])
         return cell
     }
-        
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let place = placeResults?[indexPath.item] else { return }
         guard let location = place.geometry?.location else { return }
