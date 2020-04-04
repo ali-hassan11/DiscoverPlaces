@@ -194,7 +194,6 @@ extension HomeController: CLLocationManagerDelegate {
         
         if isLocationSettingEnabled {
             updateLastSavedLocation(with: currentLocation)
-            print(UserLocation.lastSavedLocation())
             self.userLocation = currentLocation
         }
         
