@@ -124,6 +124,12 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         }
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            scrollView.contentOffset.y = 0
+        }
+    }
+    
     func fetchPlaceData(for id: String) {
         let fields = ["name" , "place_id", "opening_hours", "photo", "vicinity" ,"geometry" ,"review" ,"website" ,"url" ,"international_phone_number", "formatted_phone_number" ,"formatted_address", "rating"]
         Service.shared.fetchPlaceDetails(placeId: id, fields: fields) { (placeResponse, error) in
