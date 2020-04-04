@@ -13,7 +13,7 @@ class MyPlaceCell: UICollectionViewCell {
     static public let id = "myListCell"
     
     let placeImageView = UIImageView(image: UIImage(named: ""))
-    let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 15.5, weight: .semibold), color: .label, numberOfLines: 2)
+    let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 15.5, weight: .medium), color: .label, numberOfLines: 2)
     let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, alignment: .left, numberOfLines: 1)
     let starView = StarsView(width: 90)
     let chevronIcon = UIImageView(image: UIImage(systemName: "chevron.right"))
