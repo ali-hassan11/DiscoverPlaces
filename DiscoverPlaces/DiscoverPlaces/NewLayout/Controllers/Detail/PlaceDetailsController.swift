@@ -362,7 +362,7 @@ extension PlaceDetailsController {
             UIApplication.shared.open(url)
         } else {
             UIPasteboard.general.string = number
-            showToastAlert(title: "Copied to clipboard!")
+            showToastAlert(title: "Number copied to clipboard!")
         }
     }
 }

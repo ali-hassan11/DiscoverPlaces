@@ -25,7 +25,7 @@ class SmallPlaceCell: UICollectionViewCell {
         setupStackView()
     }
     
-    func configure(place: PlaceResult?, userLocation: Location?) {
+    func configure(place: PlaceResult?) {
         guard let place = place else { return } //Error
         configureImage(using: place)
         configurePlaceName(using: place)
@@ -60,14 +60,8 @@ class SmallPlaceCell: UICollectionViewCell {
             return
         }
         starsView.populate(with: rating)
-        guard let url = viewModel.imageURL else { return }
-        placeImageView.sd_setImage(with: url)
     }
     
-    private func configurePlaceName(using place: PlaceResult) {
-        placeNameLabel.text = place.name
-    }
-
     private func buildImageUrl(using photo: Photo) -> URL? {
         guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else {
             return nil
