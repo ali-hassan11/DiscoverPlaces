@@ -26,7 +26,7 @@ class SettingsController: BaseCollectionViewController, UICollectionViewDelegate
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -51,6 +51,10 @@ class SettingsController: BaseCollectionViewController, UICollectionViewDelegate
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyId", for: indexPath)
             configure(cell: cell)
             return cell
+        case 5:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "aboutId", for: indexPath)
+            configure(cell: cell, withText: "About")
+            return cell
         default:
             return UICollectionViewCell()
         }
@@ -73,6 +77,9 @@ class SettingsController: BaseCollectionViewController, UICollectionViewDelegate
         case 3:
             //Email
             showEmailController()
+        case 5:
+            //About
+            showAboutController()
         default:
             return
         }
@@ -95,6 +102,9 @@ class SettingsController: BaseCollectionViewController, UICollectionViewDelegate
         case 4:
             //Empty
             return .init(width: view.frame.width, height: 15)
+        case 5:
+            //About
+            return .init(width: view.frame.width, height: 65)
         default:
             return .zero
         }
@@ -130,8 +140,12 @@ class SettingsController: BaseCollectionViewController, UICollectionViewDelegate
             present(mail, animated: true)
         } else {
             showToastAlert(title: "Unable to access email")
-            // show failure alert
         }
+    }
+    
+    private func showAboutController() {
+        let controller = AboutController()
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
