@@ -132,16 +132,3 @@ extension UIButton {
         }
     }
 }
-
-extension UIViewController {
-    func showToastAlert(title: String, message: String? = nil) {
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertVC.view.tintColor = .systemPink
-
-        present(alertVC, animated: true) {
-            _ = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { timer in
-                alertVC.dismiss(animated: true, completion: nil)
-            }
-        }
-    }
-}

@@ -7,34 +7,136 @@
 //
 
 import UIKit
+import StoreKit
+import MessageUI
 
-class SettingsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class SettingsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate {
             
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Settings"
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(UnitsCell.self, forCellWithReuseIdentifier: UnitsCell.id    )
+        collectionView.register(UnitsCell.self, forCellWithReuseIdentifier: UnitsCell.id)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "emptyId")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "reviewId")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "EmailId")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "aboutId")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "termsId")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "privacyId")
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 5
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.row {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UnitsCell.id, for: indexPath) as! UnitsCell
+            configure(cell: cell)
+            return cell
+        case 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyId", for: indexPath)
+            configure(cell: cell)
+            return cell
+        case 2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reviewId", for: indexPath)
+            configure(cell: cell, withText: "Review")
+            return cell
+        case 3:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmailId", for: indexPath)
+            configure(cell: cell, withText: "Feedback", hasSeparator: false)
+            return cell
+        case 4:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyId", for: indexPath)
+            configure(cell: cell)
             return cell
         default:
             return UICollectionViewCell()
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width, height: 65)
+    private func configure(cell: UICollectionViewCell, withText: String = "", hasSeparator: Bool = true) {
+        let label = UILabel(text: withText, color: .label, numberOfLines: 1)
+        cell.addSubview(label)
+        label.fillSuperview(padding: .init(top: 0, left: 20, bottom: 0, right: 20))
+        
+        cell.backgroundColor = .systemBackground
+        cell.addBottomSeparator()
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 2:
+            //Review
+            showReviewController()
+        case 3:
+            //Email
+            showEmailController()
+        default:
+            return
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        switch indexPath.row {
+        case 0:
+            //Units
+            return .init(width: view.frame.width, height: 65)
+        case 1:
+            //Empty
+            return .init(width: view.frame.width, height: 15)
+        case 2:
+            //Review
+            return .init(width: view.frame.width, height: 65)
+        case 3:
+            //Review
+            return .init(width: view.frame.width, height: 65)
+        case 4:
+            //Empty
+            return .init(width: view.frame.width, height: 15)
+        default:
+            return .zero
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if indexPath.item == 0 || indexPath.item == 1 || indexPath.item == 3 { return }
+        collectionView.cellForItem(at: indexPath)?.backgroundColor = .quaternarySystemFill
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        collectionView.cellForItem(at: indexPath)?.backgroundColor = nil
+
+    }
+    
+    private func showReviewController() {
+         SKStoreReviewController.requestReview()
+     }
+    
+    private func showEmailController() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["ali.software.dev@gmail.com"])
+            
+            #warning("Put correct name here")
+            mail.setSubject("Feedback on Discover Places App")
+
+            present(mail, animated: true)
+        } else {
+            showToastAlert(title: "Unable to access email")
+            // show failure alert
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
 }
 
 class UnitsCell: UICollectionViewCell {
@@ -63,8 +165,6 @@ class UnitsCell: UICollectionViewCell {
         addSubview(label)
         label.centerYInSuperview()
         label.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: unitsSwitch.leadingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 12))
-        
-        addBottomSeparator()
     }
     
     required init?(coder: NSCoder) {
@@ -72,16 +172,7 @@ class UnitsCell: UICollectionViewCell {
     }
     
     @objc func toggleUnits(sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            DefaultsManager.setUnits(to: .km)
-            print("Set to Km")
-        case 1:
-            DefaultsManager.setUnits(to: .miles)
-            print("Set to Miles")
-        default:
-            break
-        }
+        DefaultsManager.setUnits(to: sender.selectedSegmentIndex == 0 ? .km : .miles)
     }
     
 }
