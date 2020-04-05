@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias PageIndicator = UISegmentedControl
+
 final class PlaceImagesHolder: UICollectionReusableView {
     
     public static let id = "placeImagesHolderId"
@@ -16,13 +18,7 @@ final class PlaceImagesHolder: UICollectionReusableView {
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 3)
     let starsView = StarsView(width: 100)
     let gradView = UIView()
-    
-    typealias PageIndicator = UISegmentedControl
-    let segmentedControl: PageIndicator! = {
-        let sc = UISegmentedControl()
-        sc.isUserInteractionEnabled = false
-        return sc
-    }()
+    let segmentedControl = PageIndicator()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,13 +53,16 @@ final class PlaceImagesHolder: UICollectionReusableView {
     private func populatePageIndicator(with count: Int) {
         segmentedControl.removeAllSegments()
         
+        if count == 1 { return  }
+        
         for i in 1...count {
             segmentedControl.insertSegment(withTitle: nil, at: i, animated: true)
         }
     }
     
     private func setupPageIndicatorDecoration () {
-        segmentedControl.backgroundColor = .secondarySystemBackground
+        segmentedControl.isUserInteractionEnabled = false
+        segmentedControl.backgroundColor = .quaternaryLabel
         segmentedControl.selectedSegmentTintColor = .systemPink
         segmentedControl.selectedSegmentIndex = 0
     }
