@@ -81,6 +81,8 @@
 		CEA988F5243A1252002A1FDE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F4243A1252002A1FDE /* Extensions.swift */; };
 		CEA988F7243A158A002A1FDE /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F6243A158A002A1FDE /* AboutController.swift */; };
 		CEABA02E24177AC90057A955 /* Category+SubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABA02D24177AC90057A955 /* Category+SubCategory.swift */; };
+		CEB72F52243D13B3002F6131 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB72F51243D13B3002F6131 /* PrivacyPolicyController.swift */; };
+		CEB72F54243D19C3002F6131 /* TermsOfUseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB72F53243D19C2002F6131 /* TermsOfUseController.swift */; };
 		CEBEE6DB24333449002C43E8 /* PlaceResultsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */; };
 		CECDA1462401C51A005F85FB /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA1452401C51A005F85FB /* StarsView.swift */; };
 		CECDA14824025896005F85FB /* ReviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA14724025896005F85FB /* ReviewDetailViewController.swift */; };
@@ -194,6 +196,8 @@
 		CEA988F4243A1252002A1FDE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEA988F6243A158A002A1FDE /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		CEABA02D24177AC90057A955 /* Category+SubCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+SubCategory.swift"; sourceTree = "<group>"; };
+		CEB72F51243D13B3002F6131 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
+		CEB72F53243D19C2002F6131 /* TermsOfUseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseController.swift; sourceTree = "<group>"; };
 		CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceResultsFilter.swift; sourceTree = "<group>"; };
 		CECDA1452401C51A005F85FB /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
 		CECDA14724025896005F85FB /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
@@ -251,6 +255,8 @@
 			children = (
 				CE327AE9241546E10010F400 /* SettingsController.swift */,
 				CEA988F6243A158A002A1FDE /* AboutController.swift */,
+				CEB72F51243D13B3002F6131 /* PrivacyPolicyController.swift */,
+				CEB72F53243D19C2002F6131 /* TermsOfUseController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -789,6 +795,7 @@
 				CE8A2FC923F088B800CDF866 /* MorePlacesHolder.swift in Sources */,
 				CE616D052405D94D008E7067 /* ListType.swift in Sources */,
 				60EADA7B23F6B0E60095DBF9 /* AddressCell.swift in Sources */,
+				CEB72F52243D13B3002F6131 /* PrivacyPolicyController.swift in Sources */,
 				60EADA8123F6D91B0095DBF9 /* ReviewsHolder.swift in Sources */,
 				CE5835C923DE173800C89622 /* BaseTabBarController.swift in Sources */,
 				CECDA1462401C51A005F85FB /* StarsView.swift in Sources */,
@@ -825,6 +832,7 @@
 				CE6599ED23EA68D100E531CD /* VerticalStackview.swift in Sources */,
 				CE5835CE23DE204B00C89622 /* BaseCollectionViewController.swift in Sources */,
 				CE659A0723EF87C100E531CD /* CategoriesHorizontalController.swift in Sources */,
+				CEB72F54243D19C3002F6131 /* TermsOfUseController.swift in Sources */,
 				CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */,
 				CE9CDF7024352D2C008DF6DE /* UserLocation.swift in Sources */,
 				CE8A2FCD23F0890100CDF866 /* MorePlacesCell.swift in Sources */,

@@ -61,7 +61,7 @@ class MyPlacesViewController: UIViewController {
     }
     
     @objc func settingsTapped() {
-        let settingsController = SettingsController()
+        let settingsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "SettingsVCId") as UITableViewController
         navigationController?.pushViewController(settingsController, animated: true)
     }
     

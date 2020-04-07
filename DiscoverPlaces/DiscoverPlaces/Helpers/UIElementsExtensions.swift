@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UICollectionReusableView {
+extension UIView {
     func addBottomSeparator(edgePadding: CGFloat = 12) {
         let separator = UIView()
         separator.backgroundColor = .quaternaryLabel

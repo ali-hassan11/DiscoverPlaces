@@ -10,66 +10,106 @@ import UIKit
 import StoreKit
 import MessageUI
 
-class SettingsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate {
-            
+class SettingsController: UITableViewController, MFMailComposeViewControllerDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Settings"
-        collectionView.backgroundColor = .systemBackground
-        collectionView.register(UnitsCell.self, forCellWithReuseIdentifier: UnitsCell.id)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "emptyId")
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "reviewId")
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "EmailId")
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "aboutId")
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "termsId")
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "privacyId")
+        tableView.backgroundColor = .systemBackground
+        tableView.register(UnitsCell.self, forCellReuseIdentifier: UnitsCell.id)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "emptyId")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "emptyId")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reviewId")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "EmailId")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "aboutId")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "termsId")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "privacyId")
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 8
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UnitsCell.id, for: indexPath) as! UnitsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: UnitsCell.id, for: indexPath) as! UnitsCell
             configure(cell: cell)
             return cell
         case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyId", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "emptyId", for: indexPath)
             configure(cell: cell)
             return cell
         case 2:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reviewId", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "reviewId", for: indexPath)
             configure(cell: cell, withText: "Review")
             return cell
         case 3:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmailId", for: indexPath)
-            configure(cell: cell, withText: "Feedback", hasSeparator: false)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EmailId", for: indexPath)
+            configure(cell: cell, withText: "Feedback")
             return cell
         case 4:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emptyId", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "emptyId", for: indexPath)
             configure(cell: cell)
             return cell
         case 5:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "aboutId", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "aboutId", for: indexPath)
             configure(cell: cell, withText: "About")
             return cell
+        case 6:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "privacyId", for: indexPath)
+            configure(cell: cell, withText: "Privacy Policy")
+            return cell
+        case 7:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "termsId", for: indexPath)
+            configure(cell: cell, withText: "Terms of Use")
+            return cell
         default:
-            return UICollectionViewCell()
+            return UITableViewCell()
         }
     }
     
-    private func configure(cell: UICollectionViewCell, withText: String = "", hasSeparator: Bool = true) {
+    private func configure(cell: UITableViewCell, withText: String = "") {
         let label = UILabel(text: withText, color: .label, numberOfLines: 1)
         cell.addSubview(label)
         label.fillSuperview(padding: .init(top: 0, left: 20, bottom: 0, right: 20))
         
         cell.backgroundColor = .systemBackground
-        cell.addBottomSeparator()
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0:
+            //Units
+            return 65
+        case 1:
+            //Empty
+            return 15
+        case 2:
+            //Review
+            return 65
+        case 3:
+            //Review
+            return 65
+        case 4:
+            //Empty
+            return 15
+        case 5:
+            //About
+            return 65
+        case 6:
+            //Privacy
+            return 65
+        case 7:
+            //Terms
+            return 65
+        default:
+            return 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 2:
             //Review
@@ -78,55 +118,19 @@ class SettingsController: BaseCollectionViewController, UICollectionViewDelegate
             //Email
             showEmailController()
         case 5:
-            //About
-            showAboutController()
+            performSegue(withIdentifier: "AboutSegue", sender: nil)
+        case 6:
+            performSegue(withIdentifier: "PrivacySegue", sender: nil)
+        case 7:
+            performSegue(withIdentifier: "TermsSegue", sender: nil)
         default:
             return
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.row {
-        case 0:
-            //Units
-            return .init(width: view.frame.width, height: 65)
-        case 1:
-            //Empty
-            return .init(width: view.frame.width, height: 15)
-        case 2:
-            //Review
-            return .init(width: view.frame.width, height: 65)
-        case 3:
-            //Review
-            return .init(width: view.frame.width, height: 65)
-        case 4:
-            //Empty
-            return .init(width: view.frame.width, height: 15)
-        case 5:
-            //About
-            return .init(width: view.frame.width, height: 65)
-        default:
-            return .zero
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if indexPath.item == 0 || indexPath.item == 1 || indexPath.item == 3 { return }
-        collectionView.cellForItem(at: indexPath)?.backgroundColor = .quaternarySystemFill
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        collectionView.cellForItem(at: indexPath)?.backgroundColor = nil
-
-    }
-    
     private func showReviewController() {
-         SKStoreReviewController.requestReview()
-     }
+        SKStoreReviewController.requestReview()
+    }
     
     private func showEmailController() {
         if MFMailComposeViewController.canSendMail() {
@@ -136,7 +140,7 @@ class SettingsController: BaseCollectionViewController, UICollectionViewDelegate
             
             #warning("Put correct name here")
             mail.setSubject("Feedback on Discover Places App")
-
+            
             present(mail, animated: true)
         } else {
             showToastAlert(title: "Unable to access email")
@@ -147,14 +151,14 @@ class SettingsController: BaseCollectionViewController, UICollectionViewDelegate
         let controller = AboutController()
         navigationController?.pushViewController(controller, animated: true)
     }
-
+    
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
 }
 
-class UnitsCell: UICollectionViewCell {
-
+class UnitsCell: UITableViewCell {
+    
     public static let id = "unitsCellId"
     
     let unitsSwitch: UISegmentedControl! = {
@@ -168,8 +172,8 @@ class UnitsCell: UICollectionViewCell {
     
     let label = UILabel(text: "Units", color: .label, alignment: .left, numberOfLines: 1)
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: "Units")
         unitsSwitch.addTarget(self, action: #selector(toggleUnits(sender:)), for: .valueChanged)
         
         addSubview(unitsSwitch)
