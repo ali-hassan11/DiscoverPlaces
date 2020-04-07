@@ -38,7 +38,7 @@ class SettingsController: UITableViewController, MFMailComposeViewControllerDele
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "emptyId", for: indexPath)
-            configure(cell: cell)
+            configure(cell: cell, isEmptyCell: true)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "reviewId", for: indexPath)
@@ -50,7 +50,7 @@ class SettingsController: UITableViewController, MFMailComposeViewControllerDele
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "emptyId", for: indexPath)
-            configure(cell: cell)
+            configure(cell: cell, isEmptyCell: true)
             return cell
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: "aboutId", for: indexPath)
@@ -69,12 +69,15 @@ class SettingsController: UITableViewController, MFMailComposeViewControllerDele
         }
     }
     
-    private func configure(cell: UITableViewCell, withText: String = "") {
+    private func configure(cell: UITableViewCell, withText: String = "", isEmptyCell: Bool = false) {
         let label = UILabel(text: withText, color: .label, numberOfLines: 1)
         cell.addSubview(label)
         label.fillSuperview(padding: .init(top: 0, left: 20, bottom: 0, right: 20))
         
         cell.backgroundColor = .systemBackground
+        if isEmptyCell {
+            cell.selectionStyle = .none
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
