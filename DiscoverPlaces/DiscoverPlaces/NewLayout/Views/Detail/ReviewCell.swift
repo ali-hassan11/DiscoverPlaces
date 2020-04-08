@@ -16,7 +16,7 @@ class ReviewCell: UICollectionViewCell {
             authorNameLabel.text = review.authorName
             timeAgoLabel.text = review.relativeTimeDescription
             reviewBodyLabel.text = review.text
-            starsView.populateStarView(rating: review.rating)
+            starRatingView.populate(with: Double(review.rating))
         }
     }
     
@@ -51,14 +51,14 @@ class ReviewCell: UICollectionViewCell {
     
     let timeAgoLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .light), color: .secondaryLabel, alignment: .right, numberOfLines: 2)
     
-    let starsView = StarsView(width: 90)
+    let starRatingView = StarRatingView()
     
     let reviewBodyLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .light), color: .label, alignment: .left, numberOfLines: 0)
     
     private func layoutCellViews() {
         authorNameLabel.setContentCompressionResistancePriority(.defaultHigh,for: .vertical)
         reviewBodyLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        let nameAndStarStackView = VerticalStackView(arrangedSubviews: [authorNameLabel, starsView], spacing: 4)
+        let nameAndStarStackView = VerticalStackView(arrangedSubviews: [authorNameLabel, starRatingView], spacing: 4)
         nameAndStarStackView.alignment = .leading
         let topStackView = HorizontalStackView(arrangedSubviews: [nameAndStarStackView, timeAgoLabel])
         topStackView.alignment = .top

@@ -76,7 +76,6 @@
 		CE8A2FD723F1CE3000CDF866 /* DetailsTopSectionCellXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8A2FD623F1CE3000CDF866 /* DetailsTopSectionCellXib.xib */; };
 		CE9CDF7024352D2C008DF6DE /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CDF6F24352D2C008DF6DE /* UserLocation.swift */; };
 		CE9CDF7324365B7D008DF6DE /* PlaceCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CDF7224365B7D008DF6DE /* PlaceCellViewModel.swift */; };
-		CE9CDF75243680FF008DF6DE /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9CDF74243680FF008DF6DE /* StarRatingView.swift */; };
 		CEA988F32438DA7F002A1FDE /* StretchyHeaderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F22438DA7F002A1FDE /* StretchyHeaderLayout.swift */; };
 		CEA988F5243A1252002A1FDE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F4243A1252002A1FDE /* Extensions.swift */; };
 		CEA988F7243A158A002A1FDE /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F6243A158A002A1FDE /* AboutController.swift */; };
@@ -84,7 +83,7 @@
 		CEB72F52243D13B3002F6131 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB72F51243D13B3002F6131 /* PrivacyPolicyController.swift */; };
 		CEB72F54243D19C3002F6131 /* TermsOfUseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB72F53243D19C2002F6131 /* TermsOfUseController.swift */; };
 		CEBEE6DB24333449002C43E8 /* PlaceResultsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */; };
-		CECDA1462401C51A005F85FB /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA1452401C51A005F85FB /* StarsView.swift */; };
+		CECDA1462401C51A005F85FB /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA1452401C51A005F85FB /* StarRatingView.swift */; };
 		CECDA14824025896005F85FB /* ReviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA14724025896005F85FB /* ReviewDetailViewController.swift */; };
 		CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */; };
 		CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5723E84978006D79E6 /* Spacing.swift */; };
@@ -191,7 +190,6 @@
 		CE8A2FD623F1CE3000CDF866 /* DetailsTopSectionCellXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsTopSectionCellXib.xib; sourceTree = "<group>"; };
 		CE9CDF6F24352D2C008DF6DE /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		CE9CDF7224365B7D008DF6DE /* PlaceCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCellViewModel.swift; sourceTree = "<group>"; };
-		CE9CDF74243680FF008DF6DE /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		CEA988F22438DA7F002A1FDE /* StretchyHeaderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyHeaderLayout.swift; sourceTree = "<group>"; };
 		CEA988F4243A1252002A1FDE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEA988F6243A158A002A1FDE /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
@@ -199,7 +197,7 @@
 		CEB72F51243D13B3002F6131 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
 		CEB72F53243D19C2002F6131 /* TermsOfUseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseController.swift; sourceTree = "<group>"; };
 		CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceResultsFilter.swift; sourceTree = "<group>"; };
-		CECDA1452401C51A005F85FB /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
+		CECDA1452401C51A005F85FB /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		CECDA14724025896005F85FB /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
 		CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalStackView.swift; sourceTree = "<group>"; };
 		CEEB4D5723E84978006D79E6 /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
@@ -287,9 +285,8 @@
 				CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */,
 				CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */,
 				CE616D062405D96D008E7067 /* DefaultsManager.swift */,
-				CECDA1452401C51A005F85FB /* StarsView.swift */,
+				CECDA1452401C51A005F85FB /* StarRatingView.swift */,
 				CE9CDF6F24352D2C008DF6DE /* UserLocation.swift */,
-				CE9CDF74243680FF008DF6DE /* StarRatingView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -798,7 +795,7 @@
 				CEB72F52243D13B3002F6131 /* PrivacyPolicyController.swift in Sources */,
 				60EADA8123F6D91B0095DBF9 /* ReviewsHolder.swift in Sources */,
 				CE5835C923DE173800C89622 /* BaseTabBarController.swift in Sources */,
-				CECDA1462401C51A005F85FB /* StarsView.swift in Sources */,
+				CECDA1462401C51A005F85FB /* StarRatingView.swift in Sources */,
 				CE616D032405D46D008E7067 /* MyPlacesViewController.swift in Sources */,
 				CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */,
 				CE694B8924097E0500F37ED6 /* PlaceListController.swift in Sources */,
@@ -806,7 +803,6 @@
 				CE9CDF7324365B7D008DF6DE /* PlaceCellViewModel.swift in Sources */,
 				CE8A2FD523F1CE0800CDF866 /* DetailsTopSectionCellXib.swift in Sources */,
 				CE659A0323EF876600E531CD /* HomeLargeCell.swift in Sources */,
-				CE9CDF75243680FF008DF6DE /* StarRatingView.swift in Sources */,
 				CE5835D423DEB7C500C89622 /* SearchCell.swift in Sources */,
 				CECDA14824025896005F85FB /* ReviewDetailViewController.swift in Sources */,
 				CE694B9224097FD200F37ED6 /* MyPlaceCell.swift in Sources */,

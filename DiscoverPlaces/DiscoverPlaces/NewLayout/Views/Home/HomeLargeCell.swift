@@ -16,7 +16,7 @@ class HomeLargeCell: UICollectionViewCell {
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 2)
     //If location not enabled, dont show distance label
     let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
-    let starsView = StarsView(width: 90)
+    let starRatingView = StarRatingView()
     
     var image: UIImage?
     
@@ -45,7 +45,7 @@ class HomeLargeCell: UICollectionViewCell {
             placeNameLabel.text = result.name
             
             guard let rating = result.rating else { return }
-            starsView.populate(with: rating)
+            starRatingView.populate(with: rating, displaysNumber: true)
             
             guard let userLocation = userLocation else { return }
             distanceLabel.text = result.geometry?.distanceString(from: userLocation)
@@ -63,7 +63,7 @@ class HomeLargeCell: UICollectionViewCell {
         addSubview(placeImageView)
         placeImageView.fillSuperview()
 
-        let stackView = HorizontalStackView(arrangedSubviews: [starsView, distanceLabel])
+        let stackView = HorizontalStackView(arrangedSubviews: [starRatingView, distanceLabel])
         placeImageView.addSubview(stackView)
         stackView.alignment = .center
         stackView.distribution = .equalSpacing

@@ -15,7 +15,7 @@ class MyPlaceCell: UICollectionViewCell {
     let placeImageView = UIImageView(image: UIImage(named: ""))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 15.5, weight: .medium), color: .label, numberOfLines: 2)
     let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, alignment: .left, numberOfLines: 1)
-    let starView = StarsView(width: 90)
+    let starRatingView = StarRatingView()
     let chevronIcon = UIImageView(image: UIImage(systemName: "chevron.right"))
     
     let highlightView: UIView! = {
@@ -76,12 +76,21 @@ class MyPlaceCell: UICollectionViewCell {
         }
     }
     
+//    private func configureRating(using place: PlaceDetailResult) {
+//        guard let rating = place.rating else {
+//            starView.isHidden = true
+//            return
+//        }
+//        starView.populate(with: rating)
+//    }
+    
     private func configureRating(using place: PlaceDetailResult) {
         guard let rating = place.rating else {
-            starView.isHidden = true
+            starRatingView.isHidden = true
             return
         }
-        starView.populate(with: rating)
+        starRatingView.isHidden = false
+        starRatingView.populate(with: rating, displaysNumber: true)
     }
     
     private func buildImageUrl(using photo: Photo) -> URL? {
@@ -113,7 +122,7 @@ class MyPlaceCell: UICollectionViewCell {
         chevronIcon.anchor(top: nil, leading: nil, bottom: nil, trailing: trailingAnchor,
                            padding: .init(top: 0, left: 0, bottom: 0, right: 16))
         
-        let detailsStackView = VerticalStackView(arrangedSubviews: [placeNameLabel, addressLabel, starView], spacing: 3)
+        let detailsStackView = VerticalStackView(arrangedSubviews: [placeNameLabel, addressLabel, starRatingView], spacing: 3)
         detailsStackView.setCustomSpacing(4, after: addressLabel)
         detailsStackView.alignment = .leading
         addSubview(detailsStackView)

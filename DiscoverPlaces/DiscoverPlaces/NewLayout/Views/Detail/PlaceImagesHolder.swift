@@ -16,7 +16,7 @@ final class PlaceImagesHolder: UICollectionReusableView {
     
     let horizontalController = ImagesHorizontalController()
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 3)
-    let starsView = StarsView(width: 100)
+    let starRatingView = StarRatingView()
     let gradView = UIView()
     let segmentedControl = PageIndicator()
     
@@ -39,8 +39,12 @@ final class PlaceImagesHolder: UICollectionReusableView {
     }
     
     private func configureRating(using detail: PlaceDetailResult) {
-        guard let rating = detail.rating else { return }
-        starsView.populate(with: rating, displaysNumber: true)
+        guard let rating = detail.rating else {
+            starRatingView.isHidden = true
+            return
+        }
+        starRatingView.isHidden = false
+        starRatingView.populate(with: rating, displaysNumber: true)
     }
     
     private func configurePageIndicator(using detail: PlaceDetailResult) {
@@ -97,7 +101,7 @@ final class PlaceImagesHolder: UICollectionReusableView {
         gradView.fillSuperview()
         gradView.isUserInteractionEnabled = false
         
-        let stackView = VerticalStackView(arrangedSubviews: [starsView, placeNameLabel], spacing: 4)
+        let stackView = VerticalStackView(arrangedSubviews: [starRatingView, placeNameLabel], spacing: 4)
         addSubview(stackView)
         
         stackView.alignment = .leading

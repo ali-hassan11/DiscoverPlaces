@@ -15,7 +15,7 @@ class ReviewDetailViewController: UIViewController {
             authorNameLabel.text = review?.authorName
             timeAgoLabel.text = review?.relativeTimeDescription
             reviewBodyTextView.text = review?.text
-            starsView.populateStarView(rating: review?.rating ?? 0)
+            starRatingView.populate(with: Double(review?.rating ?? 0))
         }
     }
     
@@ -40,7 +40,7 @@ class ReviewDetailViewController: UIViewController {
     
     let timeAgoLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .light), color: .secondaryLabel, alignment: .right, numberOfLines: 2)
     
-    let starsView = StarsView(width: 100)
+    let starRatingView = StarRatingView()
     
     let reviewBodyTextView: UITextView! = {
         let tv = UITextView()
@@ -59,7 +59,7 @@ class ReviewDetailViewController: UIViewController {
         
         reviewBodyTextView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         
-        let nameAndStarStackView = VerticalStackView(arrangedSubviews: [authorNameLabel, starsView], spacing: 4)
+        let nameAndStarStackView = VerticalStackView(arrangedSubviews: [authorNameLabel, starRatingView], spacing: 4)
         nameAndStarStackView.alignment = .leading
         
         let topStackView = HorizontalStackView(arrangedSubviews: [nameAndStarStackView, timeAgoLabel])

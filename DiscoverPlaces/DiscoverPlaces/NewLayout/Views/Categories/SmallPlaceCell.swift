@@ -15,7 +15,7 @@ class SmallPlaceCell: UICollectionViewCell {
     let placeImageView = UIImageView(image: UIImage(named: ""))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .medium), color: .label, numberOfLines: 2) //Can't be more than 2
     let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, numberOfLines: 1) //Can't be more that 1
-    let starView = StarsView(width: 80)
+    let starRatingView = StarRatingView()
     
     
     let highlightView: UIView! = {
@@ -70,10 +70,11 @@ class SmallPlaceCell: UICollectionViewCell {
     
     private func configureRating(using place: PlaceResult) {
         guard let rating = place.rating else {
-            starView.isHidden = true
+            starRatingView.isHidden = true
             return
         }
-        starView.populate(with: rating)
+        starRatingView.isHidden = false
+        starRatingView.populate(with: rating)
     }
     
     private func buildImageUrl(using photo: Photo) -> URL? {
@@ -93,7 +94,7 @@ class SmallPlaceCell: UICollectionViewCell {
     }
     
     private func setupStackView() {
-        let stackView = VerticalStackView(arrangedSubviews: [placeNameLabel, addressLabel, starView, UIView()], spacing: 4)
+        let stackView = VerticalStackView(arrangedSubviews: [placeNameLabel, addressLabel, starRatingView, UIView()], spacing: 4)
         stackView.distribution = .fill
         stackView.alignment = .leading
         addSubview(stackView)
@@ -104,10 +105,10 @@ class SmallPlaceCell: UICollectionViewCell {
         addSubview(highlightView)
         highlightView.roundCorners()
         highlightView.isHidden = true
-        if starView.isHidden {
+        if starRatingView.isHidden {
             highlightView.anchor(top: topAnchor, leading: leadingAnchor, bottom: addressLabel.bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: -8, right: 0))
         } else {
-            highlightView.anchor(top: topAnchor, leading: leadingAnchor, bottom: starView.bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: -8, right: 0))
+            highlightView.anchor(top: topAnchor, leading: leadingAnchor, bottom: starRatingView.bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: -8, right: 0))
         }
     }
     
