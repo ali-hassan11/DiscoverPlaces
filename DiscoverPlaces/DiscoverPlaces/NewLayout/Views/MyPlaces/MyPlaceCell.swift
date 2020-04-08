@@ -33,7 +33,7 @@ class MyPlaceCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         placeImageView.backgroundColor = .secondarySystemBackground
-        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.14, end: 0.24)
+//        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.14, end: 0.24)
         placeImageView.contentMode = .scaleAspectFill
         
         addViews()
@@ -101,7 +101,7 @@ class MyPlaceCell: UICollectionViewCell {
     private func addViews() {
         addSubview(placeImageView)
         addSubview(chevronIcon)
-        chevronIcon.tintColor = .systemPink
+        chevronIcon.tintColor = .label
     }
     
     private func addConstraints() {
