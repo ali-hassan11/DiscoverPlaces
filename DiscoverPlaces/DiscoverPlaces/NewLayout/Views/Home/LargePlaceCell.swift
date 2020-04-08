@@ -12,7 +12,7 @@ class LargePlaceCell: UICollectionViewCell {
     
     public static let id = "largeCellId"
     
-    let placeImageView = UIImageView(image: UIImage(named: "hotel"))
+    let placeImageView = UIImageView(image: UIImage(named: "cafe"))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 2)
     let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
     let starRatingView = StarRatingView()
@@ -65,8 +65,7 @@ class LargePlaceCell: UICollectionViewCell {
         placeNameLabel.anchor(top: nil, leading: stackView.leadingAnchor, bottom: stackView.topAnchor, trailing: stackView.trailingAnchor,
                               padding: .init(top: 0, left: 0, bottom: 8, right: 0))
         
-        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.225, end: 0.35)
-        
+        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.43, end: 0.84)        
     }
     
     required init?(coder: NSCoder) {

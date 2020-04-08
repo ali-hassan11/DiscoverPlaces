@@ -12,7 +12,7 @@ class SmallPlaceCell: UICollectionViewCell {
     
     public static let id = "smallSquareSpaceCellId"
     
-    let placeImageView = UIImageView(image: UIImage(named: "hotel"))
+    let placeImageView = UIImageView(image: UIImage(named: "cafe"))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .medium), color: .label, numberOfLines: 2) //Can't be more than 2
     let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, numberOfLines: 1) //Can't be more that 1
     let starRatingView = StarRatingView()
@@ -87,7 +87,7 @@ class SmallPlaceCell: UICollectionViewCell {
     }
     
     private func setupPlaceImageView() {
-        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.35, end: 0.45)
+        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.33, end: 0.4)
         addSubview(placeImageView)
         placeImageView.roundCorners()
         placeImageView.contentMode = .scaleAspectFill

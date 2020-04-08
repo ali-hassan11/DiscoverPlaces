@@ -12,7 +12,7 @@ class MyPlaceCell: UICollectionViewCell {
     
     static public let id = "myListCell"
     
-    let placeImageView = UIImageView(image: UIImage(named: "hotel"))
+    let placeImageView = UIImageView(image: UIImage(named: "cafe"))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 15.5, weight: .medium), color: .label, numberOfLines: 2)
     let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, alignment: .left, numberOfLines: 1)
     let starRatingView = StarRatingView()
@@ -33,7 +33,7 @@ class MyPlaceCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         placeImageView.backgroundColor = .secondarySystemBackground
-        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.15, end: 0.25)
+        placeImageView.addGradientBackground(topColor: .clear, bottomColor: .black, start: 0.14, end: 0.24)
         placeImageView.contentMode = .scaleAspectFill
         
         addViews()
