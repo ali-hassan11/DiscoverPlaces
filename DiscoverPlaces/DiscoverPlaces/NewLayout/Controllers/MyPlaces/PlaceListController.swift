@@ -22,7 +22,7 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
         }
     }
     
-    var placeResults: [PlaceDetailResult]?
+    var placeResults = [PlaceDetailResult]()
     
     let defaults = DefaultsManager()
     
@@ -40,17 +40,17 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return placeResults?.count ?? 0
+        return placeResults.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPlaceCell.id, for: indexPath) as! MyPlaceCell
-        cell.configure(place: placeResults?[indexPath.item])
+        cell.configure(place: placeResults[indexPath.item])
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let place = placeResults?[indexPath.item] else { return }
+        let place = placeResults[indexPath.item]
         guard let location = place.geometry?.location else { return }
         didSelectPlaceInListHandler?(place.place_id, location)
     }
@@ -63,11 +63,22 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
         return 0
     }
     
+    let dispatchGroup = DispatchGroup()
+    
     func fetchDataForPlaceIds() {
-        self.placeResults?.removeAll()
+        self.placeResults.removeAll()
+        
+        print("🟩 PlaceId List Count: \(placeIdList!.count)")
+        placeIdList?.forEach{ _ in dispatchGroup.enter() }
+        
         placeIdList?.forEach({ (id) in
             fetchData(for: id)
         })
+        
+        dispatchGroup.notify(queue: .main) {
+            print("🟩 PlaceId Results Count: \(self.placeResults.count)")
+            self.placeResults.forEach{print($0.name!) ; print($0.rating ?? "Rating = nil") ; print($0.place_id)}
+        }
     }
     
     func fetchData(for id: String) {
@@ -84,11 +95,9 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
             guard let placeResponse = response else { return }
             guard let result = placeResponse.result else { return }
             
-            if self.placeResults != nil {
-                self.placeResults?.append(result)
-            } else {
-                self.placeResults = [result]
-            }
+            self.placeResults.append(result)
+            
+            self.dispatchGroup.leave()
             
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
