@@ -12,7 +12,7 @@ class SmallPlaceCell: UICollectionViewCell {
     
     public static let id = "smallSquareSpaceCellId"
     
-    let placeImageView = UIImageView(image: UIImage(named: ""))
+    let placeImageView = UIImageView(image: UIImage(named: "hotel"))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .medium), color: .label, numberOfLines: 2) //Can't be more than 2
     let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, numberOfLines: 1) //Can't be more that 1
     let starRatingView = StarRatingView()
@@ -37,6 +37,8 @@ class SmallPlaceCell: UICollectionViewCell {
         setupPlaceImageView()
         setupStackView()
         configureHighlightView()
+        
+        //Add gradient, go back to when it was working
     }
     
     func configure(place: PlaceResult?) {

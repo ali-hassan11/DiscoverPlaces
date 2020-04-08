@@ -12,7 +12,7 @@ class LargePlaceCell: UICollectionViewCell {
     
     public static let id = "largeCellId"
     
-    let placeImageView = UIImageView(image: UIImage(named: ""))
+    let placeImageView = UIImageView(image: UIImage(named: "hotel"))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 2)
     let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
     let starRatingView = StarRatingView()
@@ -45,7 +45,7 @@ class LargePlaceCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-    
+        
         backgroundColor = .secondarySystemBackground
         layer.cornerRadius = 10
         clipsToBounds = true

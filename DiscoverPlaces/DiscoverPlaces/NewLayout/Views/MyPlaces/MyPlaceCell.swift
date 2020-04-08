@@ -12,7 +12,7 @@ class MyPlaceCell: UICollectionViewCell {
     
     static public let id = "myListCell"
     
-    let placeImageView = UIImageView(image: UIImage(named: ""))
+    let placeImageView = UIImageView(image: UIImage(named: "hotel"))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 15.5, weight: .medium), color: .label, numberOfLines: 2)
     let addressLabel = UILabel(text: "", font: .systemFont(ofSize: 14, weight: .regular), color: .secondaryLabel, alignment: .left, numberOfLines: 1)
     let starRatingView = StarRatingView()
