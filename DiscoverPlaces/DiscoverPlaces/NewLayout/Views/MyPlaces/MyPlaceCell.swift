@@ -75,22 +75,14 @@ class MyPlaceCell: UICollectionViewCell {
             addressLabel.text = name
         }
     }
-    
-//    private func configureRating(using place: PlaceDetailResult) {
-//        guard let rating = place.rating else {
-//            starView.isHidden = true
-//            return
-//        }
-//        starView.populate(with: rating)
-//    }
-    
+
     private func configureRating(using place: PlaceDetailResult) {
         guard let rating = place.rating else {
             starRatingView.isHidden = true
             return
         }
         starRatingView.isHidden = false
-        starRatingView.populate(with: rating, displaysNumber: true)
+        starRatingView.populate(with: rating)
     }
     
     private func buildImageUrl(using photo: Photo) -> URL? {
