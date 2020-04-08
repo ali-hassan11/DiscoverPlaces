@@ -12,9 +12,8 @@ class LargePlaceCell: UICollectionViewCell {
     
     public static let id = "largeCellId"
     
-    let placeImageView = UIImageView(image: UIImage(named: ""))//Try and make empty without loosing gradient
+    let placeImageView = UIImageView(image: UIImage(named: ""))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 2)
-    //If location not enabled, dont show distance label
     let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
     let starRatingView = StarRatingView()
     
@@ -25,23 +24,15 @@ class LargePlaceCell: UICollectionViewCell {
     var result: PlaceResult! {
         didSet {
             guard let photo = result.photos?.first else {
-                return //Default Image
+                return
             }
             
             guard let url = UrlBuilder.buildImageUrl(with: photo.photoReference, width: photo.width) else {
-                return /*Default Image*/
+                return
             }
             
-            placeImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "transparentBlock"), options: .continueInBackground) { (image, error, _, _) in
-                
-                if let error = error {
-                    print("Falied to load image: ", error)
-                    self.placeImageView.image = UIImage(named: "noPhotosFound")
-                    return
-                }
-                
-                self.image = image
-            }
+            placeImageView.sd_setImage(with: url)
+            
             placeNameLabel.text = result.name
             
             guard let rating = result.rating else { return }
