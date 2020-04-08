@@ -1,0 +1,6 @@
+module Pods_DiscoverPlaces {
+  umbrella header "Pods-DiscoverPlaces-umbrella.h"
+
+  export *
+  module * { export * }
+}
