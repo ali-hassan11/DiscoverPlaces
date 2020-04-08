@@ -30,7 +30,7 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
         super.viewDidLoad()
         
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(HomeLargeCell.self, forCellWithReuseIdentifier: HomeLargeCell.id)
+        collectionView.register(LargePlaceCell.self, forCellWithReuseIdentifier: LargePlaceCell.id)
         collectionView.contentInset = .init(top: Constants.topPadding, left: sidePadding, bottom: Constants.bottomPadding, right: sidePadding)
     }
     
@@ -40,7 +40,7 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let result = results?[indexPath.item] else { return UICollectionViewCell() }
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeLargeCell.id, for: indexPath) as! HomeLargeCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LargePlaceCell.id, for: indexPath) as! LargePlaceCell
         cell.userLocation = userLocation
         cell.result = result
         return cell
