@@ -17,14 +17,14 @@ final class PlaceImagesHolder: UICollectionReusableView {
     let horizontalController = ImagesHorizontalController()
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 3)
     let starRatingView = StarRatingView()
-    let gradView = UIView()
+    let gradientView = UIView()
     let segmentedControl = PageIndicator()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .secondarySystemBackground
         setupViews()
-        addGradient(firstColor: .clear, secondColor: .black, view: gradView, start: 0.7, end: 0.96)
+        addGradient(firstColor: .clear, secondColor: .black, view: gradientView, start: 0.7, end: 0.96)
     }
     
     public func configure(using placeDetail: PlaceDetailResult) {
@@ -83,23 +83,23 @@ final class PlaceImagesHolder: UICollectionReusableView {
         horizontalController.photos = placeDetail.photos
     }
 
-    private func addGradient(firstColor: UIColor, secondColor: UIColor, view: UIView, start: CGFloat, end: CGFloat) {
-        clipsToBounds = true
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [firstColor.cgColor, secondColor.cgColor]
-        gradientLayer.frame = self.frame
-        gradientLayer.startPoint = CGPoint(x: 0, y: start)
-        gradientLayer.endPoint = CGPoint(x: 0, y: end)
-        view.layer.insertSublayer(gradientLayer, at: 0)
-    }
+//    private func addGradient(firstColor: UIColor, secondColor: UIColor, view: UIView, start: CGFloat, end: CGFloat) {
+//        clipsToBounds = true
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.colors = [firstColor.cgColor, secondColor.cgColor]
+//        gradientLayer.frame = self.frame
+//        gradientLayer.startPoint = CGPoint(x: 0, y: start)
+//        gradientLayer.endPoint = CGPoint(x: 0, y: end)
+//        view.layer.insertSublayer(gradientLayer, at: 0)
+//    }
     
     private func setupViews() {
         addSubview(horizontalController.view)
         horizontalController.view.fillSuperview()
         
-        addSubview(gradView)
-        gradView.fillSuperview()
-        gradView.isUserInteractionEnabled = false
+        addSubview(gradientView)
+        gradientView.fillSuperview()
+        gradientView.isUserInteractionEnabled = false
         
         let stackView = VerticalStackView(arrangedSubviews: [starRatingView, placeNameLabel], spacing: 4)
         addSubview(stackView)
