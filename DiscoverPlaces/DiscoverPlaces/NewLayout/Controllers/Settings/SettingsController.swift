@@ -24,6 +24,7 @@ class SettingsController: UITableViewController, MFMailComposeViewControllerDele
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "aboutId")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "termsId")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "privacyId")
+        tableView.tableFooterView = UIView()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

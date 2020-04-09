@@ -21,6 +21,7 @@ class OpeningHoursController: UITableViewController {
         title = "Opening Times"
         view.isUserInteractionEnabled = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "id")
+        tableView.tableFooterView = UIView()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
