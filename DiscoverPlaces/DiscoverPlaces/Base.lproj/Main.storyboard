@@ -258,7 +258,6 @@
         <!--Privacy Policy-->
         <scene sceneID="2Ki-ju-KJm">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yG0-9i-7d9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="vbb-gU-Ttg" customClass="PrivacyPolicyController" customModule="DiscoverPlaces" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DG1-9t-5Rx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -301,6 +300,7 @@
                         <outlet property="privacyPolicyButton" destination="NBY-pn-Uza" id="WCy-Zv-pv7"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yG0-9i-7d9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2703" y="846"/>
         </scene>

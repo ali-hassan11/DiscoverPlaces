@@ -12,9 +12,10 @@ class LargePlaceCell: UICollectionViewCell {
     
     public static let id = "largeCellId"
     
+    
     let placeImageView = UIImageView(image: UIImage(named: "cafe"))
     let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 2)
-    let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .semibold), color: .lightText, numberOfLines: 1)
+    let distanceLabel = Font().distanceLabel
     let starRatingView = StarRatingView()
     
     var image: UIImage?

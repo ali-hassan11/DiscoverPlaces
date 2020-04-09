@@ -19,7 +19,8 @@ final class PlaceImagesHolder: UICollectionReusableView {
     let starRatingView = StarRatingView()
     let gradientView = UIView()
     let segmentedControl = PageIndicator()
-    
+    let distanceLabel = Font().distanceLabel
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .secondarySystemBackground
@@ -27,11 +28,12 @@ final class PlaceImagesHolder: UICollectionReusableView {
         addGradient(firstColor: .clear, secondColor: .black, view: gradientView, start: 0.7, end: 0.96)
     }
     
-    public func configure(using placeDetail: PlaceDetailResult) {
+    public func configure(using placeDetail: PlaceDetailResult, location: Location) {
         configurePlaceName(using: placeDetail)
         configureRating(using: placeDetail)
         configurePageIndicator(using: placeDetail)
         configurePhotosController(using: placeDetail)
+        configureDistanceLabel(using: placeDetail, and: location)
     }
     
     private func configurePlaceName(using detail: PlaceDetailResult) {
@@ -53,6 +55,11 @@ final class PlaceImagesHolder: UICollectionReusableView {
         setupPageIndicatorDecoration()
         layoutPageIndicator()
     }
+    
+    private func configureDistanceLabel(using detail: PlaceDetailResult, and location: Location) {
+        distanceLabel.text = detail.geometry?.distanceString(from: location)
+    }
+
     
     private func populatePageIndicator(with count: Int) {
         segmentedControl.removeAllSegments()
@@ -101,7 +108,7 @@ final class PlaceImagesHolder: UICollectionReusableView {
         gradientView.fillSuperview()
         gradientView.isUserInteractionEnabled = false
         
-        let stackView = VerticalStackView(arrangedSubviews: [starRatingView, placeNameLabel], spacing: 4)
+        let stackView = VerticalStackView(arrangedSubviews: [distanceLabel, starRatingView, placeNameLabel], spacing: 4)
         addSubview(stackView)
         
         stackView.alignment = .leading

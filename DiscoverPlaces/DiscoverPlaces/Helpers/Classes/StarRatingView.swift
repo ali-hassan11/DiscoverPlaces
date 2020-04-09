@@ -35,7 +35,7 @@ class StarRatingView: UIView {
         cosmosView.settings.emptyBorderColor = .systemPink
         cosmosView.settings.filledBorderColor = .systemPink
         cosmosView.settings.filledColor = .systemPink
-        cosmosView.settings.textColor = .lightText
+        cosmosView.settings.textColor = Color.starRatingNumber
         cosmosView.settings.disablePanGestures = true
         cosmosView.settings.updateOnTouch = false
     }
