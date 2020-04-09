@@ -29,6 +29,14 @@ class HomeLargeCellHolder: UICollectionReusableView {
         
     }
     
+    func configureTitle(with placeName: String?) {
+        if let name = placeName {
+            sectionDescriptionLabel.text = "Places of interest - \(name)"
+        } else {
+            sectionDescriptionLabel.text = "Places of interest near You"
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
