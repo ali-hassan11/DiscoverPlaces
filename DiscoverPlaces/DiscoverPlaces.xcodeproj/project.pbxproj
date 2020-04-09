@@ -21,6 +21,7 @@
 		CE1D791D2409B6890054864B /* DetailSplashScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1D791C2409B6890054864B /* DetailSplashScreen.xib */; };
 		CE2267DB2402A14E00E6385F /* OpeningHoursController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2267DA2402A14E00E6385F /* OpeningHoursController.swift */; };
 		CE24AD80243EFF8900852C91 /* Fonts+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24AD7F243EFF8900852C91 /* Fonts+Color.swift */; };
+		CE24AD82243F750B00852C91 /* LocationSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24AD81243F750B00852C91 /* LocationSearchController.swift */; };
 		CE319CDD23E0ECBD0088B9D1 /* UIElementsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE319CDC23E0ECBD0088B9D1 /* UIElementsExtensions.swift */; };
 		CE319CE723E15E1E0088B9D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE319CE623E15E1E0088B9D1 /* Constants.swift */; };
 		CE327AEA241546E10010F400 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AE9241546E10010F400 /* SettingsController.swift */; };
@@ -130,6 +131,7 @@
 		CE1D791C2409B6890054864B /* DetailSplashScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailSplashScreen.xib; sourceTree = "<group>"; };
 		CE2267DA2402A14E00E6385F /* OpeningHoursController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHoursController.swift; sourceTree = "<group>"; };
 		CE24AD7F243EFF8900852C91 /* Fonts+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fonts+Color.swift"; sourceTree = "<group>"; };
+		CE24AD81243F750B00852C91 /* LocationSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchController.swift; sourceTree = "<group>"; };
 		CE319CDC23E0ECBD0088B9D1 /* UIElementsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElementsExtensions.swift; sourceTree = "<group>"; };
 		CE319CE623E15E1E0088B9D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE327AE9241546E10010F400 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				CE734D2B23E0CADE005AE0EB /* Search */,
 				CE327AE8241546C00010F400 /* Settings */,
 				CE327AED2416960E0010F400 /* Categories */,
+				CE24AD81243F750B00852C91 /* LocationSearchController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -814,6 +817,7 @@
 				CE6F17FD23F66E73003D8D89 /* OpeningTimeCell.swift in Sources */,
 				60EADA8723F6E1EB0095DBF9 /* ActionButtonsCell.swift in Sources */,
 				CE659A1123EF897000E531CD /* PlaceDetailsCell.swift in Sources */,
+				CE24AD82243F750B00852C91 /* LocationSearchController.swift in Sources */,
 				CE327AEA241546E10010F400 /* SettingsController.swift in Sources */,
 				CE58359D23DE16B000C89622 /* ViewController.swift in Sources */,
 				CE694B8724097DD400F37ED6 /* MyPlacesHorizontalController.swift in Sources */,
