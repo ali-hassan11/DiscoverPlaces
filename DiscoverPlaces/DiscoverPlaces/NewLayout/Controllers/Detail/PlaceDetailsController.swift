@@ -61,10 +61,15 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         setUpSplashScreen()
         setupCollectionView()
         registerCells()
+        setIndexForImagesHolderSegmentControl(to: 0)
         
         fetchPlaceData(for: placeId)
     }
     
+    private func setIndexForImagesHolderSegmentControl(to segment: Int) {
+        UserDefaults.standard.set(segment, forKey: "nearestPageKey")
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
@@ -203,6 +208,7 @@ extension PlaceDetailsController {
         cell.configure(using: placeDetail, location: userLocation)
         cell.horizontalController.didScrollImagesController = { nearestPage in
             cell.segmentedControl.selectedSegmentIndex = nearestPage
+            self.setIndexForImagesHolderSegmentControl(to: nearestPage)
         }
         return cell
     }

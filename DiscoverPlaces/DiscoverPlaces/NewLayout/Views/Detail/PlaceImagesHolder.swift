@@ -20,6 +20,8 @@ final class PlaceImagesHolder: UICollectionReusableView {
     let gradientView = UIView()
     let segmentedControl = PageIndicator()
     let distanceLabel = Font().distanceLabel
+    
+    var isFirstInit = true
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -75,7 +77,9 @@ final class PlaceImagesHolder: UICollectionReusableView {
         segmentedControl.isUserInteractionEnabled = false
         segmentedControl.backgroundColor = .quaternaryLabel
         segmentedControl.selectedSegmentTintColor = .systemPink
-        segmentedControl.selectedSegmentIndex = 0
+        
+        let nearestPage =  UserDefaults.standard.integer(forKey: "nearestPageKey")
+        segmentedControl.selectedSegmentIndex = nearestPage
     }
     
     private func layoutPageIndicator() {
