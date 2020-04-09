@@ -90,7 +90,7 @@ extension Geometry {
         let fromLocation = CLLocation(latitude: location.lat, longitude: location.lng)
         let toLocation = CLLocation(latitude: userLocation.lat, longitude: userLocation.lng)
         let distance = fromLocation.distance(from: toLocation)
-        return distance.inUnits()
+        return "\(distance.inUnits())"
     }
 
 }
@@ -99,9 +99,9 @@ extension Double {
 //Write tests for this
     func inUnits() -> String {
         if DefaultsManager.isKm() {
-            return "\(inKm().rounded(toPlaces: 1)) Km"
+            return "\(inKm().rounded(toPlaces: 1)) km"
         } else {
-            return "\(inMiles().rounded(toPlaces: 1)) Miles"
+            return "\(inMiles().rounded(toPlaces: 1)) miles"
         }
     }
     

@@ -27,7 +27,7 @@ final class PlaceImagesHolder: UICollectionReusableView {
         super.init(frame: frame)
         backgroundColor = .secondarySystemBackground
         setupViews()
-        addGradient(firstColor: .clear, secondColor: .black, view: gradientView, start: 0.7, end: 0.96)
+        addGradient(firstColor: .clear, secondColor: .black, view: gradientView, start: 0.69, end: 0.96)
     }
     
     public func configure(using placeDetail: PlaceDetailResult, location: Location) {
@@ -112,11 +112,16 @@ final class PlaceImagesHolder: UICollectionReusableView {
         gradientView.fillSuperview()
         gradientView.isUserInteractionEnabled = false
         
-        let stackView = VerticalStackView(arrangedSubviews: [distanceLabel, starRatingView, placeNameLabel], spacing: 4)
+        let stackView = HorizontalStackView(arrangedSubviews: [starRatingView, distanceLabel])
         addSubview(stackView)
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
+        stackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor,
+                         padding: .init(top: 0, left: 16, bottom: 16, right: 16))
         
-        stackView.alignment = .leading
-        stackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 20, bottom: 16, right: 20))
+        addSubview(placeNameLabel)
+        placeNameLabel.anchor(top: nil, leading: stackView.leadingAnchor, bottom: stackView.topAnchor, trailing: stackView.trailingAnchor,
+                              padding: .init(top: 0, left: 0, bottom: 8, right: 0))
     }
     
     required init?(coder: NSCoder) {

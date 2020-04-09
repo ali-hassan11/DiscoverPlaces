@@ -9,10 +9,10 @@
 import UIKit
 
 class Font {
-    let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 16, weight: .semibold), color: Color.distanceLabel, numberOfLines: 1)
+    let distanceLabel = UILabel(text: "", font: .systemFont(ofSize: 15.5, weight: .medium), color: Color.distanceLabel, numberOfLines: 1)
 }
 
 enum Color {
-    static let distanceLabel = UIColor(white: 1, alpha: 0.85)
-    static let starRatingNumber = UIColor(white: 1, alpha: 0.85)
+    static let distanceLabel = UIColor(white: 1, alpha: 0.75)
+    static let starRatingNumber = UIColor(white: 1, alpha: 0.75)
 }
