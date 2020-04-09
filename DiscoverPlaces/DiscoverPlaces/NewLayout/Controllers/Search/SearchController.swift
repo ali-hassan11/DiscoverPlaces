@@ -15,7 +15,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var searchResults = [PlaceResult]()
     
-    private var userLocation: Location
+    private var userLocation: LocationStub
     
     private let enterSearchTextlabel = UILabel(text: "Search for any place, anywhere!", font: .systemFont(ofSize: 17), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
     
@@ -53,7 +53,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     }
     
     override init() {
-        self.userLocation = UserLocation.lastSavedLocation()
+        self.userLocation = UserLoation.lastSavedLocation()
         super.init()
     }
     
@@ -63,8 +63,9 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userLocation = UserLocation.lastSavedLocation()
-        print(userLocation)
+        userLocation = UserLoation.lastSavedLocation()
+        print("Search Controller Location: " + (userLocation.name ?? "NO LOCATION"))
+        print(userLocation.location)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -79,7 +80,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         let queryText = searchText.replacingOccurrences(of: " ", with: "%20")
         //Take into account special characters
         
-        fetchData(for: queryText, location: userLocation)
+        fetchData(for: queryText, location: userLocation.location)
         searchController.searchBar.placeholder = ""
     }
 
@@ -179,8 +180,7 @@ extension SearchController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let place = searchResults[indexPath.row]
         guard let placeId = place.place_id else { return }
-        guard let location = place.geometry?.location else { return }
-        let placeDetailController = PlaceDetailsController(placeId: placeId, location: location)//Get from defaults
+        let placeDetailController = PlaceDetailsController(placeId: placeId, location: userLocation.location)//Get from defaults
         navigationController?.pushViewController(placeDetailController, animated: true)
     }
     
@@ -195,4 +195,27 @@ extension SearchController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: 0, left: sidePadding, bottom: 0, right: sidePadding)
     }
+}
+
+
+import Foundation
+
+class UserLoation {
+    
+    static func lastSavedLocation() -> LocationStub {
+        if let data = UserDefaults.standard.data(forKey: "LocationKey") {
+            do {
+                let decoder = JSONDecoder()
+                let lastSavedLocation = try decoder.decode(LocationStub.self, from: data)
+                return lastSavedLocation
+            } catch {
+                return LocationStub(name: "Dubai", location:Location(lat: 25.1412, lng: 55.1852)) //Decide on a Default location (Currently Dubai)
+            }
+        } else {
+            return LocationStub(name: "Dubai", location:Location(lat: 25.1412, lng: 55.1852)) //Decide on a Default location (Currently Dubai)
+        }
+    }
+    
+    //SaveLocation
+    
 }

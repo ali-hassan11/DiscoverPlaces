@@ -14,7 +14,7 @@ class MyPlacesViewController: UIViewController {
     let listSelector = UISegmentedControl(items: ["Favourites", "To-Do"])
     let horizontalController = MyPlacesHorizontalController()
     
-    private var userLocation: Location?
+    private var userLocation: LocationStub?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +34,7 @@ class MyPlacesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         horizontalController.collectionView.reloadData()
+        userLocation = UserLoation.lastSavedLocation()
     }
 
     @objc private func toggleList(sender: UISegmentedControl) {
@@ -92,7 +93,8 @@ class MyPlacesViewController: UIViewController {
     
     private func setupDidTapPlaceHandler() {
         horizontalController.didReceiveDataToPassOnHandler = { [weak self] placeId, location in
-            let detailController = PlaceDetailsController(placeId: placeId, location: location) //Get from defaults
+            guard let userLocation = self?.userLocation else { return }
+            let detailController = PlaceDetailsController(placeId: placeId, location: userLocation.location)
             self?.navigationController?.pushViewController(detailController, animated: true)
         }
         

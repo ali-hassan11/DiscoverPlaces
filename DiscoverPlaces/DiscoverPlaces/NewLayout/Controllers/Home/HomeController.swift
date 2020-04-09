@@ -15,7 +15,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     private var locationManager:CLLocationManager!
     private var isLocationSettingEnabled = false
     
-    private var userLocation: Location?
+    private var userLocation: LocationStub?
     
     private var placeResults = [PlaceResult]()
     
@@ -42,7 +42,8 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         setupBarButtons()
         setupCollectionView()
         
-        determineMyCurrentLocation()
+        fetchForLastSavedLocation()
+//        determineMyCurrentLocation()
     }
     
     private func setupBarButtons() {
@@ -71,11 +72,12 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
+        print("Home Controller Location: " + (userLocation?.name ?? "NO LOCATION"))
     }
     
-    fileprivate func fetchPlacesData(location: Location) {
+    fileprivate func fetchPlacesData(location: LocationStub) {
         
-        Service.shared.fetchNearbyPlaces(location: location) { (response, error) in
+        Service.shared.fetchNearbyPlaces(location: location.location) { (response, error) in
             
             if let error = error {
                 print("Failed to fetch places: ", error)
@@ -108,9 +110,16 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     }
     
     @objc func addTapped() {
-        let locationSearchVC = UIViewController()
-        locationSearchVC.view.backgroundColor = .blue
-        show(locationSearchVC, sender: self)
+        let locationSearchController = LocationSearchController()
+        locationSearchController.resultsCompletionHandler = { [weak self] location, name in
+            guard let location = location else { return }
+            let locationStub = LocationStub(name: name, location: location)
+            self?.userLocation = locationStub
+            self?.updateLastSavedLocation(with: locationStub)
+            self?.fetchForLastSavedLocation()
+            print(UserLoation.lastSavedLocation())
+        }
+        navigationController?.pushViewController(locationSearchController, animated: true)
     }
 }
 
@@ -120,9 +129,10 @@ extension HomeController {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeLargeCellHolder.id, for: indexPath) as! HomeLargeCellHolder
         cell.horizontalController.userLocation = self.userLocation
         cell.horizontalController.results = placeResults
+        cell.configureTitle(with: userLocation?.name)
         cell.horizontalController.didSelectHandler = { [weak self] result in //Only need placeId
             guard let placeId = result.place_id, let location = self?.userLocation else { return }
-            let detailsController = PlaceDetailsController(placeId: placeId, location: location)
+            let detailsController = PlaceDetailsController(placeId: placeId, location: location.location)
             self?.navigationController?.pushViewController(detailsController, animated: true)
         }
         return cell
@@ -141,7 +151,7 @@ extension HomeController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesHolder.id, for: indexPath) as! CategoriesHolder
         cell.horizontalController.didSelectCategory = { [weak self] category in
             guard let location = self?.userLocation else { return }
-            let multipleCategoriesController = MultipleCategoriesController(category: category, location: location)
+            let multipleCategoriesController = MultipleCategoriesController(category: category, location: location.location)
             multipleCategoriesController.title = category.rawValue
             self?.navigationController?.pushViewController(multipleCategoriesController, animated: true)
         }
@@ -190,7 +200,8 @@ extension HomeController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location:CLLocation = locations[0] as CLLocation
         
-        let currentLocation = Location(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
+        let locationCoords = Location(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
+        let currentLocation = LocationStub(name: userLocation?.name, location: locationCoords)
         
         if isLocationSettingEnabled {
             updateLastSavedLocation(with: currentLocation)
@@ -207,28 +218,35 @@ extension HomeController: CLLocationManagerDelegate {
         fetchForLastSavedLocation()
     }
     
-    func updateLastSavedLocation(with location: Location) {
+
+    func updateLastSavedLocation(with location: LocationStub) {
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(location)
-            UserDefaults.standard.set(data, forKey: "Location")
+            UserDefaults.standard.set(data, forKey: "LocationKey")
         } catch {
             print("Unable to Encode Note (\(error))")
         }
     }
     
     func fetchForLastSavedLocation() {
-        if let data = UserDefaults.standard.data(forKey: "Location") {
+        if let data = UserDefaults.standard.data(forKey: "LocationKey") {
             do {
                 let decoder = JSONDecoder()
-                let lastSavedLocation = try decoder.decode(Location.self, from: data)
+                let lastSavedLocation = try decoder.decode(LocationStub.self, from: data)
                 self.userLocation = lastSavedLocation
                 fetchPlacesData(location: lastSavedLocation)
             } catch {
                 print("Unable to Decode Note (\(error))")
+                fetchPlacesData(location: LocationStub(name: "Dubai", location:Location(lat: 25.1412, lng: 55.1852))) //Decide on a Default location (Currently Dubai)
             }
         } else {
-            fetchPlacesData(location: Location(lat: 25.1412, lng: 55.1852)) //Decide on a Default location (Currently Dubai)
+             fetchPlacesData(location: LocationStub(name: "Dubai", location:Location(lat: 25.1412, lng: 55.1852))) //Decide on a Default location (Currently Dubai)
         }
     }
+}
+
+struct LocationStub: Codable {
+    let name: String?
+    let location: Location
 }
