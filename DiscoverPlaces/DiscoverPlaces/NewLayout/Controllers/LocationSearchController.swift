@@ -54,11 +54,9 @@ class LocationSearchController: UITableViewController {
 extension LocationSearchController: GMSAutocompleteResultsViewControllerDelegate {
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
-        searchController?.isActive = false
-        
         let location = Location(lat: place.coordinate.latitude, lng: place.coordinate.longitude)
-        
         self.resultsCompletionHandler?(location, place.name)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
