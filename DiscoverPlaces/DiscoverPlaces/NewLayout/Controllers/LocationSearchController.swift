@@ -19,9 +19,14 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
     private var resultsViewController: GMSAutocompleteResultsViewController?
     private var searchController: UISearchController?
     
+    private let locationManager = CLLocationManager()
+    private var locationServicesEnabled = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Set Location"
+        
+        locationManager.delegate = self
         
         setupSearchBar()
         setupLocateMeButton()
@@ -35,15 +40,23 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    @objc func dismissAndLocateUser() {
-        if CLLocationManager.locationServicesEnabled() == false {
-            showToastAlert(title: "Please enable location services, or select location manually")
-            return
-        } else {
-            
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationServicesEnabled = true
+        default:
+            locationServicesEnabled = false
         }
-        determineUserLocationTappedHandler?()
-        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func dismissAndLocateUser() {
+        if locationServicesEnabled {
+            determineUserLocationTappedHandler?()
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            showToastAlert(title: "Please enable location services, or select location manually")
+        }
+        
     }
     
     private func setupSearchBar() {
