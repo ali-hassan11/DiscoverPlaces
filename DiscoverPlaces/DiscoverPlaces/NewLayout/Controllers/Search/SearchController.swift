@@ -15,6 +15,8 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var searchResults = [PlaceResult]()
     
+    ///SearchLocation and userLocation need to be separate because when you change the search location, you don't want the userLocation to change
+    private var searchLocation: LocationStub
     private var userLocation: LocationStub
     
     private let enterSearchTextlabel = UILabel(text: "Search for any place, anywhere!", font: .systemFont(ofSize: 17), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
@@ -39,7 +41,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(userLocation)
+        print(searchLocation)
         searchController.searchBar.placeholder = "Search..." //Array or different quiries and switch between every 3 seconds?, or just every time loads
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
@@ -52,8 +54,15 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         collectionView.register(SmallPlaceCell.self, forCellWithReuseIdentifier: SmallPlaceCell.id)
     }
     
+    private func addSearchLocationButton() {
+        let locationButton = UIBarButtonItem(title: searchLocation.name, style: .done, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = locationButton
+    }
+    
     override init() {
+        self.searchLocation = UserLoation.lastSavedLocation()
         self.userLocation = UserLoation.lastSavedLocation()
+        
         super.init()
     }
     
@@ -63,9 +72,9 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userLocation = UserLoation.lastSavedLocation()
-        print("Search Controller Location: " + (userLocation.name ?? "NO LOCATION"))
-        print(userLocation.location)
+        self.searchLocation = UserLoation.lastSavedLocation()
+        self.userLocation = UserLoation.lastSavedLocation()
+        print("\n🗺 Searching for places in Location: " + (searchLocation.name ?? "NO LOCATION NAME (NEED TO GEOCODE...)"))
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -80,7 +89,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         let queryText = searchText.replacingOccurrences(of: " ", with: "%20")
         //Take into account special characters
         
-        fetchData(for: queryText, location: userLocation.location)
+        fetchData(for: queryText, location: searchLocation.selectedLocation)
         searchController.searchBar.placeholder = ""
     }
 
@@ -180,7 +189,7 @@ extension SearchController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let place = searchResults[indexPath.row]
         guard let placeId = place.place_id else { return }
-        let placeDetailController = PlaceDetailsController(placeId: placeId, location: userLocation.location)//Get from defaults
+        let placeDetailController = PlaceDetailsController(placeId: placeId, location: userLocation)//Get from defaults
         navigationController?.pushViewController(placeDetailController, animated: true)
     }
     
@@ -209,10 +218,10 @@ class UserLoation {
                 let lastSavedLocation = try decoder.decode(LocationStub.self, from: data)
                 return lastSavedLocation
             } catch {
-                return LocationStub(name: "Dubai", location:Location(lat: 25.1412, lng: 55.1852)) //Decide on a Default location (Currently Dubai)
+                return LocationStub(name: "Dubai", selectedLocation:Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil) //Decide on a Default location (Currently Dubai)
             }
         } else {
-            return LocationStub(name: "Dubai", location:Location(lat: 25.1412, lng: 55.1852)) //Decide on a Default location (Currently Dubai)
+            return LocationStub(name: "Dubai", selectedLocation:Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil) //Decide on a Default location (Currently Dubai)
         }
     }
     

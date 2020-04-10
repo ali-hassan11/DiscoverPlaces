@@ -23,8 +23,8 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     private let searchResponseFilter = SearchResponseFilter()
     private let dispatchGroup = DispatchGroup()
     
-    private var location: Location?
-    private var category: Category?
+    private var location: LocationStub
+    private var category: Category
     
     private var subCategoryGroups = [PlacesGroup]()
         
@@ -34,8 +34,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         setupCollectionView()
         
-        guard let category = category, let location = location else { return } //Show error page
-        fetchSubCategoryGroups(category: category, location: location)
+        fetchSubCategoryGroups(category: category, selectedLocation: location.selectedLocation)
     }
 
     private func setupCollectionView() {
@@ -45,17 +44,17 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         collectionView.register(SubCategoryiesHolder.self, forCellWithReuseIdentifier: SubCategoryiesHolder.id)
     }
     
-    private func fetchSubCategoryGroups(category: Category, location: Location) {
+    private func fetchSubCategoryGroups(category: Category, selectedLocation: Location?) {
         category.subCategories().forEach {
             dispatchGroup.enter()
-            fetchdata(subCategory: $0, location: location)
+            fetchdata(subCategory: $0, selectedLocation: location.selectedLocation)
         }
     }
         
-    private func fetchdata(subCategory: SubCategory, location: Location) {
+    private func fetchdata(subCategory: SubCategory, selectedLocation: Location) {
         print("FetchData for \(subCategory)")
         var subCategoryGroup: PlacesGroup?
-        Service.shared.fetchNearbyPlaces(location: location, subCategory: subCategory) { (response, error) in
+        Service.shared.fetchNearbyPlaces(selectedLocation: selectedLocation, subCategory: subCategory) { (response, error) in
             
             if let error = error {
                 print("Failed to fetch: \(error)")
@@ -93,7 +92,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         super.viewWillAppear(animated)
     }
     
-    init(category: Category, location: Location) {
+    init(category: Category, location: LocationStub) {
         self.location = location
         self.category = category
         super.init()
@@ -117,7 +116,7 @@ extension MultipleCategoriesController {
             let subCategoryGroup = subCategoryGroups[indexPath.item]
             cell.subCategoryTitleLabel.text = subCategoryGroup.title
             cell.horizontalController.placeGroup = subCategoryGroup
-            cell.horizontalController.location = self.location
+            cell.horizontalController.location = self.location.selectedLocation
             cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
                 guard let location = self?.location else { return }
                 let detailsController = PlaceDetailsController(placeId: placeId, location: location)

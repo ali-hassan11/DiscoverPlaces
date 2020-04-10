@@ -41,7 +41,7 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let result = results?[indexPath.item] else { return UICollectionViewCell() }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LargePlaceCell.id, for: indexPath) as! LargePlaceCell
-        cell.userLocation = userLocation?.location
+        cell.actualLocation = userLocation?.actualUserLocation
         cell.result = result
         return cell
     }

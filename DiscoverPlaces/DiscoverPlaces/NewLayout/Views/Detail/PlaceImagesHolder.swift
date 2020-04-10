@@ -30,12 +30,14 @@ final class PlaceImagesHolder: UICollectionReusableView {
         addGradient(firstColor: .clear, secondColor: .black, view: gradientView, start: 0.69, end: 0.96)
     }
     
-    public func configure(using placeDetail: PlaceDetailResult, location: Location) {
+    public func configure(using placeDetail: PlaceDetailResult, actualLocation: Location?) {
         configurePlaceName(using: placeDetail)
         configureRating(using: placeDetail)
         configurePageIndicator(using: placeDetail)
         configurePhotosController(using: placeDetail)
-        configureDistanceLabel(using: placeDetail, and: location)
+        if let location = actualLocation {
+            configureDistanceLabel(using: placeDetail, and: location)
+        }
     }
     
     private func configurePlaceName(using detail: PlaceDetailResult) {

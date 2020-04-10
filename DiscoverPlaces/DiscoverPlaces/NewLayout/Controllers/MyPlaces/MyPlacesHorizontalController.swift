@@ -31,7 +31,7 @@ class MyPlacesHorizontalController: HorizontalSnappingController, UICollectionVi
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavouritesListHolderCell.id, for: indexPath) as! FavouritesListHolderCell
             cell.listController.listType = .favourites
             cell.refreshData()
-            cell.listController.didSelectPlaceInListHandler = { [weak self] placeId, location in
+            cell.listController.didSelectPlaceInListHandler = { [weak self] placeId, location in  //Don't think location this is used
                 self?.didReceiveDataToPassOnHandler?(placeId, location)
             }
             return cell

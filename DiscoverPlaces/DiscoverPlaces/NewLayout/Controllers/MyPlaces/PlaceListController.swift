@@ -10,7 +10,7 @@ import UIKit
 
 class PlaceListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var didSelectPlaceInListHandler: ((String, Location) -> ())?
+    var didSelectPlaceInListHandler: ((String, Location) -> ())?  //Don't think location this is used
 
     var listType: ListType?
     
@@ -52,7 +52,7 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let place = placeResults[indexPath.item]
         guard let location = place.geometry?.location else { return }
-        didSelectPlaceInListHandler?(place.place_id, location)
+        didSelectPlaceInListHandler?(place.place_id, location) //Don't think location this is used
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

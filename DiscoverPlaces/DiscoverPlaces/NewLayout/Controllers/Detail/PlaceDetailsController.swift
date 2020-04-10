@@ -23,7 +23,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     let searchResponseFilter = SearchResponseFilter()
 
-    private let userLocation: Location
+    private let location: LocationStub
     private let placeId: String
 
     var placeDetailResult: PlaceDetailResult?
@@ -45,9 +45,9 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
 
     fileprivate let errorCellId = "errorCellId"
     
-    init(placeId: String, location: Location) {
+    init(placeId: String, location: LocationStub) {
         self.placeId = placeId
-        self.userLocation = location
+        self.location = location
         super.init()
     }
     
@@ -157,7 +157,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     private func handlePlaceDetailSuccess(with result: PlaceDetailResult) {
         self.placeDetailResult = result
-        self.fetchMorePlacesData(near: self.userLocation)
+        self.fetchMorePlacesData(near: self.location.selectedLocation)
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
@@ -205,7 +205,7 @@ extension PlaceDetailsController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PlaceImagesHolder.id, for: indexPath) as! PlaceImagesHolder
         guard let placeDetail = placeDetailResult else { return cell }
-        cell.configure(using: placeDetail, location: userLocation)
+        cell.configure(using: placeDetail, actualLocation: location.actualUserLocation)
         cell.horizontalController.didScrollImagesController = { nearestPage in
             cell.segmentedControl.selectedSegmentIndex = nearestPage
             self.setIndexForImagesHolderSegmentControl(to: nearestPage)
@@ -259,11 +259,11 @@ extension PlaceDetailsController {
         case 6:
             //More Places
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
-            cell.horizontalController.location = userLocation
+            cell.horizontalController.location = location.selectedLocation
             
             cell.horizontalController.placeGroup = PlacesGroup(results: morePlaces)
             cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
-                guard let location = self?.userLocation else { return }
+                guard let location = self?.location else { return }
                 let detailController = PlaceDetailsController(placeId: placeId, location: location)
                 self?.navigationController?.show(detailController, sender: self)
             }

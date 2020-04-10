@@ -18,7 +18,7 @@ class Service {
     
     //Change to findplacefromtext and only get data you need for cells.
     func fetchSearchResults(for searchText: String, location: Location, completion: @escaping (SearchResponse?, Error?) -> Void) {
-        let urlString = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(searchText)&location=\(location.lat),\(location.lng)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+        let urlString = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(searchText)&location=\(location.lat),\(location.lng)&radius=5000&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         print(urlString)
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
@@ -36,9 +36,9 @@ class Service {
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }
     
-    func fetchNearbyPlaces(location: Location, subCategory: SubCategory, radius: Int? = nil, completion: @escaping (SearchResponse?, Error?) -> Void) {
+    func fetchNearbyPlaces(selectedLocation: Location, subCategory: SubCategory, radius: Int? = nil, completion: @escaping (SearchResponse?, Error?) -> Void) {
         
-        let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(location.lat),\(location.lng)&type=\(subCategory.rawValue)&radius=\(radius ?? 5000)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+        let urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(selectedLocation.lat),\(selectedLocation.lng)&type=\(subCategory.rawValue)&radius=\(radius ?? 5000)&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
         
         fetchGenericJSONData(urlString: urlString, completion: completion)
     }

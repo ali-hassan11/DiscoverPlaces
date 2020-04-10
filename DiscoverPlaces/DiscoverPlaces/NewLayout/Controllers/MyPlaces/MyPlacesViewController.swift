@@ -14,7 +14,7 @@ class MyPlacesViewController: UIViewController {
     let listSelector = UISegmentedControl(items: ["Favourites", "To-Do"])
     let horizontalController = MyPlacesHorizontalController()
     
-    private var userLocation: LocationStub?
+    private var location: LocationStub?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,10 @@ class MyPlacesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         horizontalController.collectionView.reloadData()
-        userLocation = UserLoation.lastSavedLocation()
+        location = UserLoation.lastSavedLocation()
+        print("\n🗺 My Places Controller Location: " + (location?.name ?? "NO LOCATION NAME"))
+        print("🗺 My Places Controller ACTUAL Location: \(String(describing: (location?.actualUserLocation)))")
+        print("🗺 My Places Controller SELECTED Location: \(String(describing: (location?.selectedLocation)))")
     }
 
     @objc private func toggleList(sender: UISegmentedControl) {
@@ -92,12 +95,12 @@ class MyPlacesViewController: UIViewController {
     }
     
     private func setupDidTapPlaceHandler() {
-        horizontalController.didReceiveDataToPassOnHandler = { [weak self] placeId, location in
-            guard let userLocation = self?.userLocation else { return }
-            let detailController = PlaceDetailsController(placeId: placeId, location: userLocation.location)
+        horizontalController.didReceiveDataToPassOnHandler = { [weak self] placeId, location in  //Don't think location this is used
+//            guard let userLocation = self?.location else { return }
+            guard let location = self?.location else { return }
+            let detailController = PlaceDetailsController(placeId: placeId, location: location)
             self?.navigationController?.pushViewController(detailController, animated: true)
         }
-        
     }
     
     private func setupDidScrollHandler() {
