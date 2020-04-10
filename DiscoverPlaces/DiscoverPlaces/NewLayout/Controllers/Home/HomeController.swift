@@ -50,7 +50,6 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         let locationBarButton = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(showSetLocationController))
         locationBarButton.tintColor = .systemPink
         navigationItem.rightBarButtonItem = locationBarButton
-        locationBarButton.tintColor = .label
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     

@@ -29,14 +29,20 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         locationManager.delegate = self
         
         setupSearchBar()
-        setupLocateMeButton()
+        setupBarButtonItems()
     }
     
-    private func setupLocateMeButton() {
-        let locationBarButton = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(dismissAndLocateUser))
-        locationBarButton.tintColor = .systemPink
+    private func setupBarButtonItems() {
+        let btn = UIButton(type: .system)
+        btn.setTitle(" Locate Me", for: .normal)
+        btn.setImage(UIImage(systemName: "mappin"), for: .normal)
+        btn.addTarget(self, action: #selector(dismissAndLocateUser), for: .touchUpInside)
+        btn.tintColor = .systemPink
+        
+        let locationBarButton = UIBarButtonItem(customView: btn)
+        
         navigationItem.rightBarButtonItem = locationBarButton
-        locationBarButton.tintColor = .label
+
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
