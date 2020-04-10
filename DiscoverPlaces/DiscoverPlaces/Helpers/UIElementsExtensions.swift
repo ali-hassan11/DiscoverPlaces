@@ -15,8 +15,14 @@ extension UIView {
         separator.constrainHeight(constant: 1)
         addSubview(separator)
         separator.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: edgePadding, bottom: 0, right: edgePadding))
-
     }
+    
+    func addTopSeparator(edgePadding: CGFloat = 12) {
+        let separator = UIView()
+        separator.backgroundColor = .separator
+        addSubview(separator)
+        separator.constrainHeight(constant: 1)
+     separator.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: edgePadding, bottom: 0, right: edgePadding))    }
 }
 
 public class PaddingView: UIView {

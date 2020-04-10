@@ -20,6 +20,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case reviews
         case morePlaces
         case googleCell
+        case bottomPadding
     }
     
     let searchResponseFilter = SearchResponseFilter()
@@ -106,9 +107,9 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         activityIndicatorView.fillSuperview()
     }
     
+    let bottomPaddingCellId = "bottomPaddingCellId"
     private func registerCells() {
         collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PlaceImagesHolder.id)
-        
         collectionView.register(AddressCell.self, forCellWithReuseIdentifier: AddressCell.id)
         collectionView.register(OpeningTimeCell.self, forCellWithReuseIdentifier: OpeningTimeCell.id)
         collectionView.register(PhoneNumberCell.self, forCellWithReuseIdentifier: PhoneNumberCell.id)
@@ -117,7 +118,9 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         collectionView.register(ReviewsHolder.self, forCellWithReuseIdentifier: ReviewsHolder.id)
         collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: MorePlacesHolder.id)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
+        collectionView.register(GoogleLogoCell.self, forCellWithReuseIdentifier: GoogleLogoCell.id)
         collectionView.register(ErrorCell.self, forCellWithReuseIdentifier: ErrorCell.id)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: bottomPaddingCellId)
     }
     
     private func fadeOutSplashScreen() {
@@ -137,6 +140,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     func fetchPlaceData(for id: String) {
+        // TODO: - Move this
         let fields = ["name" , "place_id", "opening_hours", "photo", "vicinity" ,"geometry" ,"review" ,"website" ,"url" ,"international_phone_number", "formatted_phone_number" ,"formatted_address", "rating"]
         Service.shared.fetchPlaceDetails(placeId: id, fields: fields) { (placeResponse, error) in
             
@@ -220,6 +224,10 @@ extension PlaceDetailsController {
     }
     
     //MARK: Details
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 9
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.item {
         case Detail.address.rawValue:
@@ -268,13 +276,23 @@ extension PlaceDetailsController {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
             cell.horizontalController.location = location.selectedLocation
-            
+                        
             cell.horizontalController.placeGroup = PlacesGroup(results: morePlaces)
             cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
                 guard let location = self?.location else { return }
                 let detailController = PlaceDetailsController(placeId: placeId, location: location)
                 self?.navigationController?.show(detailController, sender: self)
             }
+            return cell
+            
+        case Detail.googleCell.rawValue:
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
+            return cell
+            
+        case Detail.bottomPadding.rawValue:
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bottomPaddingCellId, for: indexPath)
             return cell
             
         default:
@@ -304,13 +322,35 @@ extension PlaceDetailsController {
             return cellHeight(for: placeDetailResult?.reviews, desiredHeight: 180)
             
         case Detail.morePlaces.rawValue:
-            return cellHeight(for: morePlaces, desiredHeight: 320)
+            return cellHeight(for: morePlaces, desiredHeight: 280)
+            
+        case Detail.googleCell.rawValue:
+            return .init(width: view.frame.width, height: 40)
+
+        case Detail.bottomPadding.rawValue:
+            return setBottomPaddingSize(toFillWidthOf: view)
             
         default:
+            return cellHeight(for: placeDetailResult?.reviews, desiredHeight: 180)
+        }
+    }
+    
+    func cellHeight(for detail: Any?, desiredHeight: CGFloat) -> CGSize {
+        if detail != nil {
+            return .init(width: view.frame.width, height: desiredHeight)
+        } else {
             return .zero
         }
     }
     
+    func cellHeight(for morePlaces: [PlaceResult]?, desiredHeight: CGFloat) -> CGSize {
+        if let morePlaces = morePlaces, morePlaces.count > 0 {
+            return .init(width: view.frame.width, height: desiredHeight)
+        } else {
+            return .zero
+        }
+    }
+
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case Detail.address.rawValue:
@@ -338,30 +378,11 @@ extension PlaceDetailsController {
             print("Other one pressed")
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
-    }
-    
-    func cellHeight(for detail: Any?, desiredHeight: CGFloat) -> CGSize {
-        if detail != nil {
-            return .init(width: view.frame.width, height: desiredHeight)
-        } else {
-            return .zero
-        }
-    }
-    
-    func cellHeight(for morePlaces: [PlaceResult]?, desiredHeight: CGFloat) -> CGSize {
-        if let morePlaces = morePlaces, morePlaces.count > 0 {
-            return .init(width: view.frame.width, height: desiredHeight)
-        } else {
-            return .zero
-        }
-    }
+ 
     
     private func openInMaps(place: PlaceDetailResult, longitude: Double, latitude: Double) {
         let coordinate = CLLocationCoordinate2DMake(latitude,longitude)

@@ -16,7 +16,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     fileprivate var searchResults = [PlaceResult]()
     
     ///SearchLocation and userLocation need to be separate because when you change the search location, you don't want the userLocation to change
-    private var searchLocation: LocationItem
+    private var searchLocation: LocationItem ///Decided not to allow changing search location, just uses location set form home
     private var userLocation: LocationItem
     
     private let enterSearchTextlabel = UILabel(text: "Search for any place, anywhere!", font: .systemFont(ofSize: 17), color: .secondaryLabel, alignment: .center, numberOfLines: 0)

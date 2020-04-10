@@ -14,6 +14,7 @@ class GoogleLogoCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+//        backgroundColor = .systemPink
         let googleImageView = UIImageView(image: UIImage(imageLiteralResourceName: "googleLogo"))
         addSubview(googleImageView)
         googleImageView.constrainWidth(constant: 150)
