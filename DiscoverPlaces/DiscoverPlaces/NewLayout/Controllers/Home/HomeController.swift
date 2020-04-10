@@ -60,6 +60,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         collectionView.backgroundColor = .systemBackground
         collectionView.register(CategoriesHolder.self, forCellWithReuseIdentifier: CategoriesHolder.id)
         collectionView.register(HomeLargeCellHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeLargeCellHolder.id)
+        collectionView.register(GoogleLogoCell.self, forCellWithReuseIdentifier: GoogleLogoCell.id)
     }
     
     private func setupLoadingView() {
@@ -151,28 +152,44 @@ extension HomeController {
         return .init(width: view.frame.width, height: view.frame.width - 32)
     }
     
+    //MARK: Categories Controller
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
-    //MARK: Categories Controller
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesHolder.id, for: indexPath) as! CategoriesHolder
-        cell.horizontalController.didSelectCategory = { [weak self] category in
-            guard let location = self?.userLocation else { return }
-            let multipleCategoriesController = MultipleCategoriesController(category: category, location: location)
-            multipleCategoriesController.title = category.rawValue
-            self?.navigationController?.pushViewController(multipleCategoriesController, animated: true)
+        switch indexPath.item {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesHolder.id, for: indexPath) as! CategoriesHolder
+            cell.horizontalController.didSelectCategory = { [weak self] category in
+                guard let location = self?.userLocation else { return }
+                let multipleCategoriesController = MultipleCategoriesController(category: category, location: location)
+                multipleCategoriesController.title = category.rawValue
+                self?.navigationController?.pushViewController(multipleCategoriesController, animated: true)
+            }
+            return cell
+        case 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
+            return cell
+        default:
+            return ErrorCell() // TODO: - Register
         }
-        return cell
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width, height: 380)
+        switch indexPath.item {
+        case 0:
+            return .init(width: view.frame.width, height: 380)
+        case 1:
+            return .init(width: view.frame.width, height: 40)
+        default:
+            return .zero
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return 0
     }
 }
 

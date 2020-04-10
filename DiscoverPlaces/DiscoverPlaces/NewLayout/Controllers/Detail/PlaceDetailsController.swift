@@ -300,7 +300,7 @@ extension PlaceDetailsController {
             return cellHeight(for: placeDetailResult?.reviews, desiredHeight: 180)
         case 6:
             //More Places
-            return cellHeight(for: morePlaces, desiredHeight: 350 + 16)
+            return cellHeight(for: morePlaces, desiredHeight: 320)
         default:
             return .zero
         }
