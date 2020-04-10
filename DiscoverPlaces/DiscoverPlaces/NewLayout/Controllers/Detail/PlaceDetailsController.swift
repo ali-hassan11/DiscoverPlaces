@@ -19,6 +19,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case actionButtons
         case reviews
         case morePlaces
+        case googleCell
     }
     
     let searchResponseFilter = SearchResponseFilter()
@@ -221,34 +222,39 @@ extension PlaceDetailsController {
     //MARK: Details
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.item {
-        case 0:
-            //Address
+        case Detail.address.rawValue:
+
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddressCell.id, for: indexPath) as! AddressCell
             cell.vicinity = placeDetailResult?.vicinity
             return cell
-        case 1:
-            //Hours
+            
+        case Detail.openingHours.rawValue:
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OpeningTimeCell.id, for: indexPath) as! OpeningTimeCell
             cell.openingTimes = placeDetailResult?.opening_hours?.weekdayText ?? []
             return cell
-        case 2:
-            //PhoneNumber
+            
+        case Detail.phoneNumber.rawValue:
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhoneNumberCell.id, for: indexPath) as! PhoneNumberCell
             cell.phoneNumber = placeDetailResult?.international_phone_number
             return cell
-        case 3:
-            //Website
+            
+        case Detail.website.rawValue:
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WebAddressCell.id, for: indexPath) as! WebAddressCell
             cell.webAddress = placeDetailResult?.website
             return cell
-        case 4:
-            //ActionButtons
+            
+        case Detail.actionButtons.rawValue:
+
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActionButtonsCell.id, for: indexPath) as! ActionButtonsCell
             cell.placeId = placeId
             cell.delegate = self
             return cell
-        case 5:
-            //Reviews
+            
+        case Detail.reviews.rawValue:
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewsHolder.id, for: indexPath) as! ReviewsHolder
             cell.horizontalController.reviews = placeDetailResult?.reviews
             cell.horizontalController.didSelectHandler = { [weak self] review in
@@ -257,8 +263,9 @@ extension PlaceDetailsController {
                 self?.navigationController?.show(reviewViewController, sender: self)
             }
             return cell
-        case 6:
-            //More Places
+            
+        case Detail.morePlaces.rawValue:
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
             cell.horizontalController.location = location.selectedLocation
             
@@ -269,38 +276,36 @@ extension PlaceDetailsController {
                 self?.navigationController?.show(detailController, sender: self)
             }
             return cell
+            
         default:
-            #if DEBUG
-            fatalError("Too many cells in section")
-            #else
             let errorCell = collectionView.dequeueReusableCell(withReuseIdentifier: errorCellId, for: indexPath)
             return errorCell
-            #endif
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch indexPath.item {
-        case 0:
+        case Detail.address.rawValue:
             return cellHeight(for: placeDetailResult?.vicinity, desiredHeight: 60)
-        case 1:
-            //Hours
+            
+        case Detail.openingHours.rawValue:
             return cellHeight(for: placeDetailResult?.opening_hours, desiredHeight: 60)
-        case 2:
-            //PhoneNumber
+            
+        case Detail.phoneNumber.rawValue:
             return cellHeight(for: placeDetailResult?.international_phone_number, desiredHeight: 60)
-        case 3:
-            //Website
+            
+        case Detail.website.rawValue:
             return cellHeight(for: placeDetailResult?.website, desiredHeight: 60)
-        case 4:
-            //ActionButtons
+            
+        case Detail.actionButtons.rawValue:
             return .init(width: view.frame.width, height: 60)
-        case 5:
-            //Reviews
+            
+        case Detail.reviews.rawValue:
             return cellHeight(for: placeDetailResult?.reviews, desiredHeight: 180)
-        case 6:
-            //More Places
+            
+        case Detail.morePlaces.rawValue:
             return cellHeight(for: morePlaces, desiredHeight: 320)
+            
         default:
             return .zero
         }
