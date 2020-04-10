@@ -15,7 +15,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     private var locationManager:CLLocationManager!
     private var isLocationSettingEnabled = false
     
-    private var userLocation: LocationStub?
+    private var userLocation: LocationItem?
     
     private var placeResults = [PlaceResult]()
     
@@ -75,7 +75,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         collectionView.reloadData()
     }
     
-    fileprivate func fetchPlacesData(location: LocationStub) {
+    fileprivate func fetchPlacesData(location: LocationItem) {
         
         Service.shared.fetchNearbyPlaces(location: location.selectedLocation) { (response, error) in
             
@@ -114,7 +114,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         
         locationSearchController.resultsCompletionHandler = { [weak self] location, name in
             guard let location = location else { return }
-            let locationStub = LocationStub(name: name, selectedLocation: location, actualUserLocation: self?.userLocation?.actualUserLocation)
+            let locationStub = LocationItem(name: name, selectedLocation: location, actualUserLocation: self?.userLocation?.actualUserLocation)
             self?.userLocation = locationStub
             self?.updateLastSavedLocation(with: locationStub)
             self?.fetchForLastSavedLocation()
@@ -206,7 +206,7 @@ extension HomeController: CLLocationManagerDelegate {
         let location:CLLocation = locations[0] as CLLocation
         
         let locationCoords = Location(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
-        let locationStub = LocationStub(name: nil, selectedLocation: locationCoords, actualUserLocation: locationCoords) //Use geocoding to get name of current location
+        let locationStub = LocationItem(name: nil, selectedLocation: locationCoords, actualUserLocation: locationCoords) //Use geocoding to get name of current location
         
         self.userLocation = locationStub
         self.updateLastSavedLocation(with: locationStub)
@@ -228,7 +228,7 @@ extension HomeController: CLLocationManagerDelegate {
     }
     
 
-    func updateLastSavedLocation(with location: LocationStub) {
+    func updateLastSavedLocation(with location: LocationItem) {
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(location)
@@ -242,21 +242,29 @@ extension HomeController: CLLocationManagerDelegate {
         if let data = UserDefaults.standard.data(forKey: "LocationKey") {
             do {
                 let decoder = JSONDecoder()
-                let lastSavedLocation = try decoder.decode(LocationStub.self, from: data)
+                let lastSavedLocation = try decoder.decode(LocationItem.self, from: data)
                 self.userLocation = lastSavedLocation
                 fetchPlacesData(location: lastSavedLocation)
             } catch {
                 print("Unable to Decode Note (\(error))")
-                fetchPlacesData(location: LocationStub(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
+                fetchPlacesData(location: LocationItem(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
             }
         } else {
-            fetchPlacesData(location: LocationStub(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
+            fetchPlacesData(location: LocationItem(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
         }
     }
 }
 
-struct LocationStub: Codable {
-    let name: String?
-    let selectedLocation: Location
-    let actualUserLocation: Location?
+extension UserDefaults {
+    // check for is first launch - only true on first invocation after app install, false on all further invocations
+    // Note: Store this value in AppDelegate if you have multiple places where you are checking for this flag
+    static func isFirstLaunch() -> Bool {
+        let hasBeenLaunchedBeforeFlag = "hasBeenLaunchedBeforeFlag"
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: hasBeenLaunchedBeforeFlag)
+        if (isFirstLaunch) {
+            UserDefaults.standard.set(true, forKey: hasBeenLaunchedBeforeFlag)
+            UserDefaults.standard.synchronize()
+        }
+        return isFirstLaunch
+    }
 }

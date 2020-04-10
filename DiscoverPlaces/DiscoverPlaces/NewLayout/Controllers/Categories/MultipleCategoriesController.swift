@@ -23,7 +23,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     private let searchResponseFilter = SearchResponseFilter()
     private let dispatchGroup = DispatchGroup()
     
-    private var location: LocationStub
+    private var location: LocationItem
     private var category: Category
     
     private var subCategoryGroups = [PlacesGroup]()
@@ -92,7 +92,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         super.viewWillAppear(animated)
     }
     
-    init(category: Category, location: LocationStub) {
+    init(category: Category, location: LocationItem) {
         self.location = location
         self.category = category
         super.init()

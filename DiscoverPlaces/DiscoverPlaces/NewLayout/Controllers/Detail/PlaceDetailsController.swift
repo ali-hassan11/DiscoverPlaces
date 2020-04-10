@@ -23,7 +23,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     let searchResponseFilter = SearchResponseFilter()
 
-    private let location: LocationStub
+    private let location: LocationItem
     private let placeId: String
 
     var placeDetailResult: PlaceDetailResult?
@@ -45,7 +45,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
 
     fileprivate let errorCellId = "errorCellId"
     
-    init(placeId: String, location: LocationStub) {
+    init(placeId: String, location: LocationItem) {
         self.placeId = placeId
         self.location = location
         super.init()

@@ -62,7 +62,6 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         } else {
             showToastAlert(title: "Please enable location services, or select location manually")
         }
-        
     }
     
     private func setupSearchBar() {

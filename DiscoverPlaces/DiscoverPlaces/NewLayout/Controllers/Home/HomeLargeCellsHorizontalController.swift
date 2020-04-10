@@ -12,7 +12,7 @@ class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollec
     
     var didSelectHandler: ((PlaceResult) -> ())?
     
-    var userLocation: LocationStub?
+    var userLocation: LocationItem?
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let result = results?[indexPath.item] {

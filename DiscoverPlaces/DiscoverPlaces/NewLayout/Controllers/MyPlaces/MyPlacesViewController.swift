@@ -14,7 +14,7 @@ class MyPlacesViewController: UIViewController {
     let listSelector = UISegmentedControl(items: ["Favourites", "To-Do"])
     let horizontalController = MyPlacesHorizontalController()
     
-    private var location: LocationStub?
+    private var location: LocationItem?
         
     override func viewDidLoad() {
         super.viewDidLoad()
