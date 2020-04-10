@@ -42,8 +42,11 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         setupBarButtons()
         setupCollectionView()
         
-        fetchForLastSavedLocation()
-//        determineMyCurrentLocation()
+        if UserDefaults.isFirstLaunch() {
+            determineMyCurrentLocation()
+        } else {
+            fetchForLastSavedLocation()
+        }
     }
     
     private func setupBarButtons() {
