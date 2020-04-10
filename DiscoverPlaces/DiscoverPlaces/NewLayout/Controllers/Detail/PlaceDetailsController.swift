@@ -119,8 +119,8 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: MorePlacesHolder.id)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
         collectionView.register(GoogleLogoCell.self, forCellWithReuseIdentifier: GoogleLogoCell.id)
-        collectionView.register(ErrorCell.self, forCellWithReuseIdentifier: ErrorCell.id)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: bottomPaddingCellId)
+        collectionView.register(ErrorCell.self, forCellWithReuseIdentifier: ErrorCell.id)
     }
     
     private func fadeOutSplashScreen() {
