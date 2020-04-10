@@ -157,7 +157,8 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     private func handlePlaceDetailSuccess(with result: PlaceDetailResult) {
         self.placeDetailResult = result
-        self.fetchMorePlacesData(near: self.location.selectedLocation)
+        guard let location = result.geometry?.location else { return }
+        self.fetchMorePlacesData(near: location)
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
