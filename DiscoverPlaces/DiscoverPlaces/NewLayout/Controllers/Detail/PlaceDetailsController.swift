@@ -331,7 +331,7 @@ extension PlaceDetailsController {
             return setBottomPaddingSize(toFillWidthOf: view)
             
         default:
-            return cellHeight(for: placeDetailResult?.reviews, desiredHeight: 180)
+            return .zero
         }
     }
     

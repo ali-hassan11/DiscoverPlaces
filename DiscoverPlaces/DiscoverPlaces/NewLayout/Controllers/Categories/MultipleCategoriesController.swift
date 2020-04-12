@@ -52,6 +52,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     }
         
     private func fetchdata(subCategory: SubCategory, selectedLocation: Location) {
+        
         print("FetchData for \(subCategory)")
         var subCategoryGroup: PlacesGroup?
         Service.shared.fetchNearbyPlaces(selectedLocation: selectedLocation, subCategory: subCategory) { (response, error) in
@@ -79,19 +80,10 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             self.collectionView.reloadData()
             UIView.animate(withDuration: 0.35) {
                 self.collectionView.alpha = 1
-
             }
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     init(category: Category, location: LocationItem) {
         self.location = location
         self.category = category

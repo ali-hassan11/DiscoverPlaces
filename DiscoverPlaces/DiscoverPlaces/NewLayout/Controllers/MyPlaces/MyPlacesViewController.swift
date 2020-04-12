@@ -12,7 +12,10 @@ import UIKit
 class MyPlacesViewController: UIViewController {
     
     let listSelector = UISegmentedControl(items: ["Favourites", "To-Do"])
-    let horizontalController = MyPlacesHorizontalController()
+    let listControllersContainer = UIView()
+    
+    let favouritesController = PlaceListController(listType: .favourites)
+    let toDoController = PlaceListController(listType: .toDo)
     
     private var location: LocationItem?
         
@@ -23,89 +26,105 @@ class MyPlacesViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         navigationItem.largeTitleDisplayMode = .always
-        
+                
         setupViews()
         setupSegmentedControl()
+        setupListControllers()
         setupContraints()
         setupDidTapPlaceHandler()
-        setupDidScrollHandler()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        horizontalController.collectionView.reloadData()
         location = UserLoation.lastSavedLocation()
 //        print("\n🗺 My Places Controller Location: " + (location?.name ?? "NO LOCATION NAME"))
 //        print("🗺 My Places Controller ACTUAL Location: \(String(describing: (location?.actualUserLocation)))")
 //        print("🗺 My Places Controller SELECTED Location: \(String(describing: (location?.selectedLocation)))")
     }
 
-    @objc private func toggleList(sender: UISegmentedControl) {
- 
-        guard let collectionView = self.horizontalController.collectionView else { return }
-        
-        switch sender.selectedSegmentIndex {
-        case 0:
-            if collectionView.contentOffset.x > 0 {
-                UIView.animate(withDuration: 0.2, animations: {
-                    collectionView.contentOffset.x -= self.view.frame.width
-                })
-                self.view.layoutIfNeeded()
-            }
-        case 1:
-            if collectionView.contentOffset.x <= 0 {
-                UIView.animate(withDuration: 0.2, animations: {
-                    collectionView.contentOffset.x += self.view.frame.width
-                })
-                self.view.layoutIfNeeded()
-            }
-        default:
-            break
-        }
-    }
-    
     @objc func settingsTapped() {
         let settingsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "SettingsVCId") as UITableViewController
         navigationController?.pushViewController(settingsController, animated: true)
     }
     
     
-    func setupViews() {
+    private func setupViews() {
         //TemporaryFix
         let v = UIView(frame: view.frame)
         v.backgroundColor = .systemBackground
         view.addSubview(v)
         v.fillSuperview()
-        
-        v.backgroundColor = .systemBackground
-        
+                
         v.addSubview(listSelector)
-        v.addSubview(horizontalController.view)
+        v.addSubview(listControllersContainer)
     }
     
-    func setupSegmentedControl() {
+    private func setupListControllers() {
+        // TODO: - ADD AS CHILD VIEW CONTROLLER
+        addChildVC(favouritesController, on: listControllersContainer, completion: nil)
+    }
+    
+    private func setupSegmentedControl() {
         listSelector.selectedSegmentTintColor = .systemPink
         listSelector.selectedSegmentIndex = 0
         listSelector.addTarget(self, action: #selector(toggleList(sender:)), for: .valueChanged)
     }
     
-    private func setupContraints() {
-        listSelector.anchor(top: view.layoutMarginsGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: sidePadding, bottom: 0, right: sidePadding))
-        horizontalController.view.anchor(top: listSelector.bottomAnchor, leading: view.leadingAnchor, bottom: view.layoutMarginsGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
+    @objc private func toggleList(sender: UISegmentedControl) {
+
+        switch sender.selectedSegmentIndex {
+        case 0:
+            addChildVC(favouritesController, on: listControllersContainer, completion: { [weak self] in
+                self?.toDoController.remove()
+            })
+        case 1:
+            addChildVC(toDoController, on: listControllersContainer, completion: { [weak self] in
+                self?.favouritesController.remove()
+            })
+        default:
+            break
+        }
+        
     }
     
+    private func setupContraints() {
+        listSelector.anchor(top: view.layoutMarginsGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: sidePadding, bottom: 0, right: sidePadding))
+        listControllersContainer.anchor(top: listSelector.bottomAnchor, leading: view.leadingAnchor, bottom: view.layoutMarginsGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
+    }
+    
+    var didTapComletionHandler: ((String, Location) -> ())?
+    
     private func setupDidTapPlaceHandler() {
-        horizontalController.didReceiveDataToPassOnHandler = { [weak self] placeId, location in  //Don't think location this is used
-//            guard let userLocation = self?.location else { return }
+        didTapComletionHandler = { [weak self] placeId, location in  //Don't think location this is used
             guard let location = self?.location else { return }
             let detailController = PlaceDetailsController(placeId: placeId, location: location)
             self?.navigationController?.pushViewController(detailController, animated: true)
         }
-    }
     
-    private func setupDidScrollHandler() {
-        horizontalController.didScrollMyPlacesController = { [weak self] nearestPage in
-            self?.listSelector.selectedSegmentIndex = nearestPage
+        favouritesController.didSelectPlaceInListHandler = didTapComletionHandler
+        toDoController.didSelectPlaceInListHandler = didTapComletionHandler
+    }
+}
+
+
+@nonobjc extension UIViewController {
+    func addChildVC(_ child: UIViewController, on view: UIView, completion: (()->())?) {
+        addChild(child)
+        
+        child.view.alpha = 0
+        
+        view.addSubview(child.view)
+        child.view.fillSuperview()
+        child.didMove(toParent: self)
+        
+        UIView.animate(withDuration: 0.25) {
+           child.view.alpha = 1
         }
+    }
+
+    func remove() {
+        willMove(toParent: nil)
+        view.removeFromSuperview()
+        removeFromParent()
     }
 }
