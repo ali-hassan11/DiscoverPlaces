@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlaceListController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class PlaceListController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var didSelectPlaceInListHandler: ((String, Location) -> ())?  //Don't think location this is used
 
@@ -27,6 +27,15 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
     
     let defaults = DefaultsManager()
     
+    init(listType: ListType) {
+        self.listType = listType
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .systemBackground
@@ -34,35 +43,15 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
         collectionView.register(MyPlaceCell.self, forCellWithReuseIdentifier: MyPlaceCell.id)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        refreshData()
+    }
+
     func refreshData() {
         guard let listType = listType else { return }
         placeItemList = DefaultsManager.getList(listKey: listType)
 
         collectionView.reloadData()
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return placeResults.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPlaceCell.id, for: indexPath) as! MyPlaceCell
-        cell.configure(place: placeResults[indexPath.item])
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let place = placeResults[indexPath.item]
-        guard let location = place.geometry?.location else { return }
-        didSelectPlaceInListHandler?(place.place_id, location) //Don't think location this is used
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width, height: 120)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
     }
     
     let dispatchGroup = DispatchGroup()
@@ -107,3 +96,31 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
         }
     }
 }
+
+extension PlaceListController {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+         return placeResults.count
+     }
+     
+     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPlaceCell.id, for: indexPath) as! MyPlaceCell
+         cell.configure(place: placeResults[indexPath.item])
+         return cell
+     }
+     
+     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         let place = placeResults[indexPath.item]
+         guard let location = place.geometry?.location else { return }
+         didSelectPlaceInListHandler?(place.place_id, location) //Don't think location this is used
+     }
+     
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+         return .init(width: view.frame.width, height: 120)
+     }
+     
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+         return 0
+     }
+}
+
+
