@@ -80,7 +80,6 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             self.collectionView.reloadData()
             UIView.animate(withDuration: 0.35) {
                 self.collectionView.alpha = 1
-
             }
         }
     }
