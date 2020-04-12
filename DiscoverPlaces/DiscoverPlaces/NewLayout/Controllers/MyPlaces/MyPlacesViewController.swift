@@ -35,9 +35,9 @@ class MyPlacesViewController: UIViewController {
         super.viewWillAppear(animated)
         horizontalController.collectionView.reloadData()
         location = UserLoation.lastSavedLocation()
-        print("\n🗺 My Places Controller Location: " + (location?.name ?? "NO LOCATION NAME"))
-        print("🗺 My Places Controller ACTUAL Location: \(String(describing: (location?.actualUserLocation)))")
-        print("🗺 My Places Controller SELECTED Location: \(String(describing: (location?.selectedLocation)))")
+//        print("\n🗺 My Places Controller Location: " + (location?.name ?? "NO LOCATION NAME"))
+//        print("🗺 My Places Controller ACTUAL Location: \(String(describing: (location?.actualUserLocation)))")
+//        print("🗺 My Places Controller SELECTED Location: \(String(describing: (location?.selectedLocation)))")
     }
 
     @objc private func toggleList(sender: UISegmentedControl) {

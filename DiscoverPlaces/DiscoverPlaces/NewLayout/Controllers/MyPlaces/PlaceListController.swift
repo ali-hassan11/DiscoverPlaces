@@ -14,9 +14,10 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
 
     var listType: ListType?
     
-    var placeIdList: [String]? {
+    var placeItemList: [PlaceListItem]? {
         didSet {
-            if placeIdList != oldValue {
+            if placeItemList != oldValue {
+                placeItemList?.sort{$0.timestamp < $1.timestamp}
                 fetchDataForPlaceIds()
             }
         }
@@ -35,7 +36,8 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
     
     func refreshData() {
         guard let listType = listType else { return }
-        placeIdList = DefaultsManager.getList(listKey: listType)
+        placeItemList = DefaultsManager.getList(listKey: listType)
+
         collectionView.reloadData()
     }
 
@@ -68,11 +70,11 @@ class PlaceListController: BaseCollectionViewController, UICollectionViewDelegat
     func fetchDataForPlaceIds() {
         self.placeResults.removeAll()
         
-        print("🟩 PlaceId List Count: \(placeIdList!.count)")
-        placeIdList?.forEach{ _ in dispatchGroup.enter() }
+        print("🟩 PlaceId List Count: \(placeItemList!.count)")
+        placeItemList?.forEach{ _ in dispatchGroup.enter() }
         
-        placeIdList?.forEach({ (id) in
-            fetchData(for: id)
+        placeItemList?.forEach({ (placeItem) in
+            fetchData(for: placeItem.placeId)
         })
         
         dispatchGroup.notify(queue: .main) {

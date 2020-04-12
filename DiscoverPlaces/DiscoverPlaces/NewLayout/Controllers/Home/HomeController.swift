@@ -13,6 +13,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     private let searchResponseFilter = SearchResponseFilter()
     
     private var locationManager:CLLocationManager!
+    
     private var isLocationSettingEnabled = false
     
     private var userLocation: LocationItem?
@@ -223,6 +224,8 @@ extension HomeController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locationManager.stopUpdatingLocation()
+
         let location:CLLocation = locations[0] as CLLocation
         
         let locationCoords = Location(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
@@ -239,7 +242,6 @@ extension HomeController: CLLocationManagerDelegate {
 //
 //        fetchPlacesData(location: currentLocation)
         
-        locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

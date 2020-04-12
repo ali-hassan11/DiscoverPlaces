@@ -8,76 +8,118 @@
 
 import UIKit
 
-// // // ------------------- LOOK MORE INTO THIS ------------------- // // //
-class ListObject: NSObject, NSCoding {
-    
-    let timeStamp: Int
-    let placeId: String
-    
-    init(timeStamp: Int, placeId: String) {
-           self.timeStamp = timeStamp
-           self.placeId = placeId
-       }
-    
-    func encode(with coder: NSCoder) {
-        coder.encode(timeStamp, forKey: "timeStamp")
-        coder.encode(placeId, forKey: "placeId")
-    }
-    
-    required convenience init?(coder: NSCoder) {
-        let timeStamp = coder.decodeInteger(forKey: "timeStamp")
-        let placeId = coder.decodeObject(forKey: "placeId") as! String
-        self.init(timeStamp: timeStamp, placeId: placeId)
-    }
-}
-// // // ------------------- LOOK MORE INTO THIS ------------------- // // //
-
-
-// MARK: Lists
 class DefaultsManager {
     
     private static let defaults = UserDefaults.standard
     
+    // MARK: - Add
     static func addToList(placeId: String, listKey: ListType) {
-        if var favourites = defaults.object(forKey: listKey.rawValue) as? [String] {
-            if !favourites.contains(placeId) {
-                favourites.append(placeId)
-                defaults.set(favourites, forKey: listKey.rawValue)
-            }
-        } else {
-            let newFavourites = [placeId]
-            defaults.set(newFavourites, forKey: listKey.rawValue)
-        }
+        
+        var decodedList = getList(listKey: listKey)
+        
+        decodedList.append(PlaceListItem(placeId: placeId, timestamp: Int(Date().timeIntervalSince1970)))
+        save(list: decodedList, key: listKey.rawValue)
     }
     
+    // MARK: - Remove
     static func removeFromList(placeId: String, listKey: ListType) {
-        if var favourites = defaults.object(forKey: listKey.rawValue) as? [String] {
-            if favourites.contains(placeId) {
-                favourites = favourites.filter{$0 != placeId}
-                defaults.set(favourites, forKey: listKey.rawValue)
+        
+        var decodedList = getList(listKey: listKey)
+        
+        var placeIdToRemove: String?
+        for place in decodedList {
+            if place.placeId == placeId {
+                placeIdToRemove = place.placeId
             }
         }
+        
+        decodedList = decodedList.filter{$0.placeId != placeIdToRemove}
+        save(list: decodedList, key: listKey.rawValue)
     }
     
-    static func getList(listKey: ListType) -> [String] {
-        if let favourites = defaults.object(forKey: listKey.rawValue) as? [String] {
-            return favourites
+    // MARK: - Is in list
+    static func isInList(placeId: String, listKey: ListType) -> Bool {
+        
+        let list = getList(listKey: listKey)
+        
+        guard list.count > 0 else  { return false }
+        
+        var isInList = false
+        for place in list {
+            if place.placeId == placeId {
+                isInList = true
+            }
+        }
+        return isInList
+        
+    }
+    
+    // MARK: - Get
+    static func getList(listKey: ListType) -> [PlaceListItem] {
+        if let data = defaults.data(forKey: listKey.rawValue) {
+            return listFromDecoded(data: data)
         } else {
             return []
         }
     }
     
-    static func isInList(placeId: String, listKey: ListType) -> Bool {
-        if let favourites = defaults.object(forKey: listKey.rawValue) as? [String] {
-            if favourites.contains(placeId) {
-                return true
-            } else {
-                return false
-            }
-        } else {
-            return false
+    
+    // MARK: - Helpers
+    private static func save(list: [PlaceListItem], key: String) {
+        do {
+            let encoder = JSONEncoder()
+            let data = try encoder.encode(list)
+            
+            UserDefaults.standard.set(data, forKey: key)
+        } catch {
+            print("Unable to encode Location list")
         }
     }
+    
+    private static func listFromDecoded(data: Data) -> [PlaceListItem] {
+        do {
+            let decoder = JSONDecoder()
+            let decodedList = try decoder.decode([PlaceListItem].self, from: data)
+            return decodedList
+        } catch {
+            print("Unable to decode list")
+            return []
+        }
+    }
+      
+
+//    static func addToList(placeId: String, listKey: ListType) {
+//        if var favourites = defaults.object(forKey: listKey.rawValue) as? [String] {
+//            if !favourites.contains(placeId) {
+//                favourites.append(placeId)
+//                defaults.set(favourites, forKey: listKey.rawValue)
+//            }
+//        } else {
+//            let newFavourites = [placeId]
+//            defaults.set(newFavourites, forKey: listKey.rawValue)
+//        }
+//    }
+
+    
+//    static func getList(listKey: ListType) -> [String] {
+//        if let favourites = defaults.object(forKey: listKey.rawValue) as? [String] {
+//            return favourites
+//        } else {
+//            return []
+//        }
+//    }
+    
+//    static func isInList(placeId: String, listKey: ListType) -> Bool {
+//        if let favourites = defaults.object(forKey: listKey.rawValue) as? [String] {
+//            if favourites.contains(placeId) {
+//                return true
+//            } else {
+//                return false
+//            }
+//        } else {
+//            return false
+//        }
+//    }
     
     //MARK: Units
     private static let isKmKey = "isKmKey"
