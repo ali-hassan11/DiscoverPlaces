@@ -61,7 +61,7 @@ class MyPlacesViewController: UIViewController {
     
     private func setupListControllers() {
         // TODO: - ADD AS CHILD VIEW CONTROLLER
-        addChildVC(favouritesController, on: listControllersContainer)
+        addChildVC(favouritesController, on: listControllersContainer, completion: nil)
     }
     
     private func setupSegmentedControl() {
@@ -74,11 +74,13 @@ class MyPlacesViewController: UIViewController {
 
         switch sender.selectedSegmentIndex {
         case 0:
-            toDoController.remove()
-            addChildVC(favouritesController, on: listControllersContainer)
+            addChildVC(favouritesController, on: listControllersContainer, completion: { [weak self] in
+                self?.toDoController.remove()
+            })
         case 1:
-            favouritesController.remove()
-            addChildVC(toDoController, on: listControllersContainer)
+            addChildVC(toDoController, on: listControllersContainer, completion: { [weak self] in
+                self?.favouritesController.remove()
+            })
         default:
             break
         }
@@ -106,7 +108,7 @@ class MyPlacesViewController: UIViewController {
 
 
 @nonobjc extension UIViewController {
-    func addChildVC(_ child: UIViewController, on view: UIView) {
+    func addChildVC(_ child: UIViewController, on view: UIView, completion: (()->())?) {
         addChild(child)
         
         child.view.alpha = 0
@@ -115,8 +117,8 @@ class MyPlacesViewController: UIViewController {
         child.view.fillSuperview()
         child.didMove(toParent: self)
         
-        UIView.animate(withDuration: 0.35) {
-            child.view.alpha = 1
+        UIView.animate(withDuration: 0.25) {
+           child.view.alpha = 1
         }
     }
 
