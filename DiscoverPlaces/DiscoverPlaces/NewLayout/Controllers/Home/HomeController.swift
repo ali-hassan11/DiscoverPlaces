@@ -228,20 +228,18 @@ extension HomeController: CLLocationManagerDelegate {
 
         let location:CLLocation = locations[0] as CLLocation
         
-        let locationCoords = Location(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
-        let locationStub = LocationItem(name: nil, selectedLocation: locationCoords, actualUserLocation: locationCoords) //Use geocoding to get name of current location
-        
-        self.userLocation = locationStub
-        self.updateLastSavedLocation(with: locationStub)
-        self.fetchForLastSavedLocation()
-        
-//        if isLocationSettingEnabled {
-//            updateLastSavedLocation(with: currentLocation)
-//            self.userLocation = currentLocation
-//        }
-//
-//        fetchPlacesData(location: currentLocation)
-        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(location) { (placeMarks, error) in
+            let placeName = placeMarks?.first?.locality
+            
+            let locationCoords = Location(lat: location.coordinate.latitude, lng: location.coordinate.longitude)
+            let locationStub = LocationItem(name: placeName, selectedLocation: locationCoords, actualUserLocation: locationCoords)
+            
+            self.userLocation = locationStub
+            self.updateLastSavedLocation(with: locationStub)
+            self.fetchForLastSavedLocation()
+        }
+
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

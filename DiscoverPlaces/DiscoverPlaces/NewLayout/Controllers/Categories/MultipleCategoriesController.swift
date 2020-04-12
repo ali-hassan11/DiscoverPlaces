@@ -84,14 +84,6 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     init(category: Category, location: LocationItem) {
         self.location = location
         self.category = category
