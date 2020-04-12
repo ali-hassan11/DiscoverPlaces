@@ -34,7 +34,7 @@ enum Category: String {
         case .Health: return [.hospital, .pharmacy, .dentist, .spa]
         case .Hotel: return [.lodging]
         case .Transport: return [.airport, .train_station, .light_rail_station, .subway_station, .taxi_stand, .bus_station, .car_rental]
-        case .Family: return [.amusement_park, .zoo, .park, .bowling, .aquarium]
+        case .Family: return [.amusement_park, .zoo, .park, .bowling_alley, .aquarium]
         case .Attractions: return [.tourist_attraction]
         }
     }
@@ -57,7 +57,7 @@ enum SubCategory: String {
     case florist
     case park
     case gym
-    case bowling
+    case bowling_alley
     case bicycle_store
     case mosque
     case synagogue
@@ -100,7 +100,7 @@ enum SubCategory: String {
         case .florist: return "Florist"
         case .park: return "Park"
         case .gym: return "Gym"
-        case .bowling: return "Bowling"
+        case .bowling_alley: return "Bowling"
         case .bicycle_store: return "Cycling"
         case .mosque: return "Mosque"
         case .synagogue: return "Synagogue"

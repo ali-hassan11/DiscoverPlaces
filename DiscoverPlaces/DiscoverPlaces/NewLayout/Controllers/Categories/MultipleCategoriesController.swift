@@ -52,6 +52,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     }
         
     private func fetchdata(subCategory: SubCategory, selectedLocation: Location) {
+        
         print("FetchData for \(subCategory)")
         var subCategoryGroup: PlacesGroup?
         Service.shared.fetchNearbyPlaces(selectedLocation: selectedLocation, subCategory: subCategory) { (response, error) in
