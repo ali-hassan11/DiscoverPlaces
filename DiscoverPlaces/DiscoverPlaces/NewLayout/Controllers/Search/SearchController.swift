@@ -86,8 +86,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             return
         }
         
-        let queryText = searchText.replacingOccurrences(of: " ", with: "%20")
-        //Take into account special characters
+        guard let queryText = searchText.addingPercentEncoding(withAllowedCharacters: .alphanumerics) else { return }
         
         fetchData(for: queryText, location: searchLocation.selectedLocation)
         searchController.searchBar.placeholder = ""
@@ -119,9 +118,8 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             
             if self.searchResults.isEmpty {
                 
-                if !searchText.isEmpty {
-                    self.enterSearchTextlabel.text = "Sorry, we couldn't find anything for \"\(searchText.replacingOccurrences(of: "%20", with: " "))\""
-                }
+                guard let queryText = searchText.removingPercentEncoding else { return }
+                self.enterSearchTextlabel.text = "Sorry, we couldn't find anything for \"\(queryText)\""
                 
             } else {
                 self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)

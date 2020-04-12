@@ -45,8 +45,11 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     }
     
     private func fetchSubCategoryGroups(category: Category, selectedLocation: Location?) {
+        
+        category.subCategories().forEach{ _ in dispatchGroup.enter() }
+        print("➡️\(category.subCategories().count) subCats.count")
+        
         category.subCategories().forEach {
-            dispatchGroup.enter()
             fetchdata(subCategory: $0, selectedLocation: location.selectedLocation)
         }
     }
@@ -54,7 +57,6 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     private func fetchdata(subCategory: SubCategory, selectedLocation: Location) {
         
         print("FetchData for \(subCategory)")
-        var subCategoryGroup: PlacesGroup?
         Service.shared.fetchNearbyPlaces(selectedLocation: selectedLocation, subCategory: subCategory) { (response, error) in
             
             if let error = error {
@@ -65,22 +67,23 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
             guard let response = response else { return }
             
             let placeResults = self.searchResponseFilter.results(from: response)
-            subCategoryGroup = PlacesGroup(title: subCategory.formatted(), results: placeResults)
+            if placeResults.count > 0 {
+                let group = PlacesGroup(title: subCategory.formatted(), results: placeResults)
+                self.subCategoryGroups.append(group)
+                self.subCategoryGroups.sort{$0.results.count > $1.results.count}
+            }
+
             self.dispatchGroup.leave()
             
-            self.handleSuccess(with: subCategoryGroup)
+            self.handleSuccess()
         }
     }
     
-    private func handleSuccess(with subCategoryGroup: PlacesGroup?) {
+    private func handleSuccess() {
         dispatchGroup.notify(queue: .main) {
-            guard let subCategoryGroup = subCategoryGroup, subCategoryGroup.results.count > 0 else { return }
-            self.subCategoryGroups.append(subCategoryGroup)
-            self.subCategoryGroups.sort{$0.results.count > $1.results.count}
             self.collectionView.reloadData()
             UIView.animate(withDuration: 0.35) {
                 self.collectionView.alpha = 1
-
             }
         }
     }
