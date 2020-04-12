@@ -107,11 +107,7 @@ class SmallPlaceCell: UICollectionViewCell {
         addSubview(highlightView)
         highlightView.roundCorners()
         highlightView.isHidden = true
-        if starRatingView.isHidden {
-            highlightView.anchor(top: topAnchor, leading: leadingAnchor, bottom: addressLabel.bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: -8, right: 0))
-        } else {
-            highlightView.anchor(top: topAnchor, leading: leadingAnchor, bottom: starRatingView.bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: -8, right: 0))
-        }
+        highlightView.fillSuperview()
     }
     
     required init?(coder: NSCoder) {
