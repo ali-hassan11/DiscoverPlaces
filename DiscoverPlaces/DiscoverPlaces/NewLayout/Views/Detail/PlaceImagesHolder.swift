@@ -112,7 +112,6 @@ final class PlaceImagesHolder: UICollectionReusableView {
         
         addSubview(gradientView)
         gradientView.fillSuperview()
-        gradientView.isUserInteractionEnabled = false
         
         let stackView = HorizontalStackView(arrangedSubviews: [starRatingView, distanceLabel])
         addSubview(stackView)
@@ -124,6 +123,10 @@ final class PlaceImagesHolder: UICollectionReusableView {
         addSubview(placeNameLabel)
         placeNameLabel.anchor(top: nil, leading: stackView.leadingAnchor, bottom: stackView.topAnchor, trailing: stackView.trailingAnchor,
                               padding: .init(top: 0, left: 0, bottom: 8, right: 0))
+        
+        gradientView.isUserInteractionEnabled = false
+        placeNameLabel.isUserInteractionEnabled = false
+        stackView.isUserInteractionEnabled = false
     }
     
     required init?(coder: NSCoder) {
