@@ -125,20 +125,26 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             self?.userLocation = locationStub
             self?.updateLastSavedLocation(with: locationStub)
             self?.fetchForLastSavedLocation()
-            self?.scollToTop()
+            self?.resetScroll()
             print(UserLoation.lastSavedLocation())
         }
         
         locationSearchController.determineUserLocationTappedHandler = { [weak self] in
             self?.determineMyCurrentLocation()
-            self?.scollToTop()
+            self?.resetScroll()
         }
         
         navigationController?.pushViewController(locationSearchController, animated: true)
     }
     
-    private func scollToTop() {
+    private func resetScroll() {
         self.collectionView.scrollRectToVisible(CGRect(x: 0, y: -8, width: 1, height: 1), animated: true) //Bit glitchy... Need to fix
+        
+        guard let homeLargeCell = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? HomeLargeCellHolder else { return }
+        homeLargeCell.horizontalController.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
+        
+        guard let categoriesHolderCell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? CategoriesHolder else { return }
+        categoriesHolderCell.horizontalController.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
     }
 }
 
