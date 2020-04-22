@@ -78,7 +78,8 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         
         definesPresentationContext = true
         
-        searchController?.hidesNavigationBarDuringPresentation = false
+        searchController?.searchBar.placeholder = "Enter Location..."
+        searchController?.hidesNavigationBarDuringPresentation = true
         
         resultsViewController?.tintColor = .systemPink
         resultsViewController?.primaryTextColor = .label
