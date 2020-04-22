@@ -43,6 +43,8 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         setupBarButtons()
         setupCollectionView()
         
+        collectionView.contentInsetAdjustmentBehavior = .always //EXPERIMETING
+        
         if UserDefaults.isFirstLaunch() {
             determineMyCurrentLocation()
         } else {
@@ -123,14 +125,20 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             self?.userLocation = locationStub
             self?.updateLastSavedLocation(with: locationStub)
             self?.fetchForLastSavedLocation()
+            self?.scollToTop()
             print(UserLoation.lastSavedLocation())
         }
         
         locationSearchController.determineUserLocationTappedHandler = { [weak self] in
             self?.determineMyCurrentLocation()
+            self?.scollToTop()
         }
         
         navigationController?.pushViewController(locationSearchController, animated: true)
+    }
+    
+    private func scollToTop() {
+        self.collectionView.scrollRectToVisible(CGRect(x: 0, y: -8, width: 1, height: 1), animated: true) //Bit glitchy... Need to fix
     }
 }
 
@@ -204,9 +212,7 @@ extension HomeController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    
-//        guard isLocationSettingEnabled == false else { return }
-        
+            
         switch status {
         case .restricted, .denied:
             fetchForLastSavedLocation()
