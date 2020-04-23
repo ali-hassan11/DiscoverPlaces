@@ -138,7 +138,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     }
     
     private func resetScroll() {
-        self.collectionView.scrollRectToVisible(CGRect(x: 0, y: -8, width: 1, height: 1), animated: true) //Bit glitchy... Need to fix
+        self.collectionView.scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: true) //Bit glitchy... Need to fix
         
         guard let homeLargeCell = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? HomeLargeCellHolder else { return }
         homeLargeCell.horizontalController.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
@@ -164,7 +164,7 @@ extension HomeController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: view.frame.width - 32)
+        return .init(width: view.frame.width, height: view.frame.width + 10 - 32)
     }
     
     //MARK: Categories Controller

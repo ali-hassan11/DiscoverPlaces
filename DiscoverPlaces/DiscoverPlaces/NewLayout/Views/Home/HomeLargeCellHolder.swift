@@ -14,18 +14,19 @@ class HomeLargeCellHolder: UICollectionReusableView {
     
     let sectionDescriptionLabel = UILabel(text: "Places of interest near You", font: .systemFont(ofSize: 16, weight: .medium),color: .secondaryLabel , numberOfLines: 0)
     
-    let paddingView = PaddingView(width: sidePadding)
-    
+    let rightPadding = PaddingView(width: sidePadding)
+    let leftPadding = PaddingView(width: sidePadding)
+
     let horizontalController = HomeLargeCellsHorizontalController()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemBackground
-        
-        let stackView = VerticalStackView(arrangedSubviews: [UIStackView(arrangedSubviews: [paddingView, sectionDescriptionLabel]), horizontalController.view], spacing: 12)
+//        backgroundColor = .blue
+//        sectionDescriptionLabel.backgroundColor = .green
+        let stackView = VerticalStackView(arrangedSubviews: [UIStackView(arrangedSubviews: [leftPadding, sectionDescriptionLabel, rightPadding]), horizontalController.view], spacing: 12)
         addSubview(stackView)
-        stackView.fillSuperview()
+        stackView.fillSuperview(padding: .init(top: 10, left: 0, bottom: 10, right: 0))
         
     }
     
