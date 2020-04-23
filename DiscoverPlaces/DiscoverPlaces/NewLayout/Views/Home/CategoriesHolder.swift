@@ -13,7 +13,7 @@ class CategoriesHolder: UICollectionViewCell {
     static let id = "categoriesHolderId"
     
     let sectionTitleLabel = UILabel(text: "Feeling Adventurous", font: .systemFont(ofSize: 24, weight: .bold),color: .label, numberOfLines: 0)
-    let sectionDescriptionLabel = UILabel(text: "Why not try something new, get inspiration from our range of categories...", font: .systemFont(ofSize: 16, weight: .medium),color: .secondaryLabel , numberOfLines: 0)
+    let sectionDescriptionLabel = UILabel(text: "Why not try something new, get inspiration from our range of categories...", font: .systemFont(ofSize: 16, weight: .regular),color: .secondaryLabel , numberOfLines: 0)
     
     let horizontalController = CategoriesHorizontalController()
  

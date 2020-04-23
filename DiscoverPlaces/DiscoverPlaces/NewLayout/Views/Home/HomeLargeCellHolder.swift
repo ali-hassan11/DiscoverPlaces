@@ -12,7 +12,8 @@ class HomeLargeCellHolder: UICollectionReusableView {
     
     static let id = "largeCellHolderId"
     
-    let sectionDescriptionLabel = UILabel(text: "Places of interest near You", font: .systemFont(ofSize: 16, weight: .medium),color: .secondaryLabel , numberOfLines: 0)
+    let sectionDescriptionLabel = UILabel(text: "Places of interest ", font: .systemFont(ofSize: 18, weight: .regular),color: .secondaryLabel , numberOfLines: 1)
+    let placeNameLabel = UILabel(text: " near You", font: .systemFont(ofSize: 18, weight: .medium),color: .label , numberOfLines: 1)
     
     let rightPadding = PaddingView(width: sidePadding)
     let leftPadding = PaddingView(width: sidePadding)
@@ -24,17 +25,17 @@ class HomeLargeCellHolder: UICollectionReusableView {
         
 //        backgroundColor = .blue
 //        sectionDescriptionLabel.backgroundColor = .green
-        let stackView = VerticalStackView(arrangedSubviews: [UIStackView(arrangedSubviews: [leftPadding, sectionDescriptionLabel, rightPadding]), horizontalController.view], spacing: 12)
+        let stackView = VerticalStackView(arrangedSubviews: [UIStackView(arrangedSubviews: [leftPadding, sectionDescriptionLabel, placeNameLabel, UIView()]), horizontalController.view], spacing: 12)
         addSubview(stackView)
-        stackView.fillSuperview(padding: .init(top: 10, left: 0, bottom: 10, right: 0))
+        stackView.fillSuperview(padding: .init(top: 10, left: 0, bottom: 8, right: 0))
         
     }
     
     func configureTitle(with placeName: String?) {
         if let name = placeName {
-            sectionDescriptionLabel.text = "Places of interest - \(name)"
+            placeNameLabel.text = "- \(name)"
         } else {
-            sectionDescriptionLabel.text = "Places of interest near You"
+            placeNameLabel.text = "near you"
         }
     }
     
