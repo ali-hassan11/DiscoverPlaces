@@ -36,9 +36,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         v.backgroundColor = .systemBackground
         return v
     }()
-    
-    fileprivate let errorCellId = "errorCellId"
-    
+        
     init(placeId: String, location: LocationItem) {
         self.placeId = placeId
         self.location = location
@@ -105,7 +103,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         collectionView.register(ActionButtonsCell.self, forCellWithReuseIdentifier: ActionButtonsCell.id)
         collectionView.register(ReviewsHolder.self, forCellWithReuseIdentifier: ReviewsHolder.id)
         collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: MorePlacesHolder.id)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: errorCellId)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Constants.errorCellId)
         collectionView.register(GoogleLogoCell.self, forCellWithReuseIdentifier: GoogleLogoCell.id)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: bottomPaddingCellId)
         collectionView.register(ErrorCell.self, forCellWithReuseIdentifier: ErrorCell.id)
@@ -287,7 +285,7 @@ extension PlaceDetailsController {
             return cell
             
         default:
-            let errorCell = collectionView.dequeueReusableCell(withReuseIdentifier: errorCellId, for: indexPath)
+            let errorCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.errorCellId, for: indexPath)
             return errorCell
         }
     }

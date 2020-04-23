@@ -31,6 +31,9 @@ enum Constants {
     static let rightPadding: CGFloat = 20
     static let sidePadding: CGFloat = 16
     
+    //Cells
+    static let errorCellId = "errorCellId"
+    
     //
     static let imagePlaceHolder = "placeHolderImage"
 }
