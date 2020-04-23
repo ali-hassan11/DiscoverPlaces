@@ -32,6 +32,7 @@
 		CE327AF1241696B60010F400 /* MultipleCategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */; };
 		CE327AF324169DD20010F400 /* PlaceGroupHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */; };
 		CE42F3862437161800C394EC /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F3852437161800C394EC /* ErrorCell.swift */; };
+		CE45B49D2451D6D400656339 /* PlacesGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE45B49C2451D6D400656339 /* PlacesGroup.swift */; };
 		CE50CD4A24437B6C00E91643 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE50CD4924437B6C00E91643 /* Reachability.swift */; };
 		CE58359923DE16B000C89622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359823DE16B000C89622 /* AppDelegate.swift */; };
 		CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359A23DE16B000C89622 /* SceneDelegate.swift */; };
@@ -147,6 +148,7 @@
 		CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCategoriesController.swift; sourceTree = "<group>"; };
 		CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceGroupHorizontalController.swift; sourceTree = "<group>"; };
 		CE42F3852437161800C394EC /* ErrorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
+		CE45B49C2451D6D400656339 /* PlacesGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesGroup.swift; sourceTree = "<group>"; };
 		CE50CD4924437B6C00E91643 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		CE58359523DE16B000C89622 /* DiscoverPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE58359823DE16B000C89622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 				60EADA8823F706EB0095DBF9 /* PlaceDetailResponse.swift */,
 				CE24AD83244068A700852C91 /* LocationItem.swift */,
 				CE24AD892442FA9500852C91 /* PlaceListItem.swift */,
+				CE45B49C2451D6D400656339 /* PlacesGroup.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -870,6 +873,7 @@
 				60EADA8923F706EB0095DBF9 /* PlaceDetailResponse.swift in Sources */,
 				60EADA8323F6D96B0095DBF9 /* ReviewsHorizontalController.swift in Sources */,
 				CEABA02E24177AC90057A955 /* Category+SubCategory.swift in Sources */,
+				CE45B49D2451D6D400656339 /* PlacesGroup.swift in Sources */,
 				CEFD55C6241B1204001E21AC /* SmallPlaceCell.swift in Sources */,
 				CE659A0123EF874C00E531CD /* HomeLargeCellsHorizontalController.swift in Sources */,
 				CE5835D123DE224C00C89622 /* UIView+Layout.swift in Sources */,

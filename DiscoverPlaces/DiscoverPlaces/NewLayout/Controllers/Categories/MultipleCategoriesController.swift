@@ -8,16 +8,6 @@
 
 import UIKit
 
-struct PlacesGroup {
-    let title: String?
-    let results: [PlaceResult]
-    
-    init(title: String? = nil, results: [PlaceResult]?) {
-        self.title = title
-        self.results = results ?? []
-    }
-}
-
 class MultipleCategoriesController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
         
     private let searchResponseFilter = SearchResponseFilter()
@@ -28,6 +18,12 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     
     private var subCategoryGroups = [PlacesGroup]()
         
+    init(category: Category, location: LocationItem) {
+        self.location = location
+        self.category = category
+        super.init()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -82,12 +78,6 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
                 self.collectionView.alpha = 1
             }
         }
-    }
-
-    init(category: Category, location: LocationItem) {
-        self.location = location
-        self.category = category
-        super.init()
     }
     
     required init?(coder: NSCoder) {

@@ -39,6 +39,14 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         return v
     }()
     
+    override init() {
+        ///Search currently uses searchLocation in fetch, which is just the last saved location, however if I decide to add search by location feature, then the user will be able to change the searchLocation, and userLocation will remain the same so that you can calculate the distance between the userLocation and searchLocation
+        self.searchLocation = UserLoation.lastSavedLocation()
+        self.userLocation = UserLoation.lastSavedLocation()
+        
+        super.init()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(searchLocation)
@@ -57,13 +65,6 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     private func addSearchLocationButton() {
         let locationButton = UIBarButtonItem(title: searchLocation.name, style: .done, target: nil, action: nil)
         navigationItem.rightBarButtonItem = locationButton
-    }
-    
-    override init() {
-        self.searchLocation = UserLoation.lastSavedLocation()
-        self.userLocation = UserLoation.lastSavedLocation()
-        
-        super.init()
     }
     
     required init?(coder: NSCoder) {
