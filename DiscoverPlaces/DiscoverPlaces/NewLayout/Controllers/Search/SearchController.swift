@@ -52,15 +52,6 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         collectionView.register(SmallPlaceCell.self, forCellWithReuseIdentifier: SmallPlaceCell.id)
     }
     
-    private func addSearchLocationButton() {
-        let locationButton = UIBarButtonItem(title: searchLocation.name, style: .done, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = locationButton
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.searchLocation = UserLoation.lastSavedLocation()
@@ -153,16 +144,20 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     }
     
     private func hideLoadingView() {
-        //Make consistent animation time constant
         UIView.animate(withDuration: 0.3, animations: {
             self.fadeView.alpha = 0
         }) { (_) in
             self.activityIndicatorView.stopAnimating()
         }
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension SearchController {
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         enterSearchTextlabel.isHidden = searchResults.count != 0
         searchIcon.isHidden = searchResults.count != 0
@@ -196,24 +191,4 @@ extension SearchController {
 }
 
 
-import Foundation
 
-class UserLoation {
-    
-    static func lastSavedLocation() -> LocationItem {
-        if let data = UserDefaults.standard.data(forKey: "LocationKey") {
-            do {
-                let decoder = JSONDecoder()
-                let lastSavedLocation = try decoder.decode(LocationItem.self, from: data)
-                return lastSavedLocation
-            } catch {
-                return LocationItem(name: "Dubai", selectedLocation:Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil) //Decide on a Default location (Currently Dubai)
-            }
-        } else {
-            return LocationItem(name: "Dubai", selectedLocation:Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil) //Decide on a Default location (Currently Dubai)
-        }
-    }
-    
-    //SaveLocation
-    
-}

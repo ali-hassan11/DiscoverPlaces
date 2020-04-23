@@ -10,6 +10,7 @@ import UIKit
 
 class CategoriesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
+    ///Used for calculation in sizeForItemAt
     private let numberOfRows:CGFloat = 3
     private let numberOfColumns:CGFloat = 2
     private let lineSpacing: CGFloat = 10

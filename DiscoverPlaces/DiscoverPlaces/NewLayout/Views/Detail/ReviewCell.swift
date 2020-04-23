@@ -10,6 +10,8 @@ import UIKit
 
 class ReviewCell: UICollectionViewCell {
     
+    static let id = "reviewCellId"
+    
     var review: Review? {
         didSet {
             guard let review = review else { return }

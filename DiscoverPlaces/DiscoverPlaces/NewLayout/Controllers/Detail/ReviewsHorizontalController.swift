@@ -9,8 +9,6 @@
 import UIKit
 
 class ReviewsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
-
-    private let reviewCellId = "reviewCellId"
     
     var reviews: [Review]? {
         didSet {
@@ -20,17 +18,11 @@ class ReviewsHorizontalController: HorizontalSnappingController, UICollectionVie
     
     var didSelectHandler: ((Review) -> ())?
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let review = reviews?[indexPath.item] {
-            didSelectHandler?(review)
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(ReviewCell.self, forCellWithReuseIdentifier: reviewCellId)
+        collectionView.register(ReviewCell.self, forCellWithReuseIdentifier: ReviewCell.id)
         collectionView.contentInset = .init(top: 0, left: 24, bottom: 0, right: 24)
     }
 
@@ -39,13 +31,19 @@ class ReviewsHorizontalController: HorizontalSnappingController, UICollectionVie
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reviewCellId, for: indexPath) as! ReviewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewCell.id, for: indexPath) as! ReviewCell
         cell.review = reviews?[indexPath.row]
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         if let review = reviews?[indexPath.item] {
+             didSelectHandler?(review)
+         }
+     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if reviews != nil { // > 0?
+        if reviews != nil {
             return .init(width: (view.frame.width - (Constants.leftPadding + Constants.rightPadding + 10)), height: view.frame.height)
         } else {
             return.zero
