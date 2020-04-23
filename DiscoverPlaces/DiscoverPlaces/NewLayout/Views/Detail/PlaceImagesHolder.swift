@@ -87,7 +87,7 @@ final class PlaceImagesHolder: UICollectionReusableView {
     private func layoutPageIndicator() {
         addSubview(segmentedControl)
         
-        let height: CGFloat = 1
+        let height: CGFloat = 2
         segmentedControl.constrainHeight(constant: height)
         segmentedControl.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 8, bottom: 0, right: 8))
     }
