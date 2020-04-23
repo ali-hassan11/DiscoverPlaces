@@ -37,13 +37,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         return v
     }()
     
-    private let activityIndicatorView: UIActivityIndicatorView = {
-        let aiv = UIActivityIndicatorView(style: .medium)
-        aiv.color = .secondaryLabel
-        aiv.startAnimating()
-        aiv.hidesWhenStopped = true
-        return aiv
-    }()
+    private let activityIndicatorView = LoadingIndicatorView()
 
     fileprivate let errorCellId = "errorCellId"
     
@@ -128,8 +122,8 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             self.splashScreen.alpha = 0
             self.activityIndicatorView.alpha = 0
         }) { (true) in
+            self.activityIndicatorView.stopAnimating()
             self.splashScreen.removeFromSuperview()
-            self.activityIndicatorView.removeFromSuperview()
         }
     }
     
