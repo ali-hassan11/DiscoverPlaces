@@ -23,32 +23,26 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         case bottomPadding
     }
     
-    let searchResponseFilter = SearchResponseFilter()
+    private let searchResponseFilter = SearchResponseFilter()
 
     private let location: LocationItem
     private let placeId: String
+    private var placeDetailResult: PlaceDetailResult?
+    private var morePlaces: [PlaceResult]?
 
-    var placeDetailResult: PlaceDetailResult?
-    var morePlaces: [PlaceResult]?
-
-    let splashScreen: UIView! = {
+    private let activityIndicatorView = LoadingIndicatorView()
+    private let fadeView: UIView! = {
         let v = UIView()
         v.backgroundColor = .systemBackground
         return v
     }()
     
-    private let activityIndicatorView = LoadingIndicatorView()
-
     fileprivate let errorCellId = "errorCellId"
     
     init(placeId: String, location: LocationItem) {
         self.placeId = placeId
         self.location = location
         super.init()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -63,7 +57,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     private func setIndexForImagesHolderSegmentControl(to segment: Int) {
-        UserDefaults.standard.set(segment, forKey: "nearestPageKey")
+        UserDefaults.standard.set(segment, forKey: Constants.nearestPageKey)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -88,13 +82,13 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     private func setUpSplashScreen() {
 
-        self.view.addSubview(splashScreen)
-        splashScreen.fillSuperview()
+        self.view.addSubview(fadeView)
+        fadeView.fillSuperview()
         
         let imagePlaceHolder = UIView()
         imagePlaceHolder.backgroundColor = .secondarySystemBackground
-        splashScreen.addSubview(imagePlaceHolder)
-        imagePlaceHolder.anchor(top: splashScreen.topAnchor, leading: splashScreen.leadingAnchor, bottom: nil, trailing: splashScreen.trailingAnchor)
+        fadeView.addSubview(imagePlaceHolder)
+        imagePlaceHolder.anchor(top: fadeView.topAnchor, leading: fadeView.leadingAnchor, bottom: nil, trailing: fadeView.trailingAnchor)
         imagePlaceHolder.constrainHeight(constant: view.frame.height / 2)
         
         imagePlaceHolder.addSubview(activityIndicatorView)
@@ -119,11 +113,11 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     private func fadeOutSplashScreen() {
         UIView.animate(withDuration: 0.2, animations: {
-            self.splashScreen.alpha = 0
+            self.fadeView.alpha = 0
             self.activityIndicatorView.alpha = 0
         }) { (true) in
             self.activityIndicatorView.stopAnimating()
-            self.splashScreen.removeFromSuperview()
+            self.fadeView.removeFromSuperview()
         }
     }
     
@@ -197,6 +191,9 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         return places.filter{$0.place_id != currentPlaceId}
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension PlaceDetailsController {
