@@ -71,7 +71,7 @@ class SmallPlaceCell: UICollectionViewCell {
     }
     
     private func configureRating(using place: PlaceResult) {
-        guard let rating = place.rating else {
+        guard let rating = place.rating, rating != 0 else {
             starRatingView.isHidden = true
             return
         }
