@@ -88,7 +88,7 @@ class MyPlacesViewController: UIViewController {
     }
     
     private func setupContraints() {
-        listSelector.anchor(top: view.layoutMarginsGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: sidePadding, bottom: 0, right: sidePadding))
+        listSelector.anchor(top: view.layoutMarginsGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: Constants.sidePadding, bottom: 0, right: Constants.sidePadding))
         listControllersContainer.anchor(top: listSelector.bottomAnchor, leading: view.leadingAnchor, bottom: view.layoutMarginsGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
     }
     

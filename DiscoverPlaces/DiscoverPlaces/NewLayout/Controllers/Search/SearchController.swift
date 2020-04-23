@@ -15,7 +15,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var searchResults = [PlaceResult]()
     
-    ///SearchLocation and userLocation need to be separate because when you change the search location, you don't want the userLocation to change
+    ///SearchLocation and userLocation need to be separate because if I allow users to change the search location, I will need a reference to user location to calculate distance
     private var searchLocation: LocationItem ///Decided not to allow changing search location, just uses location set form home
     private var userLocation: LocationItem
     
@@ -189,7 +189,7 @@ extension SearchController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: (view.frame.width - sidePadding - sidePadding - 12) / 2, height: 250)
+        return .init(width: (view.frame.width - Constants.sidePadding - Constants.sidePadding - 12) / 2, height: 250)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -197,7 +197,7 @@ extension SearchController {
       }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 0, left: sidePadding, bottom: 0, right: sidePadding)
+        return .init(top: 0, left: Constants.sidePadding, bottom: 0, right: Constants.sidePadding)
     }
 }
 

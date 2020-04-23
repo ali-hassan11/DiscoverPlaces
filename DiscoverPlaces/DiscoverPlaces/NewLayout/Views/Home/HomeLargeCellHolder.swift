@@ -15,8 +15,8 @@ class HomeLargeCellHolder: UICollectionReusableView {
     let sectionDescriptionLabel = UILabel(text: "Places of interest ", font: .systemFont(ofSize: 18, weight: .regular),color: .secondaryLabel , numberOfLines: 1)
     let placeNameLabel = UILabel(text: " near You", font: .systemFont(ofSize: 18, weight: .medium),color: .label , numberOfLines: 1)
     
-    let rightPadding = PaddingView(width: sidePadding)
-    let leftPadding = PaddingView(width: sidePadding)
+    let rightPadding = PaddingView(width: Constants.sidePadding)
+    let leftPadding = PaddingView(width: Constants.sidePadding)
 
     let horizontalController = HomeLargeCellsHorizontalController()
     

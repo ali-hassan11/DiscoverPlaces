@@ -27,7 +27,6 @@
 		CE24AD88244102DB00852C91 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24AD87244102DB00852C91 /* Model.swift */; };
 		CE24AD8A2442FA9600852C91 /* PlaceListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24AD892442FA9500852C91 /* PlaceListItem.swift */; };
 		CE319CDD23E0ECBD0088B9D1 /* UIElementsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE319CDC23E0ECBD0088B9D1 /* UIElementsExtensions.swift */; };
-		CE319CE723E15E1E0088B9D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE319CE623E15E1E0088B9D1 /* Constants.swift */; };
 		CE327AEA241546E10010F400 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AE9241546E10010F400 /* SettingsController.swift */; };
 		CE327AF1241696B60010F400 /* MultipleCategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */; };
 		CE327AF324169DD20010F400 /* PlaceGroupHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */; };
@@ -51,6 +50,7 @@
 		CE5835D823DF145900C89622 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835D723DF145900C89622 /* SearchResponse.swift */; };
 		CE5835DB23DF1B7A00C89622 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DA23DF1B7A00C89622 /* Service.swift */; };
 		CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */; };
+		CE5FE9B02451E3DF000758C0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FE9AF2451E3DF000758C0 /* Constants.swift */; };
 		CE616D002405BE28008E7067 /* WebsiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE616CFF2405BE28008E7067 /* WebsiteViewController.swift */; };
 		CE616D032405D46D008E7067 /* MyPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE616D022405D46D008E7067 /* MyPlacesViewController.swift */; };
 		CE616D052405D94D008E7067 /* ListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE616D042405D94D008E7067 /* ListType.swift */; };
@@ -144,7 +144,6 @@
 		CE24AD87244102DB00852C91 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		CE24AD892442FA9500852C91 /* PlaceListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceListItem.swift; sourceTree = "<group>"; };
 		CE319CDC23E0ECBD0088B9D1 /* UIElementsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIElementsExtensions.swift; sourceTree = "<group>"; };
-		CE319CE623E15E1E0088B9D1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE327AE9241546E10010F400 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCategoriesController.swift; sourceTree = "<group>"; };
 		CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceGroupHorizontalController.swift; sourceTree = "<group>"; };
@@ -174,6 +173,7 @@
 		CE5835D723DF145900C89622 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		CE5835DA23DF1B7A00C89622 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		CE5835DC23DF62CE00C89622 /* UrlBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlBuilder.swift; sourceTree = "<group>"; };
+		CE5FE9AF2451E3DF000758C0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE616CFF2405BE28008E7067 /* WebsiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteViewController.swift; sourceTree = "<group>"; };
 		CE616D022405D46D008E7067 /* MyPlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacesViewController.swift; sourceTree = "<group>"; };
 		CE616D042405D94D008E7067 /* ListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListType.swift; sourceTree = "<group>"; };
@@ -317,6 +317,7 @@
 				CE9CDF6F24352D2C008DF6DE /* UserLocation.swift */,
 				CE24AD7F243EFF8900852C91 /* Fonts+Color.swift */,
 				CE24AD87244102DB00852C91 /* Model.swift */,
+				CE5FE9AF2451E3DF000758C0 /* Constants.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -390,7 +391,6 @@
 				CEEB4D5723E84978006D79E6 /* Spacing.swift */,
 				CE5835D023DE224C00C89622 /* UIView+Layout.swift */,
 				CE319CDC23E0ECBD0088B9D1 /* UIElementsExtensions.swift */,
-				CE319CE623E15E1E0088B9D1 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -855,6 +855,7 @@
 				60EADA7F23F6C19B0095DBF9 /* WebAddressCell.swift in Sources */,
 				CE659A0D23EF884700E531CD /* ImagesHorizontalController.swift in Sources */,
 				CE42F3862437161800C394EC /* ErrorCell.swift in Sources */,
+				CE5FE9B02451E3DF000758C0 /* Constants.swift in Sources */,
 				CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */,
 				CE6599F023EA692500E531CD /* HomeController.swift in Sources */,
 				CE327AF324169DD20010F400 /* PlaceGroupHorizontalController.swift in Sources */,
@@ -889,7 +890,6 @@
 				CEFD55C6241B1204001E21AC /* SmallPlaceCell.swift in Sources */,
 				CE659A0123EF874C00E531CD /* HomeLargeCellsHorizontalController.swift in Sources */,
 				CE5835D123DE224C00C89622 /* UIView+Layout.swift in Sources */,
-				CE319CE723E15E1E0088B9D1 /* Constants.swift in Sources */,
 				CE8A2FCF23F08A0E00CDF866 /* DetailsTopSectionCell.swift in Sources */,
 				CE5835DB23DF1B7A00C89622 /* Service.swift in Sources */,
 				CE2267DB2402A14E00E6385F /* OpeningHoursController.swift in Sources */,

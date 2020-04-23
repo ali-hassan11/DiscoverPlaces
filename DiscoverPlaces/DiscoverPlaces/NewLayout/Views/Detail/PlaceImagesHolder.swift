@@ -80,7 +80,7 @@ final class PlaceImagesHolder: UICollectionReusableView {
         segmentedControl.backgroundColor = .quaternaryLabel
         segmentedControl.selectedSegmentTintColor = .systemPink
         
-        let nearestPage =  UserDefaults.standard.integer(forKey: "nearestPageKey")
+        let nearestPage =  UserDefaults.standard.integer(forKey: Constants.nearestPageKey)
         segmentedControl.selectedSegmentIndex = nearestPage
     }
     
