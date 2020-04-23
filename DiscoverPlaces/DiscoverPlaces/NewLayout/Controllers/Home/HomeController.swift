@@ -10,20 +10,13 @@ import CoreLocation
 
 class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    private var userLocation: LocationItem?
+    private var locationManager:CLLocationManager!
+
+    private var placeResults = [PlaceResult]()
     private let searchResponseFilter = SearchResponseFilter()
     
-    private var locationManager:CLLocationManager!
-    
-    private var isLocationSettingEnabled = false
-    
-    private var userLocation: LocationItem?
-    
-    private var placeResults = [PlaceResult]()
-    
-    //Make custom object
     private let activityIndicatorView = LoadingIndicatorView()
-    
-    //Make custom object
     private let fadeView: UIView = {
         let v = UIView()
         v.backgroundColor = .systemBackground
@@ -219,7 +212,6 @@ extension HomeController: CLLocationManagerDelegate {
             
         case .authorizedAlways, .authorizedWhenInUse:
             locationManager.startUpdatingLocation()
-            isLocationSettingEnabled = true
             
         case .notDetermined:
             locationManager.requestAlwaysAuthorization()
