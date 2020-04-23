@@ -13,8 +13,8 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
     
     private static let googlePlacesApiKey = "AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
     
-    var resultsCompletionHandler: ((Location?, String?) -> ())?
-    var determineUserLocationTappedHandler: (()->())?
+    var selectedLocationCompletionHandler: ((Location?, String?) -> ())?
+    var determineUserLocationCompletionHandler: (()->())?
     
     private var resultsViewController: GMSAutocompleteResultsViewController?
     private var searchController: UISearchController?
@@ -57,7 +57,7 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
     
     @objc func dismissAndLocateUser() {
         if locationServicesEnabled {
-            determineUserLocationTappedHandler?()
+            determineUserLocationCompletionHandler?()
             self.navigationController?.popViewController(animated: true)
         } else {
             showToastAlert(title: "Please enable location services, or select location manually")
@@ -95,7 +95,7 @@ extension LocationSearchController: GMSAutocompleteResultsViewControllerDelegate
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
         
         let location = Location(lat: place.coordinate.latitude, lng: place.coordinate.longitude)
-        self.resultsCompletionHandler?(location, place.name)
+        self.selectedLocationCompletionHandler?(location, place.name)
         self.navigationController?.popViewController(animated: true)
     }
     

@@ -106,17 +106,16 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     @objc func showSetLocationController() {
         let locationSearchController = LocationSearchController()
         
-        locationSearchController.resultsCompletionHandler = { [weak self] location, name in
+        locationSearchController.selectedLocationCompletionHandler = { [weak self] location, name in
             guard let location = location else { return }
             let locationStub = LocationItem(name: name, selectedLocation: location, actualUserLocation: self?.userLocation?.actualUserLocation)
             self?.userLocation = locationStub
             self?.updateLastSavedLocation(with: locationStub)
             self?.fetchForLastSavedLocation()
             self?.resetScroll()
-            print(UserLoation.lastSavedLocation())
         }
         
-        locationSearchController.determineUserLocationTappedHandler = { [weak self] in
+        locationSearchController.determineUserLocationCompletionHandler = { [weak self] in
             self?.determineMyCurrentLocation()
             self?.resetScroll()
         }
