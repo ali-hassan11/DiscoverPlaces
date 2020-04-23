@@ -12,6 +12,7 @@ import UIKit
 enum Constants {
     //Keys
     static let nearestPageKey = "nearestPageKey"
+    static let placeSearchBarTextKey = "placeSearchBarTextKey"
 
     //API
     static let key = "AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"

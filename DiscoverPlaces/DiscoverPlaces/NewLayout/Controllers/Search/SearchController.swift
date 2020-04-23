@@ -9,11 +9,11 @@
 import UIKit
 
 class SearchController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
-        
+    
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchResults = [PlaceResult]()
     private let searchResponseFilter = SearchResponseFilter()
-
+    
     
     ///SearchLocation and userLocation need to be separate because if I allow users to change the search location, I will need a reference to user location to calculate distance
     private var searchLocation: LocationItem ///Decided not to allow changing search location, just uses location set form home
@@ -40,37 +40,38 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     override func viewDidLoad() {
         super.viewDidLoad()
         print(searchLocation)
-        searchController.searchBar.placeholder = "Search..." //Array or different quiries and switch between every 3 seconds?, or just every time loads
+        searchController.searchBar.placeholder = "Search..." ///Array or different quiries and switch between every 3 seconds?, or just every time loads
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         addEmptyView()
         setupSearchBar()
+        setupCollectionView()
         prepareLoadingView()
-        
-        collectionView.backgroundColor = .systemBackground
-        collectionView.contentInset = .init(top: 12, left: 0, bottom: 0, right: 0)
-        collectionView.register(SmallPlaceCell.self, forCellWithReuseIdentifier: SmallPlaceCell.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.searchLocation = UserLoation.lastSavedLocation()
         self.userLocation = UserLoation.lastSavedLocation()
-        print("\n🗺 Searching for places in Location: " + (searchLocation.name ?? "NO LOCATION NAME (NEED TO GEOCODE...)"))
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
         guard let searchText = searchBar.text else { return }
-        
         if searchText == "" {
             enterSearchTextlabel.text = "Search for any place, anywhere!"
             return
         }
-        
         let queryText = searchText.replacingOccurrences(of: " ", with: "%20")
-        
         fetchData(for: queryText, location: searchLocation.selectedLocation)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        UserDefaults.standard.set(searchText, forKey: Constants.placeSearchBarTextKey)
+    }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        guard let text = UserDefaults.standard.string(forKey: Constants.placeSearchBarTextKey) else { return }
+        searchBar.text = text
     }
 
     private func fetchData(for searchText: String, location: Location) {
@@ -90,7 +91,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             self.updateUI(searchText: searchText)
         }
     }
-
+    
     private func updateUI(searchText: String) {
         DispatchQueue.main.async {
             self.hideLoadingView()
@@ -108,7 +109,20 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             }
         }
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
+extension SearchController {
+    
+    private func setupCollectionView() {
+        collectionView.backgroundColor = .systemBackground
+        collectionView.contentInset = .init(top: 12, left: 0, bottom: 0, right: 0)
+        collectionView.register(SmallPlaceCell.self, forCellWithReuseIdentifier: SmallPlaceCell.id)
+    }
+    
     private func addEmptyView() {
         searchIcon.constrainHeight(constant: 90)
         searchIcon.constrainWidth(constant: 90)
@@ -150,10 +164,6 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             self.activityIndicatorView.stopAnimating()
         }
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 extension SearchController {
@@ -182,13 +192,10 @@ extension SearchController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-          return 12
-      }
+        return 12
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: 0, left: Constants.sidePadding, bottom: 0, right: Constants.sidePadding)
     }
 }
-
-
-
