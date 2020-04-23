@@ -24,13 +24,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     let searchIcon = UIImageView(image: UIImage(systemName: "magnifyingglass.circle.fill"))
     
     //Make custom object
-    private let activityIndicatorView: UIActivityIndicatorView = {
-        let aiv = UIActivityIndicatorView(style: .medium)
-        aiv.color = .secondaryLabel
-        aiv.startAnimating()
-        aiv.hidesWhenStopped = true
-        return aiv
-    }()
+    private let activityIndicatorView = LoadingIndicatorView()
     
     //Make custom object
     private let fadeView: UIView = {
