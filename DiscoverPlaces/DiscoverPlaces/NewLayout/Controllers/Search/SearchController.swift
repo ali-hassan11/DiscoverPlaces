@@ -82,10 +82,8 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         }
         
         let queryText = searchText.replacingOccurrences(of: " ", with: "%20")
-        //Take into account special characters
         
         fetchData(for: queryText, location: searchLocation.selectedLocation)
-        searchController.searchBar.placeholder = ""
     }
 
     private func fetchData(for searchText: String, location: Location) {

@@ -58,6 +58,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
                 return
             }
             
+            //success
             guard let response = response else { return }
             
             let placeResults = self.searchResponseFilter.results(from: response)
