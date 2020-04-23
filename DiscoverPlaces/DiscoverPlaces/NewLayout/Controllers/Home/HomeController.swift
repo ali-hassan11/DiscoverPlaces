@@ -69,7 +69,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         collectionView.reloadData()
     }
     
-    fileprivate func fetchPlacesData(location: LocationItem) {
+    private func fetchPlacesData(location: LocationItem) {
         
         Service.shared.fetchNearbyPlaces(location: location.selectedLocation) { (response, error) in
             

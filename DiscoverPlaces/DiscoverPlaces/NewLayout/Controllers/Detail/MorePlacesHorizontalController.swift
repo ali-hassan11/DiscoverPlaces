@@ -10,7 +10,7 @@
 //
 //class MorePlacesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
 //    
-//    fileprivate let morePlacesCellId = "morePlacesCellId"
+//    private let morePlacesCellId = "morePlacesCellId"
 //    #warning("Move this")
 //    
 //    var didSelectHandler: ((String, String) -> ())?

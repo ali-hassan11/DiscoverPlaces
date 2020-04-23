@@ -10,9 +10,9 @@ import UIKit
 
 class CategoriesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
-    fileprivate let numberOfRows:CGFloat = 3
-    fileprivate let numberOfColumns:CGFloat = 2
-    fileprivate let lineSpacing: CGFloat = 10
+    private let numberOfRows:CGFloat = 3
+    private let numberOfColumns:CGFloat = 2
+    private let lineSpacing: CGFloat = 10
     
     var didSelectCategory: ((Category) -> ())?
     

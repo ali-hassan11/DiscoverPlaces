@@ -34,7 +34,7 @@ class BaseTabBarController: UITabBarController {
         
     }
 
-    fileprivate func createNavController(viewController: UIViewController, title: String, selectedImageName: String, deselectedImageName: String) -> UIViewController {
+    private func createNavController(viewController: UIViewController, title: String, selectedImageName: String, deselectedImageName: String) -> UIViewController {
         let navController = UINavigationController(rootViewController: viewController)
         
         navController.navigationBar.prefersLargeTitles = true

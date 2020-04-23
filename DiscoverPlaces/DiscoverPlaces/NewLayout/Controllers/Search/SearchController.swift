@@ -9,24 +9,20 @@
 import UIKit
 
 class SearchController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
-    
+        
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var searchResults = [PlaceResult]()
     private let searchResponseFilter = SearchResponseFilter()
-    
-    fileprivate let searchController = UISearchController(searchResultsController: nil)
-    fileprivate var searchResults = [PlaceResult]()
+
     
     ///SearchLocation and userLocation need to be separate because if I allow users to change the search location, I will need a reference to user location to calculate distance
     private var searchLocation: LocationItem ///Decided not to allow changing search location, just uses location set form home
     private var userLocation: LocationItem
     
     private let enterSearchTextlabel = UILabel(text: "Search for any place, anywhere!", font: .systemFont(ofSize: 17), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
-    
-    let searchIcon = UIImageView(image: UIImage(systemName: "magnifyingglass.circle.fill"))
-    
-    //Make custom object
+    private let searchIcon = UIImageView(image: UIImage(systemName: "magnifyingglass.circle.fill"))
     private let activityIndicatorView = LoadingIndicatorView()
     
-    //Make custom object
     private let fadeView: UIView = {
         let v = UIView()
         v.backgroundColor = .systemBackground
