@@ -249,14 +249,14 @@ extension HomeController: CLLocationManagerDelegate {
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(location)
-            UserDefaults.standard.set(data, forKey: "LocationKey")
+            UserDefaults.standard.set(data, forKey: Constants.locationKey)
         } catch {
             print("Unable to Encode Note (\(error))")
         }
     }
     
     func fetchForLastSavedLocation() {
-        if let data = UserDefaults.standard.data(forKey: "LocationKey") {
+        if let data = UserDefaults.standard.data(forKey: Constants.locationKey) {
             do {
                 let decoder = JSONDecoder()
                 let lastSavedLocation = try decoder.decode(LocationItem.self, from: data)

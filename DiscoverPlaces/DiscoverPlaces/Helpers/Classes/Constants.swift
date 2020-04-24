@@ -13,6 +13,7 @@ enum Constants {
     //Keys
     static let nearestPageKey = "nearestPageKey"
     static let placeSearchBarTextKey = "placeSearchBarTextKey"
+    static let locationKey = "LocationKey"
 
     //API
     static let key = "AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"

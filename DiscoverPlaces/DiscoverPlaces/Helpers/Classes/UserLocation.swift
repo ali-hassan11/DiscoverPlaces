@@ -11,7 +11,7 @@ import Foundation
 class UserLoation {
     
     static func lastSavedLocation() -> LocationItem {
-        if let data = UserDefaults.standard.data(forKey: "LocationKey") {
+        if let data = UserDefaults.standard.data(forKey: Constants.locationKey) {
             do {
                 let decoder = JSONDecoder()
                 let lastSavedLocation = try decoder.decode(LocationItem.self, from: data)
