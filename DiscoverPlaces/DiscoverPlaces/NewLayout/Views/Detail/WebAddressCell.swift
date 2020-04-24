@@ -28,6 +28,7 @@ class WebAddressCell: UICollectionViewCell {
 
         let stackView = HorizontalStackView(arrangedSubviews: [iconVimageView, websiteAddressLabel, UIView(), arrowIconImageView], spacing: 12)
         addSubview(stackView)
+        stackView.alignment = .center
         stackView.fillSuperview(padding: .init(top: 8, left: 16, bottom: 8, right: 16))
         
         addBottomSeparator()

@@ -58,6 +58,7 @@ class AddressCell: UICollectionViewCell {
         configureHighlightView()
 
         let stackView = HorizontalStackView(arrangedSubviews: [iconVimageView, addressLabel, UIView(), chevronImageView], spacing: 12)
+        stackView.alignment = .center
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 8, left: 16, bottom: 8, right: 16))
 

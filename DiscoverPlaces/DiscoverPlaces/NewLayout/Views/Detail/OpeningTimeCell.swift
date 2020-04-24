@@ -68,6 +68,7 @@ class OpeningTimeCell: UICollectionViewCell {
     private func layoutCellViews() {
         let stackView = HorizontalStackView(arrangedSubviews: [iconVimageView, openingHoursLabel, UIView(), arrowIconImageView], spacing: 12)
         addSubview(stackView)
+        stackView.alignment = .center
         stackView.fillSuperview(padding: .init(top: 8, left: 16, bottom: 8, right: 16))
         
         addBottomSeparator()
