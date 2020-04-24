@@ -100,7 +100,7 @@ class SettingsController: UITableViewController, MFMailComposeViewControllerDele
             return 15
         case 5:
             //About
-            return 65
+            return .zero ///Populate with my other apps later
         case 6:
             //Privacy
             return 65
