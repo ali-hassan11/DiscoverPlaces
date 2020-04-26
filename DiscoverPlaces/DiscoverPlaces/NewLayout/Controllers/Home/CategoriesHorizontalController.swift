@@ -27,6 +27,10 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
         collectionView.contentInset = .init(top: Constants.topPadding, left: Constants.sidePadding, bottom: Constants.bottomPadding, right: Constants.sidePadding)
     }
     
+}
+
+extension CategoriesHorizontalController {
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categories.count
     }
