@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseStorage
 
 class CategoriesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
@@ -15,9 +14,7 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
     private let numberOfRows:CGFloat = 3
     private let numberOfColumns:CGFloat = 2
     private let lineSpacing: CGFloat = 10
-    
-    let storageRef = Storage.storage().reference()
-    
+        
     var didSelectCategory: ((Category) -> ())?
     
     let categories: [Category] = [.Food, .Cafe, .Nature, .Shopping, .Attractions, .Active, .Religion, .Beauty, .Health, .Hotel, .Transport, .Family]
