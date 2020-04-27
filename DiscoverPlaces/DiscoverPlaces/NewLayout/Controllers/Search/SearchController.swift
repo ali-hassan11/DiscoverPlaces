@@ -121,6 +121,7 @@ extension SearchController {
         collectionView.backgroundColor = .systemBackground
         collectionView.contentInset = .init(top: 12, left: 0, bottom: 0, right: 0)
         collectionView.register(SmallPlaceCell.self, forCellWithReuseIdentifier: SmallPlaceCell.id)
+        collectionView.register(GoogleLogoCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GoogleLogoCell.id)
     }
     
     private func addEmptyView() {
@@ -197,5 +198,15 @@ extension SearchController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: 0, left: Constants.sidePadding, bottom: 0, right: Constants.sidePadding)
+    }
+    
+    // MARK: GoogleCell Footer
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+            let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
+            return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return .init(width: view.frame.width, height: searchResults.count > 0 ? Constants.googleFooterHeight : .zero)
     }
 }

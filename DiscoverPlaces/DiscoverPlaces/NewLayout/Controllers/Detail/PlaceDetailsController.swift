@@ -314,7 +314,7 @@ extension PlaceDetailsController {
             return cellHeight(for: morePlaces, desiredHeight: 280)
             
         case Detail.googleCell.rawValue:
-            return .init(width: view.frame.width, height: 40)
+            return .init(width: view.frame.width, height: Constants.googleFooterHeight)
 
         case Detail.bottomPadding.rawValue:
             return setBottomPaddingSize(toFillWidthOf: view)

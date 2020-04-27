@@ -22,6 +22,8 @@ enum Constants {
     static let placeImageControllerHeight: CGFloat = 200
     static let nearbyHeaderCellHeight: CGFloat = 220
     static let discoverGroupSectionHeight: CGFloat = 160
+    
+    static let googleFooterHeight: CGFloat = 45
 
     //Color
     static let primaryHighlightColor = UIColor(displayP3Red: 255/255, green: 52/255, blue: 102/255, alpha: 1)

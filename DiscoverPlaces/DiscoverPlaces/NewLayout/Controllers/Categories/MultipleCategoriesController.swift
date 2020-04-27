@@ -38,6 +38,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         collectionView.reloadData()
         collectionView.backgroundColor = .systemBackground
         collectionView.register(SubCategoryiesHolder.self, forCellWithReuseIdentifier: SubCategoryiesHolder.id)
+        collectionView.register(GoogleLogoCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GoogleLogoCell.id)
     }
     
     private func fetchSubCategoryGroups(category: Category, selectedLocation: Location?) {
@@ -115,4 +116,15 @@ extension MultipleCategoriesController {
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
             return 5
         }
+    
+    // MARK: GoogleCell Footer
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
+        cell.addTopSeparator()
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return .init(width: view.frame.width, height: Constants.googleFooterHeight)
+    }
 }

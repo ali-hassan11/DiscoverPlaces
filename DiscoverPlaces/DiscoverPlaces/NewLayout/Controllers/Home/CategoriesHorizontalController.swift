@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseStorage
 
 class CategoriesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
@@ -15,13 +16,14 @@ class CategoriesHorizontalController: HorizontalSnappingController, UICollection
     private let numberOfColumns:CGFloat = 2
     private let lineSpacing: CGFloat = 10
     
+    let storageRef = Storage.storage().reference()
+    
     var didSelectCategory: ((Category) -> ())?
     
     let categories: [Category] = [.Food, .Cafe, .Nature, .Shopping, .Attractions, .Active, .Religion, .Beauty, .Health, .Hotel, .Transport, .Family]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collectionView.backgroundColor = .systemBackground
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.id)
         collectionView.contentInset = .init(top: Constants.topPadding, left: Constants.sidePadding, bottom: Constants.bottomPadding, right: Constants.sidePadding)
@@ -40,6 +42,7 @@ extension CategoriesHorizontalController {
         let categoryName = categories[indexPath.item].rawValue
         cell.categoryLabel.text = categoryName
         cell.categoryImageView.image = UIImage(named: categoryName)
+        
         return cell
     }
     

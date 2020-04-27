@@ -50,7 +50,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         collectionView.backgroundColor = .systemBackground
         collectionView.register(CategoriesHolder.self, forCellWithReuseIdentifier: CategoriesHolder.id)
         collectionView.register(HomeLargeCellHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeLargeCellHolder.id)
-        collectionView.register(GoogleLogoCell.self, forCellWithReuseIdentifier: GoogleLogoCell.id)
+        collectionView.register(GoogleLogoCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GoogleLogoCell.id)
     }
     
     private func setupLoadingView() {
@@ -135,18 +135,23 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
 }
 
 extension HomeController {
-    //MARK: Home Large Cell
+    //MARK: Home Large Cell Header & GoogleCell Footer
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeLargeCellHolder.id, for: indexPath) as! HomeLargeCellHolder
-        cell.horizontalController.userLocation = self.userLocation
-        cell.horizontalController.results = placeResults
-        cell.configureTitle(with: userLocation?.name)
-        cell.horizontalController.didSelectHandler = { [weak self] result in //Only need placeId
-            guard let placeId = result.place_id, let location = self?.userLocation else { return }
-            let detailsController = PlaceDetailsController(placeId: placeId, location: location)
-            self?.navigationController?.pushViewController(detailsController, animated: true)
+        if kind == UICollectionView.elementKindSectionHeader {
+            let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeLargeCellHolder.id, for: indexPath) as! HomeLargeCellHolder
+            cell.horizontalController.userLocation = self.userLocation
+            cell.horizontalController.results = placeResults
+            cell.configureTitle(with: userLocation?.name)
+            cell.horizontalController.didSelectHandler = { [weak self] result in //Only need placeId
+                guard let placeId = result.place_id, let location = self?.userLocation else { return }
+                let detailsController = PlaceDetailsController(placeId: placeId, location: location)
+                self?.navigationController?.pushViewController(detailsController, animated: true)
+            }
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
+            return cell
         }
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -155,7 +160,7 @@ extension HomeController {
     
     //MARK: Categories Controller
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -169,9 +174,6 @@ extension HomeController {
                 self?.navigationController?.pushViewController(multipleCategoriesController, animated: true)
             }
             return cell
-        case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
-            return cell
         default:
             return ErrorCell() // TODO: - Register
         }
@@ -182,8 +184,6 @@ extension HomeController {
         switch indexPath.item {
         case 0:
             return .init(width: view.frame.width, height: 380)
-        case 1:
-            return .init(width: view.frame.width, height: 40)
         default:
             return .zero
         }
@@ -191,6 +191,11 @@ extension HomeController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    // MARK: GoogleCell Footer
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return .init(width: view.frame.width, height: Constants.googleFooterHeight)
     }
 }
 

@@ -41,6 +41,7 @@ class PlaceListController: UICollectionViewController, UICollectionViewDelegateF
         collectionView.backgroundColor = .systemBackground
         refreshData()
         collectionView.register(MyPlaceCell.self, forCellWithReuseIdentifier: MyPlaceCell.id)
+        collectionView.register(GoogleLogoCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GoogleLogoCell.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,6 +122,16 @@ extension PlaceListController {
      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
          return 0
      }
+    
+    // MARK: GoogleCell Footer
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return .init(width: view.frame.width, height: Constants.googleFooterHeight)
+    }
 }
 
 
