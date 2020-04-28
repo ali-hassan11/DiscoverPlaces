@@ -117,7 +117,7 @@ class MyPlacesViewController: UIViewController {
         child.view.fillSuperview()
         child.didMove(toParent: self)
         
-        UIView.animate(withDuration: 0.25) {
+        UIView.animate(withDuration: 0.1) {
            child.view.alpha = 1
         }
     }

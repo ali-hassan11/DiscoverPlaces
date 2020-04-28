@@ -130,7 +130,7 @@ extension PlaceListController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return .init(width: view.frame.width, height: Constants.googleFooterHeight)
+        return .init(width: view.frame.width, height: placeResults.count > 0 ? Constants.googleFooterHeight : .zero)
     }
 }
 
