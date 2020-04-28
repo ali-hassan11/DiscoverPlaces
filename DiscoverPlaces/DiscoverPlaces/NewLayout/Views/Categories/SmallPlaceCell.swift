@@ -42,7 +42,7 @@ class SmallPlaceCell: UICollectionViewCell {
     }
     
     func configure(place: PlaceResult?) {
-        guard let place = place else { return } //Error
+        guard let place = place else { return }
         configureImage(using: place)
         configurePlaceName(using: place)
         configureAddress(using: place)
@@ -54,7 +54,7 @@ class SmallPlaceCell: UICollectionViewCell {
     }
     
     private func configureImage(using place: PlaceResult) {
-        guard let photo = place.photos?.first else { return } //Default Image
+        guard let photo = place.photos?.first else { return }
         placeImageView.backgroundColor = .secondarySystemBackground
         placeImageView.sd_setImage(with: buildImageUrl(using: photo))
         
