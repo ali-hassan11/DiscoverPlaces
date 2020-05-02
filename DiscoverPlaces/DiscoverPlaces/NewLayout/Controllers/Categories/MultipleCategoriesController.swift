@@ -30,7 +30,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         setupCollectionView()
         
-        fetchSubCategoryGroups(category: category, selectedLocation: location.selectedLocation)
+        fetchDataAfterDelay()
     }
 
     private func setupCollectionView() {
@@ -41,33 +41,45 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         collectionView.register(GoogleLogoCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GoogleLogoCell.id)
     }
     
+    private func fetchDataAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.fetchSubCategoryGroups(category: self.category, selectedLocation: self.location.selectedLocation)
+        }
+    }
+    
     private func fetchSubCategoryGroups(category: Category, selectedLocation: Location?) {
         category.subCategories().forEach {
             dispatchGroup.enter()
             fetchdata(subCategory: $0, selectedLocation: location.selectedLocation)
         }
     }
-        
+    
     private func fetchdata(subCategory: SubCategory, selectedLocation: Location) {
         
-        print("FetchData for \(subCategory)")
-        var subCategoryGroup: PlacesGroup?
-        Service.shared.fetchNearbyPlaces(selectedLocation: selectedLocation, subCategory: subCategory) { (response, error) in
-            
-            if let error = error {
-                print("Failed to fetch: \(error)")
+            guard Reachability.isConnectedToNetwork() else {
+                self.showNoConnectionAlertAndDismiss()
                 return
             }
             
-            //success
-            guard let response = response else { return }
-            
-            let placeResults = self.searchResponseFilter.results(from: response)
-            subCategoryGroup = PlacesGroup(title: subCategory.formatted(), results: placeResults)
-            self.dispatchGroup.leave()
-            
-            self.handleSuccess(with: subCategoryGroup)
-        }
+            print("FetchData for \(subCategory)")
+            var subCategoryGroup: PlacesGroup?
+            Service.shared.fetchNearbyPlaces(selectedLocation: selectedLocation, subCategory: subCategory) { (response, error) in
+                
+                if let error = error {
+                    print("Failed to fetch: \(error)")
+                    return
+                }
+                
+                //success
+                guard let response = response else { return }
+                
+                let placeResults = self.searchResponseFilter.results(from: response)
+                subCategoryGroup = PlacesGroup(title: subCategory.formatted(), results: placeResults)
+                self.dispatchGroup.leave()
+                
+                self.handleSuccess(with: subCategoryGroup)
+            }
+
     }
     
     private func handleSuccess(with subCategoryGroup: PlacesGroup?) {
