@@ -19,7 +19,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     private var searchLocation: LocationItem ///Decided not to allow changing search location, just uses location set form home
     private var userLocation: LocationItem
     
-    private let enterSearchTextlabel = UILabel(text: "Search for any place, anywhere!", font: .systemFont(ofSize: 17), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
+    private let enterSearchTextlabel = UILabel(text: "Search for places!", font: .systemFont(ofSize: 17), color: .secondaryLabel, alignment: .center, numberOfLines: 0)
     private let searchIcon = UIImageView(image: UIImage(systemName: "magnifyingglass.circle.fill"))
     private let activityIndicatorView = LoadingIndicatorView()
     
