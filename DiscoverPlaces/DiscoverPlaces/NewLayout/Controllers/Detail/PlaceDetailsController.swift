@@ -50,8 +50,14 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         setupCollectionView()
         registerCells()
         setIndexForImagesHolderSegmentControl(to: 0)
-        
-        fetchPlaceData(for: placeId)
+
+        fetchDataAfterDelay()
+    }
+    
+    private func fetchDataAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.fetchPlaceData(for: self.placeId)
+        }
     }
     
     private func setIndexForImagesHolderSegmentControl(to segment: Int) {
@@ -61,7 +67,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default) //UIImage.init(named: "transparent.png")
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.view.backgroundColor = .clear
@@ -127,35 +133,29 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     func fetchPlaceData(for id: String) {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            guard Reachability.isConnectedToNetwork() else {
-                self.activityIndicatorView.stopAnimating()
-                self.showNoConnectionAlertAndDismiss()
+        guard Reachability.isConnectedToNetwork() else {
+            self.activityIndicatorView.stopAnimating()
+            self.showNoConnectionAlertAndDismiss()
+            return
+        }
+        
+        Service.shared.fetchPlaceDetails(placeId: id, fields: Constants.placeDetailFields) { (placeResponse, error) in
+            
+            if let error = error {
+                print("Falied to fetch: ", error)
                 return
             }
             
-            
-            Service.shared.fetchPlaceDetails(placeId: id, fields: Constants.placeDetailFields) { (placeResponse, error) in
-                
-                if let error = error {
-                    print("Falied to fetch: ", error)
-                    return
-                }
-                
-                //success
-                guard let placeResponse = placeResponse else {
-                    print("No results?")
-                    return
-                }
-                
-                guard let detailResult = placeResponse.result else { return }
-                self.handlePlaceDetailSuccess(with: detailResult)
+            //success
+            guard let placeResponse = placeResponse else {
+                print("No results?")
+                return
             }
+            
+            guard let detailResult = placeResponse.result else { return }
+            self.handlePlaceDetailSuccess(with: detailResult)
         }
-    }
-    
-    func checkNetworkConnection () {
-
+        
     }
     
     private func handlePlaceDetailSuccess(with result: PlaceDetailResult) {
@@ -169,7 +169,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         }
     }
 
-    
     func fetchMorePlacesData(near location: Location) {
         
         Service.shared.fetchNearbyPlaces(location: location, radius: 3000) { (response, error) in

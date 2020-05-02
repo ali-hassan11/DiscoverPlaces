@@ -29,14 +29,20 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         navigationItem.largeTitleDisplayMode = .always
         setupBarButtons()
         setupCollectionView()
-                
-        if UserDefaults.isFirstLaunch() {
-            determineMyCurrentLocation()
-        } else {
-            fetchForLastSavedLocation()
-        }
+        
+        fetchDataAfterDelay()
     }
     
+    private func fetchDataAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            if UserDefaults.isFirstLaunch() {
+                self.determineMyCurrentLocation()
+            } else {
+                self.fetchForLastSavedLocation()
+            }
+        }
+    }
+ 
     private func setupBarButtons() {
         let locationBarButton = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(showSetLocationController))
         locationBarButton.tintColor = .systemPink
@@ -264,27 +270,25 @@ extension HomeController: CLLocationManagerDelegate {
     }
     
     func fetchForLastSavedLocation() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            guard Reachability.isConnectedToNetwork() else {
-                self.showRetryConnectionAlert { (_) in
-                    self.fetchForLastSavedLocation()
-                }
-                return
+        guard Reachability.isConnectedToNetwork() else {
+            self.showRetryConnectionAlert { (_) in
+                self.fetchForLastSavedLocation()
             }
-            
-            if let data = UserDefaults.standard.data(forKey: Constants.locationKey) {
-                do {
-                    let decoder = JSONDecoder()
-                    let lastSavedLocation = try decoder.decode(LocationItem.self, from: data)
-                    self.userLocation = lastSavedLocation
-                    self.fetchPlacesData(location: lastSavedLocation)
-                } catch {
-                    print("Unable to Decode Note (\(error))")
-                    self.fetchPlacesData(location: LocationItem(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
-                }
-            } else {
+            return
+        }
+        
+        if let data = UserDefaults.standard.data(forKey: Constants.locationKey) {
+            do {
+                let decoder = JSONDecoder()
+                let lastSavedLocation = try decoder.decode(LocationItem.self, from: data)
+                self.userLocation = lastSavedLocation
+                self.fetchPlacesData(location: lastSavedLocation)
+            } catch {
+                print("Unable to Decode Note (\(error))")
                 self.fetchPlacesData(location: LocationItem(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
             }
+        } else {
+            self.fetchPlacesData(location: LocationItem(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
         }
     }
     
