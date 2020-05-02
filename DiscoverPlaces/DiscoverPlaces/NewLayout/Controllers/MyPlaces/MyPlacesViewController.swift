@@ -37,16 +37,12 @@ class MyPlacesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         location = UserLoation.lastSavedLocation()
-//        print("\n🗺 My Places Controller Location: " + (location?.name ?? "NO LOCATION NAME"))
-//        print("🗺 My Places Controller ACTUAL Location: \(String(describing: (location?.actualUserLocation)))")
-//        print("🗺 My Places Controller SELECTED Location: \(String(describing: (location?.selectedLocation)))")
     }
 
     @objc func settingsTapped() {
         let settingsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "SettingsVCId") as UITableViewController
         navigationController?.pushViewController(settingsController, animated: true)
     }
-    
     
     private func setupViews() {
         //TemporaryFix
@@ -107,7 +103,7 @@ class MyPlacesViewController: UIViewController {
 }
 
 
-@nonobjc extension UIViewController {
+@nonobjc fileprivate extension UIViewController {
     func addChildVC(_ child: UIViewController, on view: UIView, completion: (()->())?) {
         addChild(child)
         
