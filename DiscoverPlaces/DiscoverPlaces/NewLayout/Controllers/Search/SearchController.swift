@@ -56,12 +56,15 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text else { return }
-        if searchText == "" {
-            enterSearchTextlabel.text = "Search for any place, anywhere!"
+        
+        guard Reachability.isConnectedToNetwork() else {
+            showNoConnectionAlert()
             return
         }
+        
+        guard let searchText = searchBar.text else { return }
         let queryText = searchText.replacingOccurrences(of: " ", with: "%20")
+        
         fetchData(for: queryText, location: searchLocation.selectedLocation)
     }
     
