@@ -30,7 +30,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         setupBarButtons()
         setupCollectionView()
         
-        collectionView.contentInsetAdjustmentBehavior = .always //EXPERIMETING
+        collectionView.contentInsetAdjustmentBehavior = .always
         
         if UserDefaults.isFirstLaunch() {
             determineMyCurrentLocation()
@@ -65,7 +65,6 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         userLocation = UserLoation.lastSavedLocation()
-        print("\n🗺 Home Controller Location: " + (userLocation?.name ?? "NO LOCATION NAME"))
         collectionView.reloadData()
     }
     
@@ -84,7 +83,6 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
                 return
             }
             
-            //If results < 5, load other places
             let placeResults = self.searchResponseFilter.results(from: response)
             self.handleFetchSuccess(with: placeResults)
         }
@@ -92,6 +90,12 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     private func handleFetchSuccess(with placeResults: [PlaceResult]) {
         self.placeResults = placeResults
+        
+        guard placeResults.count > 0 else {
+            print("No results") // TODO: - Alert or something
+            return
+        }
+        
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.5, animations: {
                 self.activityIndicatorView.stopAnimating()
