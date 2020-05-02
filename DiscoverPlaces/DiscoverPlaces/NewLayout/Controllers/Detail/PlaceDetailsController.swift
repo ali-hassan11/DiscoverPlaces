@@ -126,9 +126,10 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     func fetchPlaceData(for id: String) {
-        // TODO: - Move this
-        let fields = ["name" , "place_id", "opening_hours", "photo", "vicinity" ,"geometry" ,"review" ,"website" ,"url" ,"international_phone_number", "formatted_phone_number" ,"formatted_address", "rating"]
-        Service.shared.fetchPlaceDetails(placeId: id, fields: fields) { (placeResponse, error) in
+        
+        
+        
+        Service.shared.fetchPlaceDetails(placeId: id, fields: Constants.placeDetailFields) { (placeResponse, error) in
             
             if let error = error {
                 print("Falied to fetch: ", error)
