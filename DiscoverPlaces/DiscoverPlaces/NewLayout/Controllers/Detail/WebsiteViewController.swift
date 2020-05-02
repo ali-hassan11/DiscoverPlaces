@@ -29,6 +29,18 @@ class WebsiteViewController: UIViewController {
         self.view = webView
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkNetworkConnection()
+    }
+    
+    func checkNetworkConnection () {
+        guard Reachability.isConnectedToNetwork() else {
+            self.showNoConnectionAlertWithDismiss()
+            return
+        }
+    }
+    
     let safariImage = UIImage(systemName: "safari")
     override func viewDidLoad() {
         super.viewDidLoad()

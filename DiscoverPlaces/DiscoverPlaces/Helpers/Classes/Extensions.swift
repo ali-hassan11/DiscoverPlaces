@@ -40,6 +40,18 @@ extension UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    func showNoConnectionAlertWithDismiss() {
+        let alertController = UIAlertController(title: "No Connection", message: "Please check that you are connected to the internet", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Ok", style: .default) { (_) in
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+        alertController.addAction(action)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
     func showRetryConnectionAlert(retryHandler: ((UIAlertAction)->())?) {
         let alertController = UIAlertController(title: "No Connection", message: "Please check that you are connected to the internet", preferredStyle: .alert)
                 
