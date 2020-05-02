@@ -34,7 +34,14 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showNoConnectionAlert()
+        checkConnection()
+    }
+    
+    private func checkConnection() {
+        guard Reachability.isConnectedToNetwork() else {
+            showNoConnectionAlert()
+            return
+        }
     }
     
     private func setupBarButtonItems() {
