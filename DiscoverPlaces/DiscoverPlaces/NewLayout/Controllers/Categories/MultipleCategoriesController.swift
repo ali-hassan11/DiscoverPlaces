@@ -57,7 +57,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     private func fetchdata(subCategory: SubCategory, selectedLocation: Location) {
         
             guard Reachability.isConnectedToNetwork() else {
-                self.showNoConnectionAlertAndDismiss()
+                self.showNoConnectionAlert(popSelf: true)
                 return
             }
             
@@ -126,7 +126,7 @@ extension MultipleCategoriesController {
         }
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            return 5
+            return 10
         }
     
     // MARK: GoogleCell Footer

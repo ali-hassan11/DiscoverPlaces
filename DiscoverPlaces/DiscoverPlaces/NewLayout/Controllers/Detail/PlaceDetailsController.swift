@@ -135,7 +135,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         
         guard Reachability.isConnectedToNetwork() else {
             self.activityIndicatorView.stopAnimating()
-            self.showNoConnectionAlertAndDismiss()
+            self.showNoConnectionAlert(popSelf: true)
             return
         }
         

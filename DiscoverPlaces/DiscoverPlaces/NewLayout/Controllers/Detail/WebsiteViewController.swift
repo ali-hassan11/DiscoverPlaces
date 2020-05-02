@@ -36,7 +36,7 @@ class WebsiteViewController: UIViewController {
     
     func checkNetworkConnection () {
         guard Reachability.isConnectedToNetwork() else {
-            self.showNoConnectionAlertAndDismiss()
+            self.showNoConnectionAlert(popSelf: true)
             return
         }
     }
