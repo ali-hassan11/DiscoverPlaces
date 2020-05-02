@@ -29,9 +29,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         navigationItem.largeTitleDisplayMode = .always
         setupBarButtons()
         setupCollectionView()
-        
-        collectionView.contentInsetAdjustmentBehavior = .always
-        
+                
         if UserDefaults.isFirstLaunch() {
             determineMyCurrentLocation()
         } else {
@@ -47,6 +45,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     }
     
     private func setupCollectionView() {
+        collectionView.contentInsetAdjustmentBehavior = .always
         collectionView.backgroundColor = .systemBackground
         collectionView.register(CategoriesHolder.self, forCellWithReuseIdentifier: CategoriesHolder.id)
         collectionView.register(HomeLargeCellHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeLargeCellHolder.id)
@@ -265,6 +264,8 @@ extension HomeController: CLLocationManagerDelegate {
     }
     
     func fetchForLastSavedLocation() {
+        checkNetworkConnection()
+        
         if let data = UserDefaults.standard.data(forKey: Constants.locationKey) {
             do {
                 let decoder = JSONDecoder()
@@ -279,6 +280,18 @@ extension HomeController: CLLocationManagerDelegate {
             fetchPlacesData(location: LocationItem(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
         }
     }
+    
+    func checkNetworkConnection () {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            guard Reachability.isConnectedToNetwork() else {
+                self.showNoConnectionAlert { (_) in
+                    self.fetchForLastSavedLocation()
+                }
+                return
+            }
+        }
+    }
+    
 }
 
 extension UserDefaults {

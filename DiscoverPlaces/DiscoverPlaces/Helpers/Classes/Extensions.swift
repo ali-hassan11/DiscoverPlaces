@@ -20,14 +20,15 @@ extension UIViewController {
         }
     }
     
-    func showNoConnectionAlert(completion: @escaping ((UIAlertAction)->())) {
+    func showNoConnectionAlert(retryHandler: ((UIAlertAction)->())?) {
         let alertController = UIAlertController(title: "No Connection", message: "Please check that you are connected to the internet", preferredStyle: .alert)
                 
-        let action = UIAlertAction(title: "Retry", style: .default, handler: completion)
+        let action = UIAlertAction(title: "Retry", style: .default, handler: retryHandler)
 
         alertController.addAction(action)
 
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
+
 }
 
