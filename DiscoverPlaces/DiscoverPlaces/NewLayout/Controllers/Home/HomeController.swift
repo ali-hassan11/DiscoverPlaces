@@ -264,30 +264,26 @@ extension HomeController: CLLocationManagerDelegate {
     }
     
     func fetchForLastSavedLocation() {
-        checkNetworkConnection()
-        
-        if let data = UserDefaults.standard.data(forKey: Constants.locationKey) {
-            do {
-                let decoder = JSONDecoder()
-                let lastSavedLocation = try decoder.decode(LocationItem.self, from: data)
-                self.userLocation = lastSavedLocation
-                fetchPlacesData(location: lastSavedLocation)
-            } catch {
-                print("Unable to Decode Note (\(error))")
-                fetchPlacesData(location: LocationItem(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
-            }
-        } else {
-            fetchPlacesData(location: LocationItem(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
-        }
-    }
-    
-    func checkNetworkConnection () {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             guard Reachability.isConnectedToNetwork() else {
                 self.showRetryConnectionAlert { (_) in
                     self.fetchForLastSavedLocation()
                 }
                 return
+            }
+            
+            if let data = UserDefaults.standard.data(forKey: Constants.locationKey) {
+                do {
+                    let decoder = JSONDecoder()
+                    let lastSavedLocation = try decoder.decode(LocationItem.self, from: data)
+                    self.userLocation = lastSavedLocation
+                    self.fetchPlacesData(location: lastSavedLocation)
+                } catch {
+                    print("Unable to Decode Note (\(error))")
+                    self.fetchPlacesData(location: LocationItem(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
+                }
+            } else {
+                self.fetchPlacesData(location: LocationItem(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
             }
         }
     }

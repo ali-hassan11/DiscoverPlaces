@@ -127,24 +127,35 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     func fetchPlaceData(for id: String) {
         
-        
-        
-        Service.shared.fetchPlaceDetails(placeId: id, fields: Constants.placeDetailFields) { (placeResponse, error) in
-            
-            if let error = error {
-                print("Falied to fetch: ", error)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            guard Reachability.isConnectedToNetwork() else {
+                self.activityIndicatorView.stopAnimating()
+                self.showNoConnectionAlertWithDismiss()
                 return
             }
             
-            //success
-            guard let placeResponse = placeResponse else {
-                print("No results?")
-                return
-            }
             
-            guard let detailResult = placeResponse.result else { return }
-            self.handlePlaceDetailSuccess(with: detailResult)
+            Service.shared.fetchPlaceDetails(placeId: id, fields: Constants.placeDetailFields) { (placeResponse, error) in
+                
+                if let error = error {
+                    print("Falied to fetch: ", error)
+                    return
+                }
+                
+                //success
+                guard let placeResponse = placeResponse else {
+                    print("No results?")
+                    return
+                }
+                
+                guard let detailResult = placeResponse.result else { return }
+                self.handlePlaceDetailSuccess(with: detailResult)
+            }
         }
+    }
+    
+    func checkNetworkConnection () {
+
     }
     
     private func handlePlaceDetailSuccess(with result: PlaceDetailResult) {
@@ -157,6 +168,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             self.fadeOutSplashScreen()
         }
     }
+
     
     func fetchMorePlacesData(near location: Location) {
         
