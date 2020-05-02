@@ -284,7 +284,7 @@ extension HomeController: CLLocationManagerDelegate {
     func checkNetworkConnection () {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             guard Reachability.isConnectedToNetwork() else {
-                self.showNoConnectionAlert { (_) in
+                self.showRetryConnectionAlert { (_) in
                     self.fetchForLastSavedLocation()
                 }
                 return
