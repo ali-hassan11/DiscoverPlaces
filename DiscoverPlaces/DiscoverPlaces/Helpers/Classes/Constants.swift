@@ -26,6 +26,12 @@ enum Constants {
     static let discoverGroupSectionHeight: CGFloat = 160
     
     static let googleFooterHeight: CGFloat = 45
+    
+    //Strings
+    static let noInternetConnectionTitle = "No Internet Connection"
+    static let noInternetConnetionMessage = "Please check that you are connected to the internet"
+    static let locationServicesDisabledTitle = "We were unable to locate you"
+    static let locationServicesDisabledMessage = "Please make sure that location services are turned on in your device settings"
 
     //Color
     static let primaryHighlightColor = UIColor(displayP3Red: 255/255, green: 52/255, blue: 102/255, alpha: 1)
