@@ -20,7 +20,16 @@ extension UIViewController {
         }
     }
     
-    func showNoConnectionAlert(retryHandler: ((UIAlertAction)->())?) {
+    func showLocationDisabledAlert() {
+           let alertController = UIAlertController(title: "We were unable to locate you", message: "Please make sure that location services are turned on in your device settings", preferredStyle: .alert)
+           
+           let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+           
+           alertController.addAction(action)
+           
+           present(alertController, animated: true, completion: nil)
+       }
+    
     func showNoConnectionAlert() {
         let alertController = UIAlertController(title: "No Connection", message: "Please check that you are connected to the internet", preferredStyle: .alert)
         

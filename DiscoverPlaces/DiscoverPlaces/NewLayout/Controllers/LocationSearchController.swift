@@ -32,6 +32,11 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         setupBarButtonItems()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showNoConnectionAlert()
+    }
+    
     private func setupBarButtonItems() {
         let btn = UIButton(type: .system)
         btn.setTitle(" Locate Me", for: .normal)
@@ -60,7 +65,7 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
             determineUserLocationCompletionHandler?()
             self.navigationController?.popViewController(animated: true)
         } else {
-            showToastAlert(title: "Please enable location services, or select location manually")
+            showLocationDisabledAlert()
         }
     }
     
