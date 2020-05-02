@@ -4,3 +4,5 @@ DiscoverPlaces/DiscoverPlaces.xcodeproj/project.xcworkspace/xcuserdata/user.xcus
 *.xcuserstate
 
 *.xcbkptlist
+
+.DS_Store
