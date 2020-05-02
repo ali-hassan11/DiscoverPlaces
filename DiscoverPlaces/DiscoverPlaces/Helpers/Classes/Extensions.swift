@@ -40,7 +40,7 @@ extension UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    func showNoConnectionAlertWithDismiss() {
+    func showNoConnectionAlertAndDismiss() {
         let alertController = UIAlertController(title: "No Connection", message: "Please check that you are connected to the internet", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Ok", style: .default) { (_) in

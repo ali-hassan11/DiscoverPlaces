@@ -130,7 +130,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             guard Reachability.isConnectedToNetwork() else {
                 self.activityIndicatorView.stopAnimating()
-                self.showNoConnectionAlertWithDismiss()
+                self.showNoConnectionAlertAndDismiss()
                 return
             }
             
