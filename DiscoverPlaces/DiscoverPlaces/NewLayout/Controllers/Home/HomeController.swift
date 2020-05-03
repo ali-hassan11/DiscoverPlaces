@@ -75,6 +75,8 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     private func fetchPlacesData(location: LocationItem) {
         
+        removeNoResultsView()
+        
         Service.shared.fetchNearbyPlaces(location: location.selectedLocation) { (response, error) in
             
             if let error = error {
@@ -94,21 +96,45 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     }
     
     private func handleFetchSuccess(with placeResults: [PlaceResult]) {
-        self.placeResults = placeResults
-        
-        guard placeResults.count > 0 else {
-            print("No results") // TODO: - Alert or something
-            return
-        }
         
         DispatchQueue.main.async {
+            self.placeResults = placeResults
+            
             UIView.animate(withDuration: 0.5, animations: {
-                self.activityIndicatorView.stopAnimating()
                 self.fadeView.alpha = 0
-                self.collectionView.reloadData()
             }) { _ in
+                if placeResults.isEmpty {
+                    self.tempCoverScreenBeforeCreatingReuasableRetryVC()
+                }
+                
                 self.fadeView.removeFromSuperview()
+                self.activityIndicatorView.stopAnimating()
+                self.collectionView.reloadData()
             }
+        }
+    }
+    
+    let noResultsView = UIView()
+    private func tempCoverScreenBeforeCreatingReuasableRetryVC() {
+        noResultsView.backgroundColor = .systemBackground
+        self.view.addSubview(noResultsView)
+        noResultsView.fillSuperview()
+        
+        let label = UILabel(text: "There are no results for your chosen location. Try again later or choose a different location.", font: .systemFont(ofSize: 16), color: .label, alignment: .center, numberOfLines: 0)
+        
+        let button = UIButton(title: "Select a different location", textColor: .white, width: nil, height: 40, font: .systemFont(ofSize: 17), backgroundColor: .systemPink, cornerRadius: 10)
+        button.addTarget(self, action: #selector(showSetLocationController), for: .touchUpInside)
+        
+        let stackView = VerticalStackView(arrangedSubviews: [label, button], spacing: 16)
+        noResultsView.addSubview(stackView)
+        stackView.centerInSuperview()
+        stackView.anchor(top: nil, leading: noResultsView.leadingAnchor, bottom: nil, trailing: noResultsView.trailingAnchor,
+                         padding: .init(top: 0, left: 20, bottom: 0, right: 20))
+    }
+    
+    private func removeNoResultsView() {
+        if view.subviews.contains(noResultsView) {
+            noResultsView.removeFromSuperview()
         }
     }
     
