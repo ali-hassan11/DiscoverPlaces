@@ -16,9 +16,9 @@ enum Constants {
     static let locationKey = "LocationKey"
 
     //API
-    static let key = "AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+    static let googlePlacesAPIkey = "AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
     static let placeDetailFields = ["name" , "place_id", "opening_hours", "photo", "vicinity" ,"geometry" ,"review" ,"website" ,"url" ,"international_phone_number", "formatted_phone_number" ,"formatted_address", "rating"]
-    
+        
     //Sizes
     static let placeImageControllerHeight: CGFloat = 200
     static let nearbyHeaderCellHeight: CGFloat = 220
@@ -31,6 +31,9 @@ enum Constants {
     static let noInternetConnetionMessage = "Please check that you are connected to the internet"
     static let locationServicesDisabledTitle = "Unable To Locate"
     static let locationServicesDisabledMessage = "Please make sure that location services are turned on in your device settings"
+    static let noResultsTitle = "No Results"
+    static let noResultsMessage = "There are no results for your chosen location. Try again later or choose a different location."
+    static let tryDifferentLocationtext = "Try a differnt location"
 
     //Color
     static let primaryHighlightColor = UIColor(displayP3Red: 255/255, green: 52/255, blue: 102/255, alpha: 1)
