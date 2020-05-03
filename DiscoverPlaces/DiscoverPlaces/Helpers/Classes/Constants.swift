@@ -30,7 +30,7 @@ enum Constants {
     //Strings
     static let noInternetConnectionTitle = "No Internet Connection"
     static let noInternetConnetionMessage = "Please check that you are connected to the internet"
-    static let locationServicesDisabledTitle = "We were unable to locate you"
+    static let locationServicesDisabledTitle = "Unable To Locate"
     static let locationServicesDisabledMessage = "Please make sure that location services are turned on in your device settings"
 
     //Color
