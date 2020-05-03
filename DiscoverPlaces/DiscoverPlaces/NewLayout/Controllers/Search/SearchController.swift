@@ -58,7 +58,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         guard Reachability.isConnectedToNetwork() else {
-            showNoConnectionAlert()
+            pushNoConnectionController()
             return
         }
         
@@ -111,6 +111,16 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
                 self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
             }
         }
+    }
+    
+    private func pushNoConnectionController() {
+        let errorController = ErrorController(title: Constants.noInternetConnectionTitle,
+                                              message: Constants.genericNoConnectionMessage,
+                                              buttonTitle: Constants.backtext) {
+                                                ///DidTapRetryButtonHandler
+                                                self.navigationController?.popToRootViewController(animated: true)
+        }
+        self.navigationController?.pushViewController(errorController, animated: true)
     }
     
     required init?(coder: NSCoder) {

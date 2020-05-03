@@ -135,7 +135,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         
         guard Reachability.isConnectedToNetwork() else {
             self.activityIndicatorView.stopAnimating()
-            self.showNoConnectionAlert(popSelf: true)
+            self.pushNoConnectionController()
             return
         }
         
@@ -195,6 +195,16 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
+    }
+    
+    private func pushNoConnectionController() {
+        let errorController = ErrorController(title: Constants.noInternetConnectionTitle,
+                                              message: Constants.genericNoConnectionMessage,
+                                              buttonTitle: Constants.backtext) {
+                                                ///DidTapRetryButtonHandler
+                                                self.navigationController?.popToRootViewController(animated: true)
+        }
+        self.navigationController?.pushViewController(errorController, animated: true)
     }
     
     private func remove(currentPlaceId: String, from places: [PlaceResult]) -> [PlaceResult] {
