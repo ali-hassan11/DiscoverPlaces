@@ -91,6 +91,7 @@
 		CEABA02E24177AC90057A955 /* Category+SubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABA02D24177AC90057A955 /* Category+SubCategory.swift */; };
 		CEB72F52243D13B3002F6131 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB72F51243D13B3002F6131 /* PrivacyPolicyController.swift */; };
 		CEB72F54243D19C3002F6131 /* TermsOfUseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB72F53243D19C2002F6131 /* TermsOfUseController.swift */; };
+		CEBDBDB3245EFB72008E80B4 /* ErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDBDB2245EFB72008E80B4 /* ErrorController.swift */; };
 		CEBEE6DB24333449002C43E8 /* PlaceResultsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */; };
 		CECDA1462401C51A005F85FB /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA1452401C51A005F85FB /* StarRatingView.swift */; };
 		CECDA14824025896005F85FB /* ReviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA14724025896005F85FB /* ReviewDetailViewController.swift */; };
@@ -214,6 +215,7 @@
 		CEABA02D24177AC90057A955 /* Category+SubCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+SubCategory.swift"; sourceTree = "<group>"; };
 		CEB72F51243D13B3002F6131 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
 		CEB72F53243D19C2002F6131 /* TermsOfUseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseController.swift; sourceTree = "<group>"; };
+		CEBDBDB2245EFB72008E80B4 /* ErrorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorController.swift; sourceTree = "<group>"; };
 		CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceResultsFilter.swift; sourceTree = "<group>"; };
 		CECDA1452401C51A005F85FB /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		CECDA14724025896005F85FB /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
@@ -429,13 +431,14 @@
 		CE6599F723EF847F00E531CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CEBDBDB1245EFB55008E80B4 /* ErrorController */,
 				CE6599FA23EF867100E531CD /* Home */,
 				CE6599FD23EF869200E531CD /* Detail */,
 				CE616D012405D324008E7067 /* MyPlaces */,
 				CE734D2B23E0CADE005AE0EB /* Search */,
 				CE327AE8241546C00010F400 /* Settings */,
 				CE327AED2416960E0010F400 /* Categories */,
-				CE24AD81243F750B00852C91 /* LocationSearchController.swift */,
+				CEBDBDB0245EFB25008E80B4 /* LocationSearch */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -567,6 +570,22 @@
 				CE9CDF7224365B7D008DF6DE /* PlaceCellViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		CEBDBDB0245EFB25008E80B4 /* LocationSearch */ = {
+			isa = PBXGroup;
+			children = (
+				CE24AD81243F750B00852C91 /* LocationSearchController.swift */,
+			);
+			path = LocationSearch;
+			sourceTree = "<group>";
+		};
+		CEBDBDB1245EFB55008E80B4 /* ErrorController */ = {
+			isa = PBXGroup;
+			children = (
+				CEBDBDB2245EFB72008E80B4 /* ErrorController.swift */,
+			);
+			path = ErrorController;
 			sourceTree = "<group>";
 		};
 		CF305D9416D220BB17DC1EAB /* Frameworks */ = {
@@ -899,6 +918,7 @@
 				CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */,
 				CE616D002405BE28008E7067 /* WebsiteViewController.swift in Sources */,
 				CEBEE6DB24333449002C43E8 /* PlaceResultsFilter.swift in Sources */,
+				CEBDBDB3245EFB72008E80B4 /* ErrorController.swift in Sources */,
 				CE24AD80243EFF8900852C91 /* Fonts+Color.swift in Sources */,
 				CE50CD4A24437B6C00E91643 /* Reachability.swift in Sources */,
 				CEA988F7243A158A002A1FDE /* AboutController.swift in Sources */,
