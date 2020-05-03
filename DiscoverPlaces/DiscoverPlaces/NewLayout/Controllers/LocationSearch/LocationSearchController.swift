@@ -28,16 +28,13 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         
         setupSearchBar()
         setupBarButtonItems()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+
         checkConnection()
     }
-
+    
     private func checkConnection() {
         guard Reachability.isConnectedToNetwork() else {
-            showNoConnectionAlert()
+            pushErrorController(title: Constants.noInternetConnectionTitle, message: Constants.genericNoConnectionMessage, toRoot: false)
             return
         }
     }
@@ -66,12 +63,34 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
     }
     
     @objc func dismissAndLocateUser() {
-        if locationServicesEnabled {
+        if locationServicesEnabled && Reachability.isConnectedToNetwork() {
             determineUserLocationCompletionHandler?()
             navigationController?.popToRootViewController(animated: true)
         } else {
-            showLocationDisabledAlert()
+            pushErrorAlert()
         }
+    }
+    
+    private func pushErrorAlert() {
+        if Reachability.isConnectedToNetwork() == false {
+            pushErrorController(title: Constants.noInternetConnectionTitle, message: Constants.noInternetForLocatingMessage, toRoot: false)
+        } else if locationServicesEnabled == false {
+            pushErrorController(title: Constants.locationServicesDisabledTitle, message: Constants.locationServicesDisabledMessage, toRoot: false)
+        }
+    }
+    
+    private func pushErrorController(title: String, message: String, toRoot: Bool) {
+        let errorController = ErrorController(title: title,
+                                              message: message,
+                                              buttonTitle: Constants.backtext) {
+                                                ///DidTapRetryButtonHandler
+                                                if toRoot {
+                                                    self.navigationController?.popToRootViewController(animated: true)
+                                                } else {
+                                                    self.navigationController?.popViewController(animated: true)
+                                                }
+        }
+        self.navigationController?.pushViewController(errorController, animated: true)
     }
     
     private func setupSearchBar() {
