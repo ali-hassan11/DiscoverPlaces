@@ -27,6 +27,8 @@ enum Constants {
     static let googleFooterHeight: CGFloat = 45
     
     //Strings
+    static let retry = "Retry"
+    static let genericNoConnectionMessage = "There was a problem loading this page. Please check your internet connection and try again."
     static let noInternetConnectionTitle = "No Internet Connection"
     static let noInternetConnetionMessage = "Please check that you are connected to the internet"
     static let locationServicesDisabledTitle = "Unable To Locate"

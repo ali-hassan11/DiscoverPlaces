@@ -41,12 +41,16 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     
     private func fetchSubCategoryGroups(category: Category, selectedLocation: Location?) {
         
-        checkNetworkConnection()
+        guard Reachability.isConnectedToNetwork() else {
+            pushNoConnectionController()
+            return
+        }
         
         category.subCategories().forEach { _ in
             dispatchGroup.enter()
         }
         
+        self.subCategoryGroups.removeAll()
         category.subCategories().forEach {
             fetchdata(subCategory: $0, selectedLocation: location.selectedLocation)
         }
@@ -86,12 +90,18 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
 
     }
     
-    private func checkNetworkConnection() {
-        guard Reachability.isConnectedToNetwork() else {
-            self.showNoConnectionAlert(popSelf: true)
-            return
+    private func pushNoConnectionController() {
+        let errorController = ErrorController(title: Constants.noResultsTitle,
+                                              message: Constants.genericNoConnectionMessage,
+                                              buttonTitle: Constants.retry) {
+                                                ///DidTapRetryButtonHandler
+                                                self.navigationController?.popViewController(animated: true)
+                                                self.fetchDataAfterDelay()
         }
+        self.navigationController?.pushViewController(errorController, animated: true)
     }
+    
+    
     
     private func fetchCompletion() {
         dispatchGroup.notify(queue: .main) {
