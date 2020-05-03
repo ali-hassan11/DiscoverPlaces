@@ -11,8 +11,6 @@ import GooglePlaces
 
 class LocationSearchController: UITableViewController, CLLocationManagerDelegate {
     
-    private static let googlePlacesApiKey = "AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
-    
     var selectedLocationCompletionHandler: ((Location?, String?) -> ())?
     var determineUserLocationCompletionHandler: (()->())?
     
@@ -35,6 +33,14 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkConnection()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if self.isMovingFromParent {
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     private func checkConnection() {
@@ -70,14 +76,14 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
     @objc func dismissAndLocateUser() {
         if locationServicesEnabled {
             determineUserLocationCompletionHandler?()
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         } else {
             showLocationDisabledAlert()
         }
     }
     
     private func setupSearchBar() {
-        GMSPlacesClient.provideAPIKey(LocationSearchController.googlePlacesApiKey)
+        GMSPlacesClient.provideAPIKey(Constants.googlePlacesAPIkey)
         
         resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController?.delegate = self
@@ -108,7 +114,7 @@ extension LocationSearchController: GMSAutocompleteResultsViewControllerDelegate
         
         let location = Location(lat: place.coordinate.latitude, lng: place.coordinate.longitude)
         self.selectedLocationCompletionHandler?(location, place.name)
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
