@@ -17,11 +17,11 @@ class ErrorController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .systemBackground
         actionButton?.addTarget(self, action: #selector(callHandlerClosure), for: .touchUpInside)
         setupStackView()
     }
-
+    
     @objc private func callHandlerClosure() {
         didTapActionButtonHandler?()
     }
@@ -30,11 +30,11 @@ class ErrorController: UIViewController {
         super.init(nibName: nil, bundle: nil)
 
         if let title = title {
-            titleLabel = UILabel(text: title, font: .boldSystemFont(ofSize: 17), color: .label, alignment: .center, numberOfLines: 0)
+            titleLabel = UILabel(text: title, font: .boldSystemFont(ofSize: 19), color: .label, alignment: .center, numberOfLines: 0)
         }
         
         if let message = message {
-            messageLabel = UILabel(text: message, font: .systemFont(ofSize: 16), color: .label, alignment: .center, numberOfLines: 0)
+            messageLabel = UILabel(text: message, font: .systemFont(ofSize: 18), color: .label, alignment: .center, numberOfLines: 0)
         }
         
             actionButton = UIButton(title: buttonTitle, textColor: .systemPink, width: nil, height: 40, font: .systemFont(ofSize: 17, weight: .medium), backgroundColor: nil, cornerRadius: nil)
@@ -50,7 +50,7 @@ class ErrorController: UIViewController {
         view.addSubview(stackView)
         stackView.centerInSuperview()
         stackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor,
-                         padding: .init(top: 0, left: 20, bottom: 0, right: 20))
+                         padding: .init(top: 0, left: 30, bottom: 0, right: 30))
     }
     
     private func addViews(to stackView: UIStackView, views: UIView?...) {
