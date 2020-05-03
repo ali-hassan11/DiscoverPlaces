@@ -34,15 +34,7 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         super.viewDidAppear(animated)
         checkConnection()
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
 
-        if self.isMovingFromParent {
-            navigationController?.popToRootViewController(animated: true)
-        }
-    }
-    
     private func checkConnection() {
         guard Reachability.isConnectedToNetwork() else {
             showNoConnectionAlert()
@@ -76,7 +68,7 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
     @objc func dismissAndLocateUser() {
         if locationServicesEnabled {
             determineUserLocationCompletionHandler?()
-            self.navigationController?.popToRootViewController(animated: true)
+            navigationController?.popToRootViewController(animated: true)
         } else {
             showLocationDisabledAlert()
         }
@@ -113,8 +105,8 @@ extension LocationSearchController: GMSAutocompleteResultsViewControllerDelegate
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
         
         let location = Location(lat: place.coordinate.latitude, lng: place.coordinate.longitude)
-        self.selectedLocationCompletionHandler?(location, place.name)
-        self.navigationController?.popToRootViewController(animated: true)
+        selectedLocationCompletionHandler?(location, place.name)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
