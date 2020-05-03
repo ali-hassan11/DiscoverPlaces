@@ -3,6 +3,7 @@ PODS:
   - GoogleMaps/Base (3.7.0)
   - GooglePlaces (3.7.0):
     - GoogleMaps/Base (= 3.7.0)
+  - LBTATools (1.0.12)
   - SDWebImage (5.5.0):
     - SDWebImage/Core (= 5.5.0)
   - SDWebImage/Core (5.5.0)
@@ -10,6 +11,7 @@ PODS:
 DEPENDENCIES:
   - Cosmos (= 21.0)
   - GooglePlaces (= 3.7)
+  - LBTATools
   - SDWebImage (= 5.5)
 
 SPEC REPOS:
@@ -17,14 +19,16 @@ SPEC REPOS:
     - Cosmos
     - GoogleMaps
     - GooglePlaces
+    - LBTATools
     - SDWebImage
 
 SPEC CHECKSUMS:
   Cosmos: 3dfb6e4ba48bd48b8c9aa2a77048ae11ed114f96
   GoogleMaps: 55da829c68aa931f3ae982b9e341cc2f3d89c587
   GooglePlaces: a62077320f9d64239245af63aa1aa136393ebeb6
+  LBTATools: 389a901a01b9a56bea5682c40cd6e23530f40015
   SDWebImage: 86589f0d47a7de15827640c71813e23fd428965c
 
-PODFILE CHECKSUM: 754e06a38b8f1e034383368791aca9dd373cf15a
+PODFILE CHECKSUM: d4830b17d538beba4b5770465b26085a04399e14
 
 COCOAPODS: 1.8.4

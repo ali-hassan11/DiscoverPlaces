@@ -9,6 +9,7 @@ target 'DiscoverPlaces' do
   pod 'GooglePlaces', '3.7'
   pod 'SDWebImage', '5.5'
   pod 'Cosmos', '21.0'
+  pod 'LBTATools'  
 
   target 'DiscoverPlacesTests' do
     inherit! :search_paths
