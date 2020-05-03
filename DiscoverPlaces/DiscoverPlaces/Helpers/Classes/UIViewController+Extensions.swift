@@ -14,7 +14,7 @@ extension UIViewController {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         present(alertVC, animated: true) {
-            _ = Timer.scheduledTimer(withTimeInterval: 0.65, repeats: false) { timer in
+            _ = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false) { timer in
                 alertVC.dismiss(animated: true, completion: nil)
             }
         }

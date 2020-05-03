@@ -18,7 +18,7 @@ class TermsOfUseController: UIViewController {
         termsButton.roundCorners()
     }
     
-    @IBAction func termsButtonPressed(_ sender: Any) {
+    @IBAction func termsButtonPressed(_ sender: Any) {        
         if let url = URL(string: "https://policies.google.com/privacy") {
             UIApplication.shared.open(url)
         }

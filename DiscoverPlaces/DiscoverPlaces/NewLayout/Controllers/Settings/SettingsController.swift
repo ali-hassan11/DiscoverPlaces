@@ -133,10 +133,21 @@ class SettingsController: UITableViewController, MFMailComposeViewControllerDele
     }
     
     private func showReviewController() {
+        guard Reachability.isConnectedToNetwork() else {
+            showNoConnectionAlert()
+            return
+        }
+        
         SKStoreReviewController.requestReview()
     }
     
     private func showEmailController() {
+        
+        guard Reachability.isConnectedToNetwork() else {
+            showNoConnectionAlert()
+            return
+        }
+
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
