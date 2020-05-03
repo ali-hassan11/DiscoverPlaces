@@ -178,8 +178,12 @@ class UnitsCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: "Units")
-        unitsSwitch.addTarget(self, action: #selector(toggleUnits(sender:)), for: .valueChanged)
+        setupViews()
         
+        configureUnitSwitch()
+    }
+    
+    private func setupViews() {
         addSubview(unitsSwitch)
         unitsSwitch.centerYInSuperview()
         unitsSwitch.anchor(top: nil, leading: nil, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 20))
@@ -187,6 +191,12 @@ class UnitsCell: UITableViewCell {
         addSubview(label)
         label.centerYInSuperview()
         label.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: unitsSwitch.leadingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 12))
+    }
+    
+    private func configureUnitSwitch() {
+        unitsSwitch.addTarget(self, action: #selector(toggleUnits(sender:)), for: .valueChanged)
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        unitsSwitch.setTitleTextAttributes(titleTextAttributes, for: .selected)
     }
     
     required init?(coder: NSCoder) {

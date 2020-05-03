@@ -64,6 +64,9 @@ class MyPlacesViewController: UIViewController {
         listSelector.selectedSegmentTintColor = .systemPink
         listSelector.selectedSegmentIndex = 0
         listSelector.addTarget(self, action: #selector(toggleList(sender:)), for: .valueChanged)
+        
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        listSelector.setTitleTextAttributes(titleTextAttributes, for: .selected)
     }
     
     @objc private func toggleList(sender: UISegmentedControl) {
