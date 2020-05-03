@@ -27,6 +27,7 @@ extension UIViewController {
         let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
         
         alertController.addAction(action)
+        alertController.view.tintColor = .systemPink
         
         present(alertController, animated: true, completion: nil)
     }
@@ -42,6 +43,7 @@ extension UIViewController {
         }
         
         alertController.addAction(action)
+        alertController.view.tintColor = .systemPink
         
         present(alertController, animated: true, completion: nil)
     }
@@ -53,6 +55,7 @@ extension UIViewController {
         let action = UIAlertAction(title: "Retry", style: .default, handler: retryHandler)
 
         alertController.addAction(action)
+        alertController.view.tintColor = .systemPink
 
         present(alertController, animated: true, completion: nil)
     }
