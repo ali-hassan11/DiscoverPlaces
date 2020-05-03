@@ -102,7 +102,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
                 self.fadeView.alpha = 0
             }) { _ in
                 if placeResults.isEmpty {
-                    self.presentErrorController()
+                    self.pushNoResultsController()
                 }
                 
                 self.fadeView.removeFromSuperview()
@@ -112,7 +112,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
         }
     }
     
-    private func presentErrorController() {
+    private func pushNoResultsController() {
         let errorController = ErrorController(title: Constants.noResultsTitle,
                                               message: Constants.noResultsMessage,
                                               buttonTitle: Constants.tryDifferentLocationtext) {
@@ -305,6 +305,18 @@ extension HomeController: CLLocationManagerDelegate {
         } else {
             self.fetchPlacesData(location: LocationItem(name: "Dubai", selectedLocation: Location(lat: 25.1412, lng: 55.1852), actualUserLocation: nil)) //Decide on a Default location (Currently Dubai)
         }
+    }
+    
+    func showRetryConnectionAlert(retryHandler: ((UIAlertAction)->())?) {
+        let alertController = UIAlertController(title: Constants.noInternetConnectionTitle,
+                                                message: Constants.noInternetConnetionMessage, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Retry", style: .default, handler: retryHandler)
+        
+        alertController.addAction(action)
+        alertController.view.tintColor = .systemPink
+        
+        present(alertController, animated: true, completion: nil)
     }
     
 }

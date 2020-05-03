@@ -47,18 +47,6 @@ extension UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    
-    func showRetryConnectionAlert(retryHandler: ((UIAlertAction)->())?) {
-        let alertController = UIAlertController(title: Constants.noInternetConnectionTitle,
-                                                message: Constants.noInternetConnetionMessage, preferredStyle: .alert)
-                
-        let action = UIAlertAction(title: "Retry", style: .default, handler: retryHandler)
-
-        alertController.addAction(action)
-        alertController.view.tintColor = .systemPink
-
-        present(alertController, animated: true, completion: nil)
-    }
 
 }
 
