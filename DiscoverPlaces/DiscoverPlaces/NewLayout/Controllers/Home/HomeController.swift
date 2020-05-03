@@ -237,10 +237,18 @@ extension HomeController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
 
-        let location:CLLocation = locations[0] as CLLocation
+        let location = locations[0] as CLLocation
         
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { (placeMarks, error) in
+            
+            #if DEBUG
+            if let error = error {
+                self.showToastAlert(title: "Error Geocoding", message: error.localizedDescription)
+                print(error.localizedDescription)
+            }
+            #endif
+            
             let placeName = placeMarks?.first?.locality
             
             let locationCoords = Location(lat: location.coordinate.latitude, lng: location.coordinate.longitude)

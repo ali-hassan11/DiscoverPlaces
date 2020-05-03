@@ -12,17 +12,15 @@ typealias PageIndicator = UISegmentedControl
 
 final class PlaceImagesHolder: UICollectionReusableView {
     
-    public static let id = "placeImagesHolderId"
+    static let id = "placeImagesHolderId"
     
-    let horizontalController = ImagesHorizontalController()
-    let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 3)
-    let starRatingView = StarRatingView()
-    let gradientView = UIView()
-    let segmentedControl = PageIndicator()
-    let distanceLabel = Font().distanceLabel
+    public let horizontalController = ImagesHorizontalController()
+    public let segmentedControl = PageIndicator()
+    private let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 3)
+    private let starRatingView = StarRatingView()
+    private let gradientView = UIView()
+    private let distanceLabel = Font().distanceLabel
     
-    var isFirstInit = true
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .secondarySystemBackground
@@ -30,13 +28,13 @@ final class PlaceImagesHolder: UICollectionReusableView {
         addGradient(firstColor: .clear, secondColor: .black, view: gradientView, start: 0.69, end: 0.96)
     }
     
-    public func configure(using placeDetail: PlaceDetailResult, actualLocation: Location?) {
+    public func configure(using placeDetail: PlaceDetailResult, userLocation: Location?) {
         configurePlaceName(using: placeDetail)
         configureRating(using: placeDetail)
         configurePageIndicator(using: placeDetail)
         configurePhotosController(using: placeDetail)
-        if let location = actualLocation {
-            configureDistanceLabel(using: placeDetail, and: location)
+        if let userLocation = userLocation {
+            configureDistanceLabel(using: placeDetail.geometry, and: userLocation)
         }
     }
     
@@ -60,8 +58,8 @@ final class PlaceImagesHolder: UICollectionReusableView {
         layoutPageIndicator()
     }
     
-    private func configureDistanceLabel(using detail: PlaceDetailResult, and location: Location) {
-        distanceLabel.text = detail.geometry?.distanceString(from: location)
+    private func configureDistanceLabel(using detailGeometry: Geometry?, and location: Location) {
+        distanceLabel.text = detailGeometry?.distanceString(from: location)
     }
 
     
@@ -95,16 +93,6 @@ final class PlaceImagesHolder: UICollectionReusableView {
     private func configurePhotosController(using placeDetail: PlaceDetailResult) {
         horizontalController.photos = placeDetail.photos
     }
-
-//    private func addGradient(firstColor: UIColor, secondColor: UIColor, view: UIView, start: CGFloat, end: CGFloat) {
-//        clipsToBounds = true
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.colors = [firstColor.cgColor, secondColor.cgColor]
-//        gradientLayer.frame = self.frame
-//        gradientLayer.startPoint = CGPoint(x: 0, y: start)
-//        gradientLayer.endPoint = CGPoint(x: 0, y: end)
-//        view.layer.insertSublayer(gradientLayer, at: 0)
-//    }
     
     private func setupViews() {
         addSubview(horizontalController.view)

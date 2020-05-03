@@ -212,7 +212,7 @@ extension PlaceDetailsController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PlaceImagesHolder.id, for: indexPath) as! PlaceImagesHolder
         guard let placeDetail = placeDetailResult else { return cell }
-        cell.configure(using: placeDetail, actualLocation: location.actualUserLocation)
+        cell.configure(using: placeDetail, userLocation: location.actualUserLocation)
         cell.horizontalController.didScrollImagesController = { nearestPage in
             cell.segmentedControl.selectedSegmentIndex = nearestPage
             self.setIndexForImagesHolderSegmentControl(to: nearestPage)
