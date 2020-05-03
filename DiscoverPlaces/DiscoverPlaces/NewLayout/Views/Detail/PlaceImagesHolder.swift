@@ -33,9 +33,7 @@ final class PlaceImagesHolder: UICollectionReusableView {
         configureRating(using: placeDetail)
         configurePageIndicator(using: placeDetail)
         configurePhotosController(using: placeDetail)
-        if let userLocation = userLocation {
-            configureDistanceLabel(using: placeDetail.geometry, and: userLocation)
-        }
+        configureDistanceLabel(using: placeDetail.geometry, and: userLocation)
     }
     
     private func configurePlaceName(using detail: PlaceDetailResult) {
@@ -58,15 +56,16 @@ final class PlaceImagesHolder: UICollectionReusableView {
         layoutPageIndicator()
     }
     
-    private func configureDistanceLabel(using detailGeometry: Geometry?, and location: Location) {
-        distanceLabel.text = detailGeometry?.distanceString(from: location)
+    private func configureDistanceLabel(using detailGeometry: Geometry?, and userLocation: Location?) {
+        if let userLocation = userLocation {
+            distanceLabel.text = detailGeometry?.distanceString(from: userLocation)
+        }
     }
-
     
     private func populatePageIndicator(with count: Int) {
         segmentedControl.removeAllSegments()
         
-        if count == 1 { return  }
+        if count == 1 { return }
         
         for i in 1...count {
             segmentedControl.insertSegment(withTitle: nil, at: i, animated: true)
