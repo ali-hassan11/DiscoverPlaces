@@ -44,14 +44,6 @@ class PlaceListController: UICollectionViewController, UICollectionViewDelegateF
         collectionView.register(GoogleLogoCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GoogleLogoCell.id)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        guard Reachability.isConnectedToNetwork() else {
-            showNoConnectionAlert()
-            return
-        }
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         refreshData()
     }

@@ -32,6 +32,11 @@ class MyPlacesViewController: UIViewController {
         setupListControllers()
         setupContraints()
         setupDidTapPlaceHandler()
+        
+        guard Reachability.isConnectedToNetwork() else {
+            pushNoResultsController()
+            return
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +89,16 @@ class MyPlacesViewController: UIViewController {
             break
         }
         
+    }
+    
+    private func pushNoResultsController() {
+        let errorController = ErrorController(title: Constants.noInternetConnectionTitle,
+                                              message: Constants.genericNoConnectionMessage,
+                                              buttonTitle: Constants.backtext) {
+                                                ///DidTapActionButtonHandler
+                                                self.navigationController?.popViewController(animated: true)
+        }
+        self.navigationController?.pushViewController(errorController, animated: true)
     }
     
     private func setupContraints() {
