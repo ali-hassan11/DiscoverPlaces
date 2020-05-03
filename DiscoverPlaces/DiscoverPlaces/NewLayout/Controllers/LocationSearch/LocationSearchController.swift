@@ -47,9 +47,8 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         btn.tintColor = .systemPink
         
         let locationBarButton = UIBarButtonItem(customView: btn)
-        
         navigationItem.rightBarButtonItem = locationBarButton
-
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     

@@ -254,8 +254,7 @@ extension HomeController: CLLocationManagerDelegate {
             
             #if DEBUG
             if let error = error {
-                self.showToastAlert(title: "Error Geocoding", message: error.localizedDescription)
-                print(error.localizedDescription)
+                print("⚠️ FAILD TO GEOCODE: \(error.localizedDescription)")
             }
             #endif
             

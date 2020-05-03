@@ -13,7 +13,7 @@ class HomeLargeCellHolder: UICollectionReusableView {
     static let id = "largeCellHolderId"
     
     let sectionDescriptionLabel = UILabel(text: "Places of interest ", font: .systemFont(ofSize: 18, weight: .regular),color: .secondaryLabel , numberOfLines: 1)
-    let placeNameLabel = UILabel(text: " near You", font: .systemFont(ofSize: 18, weight: .medium),color: .label , numberOfLines: 1)
+    let placeNameLabel = UILabel(text: " Near You", font: .systemFont(ofSize: 18, weight: .medium),color: .label , numberOfLines: 1)
     
     let rightPadding = PaddingView(width: Constants.sidePadding)
     let leftPadding = PaddingView(width: Constants.sidePadding)
@@ -35,7 +35,7 @@ class HomeLargeCellHolder: UICollectionReusableView {
         if let name = placeName {
             placeNameLabel.text = "- \(name)"
         } else {
-            placeNameLabel.text = "near you"
+            placeNameLabel.text = "Near you"
         }
     }
     
