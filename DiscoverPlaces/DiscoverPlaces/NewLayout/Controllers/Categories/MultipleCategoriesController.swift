@@ -32,14 +32,6 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         
         fetchDataAfterDelay()
     }
-
-    private func setupCollectionView() {
-        collectionView.alpha = 0
-        collectionView.reloadData()
-        collectionView.backgroundColor = .systemBackground
-        collectionView.register(SubCategoryiesHolder.self, forCellWithReuseIdentifier: SubCategoryiesHolder.id)
-        collectionView.register(GoogleLogoCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GoogleLogoCell.id)
-    }
     
     private func fetchDataAfterDelay() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -48,50 +40,81 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     }
     
     private func fetchSubCategoryGroups(category: Category, selectedLocation: Location?) {
-        category.subCategories().forEach {
+        
+        checkNetworkConnection()
+        
+        category.subCategories().forEach { _ in
             dispatchGroup.enter()
+        }
+        
+        category.subCategories().forEach {
             fetchdata(subCategory: $0, selectedLocation: location.selectedLocation)
         }
+        
+        fetchCompletion()
     }
     
     private func fetchdata(subCategory: SubCategory, selectedLocation: Location) {
-        
-            guard Reachability.isConnectedToNetwork() else {
-                self.showNoConnectionAlert(popSelf: true)
-                return
-            }
             
-            print("FetchData for \(subCategory)")
             var subCategoryGroup: PlacesGroup?
             Service.shared.fetchNearbyPlaces(selectedLocation: selectedLocation, subCategory: subCategory) { (response, error) in
-                
+
                 if let error = error {
                     print("Failed to fetch: \(error)")
+                    self.dispatchGroup.leave()
                     return
                 }
                 
                 //success
-                guard let response = response else { return }
+                guard let response = response else {
+                    self.dispatchGroup.leave()
+                    return
+                }
                 
                 let placeResults = self.searchResponseFilter.results(from: response)
                 subCategoryGroup = PlacesGroup(title: subCategory.formatted(), results: placeResults)
-                self.dispatchGroup.leave()
                 
-                self.handleSuccess(with: subCategoryGroup)
-            }
+                guard let group = subCategoryGroup, group.results.count > 0 else {
+                    self.dispatchGroup.leave()
+                    return
+                }
+                
+                self.subCategoryGroups.append(group)
+                self.subCategoryGroups.sort{$0.results.count > $1.results.count}
+                self.dispatchGroup.leave()
+        }
 
     }
     
-    private func handleSuccess(with subCategoryGroup: PlacesGroup?) {
+    private func checkNetworkConnection() {
+        guard Reachability.isConnectedToNetwork() else {
+            self.showNoConnectionAlert(popSelf: true)
+            return
+        }
+    }
+    
+    private func fetchCompletion() {
         dispatchGroup.notify(queue: .main) {
-            guard let subCategoryGroup = subCategoryGroup, subCategoryGroup.results.count > 0 else { return }
-            self.subCategoryGroups.append(subCategoryGroup)
-            self.subCategoryGroups.sort{$0.results.count > $1.results.count}
             self.collectionView.reloadData()
             UIView.animate(withDuration: 0.35) {
                 self.collectionView.alpha = 1
             }
         }
+    }
+    
+    private func setupCollectionView() {
+        collectionView.alpha = 0
+        collectionView.reloadData()
+        collectionView.backgroundColor = .systemBackground
+        collectionView.register(SubCategoryiesHolder.self, forCellWithReuseIdentifier: SubCategoryiesHolder.id)
+        collectionView.register(GoogleLogoCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GoogleLogoCell.id)
+    }
+    
+    private func showNoResultsController() {
+        let errorController = ErrorController(title: Constants.noResultsTitle, message: "Try different category/location", buttonTitle: "Back") {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        self.navigationController?.pushViewController(errorController, animated: true)
     }
     
     required init?(coder: NSCoder) {
