@@ -48,10 +48,10 @@ class DefaultsManager {
         for place in list {
             if place.placeId == placeId {
                 isInList = true
+                break
             }
         }
         return isInList
-        
     }
     
     // MARK: - Get
@@ -86,42 +86,13 @@ class DefaultsManager {
             return []
         }
     }
-      
-
-//    static func addToList(placeId: String, listKey: ListType) {
-//        if var favourites = defaults.object(forKey: listKey.rawValue) as? [String] {
-//            if !favourites.contains(placeId) {
-//                favourites.append(placeId)
-//                defaults.set(favourites, forKey: listKey.rawValue)
-//            }
-//        } else {
-//            let newFavourites = [placeId]
-//            defaults.set(newFavourites, forKey: listKey.rawValue)
-//        }
-//    }
-
-    
-//    static func getList(listKey: ListType) -> [String] {
-//        if let favourites = defaults.object(forKey: listKey.rawValue) as? [String] {
-//            return favourites
-//        } else {
-//            return []
-//        }
-//    }
-    
-//    static func isInList(placeId: String, listKey: ListType) -> Bool {
-//        if let favourites = defaults.object(forKey: listKey.rawValue) as? [String] {
-//            if favourites.contains(placeId) {
-//                return true
-//            } else {
-//                return false
-//            }
-//        } else {
-//            return false
-//        }
-//    }
     
     //MARK: Units
+    enum Unit {
+        case km
+        case miles
+    }
+    
     private static let isKmKey = "isKmKey"
     
     static func isKm() -> Bool {
@@ -135,9 +106,4 @@ class DefaultsManager {
     static func setUnits(to unit: Unit) {
         defaults.set(unit == .km ? true : false, forKey: isKmKey)
     }
-}
-
-enum Unit {
-    case km
-    case miles
 }

@@ -12,7 +12,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     private var userLocation: LocationItem?
     private var locationManager:CLLocationManager!
-
+    
     private var placeResults = [PlaceResult]()
     private let searchResponseFilter = SearchResponseFilter()
     
@@ -42,7 +42,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
             }
         }
     }
- 
+    
     private func setupBarButtons() {
         let locationBarButton = UIBarButtonItem(image: UIImage(systemName: "mappin.and.ellipse"), style: .plain, target: self, action: #selector(showSetLocationController))
         locationBarButton.tintColor = .systemPink
@@ -209,7 +209,7 @@ extension HomeController {
 }
 
 extension HomeController: CLLocationManagerDelegate {
-              
+    
     func determineMyCurrentLocation() {
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -218,7 +218,7 @@ extension HomeController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-            
+        
         switch status {
         case .restricted, .denied:
             fetchForLastSavedLocation()
@@ -236,7 +236,7 @@ extension HomeController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
-
+        
         let location = locations[0] as CLLocation
         
         let geocoder = CLGeocoder()
@@ -258,7 +258,7 @@ extension HomeController: CLLocationManagerDelegate {
             self.updateLastSavedLocation(with: locationStub)
             self.fetchForLastSavedLocation()
         }
-
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -266,7 +266,6 @@ extension HomeController: CLLocationManagerDelegate {
         fetchForLastSavedLocation()
     }
     
-
     func updateLastSavedLocation(with location: LocationItem) {
         do {
             let encoder = JSONEncoder()
@@ -287,8 +286,7 @@ extension HomeController: CLLocationManagerDelegate {
         
         if let data = UserDefaults.standard.data(forKey: Constants.locationKey) {
             do {
-                let decoder = JSONDecoder()
-                let lastSavedLocation = try decoder.decode(LocationItem.self, from: data)
+                let lastSavedLocation = try JSONDecoder().decode(LocationItem.self, from: data)
                 self.userLocation = lastSavedLocation
                 self.fetchPlacesData(location: lastSavedLocation)
             } catch {
