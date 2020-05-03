@@ -10,6 +10,8 @@ import UIKit
 
 class MultipleCategoriesController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
         
+    private let activityIndicatorView = LoadingIndicatorView()
+
     private let searchResponseFilter = SearchResponseFilter()
     private let dispatchGroup = DispatchGroup()
     
@@ -17,7 +19,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     private var category: Category
     
     private var subCategoryGroups = [PlacesGroup]()
-        
+            
     init(category: Category, location: LocationItem) {
         self.location = location
         self.category = category
@@ -32,9 +34,12 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         
         fetchDataAfterDelay()
     }
-    
     private func fetchDataAfterDelay() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            //Loading Indicator (IN CENTER!)
+            self.view.addSubview(self.activityIndicatorView)
+            self.activityIndicatorView.centerInSuperview()
+            
             self.fetchSubCategoryGroups(category: self.category, selectedLocation: self.location.selectedLocation)
         }
     }
@@ -91,21 +96,19 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     }
     
     private func pushNoConnectionController() {
-        let errorController = ErrorController(title: Constants.noResultsTitle,
+        let errorController = ErrorController(title: Constants.noInternetConnectionTitle,
                                               message: Constants.genericNoConnectionMessage,
-                                              buttonTitle: Constants.retry) {
+                                              buttonTitle: Constants.backtext) {
                                                 ///DidTapRetryButtonHandler
-                                                self.navigationController?.popViewController(animated: true)
-                                                self.fetchDataAfterDelay()
+                                                self.navigationController?.popToRootViewController(animated: true)
         }
         self.navigationController?.pushViewController(errorController, animated: true)
     }
     
-    
-    
     private func fetchCompletion() {
         dispatchGroup.notify(queue: .main) {
             self.collectionView.reloadData()
+            self.activityIndicatorView.stopAnimating()
             UIView.animate(withDuration: 0.35) {
                 self.collectionView.alpha = 1
             }
