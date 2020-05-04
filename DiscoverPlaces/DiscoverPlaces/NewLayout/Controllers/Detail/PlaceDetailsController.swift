@@ -198,11 +198,9 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     private func pushNoConnectionController() {
-        let errorController = ErrorController(title: Constants.noInternetConnectionTitle,
-                                              message: Constants.genericNoConnectionMessage,
-                                              buttonTitle: Constants.backtext) {
-                                                ///DidTapRetryButtonHandler
-                                                self.navigationController?.popToRootViewController(animated: true)
+        let errorController = ErrorController(message: Constants.genericNoConnectionMessage, buttonTitle: Constants.backtext) {
+            ///DidTapRetryButtonHandler
+            self.navigationController?.popToRootViewController(animated: true)
         }
         self.navigationController?.pushViewController(errorController, animated: true)
     }

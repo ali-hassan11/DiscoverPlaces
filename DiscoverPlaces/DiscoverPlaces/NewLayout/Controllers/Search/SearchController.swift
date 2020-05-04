@@ -71,12 +71,12 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         UserDefaults.standard.set(searchText, forKey: Constants.placeSearchBarTextKey)
     }
-
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         guard let text = UserDefaults.standard.string(forKey: Constants.placeSearchBarTextKey) else { return }
         searchBar.text = text
     }
-
+    
     private func fetchData(for searchText: String, location: Location) {
         startLoadingView()
         Service.shared.fetchSearchResults(for: searchText, location: location) { (response, error) in
@@ -114,11 +114,9 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     }
     
     private func pushNoConnectionController() {
-        let errorController = ErrorController(title: Constants.noInternetConnectionTitle,
-                                              message: Constants.genericNoConnectionMessage,
-                                              buttonTitle: Constants.backtext) {
-                                                ///DidTapRetryButtonHandler
-                                                self.navigationController?.popToRootViewController(animated: true)
+        let errorController = ErrorController(message: Constants.genericNoConnectionMessage, buttonTitle: Constants.backtext) {
+            ///DidTapActionButtonHandler
+            self.navigationController?.popToRootViewController(animated: true)
         }
         self.navigationController?.pushViewController(errorController, animated: true)
     }
@@ -215,8 +213,8 @@ extension SearchController {
     
     // MARK: GoogleCell Footer
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-            let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
-            return cell
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {

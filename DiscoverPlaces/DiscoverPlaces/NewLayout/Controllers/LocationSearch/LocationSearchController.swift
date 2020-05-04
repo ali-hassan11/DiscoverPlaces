@@ -28,13 +28,13 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         
         setupSearchBar()
         setupBarButtonItems()
-
+        
         checkConnection()
     }
     
     private func checkConnection() {
         guard Reachability.isConnectedToNetwork() else {
-            pushErrorController(title: Constants.noInternetConnectionTitle, message: Constants.genericNoConnectionMessage, toRoot: false)
+            pushErrorController(title: Constants.noInternetConnectionTitle, message: Constants.genericNoConnectionMessage, popToRoot: true)
             return
         }
     }
@@ -72,22 +72,20 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
     
     private func pushErrorAlert() {
         if Reachability.isConnectedToNetwork() == false {
-            pushErrorController(title: Constants.noInternetConnectionTitle, message: Constants.noInternetForLocatingMessage, toRoot: false)
+            pushErrorController(title: Constants.noInternetConnectionTitle, message: Constants.noInternetForLocatingMessage, popToRoot: false)
         } else if locationServicesEnabled == false {
-            pushErrorController(title: Constants.locationServicesDisabledTitle, message: Constants.locationServicesDisabledMessage, toRoot: false)
+            pushErrorController(title: Constants.locationServicesDisabledTitle, message: Constants.locationServicesDisabledMessage, popToRoot: false)
         }
     }
     
-    private func pushErrorController(title: String, message: String, toRoot: Bool) {
-        let errorController = ErrorController(title: title,
-                                              message: message,
-                                              buttonTitle: Constants.backtext) {
-                                                ///DidTapRetryButtonHandler
-                                                if toRoot {
-                                                    self.navigationController?.popToRootViewController(animated: true)
-                                                } else {
-                                                    self.navigationController?.popViewController(animated: true)
-                                                }
+    private func pushErrorController(title: String, message: String, popToRoot: Bool) {
+        let errorController = ErrorController(message: message, buttonTitle: Constants.backtext) {
+            ///DidTapActionButtonHandler
+            if popToRoot {
+                self.navigationController?.popToRootViewController(animated: true)
+            } else {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
         self.navigationController?.pushViewController(errorController, animated: true)
     }
@@ -128,7 +126,7 @@ extension LocationSearchController: GMSAutocompleteResultsViewControllerDelegate
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
-//        resultsCompletionHandler?(nil, nil, error)
+        //        resultsCompletionHandler?(nil, nil, error)
         print("🚨🚨🚨 FAILED TO AUTOCOMPLETE 🚨🚨🚨")
     }
     

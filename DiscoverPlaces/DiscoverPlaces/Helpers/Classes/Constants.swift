@@ -14,18 +14,7 @@ enum Constants {
     static let nearestPageKey = "nearestPageKey"
     static let placeSearchBarTextKey = "placeSearchBarTextKey"
     static let locationKey = "LocationKey"
-
-    //API
-    static let googlePlacesAPIkey = "AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
-    static let placeDetailFields = ["name" , "place_id", "opening_hours", "photo", "vicinity" ,"geometry" ,"review" ,"website" ,"url" ,"international_phone_number", "formatted_phone_number" ,"formatted_address", "rating"]
-        
-    //Sizes
-    static let placeImageControllerHeight: CGFloat = 200
-    static let nearbyHeaderCellHeight: CGFloat = 220
-    static let discoverGroupSectionHeight: CGFloat = 160
-    
-    static let googleFooterHeight: CGFloat = 45
-    
+ 
     //Strings
     static let okText = "Ok"
     static let backtext = "Back"
@@ -38,10 +27,22 @@ enum Constants {
     static let locationServicesDisabledMessage = "Please make sure that location services are turned on in your device settings."
     static let noResultsTitle = "No Results"
     static let noResultsMessage = "There are no results for your chosen location. Try again later or choose a different location."
-    static let tryDifferentLocationtext = "Try a differnt location"
-
-    //Color
-    static let primaryHighlightColor = UIColor(displayP3Red: 255/255, green: 52/255, blue: 102/255, alpha: 1)
+    static let tryDifferentLocationtext = "Try a different location"
+    
+    //API
+    static let googlePlacesAPIkey = "AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"
+    static let placeDetailFields = ["name" , "place_id", "opening_hours", "photo", "vicinity" ,"geometry" ,"review" ,"website" ,"url" ,"international_phone_number", "formatted_phone_number" ,"formatted_address", "rating"]
+    
+    
+    //Cells
+    static let errorCellId = "errorCell"
+    
+    //Sizes
+    static let placeImageControllerHeight: CGFloat = 200
+    static let nearbyHeaderCellHeight: CGFloat = 220
+    static let discoverGroupSectionHeight: CGFloat = 160
+    
+    static let googleFooterHeight: CGFloat = 45
     
     //Padding
     static let topPadding: CGFloat = 0
@@ -49,10 +50,4 @@ enum Constants {
     static let leftPadding: CGFloat = 20
     static let rightPadding: CGFloat = 20
     static let sidePadding: CGFloat = 16
-    
-    //Cells
-    static let errorCellId = "errorCellId"
-    
-    //
-    static let imagePlaceHolder = "placeHolderImage"
 }

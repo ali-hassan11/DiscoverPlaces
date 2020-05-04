@@ -10,6 +10,7 @@ import UIKit
 
 class ErrorController: UIViewController {
     
+    private let errorIconView = UIImageView(image: UIImage(systemName: "exclamationmark.triangle.fill"))
     private var titleLabel: UILabel?
     private var messageLabel: UILabel?
     private var actionButton: UIButton?
@@ -26,26 +27,26 @@ class ErrorController: UIViewController {
         didTapActionButtonHandler?()
     }
     
-    init(title: String? = nil, message: String? = nil, buttonTitle: String, buttonHandler: @escaping (()->())) {
+    init(message: String? = nil, buttonTitle: String, buttonHandler: @escaping (()->())) {
         super.init(nibName: nil, bundle: nil)
-
-        if let title = title {
-            titleLabel = UILabel(text: title, font: .boldSystemFont(ofSize: 19), color: .label, alignment: .center, numberOfLines: 0)
-        }
+        
+        errorIconView.tintColor = .systemPink
+        errorIconView.constrainHeight(constant: 50)
+        errorIconView.constrainWidth(constant: 50)
         
         if let message = message {
-            messageLabel = UILabel(text: message, font: .systemFont(ofSize: 18), color: .label, alignment: .center, numberOfLines: 0)
+            messageLabel = UILabel(text: message, font: .systemFont(ofSize: 19), color: .label, alignment: .center, numberOfLines: 0)
         }
         
-            actionButton = UIButton(title: buttonTitle, textColor: .systemPink, width: nil, height: 40, font: .systemFont(ofSize: 17, weight: .medium), backgroundColor: nil, cornerRadius: nil)
-            
-            self.didTapActionButtonHandler = buttonHandler
+        actionButton = UIButton(title: buttonTitle, textColor: .systemPink, width: nil, height: 40, font: .systemFont(ofSize: 19, weight: .medium), backgroundColor: nil, cornerRadius: nil)
+        
+        self.didTapActionButtonHandler = buttonHandler
     }
     
     private func setupStackView() {
         let stackView = VerticalStackView(arrangedSubviews: [], spacing: 16)
         stackView.alignment = .center
-        addViews(to: stackView, views: titleLabel, messageLabel, actionButton)
+        addViews(to: stackView, views: errorIconView, messageLabel, actionButton)
         
         view.addSubview(stackView)
         stackView.centerInSuperview()

@@ -9,9 +9,9 @@
 import UIKit
 
 class MultipleCategoriesController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
-        
+    
     private let activityIndicatorView = LoadingIndicatorView()
-
+    
     private let searchResponseFilter = SearchResponseFilter()
     private let dispatchGroup = DispatchGroup()
     
@@ -19,7 +19,7 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     private var category: Category
     
     private var subCategoryGroups = [PlacesGroup]()
-            
+    
     init(category: Category, location: LocationItem) {
         self.location = location
         self.category = category
@@ -64,43 +64,41 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     }
     
     private func fetchdata(subCategory: SubCategory, selectedLocation: Location) {
+        
+        var subCategoryGroup: PlacesGroup?
+        Service.shared.fetchNearbyPlaces(selectedLocation: selectedLocation, subCategory: subCategory) { (response, error) in
             
-            var subCategoryGroup: PlacesGroup?
-            Service.shared.fetchNearbyPlaces(selectedLocation: selectedLocation, subCategory: subCategory) { (response, error) in
-
-                if let error = error {
-                    print("Failed to fetch: \(error)")
-                    self.dispatchGroup.leave()
-                    return
-                }
-                
-                //success
-                guard let response = response else {
-                    self.dispatchGroup.leave()
-                    return
-                }
-                
-                let placeResults = self.searchResponseFilter.results(from: response)
-                subCategoryGroup = PlacesGroup(title: subCategory.formatted(), results: placeResults)
-                
-                guard let group = subCategoryGroup, group.results.count > 0 else {
-                    self.dispatchGroup.leave()
-                    return
-                }
-                
-                self.subCategoryGroups.append(group)
-                self.subCategoryGroups.sort{$0.results.count > $1.results.count}
+            if let error = error {
+                print("Failed to fetch: \(error)")
                 self.dispatchGroup.leave()
+                return
+            }
+            
+            //success
+            guard let response = response else {
+                self.dispatchGroup.leave()
+                return
+            }
+            
+            let placeResults = self.searchResponseFilter.results(from: response)
+            subCategoryGroup = PlacesGroup(title: subCategory.formatted(), results: placeResults)
+            
+            guard let group = subCategoryGroup, group.results.count > 0 else {
+                self.dispatchGroup.leave()
+                return
+            }
+            
+            self.subCategoryGroups.append(group)
+            self.subCategoryGroups.sort{$0.results.count > $1.results.count}
+            self.dispatchGroup.leave()
         }
-
+        
     }
     
     private func pushNoConnectionController() {
-        let errorController = ErrorController(title: Constants.noInternetConnectionTitle,
-                                              message: Constants.genericNoConnectionMessage,
-                                              buttonTitle: Constants.backtext) {
-                                                ///DidTapRetryButtonHandler
-                                                self.navigationController?.popToRootViewController(animated: true)
+        let errorController = ErrorController(message: Constants.genericNoConnectionMessage, buttonTitle: Constants.backtext) {
+            ///DidTapRetryButtonHandler
+            self.navigationController?.popToRootViewController(animated: true)
         }
         self.navigationController?.pushViewController(errorController, animated: true)
     }
@@ -124,7 +122,8 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
     }
     
     private func showNoResultsController() {
-        let errorController = ErrorController(title: Constants.noResultsTitle, message: "Try different category/location", buttonTitle: "Back") {
+        let errorController = ErrorController(message: "Try different category/location", buttonTitle: "Back") {
+            ///DidTapActionButtonHandler
             self.navigationController?.popToRootViewController(animated: true)
         }
         self.navigationController?.pushViewController(errorController, animated: true)
@@ -138,32 +137,32 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
 
 extension MultipleCategoriesController {
     
-        override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return subCategoryGroups.count
-        }
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return subCategoryGroups.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubCategoryiesHolder.id, for: indexPath) as! SubCategoryiesHolder
         
-        override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubCategoryiesHolder.id, for: indexPath) as! SubCategoryiesHolder
-            
-            let subCategoryGroup = subCategoryGroups[indexPath.item]
-            cell.subCategoryTitleLabel.text = subCategoryGroup.title
-            cell.horizontalController.placeGroup = subCategoryGroup
-            cell.horizontalController.location = self.location.selectedLocation
-            cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
-                guard let location = self?.location else { return }
-                let detailsController = PlaceDetailsController(placeId: placeId, location: location)
-                self?.navigationController?.pushViewController(detailsController, animated: true)
-            }
-            return cell
+        let subCategoryGroup = subCategoryGroups[indexPath.item]
+        cell.subCategoryTitleLabel.text = subCategoryGroup.title
+        cell.horizontalController.placeGroup = subCategoryGroup
+        cell.horizontalController.location = self.location.selectedLocation
+        cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
+            guard let location = self?.location else { return }
+            let detailsController = PlaceDetailsController(placeId: placeId, location: location)
+            self?.navigationController?.pushViewController(detailsController, animated: true)
         }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return .init(width: view.frame.width, height: 280)
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            return 10
-        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return .init(width: view.frame.width, height: 280)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
     
     // MARK: GoogleCell Footer
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

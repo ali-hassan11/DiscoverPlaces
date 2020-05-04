@@ -113,11 +113,9 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     }
     
     private func pushNoResultsController() {
-        let errorController = ErrorController(title: Constants.noResultsTitle,
-                                              message: Constants.noResultsMessage,
-                                              buttonTitle: Constants.tryDifferentLocationtext) {
-                                                ///DidTapActionButtonHandler
-                                                self.showSetLocationController()
+        let errorController = ErrorController(message: Constants.noResultsMessage, buttonTitle: Constants.tryDifferentLocationtext) {
+            ///DidTapActionButtonHandler
+            self.showSetLocationController()
         }
         self.navigationController?.pushViewController(errorController, animated: true)
     }

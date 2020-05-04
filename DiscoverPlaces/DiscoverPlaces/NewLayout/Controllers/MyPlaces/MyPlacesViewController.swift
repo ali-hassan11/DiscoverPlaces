@@ -18,7 +18,7 @@ class MyPlacesViewController: UIViewController {
     let toDoController = PlaceListController(listType: .toDo)
     
     private var location: LocationItem?
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let settingsBarButton = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingsTapped))
@@ -26,7 +26,7 @@ class MyPlacesViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         navigationItem.largeTitleDisplayMode = .always
-                
+        
         setupViews()
         setupSegmentedControl()
         setupListControllers()
@@ -43,7 +43,7 @@ class MyPlacesViewController: UIViewController {
         super.viewWillAppear(animated)
         location = UserLoation.lastSavedLocation()
     }
-
+    
     @objc func settingsTapped() {
         let settingsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "SettingsVCId") as UITableViewController
         navigationController?.pushViewController(settingsController, animated: true)
@@ -55,7 +55,7 @@ class MyPlacesViewController: UIViewController {
         v.backgroundColor = .systemBackground
         view.addSubview(v)
         v.fillSuperview()
-                
+        
         v.addSubview(listSelector)
         v.addSubview(listControllersContainer)
     }
@@ -75,7 +75,7 @@ class MyPlacesViewController: UIViewController {
     }
     
     @objc private func toggleList(sender: UISegmentedControl) {
-
+        
         switch sender.selectedSegmentIndex {
         case 0:
             addChildVC(favouritesController, on: listControllersContainer, completion: { [weak self] in
@@ -92,11 +92,9 @@ class MyPlacesViewController: UIViewController {
     }
     
     private func pushNoResultsController() {
-        let errorController = ErrorController(title: Constants.noInternetConnectionTitle,
-                                              message: Constants.genericNoConnectionMessage,
-                                              buttonTitle: Constants.backtext) {
-                                                ///DidTapActionButtonHandler
-                                                self.navigationController?.popViewController(animated: true)
+        let errorController = ErrorController(message: Constants.genericNoConnectionMessage, buttonTitle: Constants.backtext) {
+            ///DidTapActionButtonHandler
+            self.navigationController?.popViewController(animated: true)
         }
         self.navigationController?.pushViewController(errorController, animated: true)
     }
@@ -114,7 +112,7 @@ class MyPlacesViewController: UIViewController {
             let detailController = PlaceDetailsController(placeId: placeId, location: location)
             self?.navigationController?.pushViewController(detailController, animated: true)
         }
-    
+        
         favouritesController.didSelectPlaceInListHandler = didTapComletionHandler
         toDoController.didSelectPlaceInListHandler = didTapComletionHandler
     }
@@ -132,10 +130,10 @@ class MyPlacesViewController: UIViewController {
         child.didMove(toParent: self)
         
         UIView.animate(withDuration: 0.1) {
-           child.view.alpha = 1
+            child.view.alpha = 1
         }
     }
-
+    
     func remove() {
         willMove(toParent: nil)
         view.removeFromSuperview()
