@@ -28,7 +28,7 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         
         setupResultsController()
         setupBarButtonItems()
-        
+                
         checkConnection()
     }
     
@@ -95,6 +95,11 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         
         resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController?.delegate = self
+        
+        let filter = GMSAutocompleteFilter()
+        filter.type = .region
+        
+        resultsViewController?.autocompleteFilter = filter
         
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
