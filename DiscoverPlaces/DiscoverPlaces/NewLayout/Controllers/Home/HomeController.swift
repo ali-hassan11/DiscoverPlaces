@@ -74,7 +74,14 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     }
     
     private func fetchPlacesData(location: LocationItem) {
-                
+        
+        guard Reachability.isConnectedToNetwork() else {
+            self.showRetryConnectionAlert { (_) in
+                self.fetchForLastSavedLocation()
+            }
+            return
+        }
+        
         Service.shared.fetchNearbyPlaces(location: location.selectedLocation) { (response, error) in
             
             if let error = error {
@@ -284,12 +291,6 @@ extension HomeController: CLLocationManagerDelegate {
     }
     
     func fetchForLastSavedLocation() {
-        guard Reachability.isConnectedToNetwork() else {
-            self.showRetryConnectionAlert { (_) in
-                self.fetchForLastSavedLocation()
-            }
-            return
-        }
         
         if let data = UserDefaults.standard.data(forKey: Constants.locationKey) {
             do {
