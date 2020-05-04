@@ -26,7 +26,7 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         
         locationManager.delegate = self
         
-        setupSearchBar()
+        setupResultsController()
         setupBarButtonItems()
         
         checkConnection()
@@ -90,7 +90,7 @@ class LocationSearchController: UITableViewController, CLLocationManagerDelegate
         self.navigationController?.pushViewController(errorController, animated: true)
     }
     
-    private func setupSearchBar() {
+    private func setupResultsController() {
         GMSPlacesClient.provideAPIKey(Constants.googlePlacesAPIkey)
         
         resultsViewController = GMSAutocompleteResultsViewController()
