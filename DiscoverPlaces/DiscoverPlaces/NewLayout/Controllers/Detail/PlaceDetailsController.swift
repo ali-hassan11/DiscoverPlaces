@@ -265,7 +265,7 @@ extension PlaceDetailsController {
         case Detail.website.rawValue:
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WebAddressCell.id, for: indexPath) as! WebAddressCell
-            cell.webAddress = placeDetailResult?.website
+//            cell.webAddress = placeDetailResult?.website
             return cell
             
         case Detail.actionButtons.rawValue:
