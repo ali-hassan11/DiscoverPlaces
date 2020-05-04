@@ -28,6 +28,9 @@ enum Constants {
     static let noResultsTitle = "No Results"
     static let noResultsMessage = "There are no results for your chosen location. Try again later or choose a different location."
     static let tryDifferentLocationtext = "Try a different location"
+    static func noResults(_ category: String) -> String {
+        return "There are no results for \(category) in your chosen location, please try a different category."
+    }
     
     //API
     static let googlePlacesAPIkey = "AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg"

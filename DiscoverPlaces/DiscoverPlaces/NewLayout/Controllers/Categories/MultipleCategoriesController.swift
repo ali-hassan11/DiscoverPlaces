@@ -107,6 +107,12 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         dispatchGroup.notify(queue: .main) {
             self.collectionView.reloadData()
             self.activityIndicatorView.stopAnimating()
+            
+            guard self.subCategoryGroups.isEmpty == false else {
+                self.pushNoResultsController()
+                return
+            }
+            
             UIView.animate(withDuration: 0.35) {
                 self.collectionView.alpha = 1
             }
@@ -121,8 +127,8 @@ class MultipleCategoriesController: BaseCollectionViewController, UICollectionVi
         collectionView.register(GoogleLogoCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GoogleLogoCell.id)
     }
     
-    private func showNoResultsController() {
-        let errorController = ErrorController(message: "Try different category/location", buttonTitle: "Back") {
+    private func pushNoResultsController() {
+        let errorController = ErrorController(message: Constants.noResults(category.rawValue), buttonTitle: Constants.backtext) {
             ///DidTapActionButtonHandler
             self.navigationController?.popToRootViewController(animated: true)
         }
