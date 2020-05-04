@@ -152,8 +152,6 @@ class SettingsController: UITableViewController, MFMailComposeViewControllerDele
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients(["ali.software.dev@gmail.com"])
-            
-            #warning("Put correct name here")
             mail.setSubject("Feedback on Discover Places App")
             
             present(mail, animated: true)
