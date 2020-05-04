@@ -200,13 +200,18 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     private func pushNoConnectionController() {
         let errorController = ErrorController(message: Constants.genericNoConnectionMessage, buttonTitle: Constants.backtext) {
             ///DidTapRetryButtonHandler
-            self.navigationController?.popToRootViewController(animated: true)
+            self.popTwoViewControllers()
         }
         self.navigationController?.pushViewController(errorController, animated: true)
     }
     
-    private func remove(currentPlaceId: String, from places: [PlaceResult]) -> [PlaceResult] {
-        return places.filter{$0.place_id != currentPlaceId}
+    func popTwoViewControllers() {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+    }
+    
+    private func remove(currentPlaceId: String, from morePlaces: [PlaceResult]) -> [PlaceResult] {
+        return morePlaces.filter{$0.place_id != currentPlaceId}
     }
     
     required init?(coder: NSCoder) {
