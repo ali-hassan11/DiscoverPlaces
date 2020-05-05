@@ -203,11 +203,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         self.navigationController?.pushViewController(errorController, animated: true)
     }
     
-    func popTwoViewControllers() {
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-        self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-    }
-    
     private func remove(currentPlaceId: String, from morePlaces: [PlaceResult]) -> [PlaceResult] {
         return morePlaces.filter{$0.place_id != currentPlaceId}
     }

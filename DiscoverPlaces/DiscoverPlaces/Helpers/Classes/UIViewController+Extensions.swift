@@ -10,6 +10,11 @@ import UIKit
 
 extension UIViewController {
     
+    func popTwoViewControllers() {
+        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+    }
+    
     func showToastAlert(title: String, message: String? = nil) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
