@@ -410,7 +410,6 @@
 			children = (
 				CE616D042405D94D008E7067 /* ListType.swift */,
 				CE616D022405D46D008E7067 /* MyPlacesViewController.swift */,
-				CE694B8624097DD300F37ED6 /* MyPlacesHorizontalController.swift */,
 				CE694B8824097E0500F37ED6 /* PlaceListController.swift */,
 				CE694B8A24097E2700F37ED6 /* ToDoListController.swift */,
 			);
@@ -502,10 +501,8 @@
 				60EADA7E23F6C19B0095DBF9 /* WebAddressCell.swift */,
 				60EADA8623F6E1EB0095DBF9 /* ActionButtonsCell.swift */,
 				CE8A2FC823F088B800CDF866 /* MorePlacesHolder.swift */,
-				CE8A2FCC23F0890100CDF866 /* MorePlacesCell.swift */,
 				60EADA8023F6D91B0095DBF9 /* ReviewsHolder.swift */,
 				60EADA8423F6DA360095DBF9 /* ReviewCell.swift */,
-				CE1D791C2409B6890054864B /* DetailSplashScreen.xib */,
 				CE6F17FE23F66ED0003D8D89 /* ProbablyEndUpDeleting */,
 			);
 			path = Detail;
@@ -517,7 +514,6 @@
 				CE6599F123EC96A200E531CD /* PlaceDetailsController.swift */,
 				CE659A0C23EF884700E531CD /* ImagesHorizontalController.swift */,
 				60EADA8223F6D96B0095DBF9 /* ReviewsHorizontalController.swift */,
-				CE8A2FCA23F088D200CDF866 /* MorePlacesHorizontalController.swift */,
 				CECDA14724025896005F85FB /* ReviewDetailViewController.swift */,
 				CE2267DA2402A14E00E6385F /* OpeningHoursController.swift */,
 				CE616CFF2405BE28008E7067 /* WebsiteViewController.swift */,
@@ -538,6 +534,10 @@
 		CE6F17FE23F66ED0003D8D89 /* ProbablyEndUpDeleting */ = {
 			isa = PBXGroup;
 			children = (
+				CE8A2FCA23F088D200CDF866 /* MorePlacesHorizontalController.swift */,
+				CE694B8624097DD300F37ED6 /* MyPlacesHorizontalController.swift */,
+				CE8A2FCC23F0890100CDF866 /* MorePlacesCell.swift */,
+				CE1D791C2409B6890054864B /* DetailSplashScreen.xib */,
 				CE659A1023EF897000E531CD /* PlaceDetailsCell.swift */,
 				CE8A2FCE23F08A0E00CDF866 /* DetailsTopSectionCell.swift */,
 				CE8A2FD423F1CE0700CDF866 /* DetailsTopSectionCellXib.swift */,
