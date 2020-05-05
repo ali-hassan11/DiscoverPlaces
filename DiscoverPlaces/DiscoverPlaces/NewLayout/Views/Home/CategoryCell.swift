@@ -18,8 +18,7 @@ class CategoryCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
                 
-        layer.cornerRadius = 10
-        clipsToBounds = true
+        roundCorners()
         
         categoryImageView.contentMode = .scaleAspectFill
         categoryImageView.addOverlay(color: .black, alpha: 0.5)

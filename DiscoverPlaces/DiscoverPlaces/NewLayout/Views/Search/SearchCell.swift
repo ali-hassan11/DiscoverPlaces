@@ -30,8 +30,7 @@ class SearchCell: UICollectionViewCell {
     
     let placeImageView: UIImageView = {
         let iv = UIImageView(image: nil)
-        iv.layer.cornerRadius = 16 //Standardize
-        iv.clipsToBounds = true
+        iv.roundCorners()
         iv.contentMode = .scaleAspectFill
 //        iv.addGradientBackground(bottomColor: .clear, topColor: .black)
         return iv

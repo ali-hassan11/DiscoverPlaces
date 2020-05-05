@@ -50,7 +50,7 @@ extension UIView {
     }
     
     func roundCorners() {
-        layer.cornerRadius = 10
+        layer.cornerRadius = 8
         clipsToBounds = true
     }
     

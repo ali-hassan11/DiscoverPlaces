@@ -29,9 +29,7 @@ class ReviewDetailViewController: UIViewController {
     let reviewCardView: UIView! = {
         let v = UIView()
         v.backgroundColor = .secondarySystemBackground
-        //Standardize
-        v.layer.cornerRadius = 10
-        v.clipsToBounds = true
+        v.roundCorners()
         return v
     }()
     

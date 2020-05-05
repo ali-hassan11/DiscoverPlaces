@@ -29,8 +29,7 @@ class ReviewCell: UICollectionViewCell {
         highlightView.isHidden = true
         highlightView.fillSuperview()
         
-        layer.cornerRadius = 10
-        clipsToBounds = true
+        roundCorners()
         
         backgroundColor = .secondarySystemBackground
         

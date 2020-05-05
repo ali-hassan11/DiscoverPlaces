@@ -48,8 +48,7 @@ class ActionButtonsCell: UICollectionViewCell {
         btn.setImage(UIImage(systemName: "heart"), for: .normal)
         btn.tintColor = .white
         btn.backgroundColor = UIColor.systemPink
-        btn.layer.cornerRadius = 10
-        btn.clipsToBounds = true
+        btn.roundCorners()
         return btn
     }()
 
@@ -59,8 +58,7 @@ class ActionButtonsCell: UICollectionViewCell {
         btn.setImage(UIImage(systemName: "bookmark"), for: .normal)
         btn.tintColor = .white
         btn.backgroundColor = UIColor.systemPink
-        btn.layer.cornerRadius = 10
-        btn.clipsToBounds = true
+        btn.roundCorners()
         return btn
     }()
 
@@ -70,8 +68,7 @@ class ActionButtonsCell: UICollectionViewCell {
         btn.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         btn.tintColor = .white
         btn.backgroundColor = UIColor.systemPink
-        btn.layer.cornerRadius = 10
-        btn.clipsToBounds = true
+        btn.roundCorners()
         return btn
     }()
 
