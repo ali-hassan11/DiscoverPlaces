@@ -39,7 +39,7 @@ class ErrorController: UIViewController {
             messageLabel = UILabel(text: message, font: .systemFont(ofSize: 19), color: .label, alignment: .center, numberOfLines: 0)
         }
         
-        actionButton = UIButton(title: buttonTitle, textColor: .systemPink, width: nil, height: 40, font: .systemFont(ofSize: 19, weight: .medium), backgroundColor: nil, cornerRadius: nil)
+        actionButton = UIButton(title: buttonTitle, textColor: .systemPink, height: 40, font: .systemFont(ofSize: 19, weight: .medium), backgroundColor: nil)
         
         self.didTapActionButtonHandler = buttonHandler
     }
