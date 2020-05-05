@@ -264,7 +264,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRg-hH-eB1">
                                 <rect key="frame" x="20" y="96" width="374" height="81.5"/>
-                                <string key="text">Discover Places App uses the Google Places API to get the latest place data and locations around the world. Tap the button below to find out more about Google's Privacy Policy:</string>
+                                <string key="text">Discover Places App uses the Google Places API to get the latest place data and locations around the world. Tap the button below to find out more about Google's Privacy Policy.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
