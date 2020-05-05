@@ -25,6 +25,7 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLocationManager()
         setupLoadingView()
         navigationItem.largeTitleDisplayMode = .always
         setupBarButtons()
@@ -225,10 +226,13 @@ extension HomeController {
 
 extension HomeController: CLLocationManagerDelegate {
     
-    func determineMyCurrentLocation() {
+    private func setupLocationManager() {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func determineMyCurrentLocation() {
         locationManager.requestAlwaysAuthorization()
     }
     
