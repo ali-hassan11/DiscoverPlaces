@@ -50,6 +50,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         setupCollectionView()
         registerCells()
         setIndexForImagesHolderSegmentControl(to: 0)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         fetchDataAfterDelay()
     }
@@ -265,7 +266,6 @@ extension PlaceDetailsController {
         case Detail.website.rawValue:
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WebAddressCell.id, for: indexPath) as! WebAddressCell
-//            cell.webAddress = placeDetailResult?.website
             return cell
             
         case Detail.actionButtons.rawValue:

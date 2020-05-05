@@ -12,12 +12,6 @@ class WebAddressCell: UICollectionViewCell {
     
     public static let id = "webAddressCellId"
     
-//    var webAddress: String? {
-//        didSet {
-//            websiteAddressLabel.text = webAddress
-//        }
-//    }
-    
     let highlightView: UIView! = {
         let v = UIView()
         v.backgroundColor = UIColor.quaternarySystemFill
