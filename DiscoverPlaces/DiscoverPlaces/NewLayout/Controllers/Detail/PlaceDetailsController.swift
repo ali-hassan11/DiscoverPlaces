@@ -45,24 +45,13 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.largeTitleDisplayMode = .never
         setUpSplashScreen()
         setupCollectionView()
         registerCells()
         setIndexForImagesHolderSegmentControl(to: 0)
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        setupNavigationItem()
 
-        fetchDataAfterDelay()
-    }
-    
-    private func fetchDataAfterDelay() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.fetchPlaceData(for: self.placeId)
-        }
-    }
-    
-    private func setIndexForImagesHolderSegmentControl(to segment: Int) {
-        UserDefaults.standard.set(segment, forKey: Constants.nearestPageKey)
+        fetchPlaceData(for: self.placeId)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -80,9 +69,18 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         navigationController?.navigationBar.isTranslucent = true
     }
     
+    private func setIndexForImagesHolderSegmentControl(to segment: Int) {
+        UserDefaults.standard.set(segment, forKey: Constants.nearestPageKey)
+    }
+    
     private func setupCollectionView() {
         collectionView.backgroundColor = .systemBackground
         collectionView.contentInsetAdjustmentBehavior = .never
+    }
+    
+    private func setupNavigationItem() {
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     private func setUpSplashScreen() {
@@ -100,7 +98,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         activityIndicatorView.fillSuperview()
     }
     
-    let bottomPaddingCellId = "bottomPaddingCellId"
     private func registerCells() {
         collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PlaceImagesHolder.id)
         collectionView.register(AddressCell.self, forCellWithReuseIdentifier: AddressCell.id)
@@ -112,7 +109,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: MorePlacesHolder.id)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Constants.errorCellId)
         collectionView.register(GoogleLogoCell.self, forCellWithReuseIdentifier: GoogleLogoCell.id)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: bottomPaddingCellId)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Constants.bottomPaddingCellId)
         collectionView.register(ErrorCell.self, forCellWithReuseIdentifier: ErrorCell.id)
     }
     
@@ -306,7 +303,7 @@ extension PlaceDetailsController {
             
         case Detail.bottomPadding.rawValue:
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bottomPaddingCellId, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.bottomPaddingCellId, for: indexPath)
             return cell
             
         default:

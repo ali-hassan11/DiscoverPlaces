@@ -39,6 +39,7 @@ enum Constants {
     
     //Cells
     static let errorCellId = "errorCell"
+    static let bottomPaddingCellId = "bottomPaddingCellId"
     
     //Sizes
     static let placeImageControllerHeight: CGFloat = 200
