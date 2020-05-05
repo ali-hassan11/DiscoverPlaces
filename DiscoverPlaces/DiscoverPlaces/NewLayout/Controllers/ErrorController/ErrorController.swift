@@ -20,6 +20,7 @@ class ErrorController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         actionButton?.addTarget(self, action: #selector(callHandlerClosure), for: .touchUpInside)
+        navigationItem.setHidesBackButton(true, animated:true)
         setupStackView()
     }
     
