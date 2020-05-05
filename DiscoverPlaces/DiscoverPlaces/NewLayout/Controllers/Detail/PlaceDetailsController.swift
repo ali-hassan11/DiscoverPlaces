@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
-
+    
     private enum Detail: Int {
         case address
         case openingHours
@@ -24,19 +24,19 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
     }
     
     private let searchResponseFilter = SearchResponseFilter()
-
+    
     private let location: LocationItem
     private let placeId: String
     private var placeDetailResult: PlaceDetailResult?
     private var morePlaces: [PlaceResult]?
-
+    
     private let activityIndicatorView = LoadingIndicatorView()
     private let fadeView: UIView! = {
         let v = UIView()
         v.backgroundColor = .systemBackground
         return v
     }()
-        
+    
     init(placeId: String, location: LocationItem) {
         self.placeId = placeId
         self.location = location
@@ -50,10 +50,10 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         registerCells()
         setIndexForImagesHolderSegmentControl(to: 0)
         setupNavigationItem()
-
+        
         fetchPlaceData(for: self.placeId)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
@@ -67,60 +67,6 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.shadowImage = nil
         navigationController?.navigationBar.isTranslucent = true
-    }
-    
-    private func setIndexForImagesHolderSegmentControl(to segment: Int) {
-        UserDefaults.standard.set(segment, forKey: Constants.nearestPageKey)
-    }
-    
-    private func setupCollectionView() {
-        collectionView.backgroundColor = .systemBackground
-        collectionView.contentInsetAdjustmentBehavior = .never
-    }
-    
-    private func setupNavigationItem() {
-        navigationItem.largeTitleDisplayMode = .never
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    }
-    
-    private func setUpSplashScreen() {
-
-        self.view.addSubview(fadeView)
-        fadeView.fillSuperview()
-        
-        let imagePlaceHolder = UIView()
-        imagePlaceHolder.backgroundColor = .secondarySystemBackground
-        fadeView.addSubview(imagePlaceHolder)
-        imagePlaceHolder.anchor(top: fadeView.topAnchor, leading: fadeView.leadingAnchor, bottom: nil, trailing: fadeView.trailingAnchor)
-        imagePlaceHolder.constrainHeight(constant: view.frame.height / 2)
-        
-        imagePlaceHolder.addSubview(activityIndicatorView)
-        activityIndicatorView.fillSuperview()
-    }
-    
-    private func registerCells() {
-        collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PlaceImagesHolder.id)
-        collectionView.register(AddressCell.self, forCellWithReuseIdentifier: AddressCell.id)
-        collectionView.register(OpeningTimeCell.self, forCellWithReuseIdentifier: OpeningTimeCell.id)
-        collectionView.register(PhoneNumberCell.self, forCellWithReuseIdentifier: PhoneNumberCell.id)
-        collectionView.register(WebAddressCell.self, forCellWithReuseIdentifier: WebAddressCell.id)
-        collectionView.register(ActionButtonsCell.self, forCellWithReuseIdentifier: ActionButtonsCell.id)
-        collectionView.register(ReviewsHolder.self, forCellWithReuseIdentifier: ReviewsHolder.id)
-        collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: MorePlacesHolder.id)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Constants.errorCellId)
-        collectionView.register(GoogleLogoCell.self, forCellWithReuseIdentifier: GoogleLogoCell.id)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Constants.bottomPaddingCellId)
-        collectionView.register(ErrorCell.self, forCellWithReuseIdentifier: ErrorCell.id)
-    }
-    
-    private func fadeOutSplashScreen() {
-        UIView.animate(withDuration: 0.2, animations: {
-            self.fadeView.alpha = 0
-            self.activityIndicatorView.alpha = 0
-        }) { (true) in
-            self.activityIndicatorView.stopAnimating()
-            self.fadeView.removeFromSuperview()
-        }
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -166,7 +112,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
             self.fadeOutSplashScreen()
         }
     }
-
+    
     func fetchMorePlacesData(near location: Location) {
         
         Service.shared.fetchNearbyPlaces(location: location, radius: 3000) { (response, error) in
@@ -181,7 +127,7 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
                 print("No results?")
                 return
             }
-                        
+            
             let filteredResults = self.searchResponseFilter.morePlacesResults(from: response)
             self.handleMorePlacesSuccess(with: filteredResults)
         }
@@ -192,6 +138,60 @@ class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDele
         
         DispatchQueue.main.async {
             self.collectionView.reloadData()
+        }
+    }
+    
+    private func setIndexForImagesHolderSegmentControl(to segment: Int) {
+        UserDefaults.standard.set(segment, forKey: Constants.nearestPageKey)
+    }
+    
+    private func setupCollectionView() {
+        collectionView.backgroundColor = .systemBackground
+        collectionView.contentInsetAdjustmentBehavior = .never
+    }
+    
+    private func setupNavigationItem() {
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    private func setUpSplashScreen() {
+        
+        self.view.addSubview(fadeView)
+        fadeView.fillSuperview()
+        
+        let imagePlaceHolder = UIView()
+        imagePlaceHolder.backgroundColor = .secondarySystemBackground
+        fadeView.addSubview(imagePlaceHolder)
+        imagePlaceHolder.anchor(top: fadeView.topAnchor, leading: fadeView.leadingAnchor, bottom: nil, trailing: fadeView.trailingAnchor)
+        imagePlaceHolder.constrainHeight(constant: view.frame.height / 2)
+        
+        imagePlaceHolder.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
+    }
+    
+    private func registerCells() {
+        collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PlaceImagesHolder.id)
+        collectionView.register(AddressCell.self, forCellWithReuseIdentifier: AddressCell.id)
+        collectionView.register(OpeningTimeCell.self, forCellWithReuseIdentifier: OpeningTimeCell.id)
+        collectionView.register(PhoneNumberCell.self, forCellWithReuseIdentifier: PhoneNumberCell.id)
+        collectionView.register(WebAddressCell.self, forCellWithReuseIdentifier: WebAddressCell.id)
+        collectionView.register(ActionButtonsCell.self, forCellWithReuseIdentifier: ActionButtonsCell.id)
+        collectionView.register(ReviewsHolder.self, forCellWithReuseIdentifier: ReviewsHolder.id)
+        collectionView.register(MorePlacesHolder.self, forCellWithReuseIdentifier: MorePlacesHolder.id)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Constants.errorCellId)
+        collectionView.register(GoogleLogoCell.self, forCellWithReuseIdentifier: GoogleLogoCell.id)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Constants.bottomPaddingCellId)
+        collectionView.register(ErrorCell.self, forCellWithReuseIdentifier: ErrorCell.id)
+    }
+    
+    private func fadeOutSplashScreen() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.fadeView.alpha = 0
+            self.activityIndicatorView.alpha = 0
+        }) { (true) in
+            self.activityIndicatorView.stopAnimating()
+            self.fadeView.removeFromSuperview()
         }
     }
     
@@ -238,7 +238,7 @@ extension PlaceDetailsController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.item {
         case Detail.address.rawValue:
-
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddressCell.id, for: indexPath) as! AddressCell
             cell.vicinity = placeDetailResult?.vicinity
             return cell
@@ -261,7 +261,7 @@ extension PlaceDetailsController {
             return cell
             
         case Detail.actionButtons.rawValue:
-
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActionButtonsCell.id, for: indexPath) as! ActionButtonsCell
             cell.placeId = placeId
             cell.delegate = self
@@ -282,7 +282,7 @@ extension PlaceDetailsController {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
             cell.horizontalController.location = location.selectedLocation
-                        
+            
             cell.horizontalController.placeGroup = PlacesGroup(results: morePlaces)
             cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
                 guard let location = self?.location else { return }
@@ -332,7 +332,7 @@ extension PlaceDetailsController {
             
         case Detail.googleCell.rawValue:
             return .init(width: view.frame.width, height: Constants.googleFooterHeight)
-
+            
         case Detail.bottomPadding.rawValue:
             return setBottomPaddingSize(toFillWidthOf: view)
             
@@ -356,7 +356,7 @@ extension PlaceDetailsController {
             return .zero
         }
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.item {
         case Detail.address.rawValue:
@@ -388,7 +388,7 @@ extension PlaceDetailsController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
- 
+    
     
     private func openInMaps(place: PlaceDetailResult, longitude: Double, latitude: Double) {
         let coordinate = CLLocationCoordinate2DMake(latitude,longitude)
