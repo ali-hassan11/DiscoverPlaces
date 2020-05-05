@@ -9,7 +9,7 @@
 import UIKit
 import GooglePlaces
 
-class LocationSearchController: UITableViewController, CLLocationManagerDelegate {
+final class LocationSearchController: UITableViewController, CLLocationManagerDelegate {
     
     var selectedLocationCompletionHandler: ((Location?, String?) -> ())?
     var determineUserLocationCompletionHandler: (()->())?

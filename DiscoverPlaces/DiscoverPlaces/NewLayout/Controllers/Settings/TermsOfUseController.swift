@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TermsOfUseController: UIViewController {
+final class TermsOfUseController: UIViewController {
     
     @IBOutlet weak var termsButton: UIButton!
     

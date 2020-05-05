@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MorePlacesHolder: UICollectionViewCell {
+final class MorePlacesHolder: UICollectionViewCell {
     
     public static let id = "morePlacesHolderId"
 

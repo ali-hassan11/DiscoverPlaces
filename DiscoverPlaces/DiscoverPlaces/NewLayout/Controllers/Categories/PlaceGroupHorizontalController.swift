@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlaceGroupHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
+final class PlaceGroupHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     private let searchResponseFilter = SearchResponseFilter()
     

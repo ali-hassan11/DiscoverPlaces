@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoriesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
+final class CategoriesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     ///Used for calculation in sizeForItemAt
     private let numberOfRows:CGFloat = 3

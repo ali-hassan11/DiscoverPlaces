@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReviewsHolder: UICollectionViewCell {
+final class ReviewsHolder: UICollectionViewCell {
 
     public static let id = "reviewsHolderId"
     

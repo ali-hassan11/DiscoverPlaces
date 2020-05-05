@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PrivacyPolicyController: UIViewController {
+final class PrivacyPolicyController: UIViewController {
     
     @IBOutlet weak var privacyPolicyButton: UIButton!
     

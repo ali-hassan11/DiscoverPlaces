@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OpeningTimeCell: UICollectionViewCell {
+final class OpeningTimeCell: UICollectionViewCell {
     
     public static let id = "openingTimeCellId"
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeLargeCellHolder: UICollectionReusableView {
+final class HomeLargeCellHolder: UICollectionReusableView {
     
     static let id = "largeCellHolderId"
     

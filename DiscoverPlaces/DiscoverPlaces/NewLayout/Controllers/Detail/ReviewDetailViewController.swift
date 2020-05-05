@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReviewDetailViewController: UIViewController {
+final class ReviewDetailViewController: UIViewController {
   
     var review: Review? {
           didSet {

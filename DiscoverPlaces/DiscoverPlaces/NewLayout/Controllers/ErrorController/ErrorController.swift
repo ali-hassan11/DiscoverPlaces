@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ErrorController: UIViewController {
+final class ErrorController: UIViewController {
     
     private let errorIconView = UIImageView(image: UIImage(systemName: "exclamationmark.triangle.fill"))
     private var titleLabel: UILabel?

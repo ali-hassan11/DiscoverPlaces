@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WebAddressCell: UICollectionViewCell {
+final class WebAddressCell: UICollectionViewCell {
     
     public static let id = "webAddressCellId"
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
+final class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     var didSelectHandler: ((PlaceResult) -> ())?
     

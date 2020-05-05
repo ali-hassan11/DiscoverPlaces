@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+final class SearchController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchResults = [PlaceResult]()

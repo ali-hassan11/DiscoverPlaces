@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LargePlaceCell: UICollectionViewCell {
+final class LargePlaceCell: UICollectionViewCell {
     
     public static let id = "largeCellId"
     

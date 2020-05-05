@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AboutController: UIViewController {
+final class AboutController: UIViewController {
     
     @IBOutlet weak var getInTouchButton: UIButton!
     

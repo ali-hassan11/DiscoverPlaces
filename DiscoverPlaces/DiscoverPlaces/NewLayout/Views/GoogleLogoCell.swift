@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GoogleLogoCell: UICollectionViewCell {
+final class GoogleLogoCell: UICollectionViewCell {
     
     static let id = "googleCellId"
     

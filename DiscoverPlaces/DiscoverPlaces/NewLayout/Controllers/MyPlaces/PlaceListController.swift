@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlaceListController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+final class PlaceListController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var didSelectPlaceInListHandler: ((String, Location) -> ())?  //Don't think location this is used
 

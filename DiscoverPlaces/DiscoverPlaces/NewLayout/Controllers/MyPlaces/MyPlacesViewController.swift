@@ -9,7 +9,7 @@
 
 import UIKit
 
-class MyPlacesViewController: UIViewController {
+final class MyPlacesViewController: UIViewController {
     
     let listSelector = UISegmentedControl(items: ["Favourites", "To-Do"])
     let listControllersContainer = UIView()

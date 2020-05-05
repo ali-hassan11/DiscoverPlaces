@@ -8,11 +8,12 @@
 
 import UIKit
 
+//Use closure
 protocol ActionButtonsCellDelegate: class {
     func sharePressed(cell: ActionButtonsCell)
 }
 
-class ActionButtonsCell: UICollectionViewCell {
+final class ActionButtonsCell: UICollectionViewCell {
     
     public static let id = "actionButtonsCellId"
 

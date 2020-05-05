@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReviewCell: UICollectionViewCell {
+final class ReviewCell: UICollectionViewCell {
     
     static let id = "reviewCellId"
     

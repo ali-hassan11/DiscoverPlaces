@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import SafariServices
 
-class WebsiteViewController: UIViewController {
+final class WebsiteViewController: UIViewController {
     
     var urlString: String? {
         didSet {

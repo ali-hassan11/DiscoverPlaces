@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 import MessageUI
 
-class SettingsController: UITableViewController, MFMailComposeViewControllerDelegate {
+final class SettingsController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -170,7 +170,7 @@ class SettingsController: UITableViewController, MFMailComposeViewControllerDele
     }
 }
 
-class UnitsCell: UITableViewCell {
+final class UnitsCell: UITableViewCell {
     
     public static let id = "unitsCellId"
     

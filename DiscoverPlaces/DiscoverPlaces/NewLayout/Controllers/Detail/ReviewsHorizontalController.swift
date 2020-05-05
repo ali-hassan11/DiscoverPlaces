@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReviewsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
+final class ReviewsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     var reviews: [Review]? {
         didSet {

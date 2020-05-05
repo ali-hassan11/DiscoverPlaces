@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddressCell: UICollectionViewCell {
+final class AddressCell: UICollectionViewCell {
 
     public static let id = "addressCellId"
     

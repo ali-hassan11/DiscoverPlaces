@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhoneNumberCell: UICollectionViewCell {
+final class PhoneNumberCell: UICollectionViewCell {
     
     public static let id = "phoneNumberCellId"
     

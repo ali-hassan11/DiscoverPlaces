@@ -8,8 +8,8 @@
 import UIKit
 import CoreLocation
 
-class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
-    
+final class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+
     private var userLocation: LocationItem?
     private var locationManager:CLLocationManager!
     

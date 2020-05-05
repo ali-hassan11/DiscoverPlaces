@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MultipleCategoriesController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+final class MultipleCategoriesController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private let activityIndicatorView = LoadingIndicatorView()
     

@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class SearchCell: UICollectionViewCell {
+final class SearchCell: UICollectionViewCell {
     
     var searchResult: PlaceResult! {
         didSet {

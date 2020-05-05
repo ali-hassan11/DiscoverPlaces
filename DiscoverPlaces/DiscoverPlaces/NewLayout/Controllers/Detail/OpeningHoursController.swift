@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OpeningHoursController: UITableViewController {
+final class OpeningHoursController: UITableViewController {
     
     var openingHours: OpeningHours? {
         didSet {

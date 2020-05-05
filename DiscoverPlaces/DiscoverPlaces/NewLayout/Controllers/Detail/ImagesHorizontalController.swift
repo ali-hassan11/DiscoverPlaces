@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImagesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
+final class ImagesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     var photos: [Photo]? {
         didSet {

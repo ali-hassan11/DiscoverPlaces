@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+final class PlaceDetailsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private enum Detail: Int {
         case address

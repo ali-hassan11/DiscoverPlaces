@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoriesHolder: UICollectionViewCell {
+final class CategoriesHolder: UICollectionViewCell {
     
     static let id = "categoriesHolderId"
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ErrorCell: UICollectionViewCell {
+final class ErrorCell: UICollectionViewCell {
     
     static let id = "id"
     
