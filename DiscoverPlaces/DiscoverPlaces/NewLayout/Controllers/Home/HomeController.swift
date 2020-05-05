@@ -25,7 +25,6 @@ class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlow
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLocationManager()
         setupLoadingView()
         navigationItem.largeTitleDisplayMode = .always
         setupBarButtons()
@@ -226,13 +225,10 @@ extension HomeController {
 
 extension HomeController: CLLocationManagerDelegate {
     
-    private func setupLocationManager() {
+    func determineMyCurrentLocation() {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-    
-    func determineMyCurrentLocation() {
         locationManager.requestAlwaysAuthorization()
     }
     
@@ -284,7 +280,7 @@ extension HomeController: CLLocationManagerDelegate {
         fetchForLastSavedLocation()
     }
     
-    func updateLastSavedLocation(with location: LocationItem) {
+    private func updateLastSavedLocation(with location: LocationItem) {
         do {
             let encoder = JSONEncoder()
             let data = try encoder.encode(location)
@@ -294,7 +290,7 @@ extension HomeController: CLLocationManagerDelegate {
         }
     }
     
-    func fetchForLastSavedLocation() {
+    private func fetchForLastSavedLocation() {
         
         if let data = UserDefaults.standard.data(forKey: Constants.locationKey) {
             do {
@@ -310,7 +306,7 @@ extension HomeController: CLLocationManagerDelegate {
         }
     }
     
-    func showRetryConnectionAlert(retryHandler: ((UIAlertAction)->())?) {
+    private func showRetryConnectionAlert(retryHandler: ((UIAlertAction)->())?) {
         let alertController = UIAlertController(title: Constants.noInternetConnectionTitle,
                                                 message: Constants.noInternetConnetionMessage, preferredStyle: .alert)
         
