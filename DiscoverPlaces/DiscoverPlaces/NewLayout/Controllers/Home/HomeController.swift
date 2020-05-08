@@ -128,11 +128,7 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
         let locationSearchController = LocationSearchController()
         
         locationSearchController.selectedLocationCompletionHandler = updateToSelectedLocation
-        
-        locationSearchController.determineUserLocationCompletionHandler = { [weak self] in
-            self?.determineMyCurrentLocation()
-            self?.resetScroll()
-        }
+        locationSearchController.determineUserLocationCompletionHandler = updateToCurrentUserLocation
         
         navigationController?.pushViewController(locationSearchController, animated: true)
     }
@@ -142,6 +138,11 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
         userLocation = locationStub
         updateLastSavedLocation(with: locationStub)
         fetchForLastSavedLocation()
+        resetScroll()
+    }
+    
+    private func updateToCurrentUserLocation() -> () {
+        determineMyCurrentLocation()
         resetScroll()
     }
     
