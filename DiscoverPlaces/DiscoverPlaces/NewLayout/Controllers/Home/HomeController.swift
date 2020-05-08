@@ -120,31 +120,30 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
     }
     
     private func pushNoResultsController() {
-        let errorController = ErrorController(message: Constants.noResultsMessage, buttonTitle: Constants.tryDifferentLocationtext) {
-            ///DidTapActionButtonHandler
-            self.showSetLocationController()
-        }
+        let errorController = ErrorController(message: Constants.noResultsMessage, buttonTitle: Constants.tryDifferentLocationtext, buttonHandler: showSetLocationController)
         self.navigationController?.pushViewController(errorController, animated: true)
     }
-
-    @objc func showSetLocationController() {
+    
+    @objc func showSetLocationController() -> () {
         let locationSearchController = LocationSearchController()
         
-        locationSearchController.selectedLocationCompletionHandler = { [weak self] location, name in
-            guard let location = location else { return }
-            let locationStub = LocationItem(name: name, selectedLocation: location, actualUserLocation: self?.userLocation?.actualUserLocation)
-            self?.userLocation = locationStub
-            self?.updateLastSavedLocation(with: locationStub)
-            self?.fetchForLastSavedLocation()
-            self?.resetScroll()
-        }
-        
-        locationSearchController.determineUserLocationCompletionHandler = { [weak self] in
-            self?.determineMyCurrentLocation()
-            self?.resetScroll()
-        }
+        locationSearchController.selectedLocationCompletionHandler = updateToSelectedLocation
+        locationSearchController.determineUserLocationCompletionHandler = updateToCurrentUserLocation
         
         navigationController?.pushViewController(locationSearchController, animated: true)
+    }
+    
+    private func updateToSelectedLocation(location: Location, name: String?) -> () {
+        let locationStub = LocationItem(name: name, selectedLocation: location, actualUserLocation: userLocation?.actualUserLocation)
+        userLocation = locationStub
+        updateLastSavedLocation(with: locationStub)
+        fetchForLastSavedLocation()
+        resetScroll()
+    }
+    
+    private func updateToCurrentUserLocation() -> () {
+        determineMyCurrentLocation()
+        resetScroll()
     }
     
     private func resetScroll() {
@@ -156,6 +155,12 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
         guard let categoriesHolderCell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? CategoriesHolder else { return }
         categoriesHolderCell.horizontalController.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
     }
+    
+    private func presentDetailController(placeId: String) -> () {
+        guard let location = userLocation else { return }
+        let detailsController = PlaceDetailsController(placeId: placeId, location: location)
+        navigationController?.pushViewController(detailsController, animated: true)
+    }
 }
 
 extension HomeController {
@@ -166,11 +171,7 @@ extension HomeController {
             cell.horizontalController.userLocation = self.userLocation
             cell.horizontalController.results = placeResults
             cell.configureTitle(with: userLocation?.name)
-            cell.horizontalController.didSelectHandler = { [weak self] result in //Only need placeId
-                guard let placeId = result.place_id, let location = self?.userLocation else { return }
-                let detailsController = PlaceDetailsController(placeId: placeId, location: location)
-                self?.navigationController?.pushViewController(detailsController, animated: true)
-            }
+            cell.horizontalController.didSelectHandler = presentDetailController
             return cell
         } else {
             let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
