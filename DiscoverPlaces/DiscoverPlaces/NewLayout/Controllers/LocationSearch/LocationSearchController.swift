@@ -11,7 +11,7 @@ import GooglePlaces
 
 final class LocationSearchController: UITableViewController, CLLocationManagerDelegate {
     
-    var selectedLocationCompletionHandler: ((Location?, String?) -> ())?
+    var selectedLocationCompletionHandler: ((Location, String?) -> ())?
     var determineUserLocationCompletionHandler: (()->())?
     
     private var resultsViewController: GMSAutocompleteResultsViewController?
