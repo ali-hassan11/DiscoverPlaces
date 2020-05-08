@@ -120,14 +120,11 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
     }
     
     private func pushNoResultsController() {
-        let errorController = ErrorController(message: Constants.noResultsMessage, buttonTitle: Constants.tryDifferentLocationtext) {
-            ///DidTapActionButtonHandler
-            self.showSetLocationController()
-        }
+        let errorController = ErrorController(message: Constants.noResultsMessage, buttonTitle: Constants.tryDifferentLocationtext, buttonHandler: showSetLocationController)
         self.navigationController?.pushViewController(errorController, animated: true)
     }
-
-    @objc func showSetLocationController() {
+    
+    @objc func showSetLocationController() -> (){
         let locationSearchController = LocationSearchController()
         
         locationSearchController.selectedLocationCompletionHandler = { [weak self] location, name in
