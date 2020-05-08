@@ -124,7 +124,7 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
         self.navigationController?.pushViewController(errorController, animated: true)
     }
     
-    @objc func showSetLocationController() -> (){
+    @objc func showSetLocationController() -> () {
         let locationSearchController = LocationSearchController()
         
         locationSearchController.selectedLocationCompletionHandler = updateToSelectedLocation
@@ -155,6 +155,12 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
         guard let categoriesHolderCell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? CategoriesHolder else { return }
         categoriesHolderCell.horizontalController.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
     }
+    
+    private func presentDetailController(placeId: String) -> () {
+        guard let location = userLocation else { return }
+        let detailsController = PlaceDetailsController(placeId: placeId, location: location)
+        navigationController?.pushViewController(detailsController, animated: true)
+    }
 }
 
 extension HomeController {
@@ -165,11 +171,7 @@ extension HomeController {
             cell.horizontalController.userLocation = self.userLocation
             cell.horizontalController.results = placeResults
             cell.configureTitle(with: userLocation?.name)
-            cell.horizontalController.didSelectHandler = { [weak self] result in //Only need placeId
-                guard let placeId = result.place_id, let location = self?.userLocation else { return }
-                let detailsController = PlaceDetailsController(placeId: placeId, location: location)
-                self?.navigationController?.pushViewController(detailsController, animated: true)
-            }
+            cell.horizontalController.didSelectHandler = presentDetailController
             return cell
         } else {
             let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell

@@ -19,7 +19,7 @@ struct SearchResponse: Decodable {
 struct PlaceResult: Decodable {
     let geometry: Geometry?
     let icon: String? //Probably won't need this
-    let place_id: String?
+    let place_id: String
     let name: String?
     let photos: [Photo]?
     let types: [String]?
