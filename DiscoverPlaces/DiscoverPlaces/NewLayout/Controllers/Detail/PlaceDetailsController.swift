@@ -171,7 +171,7 @@ final class PlaceDetailsController: BaseCollectionViewController, UICollectionVi
     }
     
     private func registerCells() {
-        collectionView.register(PlaceImagesHolder.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PlaceImagesHolder.id)
+        collectionView.register(MainImagesSliderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainImagesSliderCell.id)
         collectionView.register(AddressCell.self, forCellWithReuseIdentifier: AddressCell.id)
         collectionView.register(OpeningTimeCell.self, forCellWithReuseIdentifier: OpeningTimeCell.id)
         collectionView.register(PhoneNumberCell.self, forCellWithReuseIdentifier: PhoneNumberCell.id)
@@ -216,7 +216,7 @@ extension PlaceDetailsController {
     
     //MARK: Place Images
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PlaceImagesHolder.id, for: indexPath) as! PlaceImagesHolder
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MainImagesSliderCell.id, for: indexPath) as! MainImagesSliderCell
         guard let placeDetail = placeDetailResult else { return cell }
         cell.configure(using: placeDetail, userLocation: location.actualUserLocation)
         cell.horizontalController.didScrollImagesController = { nearestPage in

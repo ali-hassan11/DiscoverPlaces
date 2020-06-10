@@ -10,7 +10,7 @@ import UIKit
 
 typealias PageIndicator = UISegmentedControl
 
-final class PlaceImagesHolder: UICollectionReusableView {
+final class MainImagesSliderCell: UICollectionReusableView {
     
     static let id = "placeImagesHolderId"
     

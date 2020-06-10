@@ -64,7 +64,7 @@
 		CE659A0523EF87A200E531CD /* CategoriesHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A0423EF87A200E531CD /* CategoriesHolder.swift */; };
 		CE659A0723EF87C100E531CD /* CategoriesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A0623EF87C100E531CD /* CategoriesHorizontalController.swift */; };
 		CE659A0923EF87E800E531CD /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A0823EF87E800E531CD /* CategoryCell.swift */; };
-		CE659A0B23EF882300E531CD /* PlaceImagesHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A0A23EF882300E531CD /* PlaceImagesHolder.swift */; };
+		CE659A0B23EF882300E531CD /* MainImagesSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A0A23EF882300E531CD /* MainImagesSliderCell.swift */; };
 		CE659A0D23EF884700E531CD /* ImagesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A0C23EF884700E531CD /* ImagesHorizontalController.swift */; };
 		CE659A0F23EF888900E531CD /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A0E23EF888900E531CD /* ImageCell.swift */; };
 		CE659A1123EF897000E531CD /* PlaceDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE659A1023EF897000E531CD /* PlaceDetailsCell.swift */; };
@@ -188,7 +188,7 @@
 		CE659A0423EF87A200E531CD /* CategoriesHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesHolder.swift; sourceTree = "<group>"; };
 		CE659A0623EF87C100E531CD /* CategoriesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesHorizontalController.swift; sourceTree = "<group>"; };
 		CE659A0823EF87E800E531CD /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		CE659A0A23EF882300E531CD /* PlaceImagesHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceImagesHolder.swift; sourceTree = "<group>"; };
+		CE659A0A23EF882300E531CD /* MainImagesSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImagesSliderCell.swift; sourceTree = "<group>"; };
 		CE659A0C23EF884700E531CD /* ImagesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesHorizontalController.swift; sourceTree = "<group>"; };
 		CE659A0E23EF888900E531CD /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		CE659A1023EF897000E531CD /* PlaceDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDetailsCell.swift; sourceTree = "<group>"; };
@@ -266,6 +266,13 @@
 				28D38EEAE4021C84F9F5812F /* Pods-DiscoverPlacesTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		CE300D3024918887008F1931 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		CE327AE8241546C00010F400 /* Settings */ = {
@@ -351,7 +358,10 @@
 			children = (
 				CE5835CD23DE204B00C89622 /* BaseCollectionViewController.swift */,
 				CE5835C823DE173800C89622 /* BaseTabBarController.swift */,
-				CE6599EE23EA692500E531CD /* NewLayout */,
+				CE6599F723EF847F00E531CD /* Controllers */,
+				CE6599F923EF849000E531CD /* Views */,
+				CE9CDF7124365B4E008DF6DE /* ViewModels */,
+				CE6599F823EF848A00E531CD /* Models */,
 				CE5835D923DF1B6900C89622 /* Service */,
 				CE5835CF23DE223800C89622 /* Helpers */,
 				CE5835A123DE16B600C89622 /* Assets.xcassets */,
@@ -416,17 +426,6 @@
 			path = MyPlaces;
 			sourceTree = "<group>";
 		};
-		CE6599EE23EA692500E531CD /* NewLayout */ = {
-			isa = PBXGroup;
-			children = (
-				CE6599F723EF847F00E531CD /* Controllers */,
-				CE6599F923EF849000E531CD /* Views */,
-				CE9CDF7124365B4E008DF6DE /* ViewModels */,
-				CE6599F823EF848A00E531CD /* Models */,
-			);
-			path = NewLayout;
-			sourceTree = "<group>";
-		};
 		CE6599F723EF847F00E531CD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,7 +438,8 @@
 				CE327AED2416960E0010F400 /* Categories */,
 				CEBDBDB0245EFB25008E80B4 /* LocationSearch */,
 			);
-			path = Controllers;
+			name = Controllers;
+			path = NewLayout/Controllers;
 			sourceTree = "<group>";
 		};
 		CE6599F823EF848A00E531CD /* Models */ = {
@@ -451,12 +451,14 @@
 				CE24AD892442FA9500852C91 /* PlaceListItem.swift */,
 				CE45B49C2451D6D400656339 /* PlacesGroup.swift */,
 			);
-			path = Models;
+			name = Models;
+			path = NewLayout/Models;
 			sourceTree = "<group>";
 		};
 		CE6599F923EF849000E531CD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CE300D3024918887008F1931 /* Cells */,
 				CE6599FB23EF867A00E531CD /* Home */,
 				CE6599FC23EF868000E531CD /* Detail */,
 				CE694B8C24097E8400F37ED6 /* MyPlaces */,
@@ -466,7 +468,8 @@
 				CEA988F22438DA7F002A1FDE /* StretchyHeaderLayout.swift */,
 				CE24AD852440C3AB00852C91 /* GoogleLogoCell.swift */,
 			);
-			path = Views;
+			name = Views;
+			path = NewLayout/Views;
 			sourceTree = "<group>";
 		};
 		CE6599FA23EF867100E531CD /* Home */ = {
@@ -493,7 +496,7 @@
 		CE6599FC23EF868000E531CD /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				CE659A0A23EF882300E531CD /* PlaceImagesHolder.swift */,
+				CE659A0A23EF882300E531CD /* MainImagesSliderCell.swift */,
 				CE659A0E23EF888900E531CD /* ImageCell.swift */,
 				60EADA7A23F6B0E60095DBF9 /* AddressCell.swift */,
 				60EADA7C23F6B75D0095DBF9 /* PhoneNumberCell.swift */,
@@ -569,7 +572,8 @@
 			children = (
 				CE9CDF7224365B7D008DF6DE /* PlaceCellViewModel.swift */,
 			);
-			path = ViewModels;
+			name = ViewModels;
+			path = NewLayout/ViewModels;
 			sourceTree = "<group>";
 		};
 		CEBDBDB0245EFB25008E80B4 /* LocationSearch */ = {
@@ -839,7 +843,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE659A0B23EF882300E531CD /* PlaceImagesHolder.swift in Sources */,
+				CE659A0B23EF882300E531CD /* MainImagesSliderCell.swift in Sources */,
 				CE694B9024097ECF00F37ED6 /* ToDoListHolderCell.swift in Sources */,
 				CE659A0923EF87E800E531CD /* CategoryCell.swift in Sources */,
 				CE8A2FD323F08AA900CDF866 /* DetailsOpeningTimesCell.swift in Sources */,
