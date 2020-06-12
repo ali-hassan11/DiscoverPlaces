@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 
-struct RegularDetailViewModel {
+struct RegularDetailViewModel: DetailItemViewModel {
     
     let title: NSAttributedString
     let backgroundColor: UIColor

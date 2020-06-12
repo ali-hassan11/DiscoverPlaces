@@ -96,7 +96,7 @@ extension DetailsViewModel: UITableViewDataSource {
         
         switch item.type {
         case .regular(let regularDetailViewModel):
-            return regularCell(at: indexPath, tableView: tableView, viewModel: regularDetailViewModel)
+            return regularDetailCell(at: indexPath, tableView: tableView, viewModel: regularDetailViewModel)
         default:
             fatalError()
         }
@@ -118,7 +118,7 @@ extension DetailsViewModel: UITableViewDelegate {
 // MARK: Configure Cell Helpers
 extension DetailsViewModel {
     
-    private func regularCell(at indexPath: IndexPath, tableView: UITableView, viewModel: RegularDetailViewModel) -> UITableViewCell {
+    private func regularDetailCell(at indexPath: IndexPath, tableView: UITableView, viewModel: RegularDetailViewModel) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RegularCell.self), for: indexPath) as? RegularCell else {
             return UITableViewCell()
         }
