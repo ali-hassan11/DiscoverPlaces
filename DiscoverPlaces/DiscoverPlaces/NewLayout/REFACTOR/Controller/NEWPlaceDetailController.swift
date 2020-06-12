@@ -3,7 +3,7 @@ import UIKit
 final class NEWPlaceDetailController: UITableViewController {
     
     
-    var viewModel: DetailsViewModel //make let
+    private let viewModel: DetailsViewModel
     
     init(viewModel: DetailsViewModel) {
         self.viewModel = viewModel
@@ -20,33 +20,21 @@ final class NEWPlaceDetailController: UITableViewController {
         tableView.register(RegularCell.nib(), forCellReuseIdentifier: RegularCell.reuseIdentifier)
         
         tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableView.automaticDimension                
-    }
-}
-
-extension NEWPlaceDetailController {
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows()
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        tableView.rowHeight = UITableView.automaticDimension
         
-        let item = viewModel.itemForRow(at: indexPath)
+        tableView.dataSource = viewModel
         
-        switch item.type {
-        case .regular(let regularDetailViewModel):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RegularCell.self), for: indexPath) as? RegularCell else {
-                return UITableViewCell()
+        fetchData()
+    }
+    
+    private func fetchData() {
+        viewModel.fetchPlaceData { [weak self] error in
+            
+            if let error = error {
+                print("delegate.showErrorAlert \(error)")
             }
-            cell.configure(using: regularDetailViewModel)
-            return cell
-        default:
-            fatalError()
+            
+            self?.tableView.reloadData()
         }
     }
 }
