@@ -8,11 +8,14 @@ struct RegularDetailViewModel {
     let icon: Icon
     let iconTintColor: UIColor
     
-    init(icon: Icon, title: String, typography: TypographyProvider, theming: PlaceDetailTheming) {
+    let action: (() -> Void)?
+    
+    init(icon: Icon, title: String, typography: TypographyProvider, theming: PlaceDetailTheming, action: (() -> Void)? = nil) {
         self.icon = icon
         self.iconTintColor = theming.cellIconTint
         self.title = NSAttributedString(string: title, attributes: typography.regularCellTitle)
         self.backgroundColor = theming.cellBackground
+        self.action = action
     }
     
 }

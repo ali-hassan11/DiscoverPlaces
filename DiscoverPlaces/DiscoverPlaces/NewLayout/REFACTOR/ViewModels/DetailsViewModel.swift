@@ -23,7 +23,7 @@ class DetailsViewModel: NSObject {
 extension DetailsViewModel {
     
     func fetchPlaceData(completion: @escaping (Error?) -> Void) {
- 
+        
         Service.shared.fetchPlaceDetails(placeId: placeId, fields: Constants.placeDetailFields) {  [weak self] (placeResponse, error) in
             guard let self = self else { return }
             
@@ -39,7 +39,7 @@ extension DetailsViewModel {
                 completion(error)
                 return
             }
-                        
+            
             self.populateDetailItems(with: result, completion: completion)
         }
     }
@@ -64,7 +64,7 @@ extension DetailsViewModel {
                                           typography: self.typography,
                                           theming: self.theming))
         }
-                    
+        
         if let webAdress = result.website {
             items.append(Self.website(using: webAdress,
                                       typography: self.typography,
@@ -103,6 +103,18 @@ extension DetailsViewModel: UITableViewDataSource {
     }
 }
 
+//MARK: TableView Delegate
+extension DetailsViewModel: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = items[indexPath.row]
+        item.action?()
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+}
+
 // MARK: Configure Cell Helpers
 extension DetailsViewModel {
     
@@ -116,40 +128,51 @@ extension DetailsViewModel {
     
 }
 
-//MARK: Detail Item Methods
+//MARK: Configure Detail Item Methods
 extension DetailsViewModel {
     private static func vicinity(using vicinity: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
-           let viewModel = RegularDetailViewModel(icon: .mapPin, title: vicinity, typography: typography, theming: theming)
-           return DetailItem(type: .regular(viewModel), action: nil)
-       }
-       
-       private static func openingHours(using openingHours: [String], typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
-           
-           let todaysOpeningHoursText = todayOpeningHours(openingHours: openingHours)
-           
-           let viewModel = RegularDetailViewModel(icon: .time, title: todaysOpeningHoursText, typography: typography, theming: theming)
-           return DetailItem(type: .regular(viewModel), action: nil)
-       }
-       
-       private static func phoneNumber(using phoneNumber: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
-           let viewModel = RegularDetailViewModel(icon: .phone, title: phoneNumber, typography: typography, theming: theming)
-           return DetailItem(type: .regular(viewModel), action: nil)
-       }
-       
-       private static func website(using webAddress: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
-           let viewModel = RegularDetailViewModel(icon: .browser, title: "Website", typography: typography, theming: theming)
-           return DetailItem(type: .regular(viewModel), action: nil) //Use webAdress for action
-       }
-       
-       private static func todayOpeningHours(openingHours: [String]) -> String {
-           let today = Date().today()
-           
-           for weekDay in openingHours {
-               if weekDay.hasPrefix(today) {
-                   return weekDay
-               }
-           }
-           return "Opening Times"
-       }
+        let action: () -> Void = {
+            print("Open Maps")
+        }
+        let viewModel = RegularDetailViewModel(icon: .mapPin, title: vicinity, typography: typography, theming: theming)
+        return DetailItem(type: .regular(viewModel), action: action)
+    }
+    
+    private static func openingHours(using openingHours: [String], typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
+        let action: () -> Void = {
+            print("Open Opening Hours")
+        }
+        let todaysOpeningHoursText = todayOpeningHours(openingHours: openingHours)
+        
+        let viewModel = RegularDetailViewModel(icon: .time, title: todaysOpeningHoursText, typography: typography, theming: theming)
+        return DetailItem(type: .regular(viewModel), action: action)
+    }
+    
+    private static func phoneNumber(using phoneNumber: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
+        let action: () -> Void = {
+            print("Call Phone Number")
+        }
+        let viewModel = RegularDetailViewModel(icon: .phone, title: phoneNumber, typography: typography, theming: theming)
+        return DetailItem(type: .regular(viewModel), action: action)
+    }
+    
+    private static func website(using webAddress: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
+        let action: () -> Void = {
+            print("Open Website")
+        }
+        let viewModel = RegularDetailViewModel(icon: .browser, title: "Website", typography: typography, theming: theming, action: action)
+        return DetailItem(type: .regular(viewModel), action: action) //Use webAdress for action
+    }
+    
+    private static func todayOpeningHours(openingHours: [String]) -> String {
+        let today = Date().today()
+        
+        for weekDay in openingHours {
+            if weekDay.hasPrefix(today) {
+                return weekDay
+            }
+        }
+        return "Opening Times"
+    }
 }
 

@@ -48,6 +48,7 @@ extension NEWPlaceDetailController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.contentInsetAdjustmentBehavior = .never
         
+        tableView.delegate = viewModel
         tableView.dataSource = viewModel
     }
     
