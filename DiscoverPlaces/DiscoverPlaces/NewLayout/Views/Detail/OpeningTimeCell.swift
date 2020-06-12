@@ -14,9 +14,9 @@ final class OpeningTimeCell: UICollectionViewCell {
     
     var openingTimes: [String]? {
         didSet {
-            let today = Date().dayOfWeek()
+            let today = Date().today()
             openingTimes?.forEach({ (openingTime) in
-                if openingTime.hasPrefix(today ?? "") {
+                if openingTime.hasPrefix(today) {
                     openingHoursLabel.text = openingTime
                     return
                 }
@@ -81,12 +81,12 @@ final class OpeningTimeCell: UICollectionViewCell {
     }
     
 }
-
-extension Date {
-    func dayOfWeek() -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        return dateFormatter.string(from: self).capitalized
-    }
-}
+//
+//extension Date {
+//    func dayOfWeek() -> String? {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "EEEE"
+//        return dateFormatter.string(from: self).capitalized
+//    }
+//}
 

@@ -2,7 +2,6 @@ import UIKit
 
 final class NEWPlaceDetailController: UITableViewController {
     
-    
     private let viewModel: DetailsViewModel
     
     init(viewModel: DetailsViewModel) {
@@ -16,16 +15,13 @@ final class NEWPlaceDetailController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "New Details"
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
-        tableView.register(RegularCell.nib(), forCellReuseIdentifier: RegularCell.reuseIdentifier)
+        setupNavigationBar()
+        setupTableView()
         
-        tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableView.automaticDimension
-        
-        tableView.dataSource = viewModel
-        
+        guard Reachability.isConnectedToNetwork() else {
+            return
+        }
         fetchData()
     }
     
@@ -38,5 +34,26 @@ final class NEWPlaceDetailController: UITableViewController {
             
             self?.tableView.reloadData()
         }
+    }
+}
+
+//MARK: Setup Methods
+extension NEWPlaceDetailController {
+    
+    private func setupTableView() {
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
+        tableView.register(RegularCell.nib(), forCellReuseIdentifier: RegularCell.reuseIdentifier)
+        
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.contentInsetAdjustmentBehavior = .never
+        
+        tableView.dataSource = viewModel
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.largeTitleDisplayMode = .never
+        navigationItem.hideBackButtonText()
+        navigationController?.navigationBar.makeTransparent()
     }
 }
