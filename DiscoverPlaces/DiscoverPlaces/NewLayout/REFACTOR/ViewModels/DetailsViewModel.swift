@@ -1,17 +1,18 @@
 import UIKit
 
-class DetailsViewModel: NSObject {
+final class DetailsViewModel: NSObject {
     
     private var items: [DetailItem] = []
     
-    private let typography: PlaceDetailTypography
+    typealias Typography = TypographyProvider & PlaceDetailTypography
+    private let typography: Typography
     private let theming: PlaceDetailTheming
     private let placeId: String
     private let location: LocationItem
     
     private var result: PlaceDetailResult?
     
-    init(placeId: String, location: LocationItem, typography: PlaceDetailTypography, theming: PlaceDetailTheming) {
+    init(placeId: String, location: LocationItem, typography: Typography, theming: PlaceDetailTheming) {
         self.placeId = placeId
         self.location = location
         self.typography = typography
@@ -46,6 +47,16 @@ extension DetailsViewModel {
     
     private func populateDetailItems(with result: PlaceDetailResult, completion: @escaping (Error?) -> Void) {
         var items = [DetailItem]()
+        
+        if let photos = result.photos {
+            
+            let distance = result.geometry?.distanceString(from: location.selectedLocation)
+            
+            let mainImagesSliderItem = MainImageSliderItem(name: result.name, rating: result.rating, distance: distance, photos: photos)
+            items.append(Self.mainImageSlider(using: mainImagesSliderItem,
+                                              typography: typography,
+                                              theming: theming))
+        }
         
         if let vicinity = result.vicinity {
             items.append(Self.vicinity(using: vicinity,
@@ -97,6 +108,8 @@ extension DetailsViewModel: UITableViewDataSource {
         switch item.type {
         case .regular(let regularDetailViewModel):
             return regularDetailCell(at: indexPath, tableView: tableView, viewModel: regularDetailViewModel)
+        case .mainImagesSlider(let mainImageSliderViewModel):
+            return mainImageSliderCell(at: indexPath, tableView: tableView, viewModel: mainImageSliderViewModel)
         default:
             fatalError()
         }
@@ -126,11 +139,26 @@ extension DetailsViewModel {
         return cell
     }
     
+    private func mainImageSliderCell(at indexPath: IndexPath, tableView: UITableView, viewModel: MainImageSliderViewModel) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MainImageSliderCell.self), for: indexPath) as? MainImageSliderCell else {
+            return UITableViewCell()
+        }
+        cell.configure(using: viewModel)
+        return cell
+    }
+    
 }
 
 //MARK: Configure Detail Item Methods
 extension DetailsViewModel {
-    private static func vicinity(using vicinity: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
+    
+    private static func mainImageSlider(using mainImageSliderItem: MainImageSliderItem, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+        
+        let viewModel = MainImageSliderViewModel(mainImageSliderItem: mainImageSliderItem, typography: typography, theming: theming)
+        return DetailItem(type: .mainImagesSlider(viewModel), action: nil)
+    }
+    
+    private static func vicinity(using vicinity: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         let action: () -> Void = {
             print("Open Maps")
         }
@@ -138,7 +166,7 @@ extension DetailsViewModel {
         return DetailItem(type: .regular(viewModel), action: action)
     }
     
-    private static func openingHours(using openingHours: [String], typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func openingHours(using openingHours: [String], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         let action: () -> Void = {
             print("Open Opening Hours")
         }
@@ -148,7 +176,7 @@ extension DetailsViewModel {
         return DetailItem(type: .regular(viewModel), action: action)
     }
     
-    private static func phoneNumber(using phoneNumber: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func phoneNumber(using phoneNumber: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         let action: () -> Void = {
             print("Call Phone Number")
         }
@@ -156,7 +184,7 @@ extension DetailsViewModel {
         return DetailItem(type: .regular(viewModel), action: action)
     }
     
-    private static func website(using webAddress: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func website(using webAddress: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         let action: () -> Void = {
             print("Open Website")
         }

@@ -43,6 +43,7 @@ extension NEWPlaceDetailController {
     private func setupTableView() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         tableView.register(RegularCell.nib(), forCellReuseIdentifier: RegularCell.reuseIdentifier)
+        tableView.register(MainImageSliderCell.nib(), forCellReuseIdentifier: MainImageSliderCell.reuseIdentifier)
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension

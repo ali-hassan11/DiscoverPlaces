@@ -71,8 +71,8 @@ class MyPlaceCell: UICollectionViewCell {
             addressLabel.text = vicinity
         } else if let address = place.formatted_address {
             addressLabel.text = address
-        } else if let name = place.name {
-            addressLabel.text = name
+        } else {
+            addressLabel.text = place.name
         }
     }
 

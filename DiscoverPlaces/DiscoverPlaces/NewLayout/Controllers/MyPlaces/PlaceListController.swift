@@ -60,7 +60,6 @@ final class PlaceListController: UICollectionViewController, UICollectionViewDel
     func fetchDataForPlaceIds() {
         self.placeResults.removeAll()
         
-        print("🟩 PlaceId List Count: \(placeItemList!.count)")
         placeItemList?.forEach{ _ in dispatchGroup.enter() }
         
         placeItemList?.forEach({ (placeItem) in
@@ -68,8 +67,7 @@ final class PlaceListController: UICollectionViewController, UICollectionViewDel
         })
         
         dispatchGroup.notify(queue: .main) {
-            print("🟩 PlaceId Results Count: \(self.placeResults.count)")
-            self.placeResults.forEach{print($0.name!) ; print($0.rating ?? "Rating = nil") ; print($0.place_id)}
+            self.placeResults.forEach{print($0.name) ; print($0.rating ?? "Rating = nil") ; print($0.place_id)}
         }
     }
     

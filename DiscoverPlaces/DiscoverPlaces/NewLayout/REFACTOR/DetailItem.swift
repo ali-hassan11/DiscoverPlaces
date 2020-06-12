@@ -6,7 +6,7 @@ struct DetailItem {
     let action: (() -> Void)?
     
     enum DetailType  {
-        case mainImagesSlider
+        case mainImagesSlider(MainImageSliderViewModel)
         case regular(RegularDetailViewModel)
         case actionButtons
         case reviews
@@ -15,4 +15,3 @@ struct DetailItem {
         case separator
      }
 }
-
