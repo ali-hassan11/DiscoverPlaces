@@ -158,8 +158,9 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
     
     private func presentDetailController(placeId: String) -> () {
         guard let location = userLocation else { return }
-        let detailsController = PlaceDetailsController(placeId: placeId, location: location)
-        navigationController?.pushViewController(detailsController, animated: true)
+        let placeDetailViewModel = DetailsViewModel(placeId: placeId, location: location, typography: PlaceDetailTypography(), theming: PlaceDetailTheming())
+        let newDetailsController = NEWPlaceDetailController(viewModel: placeDetailViewModel)
+        navigationController?.pushViewController(newDetailsController, animated: true)
     }
 }
 

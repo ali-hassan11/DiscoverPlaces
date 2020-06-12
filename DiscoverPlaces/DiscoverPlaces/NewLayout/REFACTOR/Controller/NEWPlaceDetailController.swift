@@ -3,7 +3,7 @@ import UIKit
 final class NEWPlaceDetailController: UITableViewController {
     
     
-    let viewModel: DetailsViewModel
+    var viewModel: DetailsViewModel //make let
     
     init(viewModel: DetailsViewModel) {
         self.viewModel = viewModel
@@ -17,12 +17,11 @@ final class NEWPlaceDetailController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
-//        RegisterCells()
-//        Estimated/Dynamic row height
+        tableView.register(RegularCell.nib(), forCellReuseIdentifier: RegularCell.reuseIdentifier)
         
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableView.automaticDimension                
     }
-    
-    
 }
 
 extension NEWPlaceDetailController {
@@ -41,19 +40,13 @@ extension NEWPlaceDetailController {
         
         switch item.type {
         case .regular(let regularDetailViewModel):
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
-            cell.textLabel?.attributedText = regularDetailViewModel.title
-            cell.backgroundColor = regularDetailViewModel.backgroundColor
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RegularCell.self), for: indexPath) as? RegularCell else {
+                return UITableViewCell()
+            }
+            cell.configure(using: regularDetailViewModel)
             return cell
         default:
             fatalError()
         }
     }
-    
-}
-
-extension NEWPlaceDetailController {
-    
-    
-    
 }

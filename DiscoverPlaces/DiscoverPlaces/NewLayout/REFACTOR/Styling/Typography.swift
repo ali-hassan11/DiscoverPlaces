@@ -7,12 +7,12 @@ protocol TypographyProvider {
 
 }
 
-public final class DefaultTypography: TypographyProvider {
+public final class PlaceDetailTypography: TypographyProvider {
     
     var regularCellTitle: [NSAttributedString.Key: Any] {
         return [
-            .font : UIFont.systemFont(ofSize: 10),
-            .foregroundColor : UIColor.red
+            .font : UIFont.systemFont(ofSize: 16),
+            .foregroundColor : UIColor.label
         ]
     }
     

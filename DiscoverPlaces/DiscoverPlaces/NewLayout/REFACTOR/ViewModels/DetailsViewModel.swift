@@ -1,40 +1,84 @@
 import UIKit
 
-struct DetailsViewModel {
+class DetailsViewModel {
     
+    var result: PlaceDetailResult?
     private var items = [DetailItem]()
+    let dispatchGroup = DispatchGroup()
     
-    init(placeDetails: PlaceDetailResponse, typography: TypographyProvider, theming: ThemingProvider) {
+    init(placeId: String, location: LocationItem, typography: PlaceDetailTypography, theming: PlaceDetailTheming) {
         
-        var items = [DetailItem]()
-        
-        guard let results = placeDetails.result else { return }
-        
-        guard let vicinity = results.vicinity else { return }
-        items.append(Self.regularCellDetail(using: vicinity, typography: typography, theming: theming))
-        
-        //Dummy Cells to fill up tableView
-        items.append(Self.regular2(using: vicinity, typography: typography, theming: theming))
-        items.append(Self.regular3(using: vicinity, typography: typography, theming: theming))
-        
-        self.items = items
+        fetchPlaceData(for: placeId, typography: typography, theming: theming)
+  
     }
     
-    private static func regularCellDetail(using vicinity: String, typography: TypographyProvider, theming: ThemingProvider) -> DetailItem {
+    private static func vicinity(using vicinity: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
         let viewModel = RegularDetailViewModel(icon: .mapPin, title: vicinity, typography: typography, theming: theming)
         return DetailItem(type: .regular(viewModel), action: nil)
     }
     
-    private static func regular2(using vicinity: String, typography: TypographyProvider, theming: ThemingProvider) -> DetailItem {
-        let viewModel = RegularDetailViewModel(icon: .phone, title: "Title2", typography: typography, theming: theming)
+    private static func phoneNumber(using phoneNumber: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
+        let viewModel = RegularDetailViewModel(icon: .phone, title: phoneNumber, typography: typography, theming: theming)
         return DetailItem(type: .regular(viewModel), action: nil)
     }
     
-    private static func regular3(using vicinity: String, typography: TypographyProvider, theming: ThemingProvider) -> DetailItem {
-        let viewModel = RegularDetailViewModel(icon: .browser, title: "Title3", typography: typography, theming: theming)
-        return DetailItem(type: .regular(viewModel), action: nil)
+    private static func website(using webAddress: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) -> DetailItem {
+         let viewModel = RegularDetailViewModel(icon: .browser, title: "Website", typography: typography, theming: theming)
+         return DetailItem(type: .regular(viewModel), action: nil) //Use webAdress for action
     }
+}
+
+//MARK: FetchData
+extension DetailsViewModel {
     
+    func fetchPlaceData(for id: String, typography: PlaceDetailTypography, theming: PlaceDetailTheming) {
+
+        guard Reachability.isConnectedToNetwork() else { return }
+        
+        Service.shared.fetchPlaceDetails(placeId: id, fields: Constants.placeDetailFields) {  [weak self] (placeResponse, error) in
+            
+            if let error = error {
+                print("Falied to fetch: ", error)
+                return
+            }
+            
+            //success
+            guard let placeResponse = placeResponse else {
+                print("No results?")
+                return
+            }
+            
+            let results = placeResponse.result
+            var items = [DetailItem]()
+            
+            if let vicinity = results?.vicinity {
+                items.append(Self.vicinity(using: vicinity,
+                                           typography: typography,
+                                           theming: theming))
+            }
+            
+            if let phoneNumber = results?.international_phone_number {
+                items.append(Self.phoneNumber(using: phoneNumber,
+                                              typography: typography,
+                                              theming: theming))
+            }
+            
+            if let webAdress = results?.website {
+                
+                items.append(Self.website(using: webAdress,
+                                          typography: typography,
+                                          theming: theming))
+                
+            } else if let googleUrl = results?.url {
+                
+                items.append(Self.website(using: googleUrl,
+                                          typography: typography,
+                                          theming: theming))
+            }
+            
+            self?.items = items
+        }
+    }
 }
 
 // MARK: Public API

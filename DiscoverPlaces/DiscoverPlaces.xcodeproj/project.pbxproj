@@ -98,6 +98,11 @@
 		CEA988F5243A1252002A1FDE /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F4243A1252002A1FDE /* UIViewController+Extensions.swift */; };
 		CEA988F7243A158A002A1FDE /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F6243A158A002A1FDE /* AboutController.swift */; };
 		CEABA02E24177AC90057A955 /* Category+SubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABA02D24177AC90057A955 /* Category+SubCategory.swift */; };
+		CEB41DA42493A02F00DDFC53 /* RegularCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB41DA32493A02F00DDFC53 /* RegularCell.xib */; };
+		CEB41DA62493A10400DDFC53 /* RegularCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB41DA52493A10400DDFC53 /* RegularCellViewModel.swift */; };
+		CEB41DA92493ACE200DDFC53 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB41DA72493ACE100DDFC53 /* ReuseIdentifiable.swift */; };
+		CEB41DAA2493ACE200DDFC53 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB41DA82493ACE200DDFC53 /* NibLoadable.swift */; };
+		CEB41DAC2493AD4A00DDFC53 /* BundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB41DAB2493AD4900DDFC53 /* BundleHelper.swift */; };
 		CEB72F52243D13B3002F6131 /* PrivacyPolicyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB72F51243D13B3002F6131 /* PrivacyPolicyController.swift */; };
 		CEB72F54243D19C3002F6131 /* TermsOfUseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB72F53243D19C2002F6131 /* TermsOfUseController.swift */; };
 		CEBDBDB3245EFB72008E80B4 /* ErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDBDB2245EFB72008E80B4 /* ErrorController.swift */; };
@@ -231,6 +236,11 @@
 		CEA988F4243A1252002A1FDE /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CEA988F6243A158A002A1FDE /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		CEABA02D24177AC90057A955 /* Category+SubCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+SubCategory.swift"; sourceTree = "<group>"; };
+		CEB41DA32493A02F00DDFC53 /* RegularCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegularCell.xib; sourceTree = "<group>"; };
+		CEB41DA52493A10400DDFC53 /* RegularCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularCellViewModel.swift; sourceTree = "<group>"; };
+		CEB41DA72493ACE100DDFC53 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
+		CEB41DA82493ACE200DDFC53 /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		CEB41DAB2493AD4900DDFC53 /* BundleHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleHelper.swift; sourceTree = "<group>"; };
 		CEB72F51243D13B3002F6131 /* PrivacyPolicyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyController.swift; sourceTree = "<group>"; };
 		CEB72F53243D19C2002F6131 /* TermsOfUseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseController.swift; sourceTree = "<group>"; };
 		CEBDBDB2245EFB72008E80B4 /* ErrorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorController.swift; sourceTree = "<group>"; };
@@ -306,6 +316,7 @@
 			children = (
 				CE300D4124919446008F1931 /* RegularDetailViewModel.swift */,
 				CE300D4924919B30008F1931 /* DetailsViewModel.swift */,
+				CEB41DA52493A10400DDFC53 /* RegularCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -314,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				CE300D3124918BE1008F1931 /* RegularCell.swift */,
+				CEB41DA32493A02F00DDFC53 /* RegularCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -423,6 +435,9 @@
 				CE6599F923EF849000E531CD /* Views */,
 				CE9CDF7124365B4E008DF6DE /* REFACTOR */,
 				CE300D3A24918EE7008F1931 /* MainImagesSliderItem.swift */,
+				CEB41DAB2493AD4900DDFC53 /* BundleHelper.swift */,
+				CEB41DA82493ACE200DDFC53 /* NibLoadable.swift */,
+				CEB41DA72493ACE100DDFC53 /* ReuseIdentifiable.swift */,
 				CE6599F823EF848A00E531CD /* Models */,
 				CE5835D923DF1B6900C89622 /* Service */,
 				CE5835CF23DE223800C89622 /* Helpers */,
@@ -782,6 +797,7 @@
 				CE5835A523DE16B600C89622 /* LaunchScreen.storyboard in Resources */,
 				CE5835A223DE16B600C89622 /* Assets.xcassets in Resources */,
 				CE5835A023DE16B000C89622 /* Main.storyboard in Resources */,
+				CEB41DA42493A02F00DDFC53 /* RegularCell.xib in Resources */,
 				CE1D791D2409B6890054864B /* DetailSplashScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -917,7 +933,9 @@
 				CE8A2FD323F08AA900CDF866 /* DetailsOpeningTimesCell.swift in Sources */,
 				CE8A2FC923F088B800CDF866 /* MorePlacesHolder.swift in Sources */,
 				CE616D052405D94D008E7067 /* ListType.swift in Sources */,
+				CEB41DAC2493AD4A00DDFC53 /* BundleHelper.swift in Sources */,
 				60EADA7B23F6B0E60095DBF9 /* AddressCell.swift in Sources */,
+				CEB41DAA2493ACE200DDFC53 /* NibLoadable.swift in Sources */,
 				CEB72F52243D13B3002F6131 /* PrivacyPolicyController.swift in Sources */,
 				60EADA8123F6D91B0095DBF9 /* ReviewsHolder.swift in Sources */,
 				CE5835C923DE173800C89622 /* BaseTabBarController.swift in Sources */,
@@ -926,6 +944,7 @@
 				CE616D032405D46D008E7067 /* MyPlacesViewController.swift in Sources */,
 				CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */,
 				CE694B8924097E0500F37ED6 /* PlaceListController.swift in Sources */,
+				CEB41DA62493A10400DDFC53 /* RegularCellViewModel.swift in Sources */,
 				CE6599FF23EF872900E531CD /* HomeLargeCellHolder.swift in Sources */,
 				CE24AD862440C3AB00852C91 /* GoogleLogoCell.swift in Sources */,
 				CE8A2FD523F1CE0800CDF866 /* DetailsTopSectionCellXib.swift in Sources */,
@@ -993,6 +1012,7 @@
 				CE2267DB2402A14E00E6385F /* OpeningHoursController.swift in Sources */,
 				CE24AD8A2442FA9600852C91 /* PlaceListItem.swift in Sources */,
 				CEFD55C8241B7038001E21AC /* SubCategoryiesHolder.swift in Sources */,
+				CEB41DA92493ACE200DDFC53 /* ReuseIdentifiable.swift in Sources */,
 				CE5835D823DF145900C89622 /* SearchResponse.swift in Sources */,
 				CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */,
 				CE616D002405BE28008E7067 /* WebsiteViewController.swift in Sources */,
