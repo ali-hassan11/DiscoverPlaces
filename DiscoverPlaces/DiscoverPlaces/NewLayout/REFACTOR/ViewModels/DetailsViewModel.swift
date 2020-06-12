@@ -59,28 +59,28 @@ extension DetailsViewModel {
             }
             //
             
-            let results = placeResponse.result
+            let result = placeResponse.result
             var items = [DetailItem]()
             
-            if let vicinity = results?.vicinity {
+            if let vicinity = result?.vicinity {
                 items.append(Self.vicinity(using: vicinity,
                                            typography: self.typography,
                                            theming: self.theming))
             }
             
-            if let phoneNumber = results?.international_phone_number {
+            if let phoneNumber = result?.international_phone_number {
                 items.append(Self.phoneNumber(using: phoneNumber,
                                               typography: self.typography,
                                               theming: self.theming))
             }
             
-            if let webAdress = results?.website {
+            if let webAdress = result?.website {
                 
                 items.append(Self.website(using: webAdress,
                                           typography: self.typography,
                                           theming: self.theming))
                 
-            } else if let googleUrl = results?.url {
+            } else if let googleUrl = result?.url {
                 
                 items.append(Self.website(using: googleUrl,
                                           typography: self.typography,

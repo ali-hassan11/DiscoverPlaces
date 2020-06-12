@@ -16,6 +16,8 @@ final class NEWPlaceDetailController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "New Details"
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         tableView.register(RegularCell.nib(), forCellReuseIdentifier: RegularCell.reuseIdentifier)
         
