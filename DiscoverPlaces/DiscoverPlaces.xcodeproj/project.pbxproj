@@ -18,6 +18,10 @@
 		60EADA8923F706EB0095DBF9 /* PlaceDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60EADA8823F706EB0095DBF9 /* PlaceDetailResponse.swift */; };
 		AF08E6237E05334F0DE2B7BB /* libPods-DiscoverPlaces-DiscoverPlacesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1B3E96418B082CCBC2B19 /* libPods-DiscoverPlaces-DiscoverPlacesUITests.a */; };
 		BCBBEA84B0DB9A3DA43ED3C5 /* libPods-DiscoverPlaces.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 874F36B3FAA111D018C4EB42 /* libPods-DiscoverPlaces.a */; };
+		CE15FD9A2494EA6600725A38 /* DetailActionsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE15FD992494EA6600725A38 /* DetailActionsCell.xib */; };
+		CE15FD9C2494EB6900725A38 /* DetailActionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15FD9B2494EB6900725A38 /* DetailActionsCell.swift */; };
+		CE15FD9E2494ECD600725A38 /* DetailActionsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15FD9D2494ECD600725A38 /* DetailActionsItem.swift */; };
+		CE15FDA02494EDB400725A38 /* DetailActionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15FD9F2494EDB400725A38 /* DetailActionsViewModel.swift */; };
 		CE1D791D2409B6890054864B /* DetailSplashScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE1D791C2409B6890054864B /* DetailSplashScreen.xib */; };
 		CE2267DB2402A14E00E6385F /* OpeningHoursController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2267DA2402A14E00E6385F /* OpeningHoursController.swift */; };
 		CE24AD80243EFF8900852C91 /* Fonts+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24AD7F243EFF8900852C91 /* Fonts+Color.swift */; };
@@ -46,7 +50,6 @@
 		CE50CD4A24437B6C00E91643 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE50CD4924437B6C00E91643 /* Reachability.swift */; };
 		CE58359923DE16B000C89622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359823DE16B000C89622 /* AppDelegate.swift */; };
 		CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359A23DE16B000C89622 /* SceneDelegate.swift */; };
-		CE58359D23DE16B000C89622 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58359C23DE16B000C89622 /* ViewController.swift */; };
 		CE5835A023DE16B000C89622 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE58359E23DE16B000C89622 /* Main.storyboard */; };
 		CE5835A223DE16B600C89622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE5835A123DE16B600C89622 /* Assets.xcassets */; };
 		CE5835A523DE16B600C89622 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5835A323DE16B600C89622 /* LaunchScreen.storyboard */; };
@@ -156,6 +159,10 @@
 		81A0122DE5F52B899FFE50F4 /* Pods-DiscoverPlacesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscoverPlacesTests.debug.xcconfig"; path = "Target Support Files/Pods-DiscoverPlacesTests/Pods-DiscoverPlacesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		874F36B3FAA111D018C4EB42 /* libPods-DiscoverPlaces.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DiscoverPlaces.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE3F36679EDD97E38E09F426 /* Pods-DiscoverPlaces.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DiscoverPlaces.debug.xcconfig"; path = "Target Support Files/Pods-DiscoverPlaces/Pods-DiscoverPlaces.debug.xcconfig"; sourceTree = "<group>"; };
+		CE15FD992494EA6600725A38 /* DetailActionsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailActionsCell.xib; sourceTree = "<group>"; };
+		CE15FD9B2494EB6900725A38 /* DetailActionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActionsCell.swift; sourceTree = "<group>"; };
+		CE15FD9D2494ECD600725A38 /* DetailActionsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActionsItem.swift; sourceTree = "<group>"; };
+		CE15FD9F2494EDB400725A38 /* DetailActionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailActionsViewModel.swift; sourceTree = "<group>"; };
 		CE1D791C2409B6890054864B /* DetailSplashScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailSplashScreen.xib; sourceTree = "<group>"; };
 		CE2267DA2402A14E00E6385F /* OpeningHoursController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningHoursController.swift; sourceTree = "<group>"; };
 		CE24AD7F243EFF8900852C91 /* Fonts+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fonts+Color.swift"; sourceTree = "<group>"; };
@@ -185,7 +192,6 @@
 		CE58359523DE16B000C89622 /* DiscoverPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiscoverPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE58359823DE16B000C89622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE58359A23DE16B000C89622 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE58359C23DE16B000C89622 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE58359F23DE16B000C89622 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE5835A123DE16B600C89622 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE5835A423DE16B600C89622 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -327,9 +333,10 @@
 			isa = PBXGroup;
 			children = (
 				CEB41DB9249414C200DDFC53 /* DetailItemViewModel.swift */,
+				CE300D4924919B30008F1931 /* DetailsViewModel.swift */,
 				CEB41DBB249419A000DDFC53 /* MainImageSliderViewModel.swift */,
 				CE300D4124919446008F1931 /* RegularDetailViewModel.swift */,
-				CE300D4924919B30008F1931 /* DetailsViewModel.swift */,
+				CE15FD9F2494EDB400725A38 /* DetailActionsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -341,6 +348,8 @@
 				CE300D3124918BE1008F1931 /* RegularCell.swift */,
 				CEB41DB52494143100DDFC53 /* MainImageSliderCell.xib */,
 				CEB41DB72494146800DDFC53 /* MainImageSliderCell.swift */,
+				CE15FD992494EA6600725A38 /* DetailActionsCell.xib */,
+				CE15FD9B2494EB6900725A38 /* DetailActionsCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -349,6 +358,8 @@
 			isa = PBXGroup;
 			children = (
 				CE300D3C24918FB3008F1931 /* RegularDetailItem.swift */,
+				CE300D3A24918EE7008F1931 /* MainImageSliderItem.swift */,
+				CE15FD9D2494ECD600725A38 /* DetailActionsItem.swift */,
 			);
 			path = DetailItemTypes;
 			sourceTree = "<group>";
@@ -449,14 +460,12 @@
 				CE6599F723EF847F00E531CD /* Controllers */,
 				CE6599F923EF849000E531CD /* Views */,
 				CE9CDF7124365B4E008DF6DE /* REFACTOR */,
-				CE300D3A24918EE7008F1931 /* MainImageSliderItem.swift */,
 				CE6599F823EF848A00E531CD /* Models */,
 				CE5835D923DF1B6900C89622 /* Service */,
 				CE5835CF23DE223800C89622 /* Helpers */,
 				CE5835A123DE16B600C89622 /* Assets.xcassets */,
 				CE58359823DE16B000C89622 /* AppDelegate.swift */,
 				CE58359A23DE16B000C89622 /* SceneDelegate.swift */,
-				CE58359C23DE16B000C89622 /* ViewController.swift */,
 				CE58359E23DE16B000C89622 /* Main.storyboard */,
 				CE5835A323DE16B600C89622 /* LaunchScreen.storyboard */,
 				CE5835A623DE16B600C89622 /* Info.plist */,
@@ -821,6 +830,7 @@
 			files = (
 				CE8A2FD723F1CE3000CDF866 /* DetailsTopSectionCellXib.xib in Resources */,
 				CEB41DB62494143100DDFC53 /* MainImageSliderCell.xib in Resources */,
+				CE15FD9A2494EA6600725A38 /* DetailActionsCell.xib in Resources */,
 				CE5835A523DE16B600C89622 /* LaunchScreen.storyboard in Resources */,
 				CE5835A223DE16B600C89622 /* Assets.xcassets in Resources */,
 				CE5835A023DE16B000C89622 /* Main.storyboard in Resources */,
@@ -984,10 +994,10 @@
 				60EADA8523F6DA370095DBF9 /* ReviewCell.swift in Sources */,
 				CE6F17FD23F66E73003D8D89 /* OpeningTimeCell.swift in Sources */,
 				60EADA8723F6E1EB0095DBF9 /* ActionButtonsCell.swift in Sources */,
+				CE15FD9E2494ECD600725A38 /* DetailActionsItem.swift in Sources */,
 				CE659A1123EF897000E531CD /* PlaceDetailsCell.swift in Sources */,
 				CE24AD82243F750B00852C91 /* LocationSearchController.swift in Sources */,
 				CE327AEA241546E10010F400 /* SettingsController.swift in Sources */,
-				CE58359D23DE16B000C89622 /* ViewController.swift in Sources */,
 				CE694B8724097DD400F37ED6 /* MyPlacesHorizontalController.swift in Sources */,
 				CE327AF1241696B60010F400 /* MultipleCategoriesController.swift in Sources */,
 				60EADA7F23F6C19B0095DBF9 /* WebAddressCell.swift in Sources */,
@@ -1039,6 +1049,7 @@
 				CE8A2FCF23F08A0E00CDF866 /* DetailsTopSectionCell.swift in Sources */,
 				CEB41DB82494146800DDFC53 /* MainImageSliderCell.swift in Sources */,
 				CE5835DB23DF1B7A00C89622 /* Service.swift in Sources */,
+				CE15FDA02494EDB400725A38 /* DetailActionsViewModel.swift in Sources */,
 				CE300D4624919970008F1931 /* Theming.swift in Sources */,
 				CE300D4A24919B30008F1931 /* DetailsViewModel.swift in Sources */,
 				CE2267DB2402A14E00E6385F /* OpeningHoursController.swift in Sources */,
@@ -1049,6 +1060,7 @@
 				CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */,
 				CE616D002405BE28008E7067 /* WebsiteViewController.swift in Sources */,
 				CEBEE6DB24333449002C43E8 /* PlaceResultsFilter.swift in Sources */,
+				CE15FD9C2494EB6900725A38 /* DetailActionsCell.swift in Sources */,
 				CE300D3924918D0F008F1931 /* DetailItem.swift in Sources */,
 				CEBDBDB3245EFB72008E80B4 /* ErrorController.swift in Sources */,
 				CE24AD80243EFF8900852C91 /* Fonts+Color.swift in Sources */,

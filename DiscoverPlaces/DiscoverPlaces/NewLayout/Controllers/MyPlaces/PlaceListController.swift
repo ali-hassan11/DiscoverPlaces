@@ -65,10 +65,6 @@ final class PlaceListController: UICollectionViewController, UICollectionViewDel
         placeItemList?.forEach({ (placeItem) in
             fetchData(for: placeItem.placeId)
         })
-        
-        dispatchGroup.notify(queue: .main) {
-            self.placeResults.forEach{print($0.name) ; print($0.rating ?? "Rating = nil") ; print($0.place_id)}
-        }
     }
     
     func fetchData(for id: String) {

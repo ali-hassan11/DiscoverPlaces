@@ -8,7 +8,6 @@
 
 import UIKit
 
-//Use closure
 protocol ActionButtonsCellDelegate: class {
     func sharePressed(cell: ActionButtonsCell)
 }

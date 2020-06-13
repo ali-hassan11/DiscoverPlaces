@@ -48,6 +48,7 @@ extension DetailsViewModel {
     private func populateDetailItems(with result: PlaceDetailResult, completion: @escaping (Error?) -> Void) {
         var items = [DetailItem]()
         
+        //Photos
         if let photos = result.photos {
             
             let distance = result.geometry?.distanceString(from: location.selectedLocation)
@@ -58,6 +59,7 @@ extension DetailsViewModel {
                                               theming: theming))
         }
         
+        //Regular Cells
         if let vicinity = result.vicinity {
             items.append(Self.vicinity(using: vicinity,
                                        typography: self.typography,
@@ -86,6 +88,11 @@ extension DetailsViewModel {
                                       theming: self.theming))
         }
         
+        //Actions
+        items.append(Self.actions(placeId: placeId,
+                                  typography: typography,
+                                  theming: theming))
+        
         self.items = items
         DispatchQueue.main.async {
             completion(nil)
@@ -110,6 +117,8 @@ extension DetailsViewModel: UITableViewDataSource {
             return regularDetailCell(at: indexPath, tableView: tableView, viewModel: regularDetailViewModel)
         case .mainImagesSlider(let mainImageSliderViewModel):
             return mainImageSliderCell(at: indexPath, tableView: tableView, viewModel: mainImageSliderViewModel)
+        case .actionButtons(let actionsViewModel):
+            return actionsCell(at: indexPath, tableView: tableView, viewModel: actionsViewModel)
         default:
             fatalError()
         }
@@ -132,7 +141,7 @@ extension DetailsViewModel: UITableViewDelegate {
 extension DetailsViewModel {
     
     private func regularDetailCell(at indexPath: IndexPath, tableView: UITableView, viewModel: RegularDetailViewModel) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RegularCell.self), for: indexPath) as? RegularCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RegularCell.reuseIdentifier, for: indexPath) as? RegularCell else {
             return UITableViewCell()
         }
         cell.configure(using: viewModel)
@@ -140,7 +149,15 @@ extension DetailsViewModel {
     }
     
     private func mainImageSliderCell(at indexPath: IndexPath, tableView: UITableView, viewModel: MainImageSliderViewModel) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: MainImageSliderCell.self), for: indexPath) as? MainImageSliderCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainImageSliderCell.reuseIdentifier, for: indexPath) as? MainImageSliderCell else {
+            return UITableViewCell()
+        }
+        cell.configure(using: viewModel)
+        return cell
+    }
+    
+    private func actionsCell(at indexPath: IndexPath, tableView: UITableView, viewModel: DetailActionsViewModel) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailActionsCell.reuseIdentifier, for: indexPath) as? DetailActionsCell else {
             return UITableViewCell()
         }
         cell.configure(using: viewModel)
@@ -190,6 +207,21 @@ extension DetailsViewModel {
         }
         let viewModel = RegularDetailViewModel(icon: .browser, title: "Website", typography: typography, theming: theming, action: action)
         return DetailItem(type: .regular(viewModel), action: action) //Use webAdress for action
+    }
+    
+    private static func actions(placeId: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+        let isFave = DefaultsManager.isInList(placeId: placeId, listKey: .favourites)
+        
+        let favouriteAction: (Bool) -> Void = { isFave in
+            isFave ? DefaultsManager.removeFromList(placeId: placeId, listKey: .favourites) : DefaultsManager.addToList(placeId: placeId, listKey: .favourites)
+        }
+        let toDoAction: (Bool) -> Void = { isTod in print("Add to to-do") }
+        let shareAction: () -> Void = { print("share place") }
+
+        let actionsItem = DetailActionsItem(isFave: isFave, favouriteAction: favouriteAction, toDoAction: toDoAction, shareAction: shareAction)
+
+        let viewModel = DetailActionsViewModel(placeId: placeId, actions: actionsItem)
+        return DetailItem(type: .actionButtons(viewModel), action: nil)
     }
     
     private static func todayOpeningHours(openingHours: [String]) -> String {

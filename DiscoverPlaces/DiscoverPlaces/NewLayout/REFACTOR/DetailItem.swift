@@ -8,7 +8,7 @@ struct DetailItem {
     enum DetailType  {
         case mainImagesSlider(MainImageSliderViewModel)
         case regular(RegularDetailViewModel)
-        case actionButtons
+        case actionButtons(DetailActionsViewModel)
         case reviews
         case morePlaces
         case googleCell

@@ -25,6 +25,11 @@ final class NEWPlaceDetailController: UITableViewController {
         fetchData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     private func fetchData() {
         viewModel.fetchPlaceData { [weak self] error in
             
@@ -44,6 +49,7 @@ extension NEWPlaceDetailController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         tableView.register(RegularCell.nib(), forCellReuseIdentifier: RegularCell.reuseIdentifier)
         tableView.register(MainImageSliderCell.nib(), forCellReuseIdentifier: MainImageSliderCell.reuseIdentifier)
+        tableView.register(DetailActionsCell.nib(), forCellReuseIdentifier: DetailActionsCell.reuseIdentifier)
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
