@@ -8,6 +8,7 @@ protocol ThemingProvider {
     var starFill: UIColor { get }
     var starBorder: UIColor { get }
     var pageIndicatorFill: UIColor { get }
+    var pageIndicatorBackground: UIColor { get }
     
 }
 
@@ -19,5 +20,6 @@ final class PlaceDetailTheming: ThemingProvider {
     let starFill: UIColor = .systemPink
     let starBorder: UIColor = .systemPink
     let pageIndicatorFill: UIColor = .systemPink
+    let pageIndicatorBackground: UIColor = .quaternarySystemFill
     
 }

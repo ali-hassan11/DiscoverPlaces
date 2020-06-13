@@ -23,10 +23,10 @@
                         </constraints>
                     </view>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="One-U5-bbA">
-                        <rect key="frame" x="0.0" y="449" width="414" height="2"/>
+                        <rect key="frame" x="0.0" y="448.5" width="414" height="2.5"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="nm8-mg-RYM"/>
+                            <constraint firstAttribute="height" constant="1.5" id="nm8-mg-RYM"/>
                         </constraints>
                         <segments>
                             <segment title=""/>
@@ -39,13 +39,13 @@
                         <color key="selectedSegmentTintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </segmentedControl>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Some Nice Place" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLr-TH-zJf">
-                        <rect key="frame" x="20" y="371" width="374" height="29"/>
+                        <rect key="frame" x="20" y="370.5" width="374" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="210" translatesAutoresizingMaskIntoConstraints="NO" id="eQ5-CI-MH3">
-                        <rect key="frame" x="20" y="412" width="374" height="25"/>
+                        <rect key="frame" x="20" y="411.5" width="374" height="25"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEI-XS-vLM" userLabel="StarsContainer">
                                 <rect key="frame" x="0.0" y="0.0" width="98.5" height="25"/>

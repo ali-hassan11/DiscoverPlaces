@@ -13,6 +13,7 @@ struct MainImageSliderViewModel: DetailItemViewModel {
     let starsFillColor: UIColor
     let starsBorderColor: UIColor
     let pageIndicatorColor: UIColor
+    let pageIndicatorBackgroundColor: UIColor
         
     init(mainImageSliderItem: MainImageSliderItem, typography: Typography, theming: PlaceDetailTheming) {
         
@@ -28,6 +29,7 @@ struct MainImageSliderViewModel: DetailItemViewModel {
         self.starsFillColor = theming.starFill
         self.starsBorderColor = theming.starBorder
         self.pageIndicatorColor = theming.pageIndicatorFill
+        self.pageIndicatorBackgroundColor = theming.pageIndicatorBackground
     }
     
 }

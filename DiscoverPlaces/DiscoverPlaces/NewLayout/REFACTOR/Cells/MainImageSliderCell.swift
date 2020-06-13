@@ -13,13 +13,13 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
     private var imagesController: ImagesHorizontalController?
     
     func configure(using viewModel: DetailItemViewModel) {
+        
         guard let viewModel = viewModel as? MainImageSliderViewModel else { return }
         
         configureLabels(using: viewModel)
         configureStars(using: viewModel)
         configureImageSlider(using: viewModel)
-        
-        pageIndicator.selectedSegmentTintColor = viewModel.pageIndicatorColor
+        configurePageIndicator(using: viewModel)
     }
             
     private func configureStars(using viewModel: MainImageSliderViewModel) {
@@ -46,6 +46,31 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
         imagesSliderContainer.addSubview(imagesController.view)
         imagesSliderContainer.backgroundColor = viewModel.imagesPlaceHolderColor
         imagesController.view.fillSuperview()
+
+        imagesController.didScrollImagesController = { [weak self] nearestPage in
+            self?.pageIndicator.selectedSegmentIndex = nearestPage
+        }
     }
     
+    private func configurePageIndicator(using viewModel: MainImageSliderViewModel) {
+        
+        guard let count = viewModel.photos?.count else { return }
+        populatePageIndicator(with: count)
+        
+        pageIndicator.isUserInteractionEnabled = false
+        pageIndicator.backgroundColor = viewModel.pageIndicatorBackgroundColor
+        pageIndicator.selectedSegmentTintColor = viewModel.pageIndicatorColor
+        
+        pageIndicator.selectedSegmentIndex = 0
+    }
+    
+    private func populatePageIndicator(with count: Int) {
+        pageIndicator.removeAllSegments()
+        
+        if count == 1 { return }
+        
+        for i in 1...count {
+            pageIndicator.insertSegment(withTitle: nil, at: i, animated: true)
+        }
+    }
 }

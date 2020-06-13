@@ -29,14 +29,14 @@ final class ImagesHorizontalController: HorizontalSnappingController, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = theming.imagePlaceHolder
         collectionView.scrollsToTop = true
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "imageCell")
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos?.count ?? 0 // or 1
+        return photos?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -53,7 +53,7 @@ final class ImagesHorizontalController: HorizontalSnappingController, UICollecti
         return 1
     }
     
-    var didScrollImagesController: ((Int) -> ())?
+    var didScrollImagesController: ((Int) -> Void)?
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let nearestPage = (scrollView.contentOffset.x / UIScreen.main.bounds.width).rounded()
