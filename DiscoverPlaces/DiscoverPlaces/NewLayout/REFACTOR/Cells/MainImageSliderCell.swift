@@ -13,6 +13,13 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
     
     private var imagesController: ImagesHorizontalController?
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        imagesController = ImagesHorizontalController(theming: PlaceDetailTheming())
+        imagesSliderContainer.addSubview(imagesController?.view ?? UIView())
+        imagesController?.view.fillSuperview()
+    }
+    
     func configure(using viewModel: DetailItemViewModel) {
         
         guard let viewModel = viewModel as? MainImageSliderViewModel else { return }
@@ -42,13 +49,13 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
     }
     
     private func configureImageSlider(using viewModel: MainImageSliderViewModel) {
-        imagesController = ImagesHorizontalController(theming: viewModel.theming)
+//        imagesController = ImagesHorizontalController(theming: viewModel.theming)
         
         guard let imagesController = imagesController else { return }
         imagesController.photos = viewModel.photos
-        imagesSliderContainer.addSubview(imagesController.view)
+//        imagesSliderContainer.addSubview(imagesController.view)
         imagesSliderContainer.backgroundColor = viewModel.imagesPlaceHolderColor
-        imagesController.view.fillSuperview()
+//        imagesController.view.fillSuperview()
 
         imagesController.didScrollImagesController = { [weak self] nearestPage in
             self?.pageIndicator.selectedSegmentIndex = nearestPage
