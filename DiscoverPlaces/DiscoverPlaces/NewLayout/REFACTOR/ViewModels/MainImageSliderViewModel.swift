@@ -5,9 +5,9 @@ struct MainImageSliderViewModel: DetailItemViewModel {
     typealias Typography = TypographyProvider & PlaceDetailTypography
     let theming: PlaceDetailTheming
     
-    let photos: [Photo]?
     let placeName: NSAttributedString
     let distance: NSAttributedString
+    let photos: [Photo]?
     let rating: Double?
     let imagesPlaceHolderColor: UIColor
     let starsFillColor: UIColor

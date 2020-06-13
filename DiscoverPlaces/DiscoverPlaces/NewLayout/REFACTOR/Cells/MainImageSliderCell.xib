@@ -54,8 +54,11 @@
                                     <constraint firstAttribute="height" constant="25" id="cc6-Jo-d0G"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99 miles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWU-rQ-h5h">
-                                <rect key="frame" x="308.5" y="0.0" width="65.5" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1000" text="99 miles" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWU-rQ-h5h">
+                                <rect key="frame" x="308.5" y="4.5" width="65.5" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="lzK-27-EtZ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
