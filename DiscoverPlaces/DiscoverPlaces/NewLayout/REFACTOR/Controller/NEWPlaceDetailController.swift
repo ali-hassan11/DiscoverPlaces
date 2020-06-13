@@ -15,7 +15,6 @@ final class NEWPlaceDetailController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupNavigationBar()
         setupTableView()
         
@@ -46,10 +45,13 @@ final class NEWPlaceDetailController: UITableViewController {
 extension NEWPlaceDetailController {
     
     private func setupTableView() {
+        edgesForExtendedLayout = [.top, .left, .right]
+
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         tableView.register(RegularCell.nib(), forCellReuseIdentifier: RegularCell.reuseIdentifier)
         tableView.register(MainImageSliderCell.nib(), forCellReuseIdentifier: MainImageSliderCell.reuseIdentifier)
         tableView.register(DetailActionsCell.nib(), forCellReuseIdentifier: DetailActionsCell.reuseIdentifier)
+        tableView.register(ReviewSliderCell.nib(), forCellReuseIdentifier: ReviewSliderCell.reuseIdentifier)
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension

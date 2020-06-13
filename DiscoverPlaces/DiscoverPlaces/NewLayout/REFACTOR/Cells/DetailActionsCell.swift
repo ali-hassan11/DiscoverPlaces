@@ -14,6 +14,7 @@ final class DetailActionsCell: UITableViewCell, NibLoadableReusable {
     func configure(using viewModel: DetailItemViewModel) {
         guard let viewModel = viewModel as? DetailActionsViewModel else { return }
         
+        selectionStyle = .none
         placeId = viewModel.placeId
         
         isFave = DefaultsManager.isInList(placeId: viewModel.placeId, listKey: .favourites)

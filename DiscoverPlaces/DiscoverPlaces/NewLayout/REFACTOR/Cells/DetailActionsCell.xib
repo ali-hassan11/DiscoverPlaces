@@ -11,15 +11,15 @@
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="63" id="4dO-Vd-Dcx" customClass="DetailActionsCell" customModule="DiscoverPlaces" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="63"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4dO-Vd-Dcx" id="pOF-aH-RbA">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4dO-Vd-Dcx" id="pOF-aH-RbA">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="63"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ggf-Wz-zP6">
-                        <rect key="frame" x="20" y="10" width="374" height="40"/>
+                        <rect key="frame" x="20" y="10" width="374" height="43"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mdu-UH-7ZJ">
-                                <rect key="frame" x="0.0" y="0.0" width="119.5" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="119.5" height="43"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Favourite">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -29,7 +29,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbv-XM-ZRU">
-                                <rect key="frame" x="127.5" y="0.0" width="119" height="40"/>
+                                <rect key="frame" x="127.5" y="0.0" width="119" height="43"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="To-Do">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -39,7 +39,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POx-gQ-Kd9">
-                                <rect key="frame" x="254.5" y="0.0" width="119.5" height="40"/>
+                                <rect key="frame" x="254.5" y="0.0" width="119.5" height="43"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Share">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -50,7 +50,7 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" constant="40" id="gAL-1Y-GeJ"/>
+                            <constraint firstAttribute="height" priority="999" constant="40" id="gAL-1Y-GeJ"/>
                         </constraints>
                     </stackView>
                 </subviews>

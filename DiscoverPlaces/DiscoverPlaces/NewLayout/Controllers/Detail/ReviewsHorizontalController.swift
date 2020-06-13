@@ -21,7 +21,7 @@ final class ReviewsHorizontalController: HorizontalSnappingController, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .clear
         collectionView.register(ReviewCell.self, forCellWithReuseIdentifier: ReviewCell.id)
         collectionView.contentInset = .init(top: 0, left: 24, bottom: 0, right: 24)
     }

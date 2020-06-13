@@ -9,7 +9,7 @@ struct DetailItem {
         case mainImagesSlider(MainImageSliderViewModel)
         case regular(RegularDetailViewModel)
         case actionButtons(DetailActionsViewModel)
-        case reviews
+        case reviews(ReviewSliderViewModel)
         case morePlaces
         case googleCell
         case separator

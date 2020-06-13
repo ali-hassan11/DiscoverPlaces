@@ -87,6 +87,9 @@
 		CE694B8E24097EC400F37ED6 /* FavouritesListHolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8D24097EC400F37ED6 /* FavouritesListHolderCell.swift */; };
 		CE694B9024097ECF00F37ED6 /* ToDoListHolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B8F24097ECF00F37ED6 /* ToDoListHolderCell.swift */; };
 		CE694B9224097FD200F37ED6 /* MyPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE694B9124097FD200F37ED6 /* MyPlaceCell.swift */; };
+		CE698968249590F80032B739 /* ReviewSliderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE698967249590F80032B739 /* ReviewSliderCell.xib */; };
+		CE69896A249592860032B739 /* ReviewSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE698969249592860032B739 /* ReviewSliderCell.swift */; };
+		CE69896C249593350032B739 /* ReviewSliderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69896B249593350032B739 /* ReviewSliderViewModel.swift */; };
 		CE6F17FD23F66E73003D8D89 /* OpeningTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6F17FC23F66E72003D8D89 /* OpeningTimeCell.swift */; };
 		CE8A2FC923F088B800CDF866 /* MorePlacesHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A2FC823F088B800CDF866 /* MorePlacesHolder.swift */; };
 		CE8A2FCB23F088D200CDF866 /* MorePlacesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8A2FCA23F088D200CDF866 /* MorePlacesHorizontalController.swift */; };
@@ -234,6 +237,9 @@
 		CE694B8D24097EC400F37ED6 /* FavouritesListHolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesListHolderCell.swift; sourceTree = "<group>"; };
 		CE694B8F24097ECF00F37ED6 /* ToDoListHolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListHolderCell.swift; sourceTree = "<group>"; };
 		CE694B9124097FD200F37ED6 /* MyPlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlaceCell.swift; sourceTree = "<group>"; };
+		CE698967249590F80032B739 /* ReviewSliderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewSliderCell.xib; sourceTree = "<group>"; };
+		CE698969249592860032B739 /* ReviewSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSliderCell.swift; sourceTree = "<group>"; };
+		CE69896B249593350032B739 /* ReviewSliderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSliderViewModel.swift; sourceTree = "<group>"; };
 		CE6F17FC23F66E72003D8D89 /* OpeningTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningTimeCell.swift; sourceTree = "<group>"; };
 		CE8A2FC823F088B800CDF866 /* MorePlacesHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePlacesHolder.swift; sourceTree = "<group>"; };
 		CE8A2FCA23F088D200CDF866 /* MorePlacesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorePlacesHorizontalController.swift; sourceTree = "<group>"; };
@@ -337,6 +343,7 @@
 				CEB41DBB249419A000DDFC53 /* MainImageSliderViewModel.swift */,
 				CE300D4124919446008F1931 /* RegularDetailViewModel.swift */,
 				CE15FD9F2494EDB400725A38 /* DetailActionsViewModel.swift */,
+				CE69896B249593350032B739 /* ReviewSliderViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -350,6 +357,8 @@
 				CEB41DB72494146800DDFC53 /* MainImageSliderCell.swift */,
 				CE15FD992494EA6600725A38 /* DetailActionsCell.xib */,
 				CE15FD9B2494EB6900725A38 /* DetailActionsCell.swift */,
+				CE698967249590F80032B739 /* ReviewSliderCell.xib */,
+				CE698969249592860032B739 /* ReviewSliderCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -828,6 +837,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE698968249590F80032B739 /* ReviewSliderCell.xib in Resources */,
 				CE8A2FD723F1CE3000CDF866 /* DetailsTopSectionCellXib.xib in Resources */,
 				CEB41DB62494143100DDFC53 /* MainImageSliderCell.xib in Resources */,
 				CE15FD9A2494EA6600725A38 /* DetailActionsCell.xib in Resources */,
@@ -977,6 +987,7 @@
 				CEB41DAA2493ACE200DDFC53 /* NibLoadable.swift in Sources */,
 				CEB72F52243D13B3002F6131 /* PrivacyPolicyController.swift in Sources */,
 				60EADA8123F6D91B0095DBF9 /* ReviewsHolder.swift in Sources */,
+				CE69896C249593350032B739 /* ReviewSliderViewModel.swift in Sources */,
 				CE5835C923DE173800C89622 /* BaseTabBarController.swift in Sources */,
 				CECDA1462401C51A005F85FB /* StarRatingView.swift in Sources */,
 				CE300D3424918C8D008F1931 /* NEWPlaceDetailController.swift in Sources */,
@@ -1049,6 +1060,7 @@
 				CE8A2FCF23F08A0E00CDF866 /* DetailsTopSectionCell.swift in Sources */,
 				CEB41DB82494146800DDFC53 /* MainImageSliderCell.swift in Sources */,
 				CE5835DB23DF1B7A00C89622 /* Service.swift in Sources */,
+				CE69896A249592860032B739 /* ReviewSliderCell.swift in Sources */,
 				CE15FDA02494EDB400725A38 /* DetailActionsViewModel.swift in Sources */,
 				CE300D4624919970008F1931 /* Theming.swift in Sources */,
 				CE300D4A24919B30008F1931 /* DetailsViewModel.swift in Sources */,

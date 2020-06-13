@@ -7,6 +7,7 @@ final class DetailsViewModel: NSObject {
     typealias Typography = TypographyProvider & PlaceDetailTypography
     private let typography: Typography
     private let theming: PlaceDetailTheming
+    
     private let placeId: String
     private let location: LocationItem
     
@@ -93,6 +94,13 @@ extension DetailsViewModel {
                                   typography: typography,
                                   theming: theming))
         
+        //Reviews
+        if let reviews = result.reviews {
+        items.append(Self.reviews(reviews: reviews,
+                                  typography: typography,
+                                  theming: theming))
+        }
+        
         self.items = items
         DispatchQueue.main.async {
             completion(nil)
@@ -119,6 +127,8 @@ extension DetailsViewModel: UITableViewDataSource {
             return mainImageSliderCell(at: indexPath, tableView: tableView, viewModel: mainImageSliderViewModel)
         case .actionButtons(let actionsViewModel):
             return actionsCell(at: indexPath, tableView: tableView, viewModel: actionsViewModel)
+        case .reviews(let reviewSliderViewModel):
+            return reviewSliderCell(at: indexPath, tableView: tableView, viewModel: reviewSliderViewModel)
         default:
             fatalError()
         }
@@ -139,7 +149,8 @@ extension DetailsViewModel: UITableViewDelegate {
 
 // MARK: Configure Cell Helpers
 extension DetailsViewModel {
-    
+
+    //Make into 1 method for all
     private func regularDetailCell(at indexPath: IndexPath, tableView: UITableView, viewModel: RegularDetailViewModel) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RegularCell.reuseIdentifier, for: indexPath) as? RegularCell else {
             return UITableViewCell()
@@ -158,6 +169,14 @@ extension DetailsViewModel {
     
     private func actionsCell(at indexPath: IndexPath, tableView: UITableView, viewModel: DetailActionsViewModel) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailActionsCell.reuseIdentifier, for: indexPath) as? DetailActionsCell else {
+            return UITableViewCell()
+        }
+        cell.configure(using: viewModel)
+        return cell
+    }
+    
+    private func reviewSliderCell(at indexPath: IndexPath, tableView: UITableView, viewModel: ReviewSliderViewModel) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewSliderCell.reuseIdentifier, for: indexPath) as? ReviewSliderCell else {
             return UITableViewCell()
         }
         cell.configure(using: viewModel)
@@ -219,6 +238,12 @@ extension DetailsViewModel {
 
         let viewModel = DetailActionsViewModel(actions: actionsItem, placeId: placeId, theming: theming)
         return DetailItem(type: .actionButtons(viewModel), action: nil)
+    }
+    
+    private static func reviews(reviews: [Review], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+        
+        let viewModel = ReviewSliderViewModel(reviews: reviews, typography: typography, theming: theming)
+        return DetailItem(type: .reviews(viewModel), action: nil)
     }
     
     private static func todayOpeningHours(openingHours: [String]) -> String {

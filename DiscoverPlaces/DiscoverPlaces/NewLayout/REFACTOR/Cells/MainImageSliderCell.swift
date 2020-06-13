@@ -19,7 +19,6 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
         imagesController = ImagesHorizontalController()
         imagesSliderContainer.addSubview(imagesController?.view ?? UIView())
         imagesController?.view.fillSuperview()
-        
         configureGradient()
     }
     
@@ -30,6 +29,8 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
         configureStars(using: viewModel)
         configureImageSlider(using: viewModel)
         configurePageIndicator(using: viewModel)
+        
+//        backgroundColor = viewModel.backgroundColor
     }
             
     private func configureStars(using viewModel: MainImageSliderViewModel) {
