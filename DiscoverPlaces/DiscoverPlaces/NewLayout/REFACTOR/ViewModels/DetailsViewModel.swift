@@ -51,7 +51,7 @@ extension DetailsViewModel {
         //Photos
         if let photos = result.photos {
             
-            let distance = result.geometry?.distanceString(from: location.selectedLocation)
+            let distance = result.geometry?.distanceString(from: location.actualUserLocation ?? location.selectedLocation)
             
             let mainImagesSliderItem = MainImageSliderItem(name: result.name, rating: result.rating, distance: distance, photos: photos)
             items.append(Self.mainImageSlider(using: mainImagesSliderItem,
