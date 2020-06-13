@@ -15,22 +15,11 @@ final class ImagesHorizontalController: HorizontalSnappingController, UICollecti
             collectionView.reloadData()
         }
     }
-    
-    let theming: PlaceDetailTheming
-    
-    init(theming: PlaceDetailTheming) {
-        self.theming = theming
-        super.init()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = theming.imagePlaceHolder
+        collectionView.backgroundColor = .clear
         collectionView.scrollsToTop = true
         collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "imageCell")
     }

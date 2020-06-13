@@ -14,7 +14,7 @@ final class MainImagesSliderCell: UICollectionReusableView {
     
     static let id = "placeImagesHolderId"
     
-    public let horizontalController = ImagesHorizontalController(theming: PlaceDetailTheming())
+    public let horizontalController = ImagesHorizontalController()
     public let segmentedControl = PageIndicator()
     private let placeNameLabel = UILabel(text: "", font: .systemFont(ofSize: 24, weight: .semibold), color: .white, numberOfLines: 3)
     private let starRatingView = StarRatingView()

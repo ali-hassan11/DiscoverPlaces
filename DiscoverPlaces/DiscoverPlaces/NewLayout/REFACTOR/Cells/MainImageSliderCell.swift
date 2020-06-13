@@ -15,13 +15,12 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        imagesController = ImagesHorizontalController(theming: PlaceDetailTheming())
+        imagesController = ImagesHorizontalController()
         imagesSliderContainer.addSubview(imagesController?.view ?? UIView())
         imagesController?.view.fillSuperview()
     }
     
     func configure(using viewModel: DetailItemViewModel) {
-        
         guard let viewModel = viewModel as? MainImageSliderViewModel else { return }
     
         configureLabels(using: viewModel)
@@ -32,7 +31,13 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
     }
             
     private func configureStars(using viewModel: MainImageSliderViewModel) {
-        guard let rating = viewModel.rating else { return }
+        guard let rating = viewModel.rating else {
+            starsContainer.backgroundColor = .clear
+            starsContainer.isHidden = true
+            distanceLabel.textAlignment = .left
+            return
+        }
+        
         let starsView = StarRatingView()
         starsView.populate(with: rating, displaysNumber: true)
         
@@ -49,13 +54,10 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
     }
     
     private func configureImageSlider(using viewModel: MainImageSliderViewModel) {
-//        imagesController = ImagesHorizontalController(theming: viewModel.theming)
-        
         guard let imagesController = imagesController else { return }
+        
         imagesController.photos = viewModel.photos
-//        imagesSliderContainer.addSubview(imagesController.view)
         imagesSliderContainer.backgroundColor = viewModel.imagesPlaceHolderColor
-//        imagesController.view.fillSuperview()
 
         imagesController.didScrollImagesController = { [weak self] nearestPage in
             self?.pageIndicator.selectedSegmentIndex = nearestPage
@@ -69,12 +71,12 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
     }
     
     private func configurePageIndicator(using viewModel: MainImageSliderViewModel) {
-        
         guard let count = viewModel.photos?.count else { return }
+        
         populatePageIndicator(with: count)
         
         pageIndicator.isUserInteractionEnabled = false
-        pageIndicator.backgroundColor = viewModel.pageIndicatorBackgroundColor
+        pageIndicator.backgroundColor = .black
         pageIndicator.selectedSegmentTintColor = viewModel.pageIndicatorColor
         
         pageIndicator.selectedSegmentIndex = 0
