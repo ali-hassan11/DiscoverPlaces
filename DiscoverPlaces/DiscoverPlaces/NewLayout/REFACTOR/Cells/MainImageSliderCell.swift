@@ -9,17 +9,19 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
     
     @IBOutlet weak var imagesSliderContainer: UIView!
     @IBOutlet weak var starsContainer: UIView!
+    @IBOutlet weak var gradientView: UIView!
     
     private var imagesController: ImagesHorizontalController?
     
     func configure(using viewModel: DetailItemViewModel) {
         
         guard let viewModel = viewModel as? MainImageSliderViewModel else { return }
-        
+    
         configureLabels(using: viewModel)
         configureStars(using: viewModel)
         configureImageSlider(using: viewModel)
         configurePageIndicator(using: viewModel)
+        configureGradient()
     }
             
     private func configureStars(using viewModel: MainImageSliderViewModel) {
@@ -41,6 +43,7 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
     
     private func configureImageSlider(using viewModel: MainImageSliderViewModel) {
         imagesController = ImagesHorizontalController(theming: viewModel.theming)
+        
         guard let imagesController = imagesController else { return }
         imagesController.photos = viewModel.photos
         imagesSliderContainer.addSubview(imagesController.view)
@@ -50,6 +53,12 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
         imagesController.didScrollImagesController = { [weak self] nearestPage in
             self?.pageIndicator.selectedSegmentIndex = nearestPage
         }
+    }
+    
+    private func configureGradient() {
+        gradientView.backgroundColor = .clear
+        gradientView.isUserInteractionEnabled = false
+        addGradient(firstColor: .clear, secondColor: .black, view: gradientView, start: 0.69, end: 0.96)
     }
     
     private func configurePageIndicator(using viewModel: MainImageSliderViewModel) {

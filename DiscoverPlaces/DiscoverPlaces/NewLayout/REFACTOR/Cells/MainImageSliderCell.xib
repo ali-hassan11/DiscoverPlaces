@@ -22,6 +22,10 @@
                             <constraint firstAttribute="height" constant="450" id="UuD-t3-h70"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vpd-cV-vbG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="450"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="One-U5-bbA">
                         <rect key="frame" x="0.0" y="448.5" width="414" height="2.5"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -67,6 +71,7 @@
                     </stackView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Kft-os-eLH" firstAttribute="leading" secondItem="vpd-cV-vbG" secondAttribute="leading" id="3LJ-HK-2pe"/>
                     <constraint firstAttribute="trailing" secondItem="Kft-os-eLH" secondAttribute="trailing" id="5xs-z7-U66"/>
                     <constraint firstAttribute="trailing" secondItem="One-U5-bbA" secondAttribute="trailing" id="LcL-3t-5HJ"/>
                     <constraint firstItem="eQ5-CI-MH3" firstAttribute="top" secondItem="qLr-TH-zJf" secondAttribute="bottom" constant="12" id="O0a-dQ-LWZ"/>
@@ -75,15 +80,19 @@
                     <constraint firstItem="qLr-TH-zJf" firstAttribute="trailing" secondItem="sPY-WE-uLz" secondAttribute="trailingMargin" id="T9h-DD-34m"/>
                     <constraint firstAttribute="bottom" secondItem="Kft-os-eLH" secondAttribute="bottom" id="TkQ-vM-rbj"/>
                     <constraint firstItem="One-U5-bbA" firstAttribute="leading" secondItem="sPY-WE-uLz" secondAttribute="leading" id="Tx5-cN-UNd"/>
+                    <constraint firstItem="Kft-os-eLH" firstAttribute="top" secondItem="vpd-cV-vbG" secondAttribute="top" id="ZW5-rc-89d"/>
                     <constraint firstItem="Kft-os-eLH" firstAttribute="top" secondItem="sPY-WE-uLz" secondAttribute="top" id="b58-EB-UWx"/>
+                    <constraint firstItem="Kft-os-eLH" firstAttribute="trailing" secondItem="vpd-cV-vbG" secondAttribute="trailing" id="dAW-ba-T1a"/>
                     <constraint firstItem="eQ5-CI-MH3" firstAttribute="leading" secondItem="sPY-WE-uLz" secondAttribute="leadingMargin" id="eE4-xE-siz"/>
                     <constraint firstItem="qLr-TH-zJf" firstAttribute="leading" secondItem="sPY-WE-uLz" secondAttribute="leadingMargin" id="hW3-Cc-o1f"/>
                     <constraint firstItem="Kft-os-eLH" firstAttribute="leading" secondItem="sPY-WE-uLz" secondAttribute="leading" id="lvy-PM-Kjb"/>
+                    <constraint firstItem="Kft-os-eLH" firstAttribute="bottom" secondItem="vpd-cV-vbG" secondAttribute="bottom" id="tUw-Pe-BYi"/>
                     <constraint firstItem="One-U5-bbA" firstAttribute="top" secondItem="eQ5-CI-MH3" secondAttribute="bottom" constant="12" id="uuY-3N-ivm"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="distanceLabel" destination="dWU-rQ-h5h" id="dQ5-XT-6ft"/>
+                <outlet property="gradientView" destination="vpd-cV-vbG" id="sSu-6f-aNA"/>
                 <outlet property="imagesSliderContainer" destination="Kft-os-eLH" id="oW2-ev-DQm"/>
                 <outlet property="pageIndicator" destination="One-U5-bbA" id="8cg-E2-IA8"/>
                 <outlet property="placeNameLabel" destination="qLr-TH-zJf" id="lb4-dz-YKk"/>
