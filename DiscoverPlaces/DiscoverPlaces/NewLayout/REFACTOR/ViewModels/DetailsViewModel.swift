@@ -211,16 +211,13 @@ extension DetailsViewModel {
     
     private static func actions(placeId: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         let isFave = DefaultsManager.isInList(placeId: placeId, listKey: .favourites)
-        
-        let favouriteAction: (Bool) -> Void = { isFave in
-            isFave ? DefaultsManager.removeFromList(placeId: placeId, listKey: .favourites) : DefaultsManager.addToList(placeId: placeId, listKey: .favourites)
-        }
-        let toDoAction: (Bool) -> Void = { isTod in print("Add to to-do") }
+        let isToDo = DefaultsManager.isInList(placeId: placeId, listKey: .toDo)
+ 
         let shareAction: () -> Void = { print("share place") }
 
-        let actionsItem = DetailActionsItem(isFave: isFave, favouriteAction: favouriteAction, toDoAction: toDoAction, shareAction: shareAction)
+        let actionsItem = DetailActionsItem(isFave: isFave, isToDo: isToDo, shareAction: shareAction)
 
-        let viewModel = DetailActionsViewModel(placeId: placeId, actions: actionsItem)
+        let viewModel = DetailActionsViewModel(actions: actionsItem, placeId: placeId, theming: theming)
         return DetailItem(type: .actionButtons(viewModel), action: nil)
     }
     

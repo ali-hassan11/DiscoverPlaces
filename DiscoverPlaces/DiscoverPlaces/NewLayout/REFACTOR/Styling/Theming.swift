@@ -3,7 +3,6 @@ import UIKit
 protocol ThemingProvider {
     
     var cellBackground: UIColor { get }
-    var cellIconTint: UIColor { get }
     var imagePlaceHolder: UIColor { get }
     var starFill: UIColor { get }
     var starBorder: UIColor { get }
@@ -12,14 +11,25 @@ protocol ThemingProvider {
     
 }
 
-final class PlaceDetailTheming: ThemingProvider {
-
+class DefaultThemingProvider: ThemingProvider {
     let cellBackground: UIColor = .systemBackground
-    let cellIconTint: UIColor = .label
     let imagePlaceHolder: UIColor = .secondarySystemBackground
     let starFill: UIColor = .systemPink
     let starBorder: UIColor = .systemPink
     let pageIndicatorFill: UIColor = .systemPink
     let pageIndicatorBackground: UIColor = .quaternarySystemFill
+}
+
+//MARK: Place Detail
+protocol PlaceDetailTheming: ThemingProvider {
+    var cellIconTint: UIColor { get }
+    var actionButtonBackground: UIColor { get }
+    var actionButtonTint: UIColor { get }
+}
+
+extension DefaultThemingProvider: PlaceDetailTheming {
+    var cellIconTint: UIColor { return .label }
+    var actionButtonBackground: UIColor { return .systemPink }
+    var actionButtonTint: UIColor { return .white }
     
 }

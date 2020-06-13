@@ -18,7 +18,6 @@ struct MainImageSliderViewModel: DetailItemViewModel {
     init(mainImageSliderItem: MainImageSliderItem, typography: Typography, theming: PlaceDetailTheming) {
         
         self.theming = theming
-        
         self.photos = mainImageSliderItem.photos
         self.rating = mainImageSliderItem.rating
         

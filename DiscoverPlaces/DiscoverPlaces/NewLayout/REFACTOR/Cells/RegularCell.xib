@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stz-Li-ma3">
-                        <rect key="frame" x="57" y="16" width="292" height="33"/>
+                        <rect key="frame" x="57" y="20" width="292" height="25"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -38,11 +38,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="5Hj-29-maw" firstAttribute="leading" secondItem="kxk-7f-Yqj" secondAttribute="leading" constant="20" id="4bu-bN-yLc"/>
-                    <constraint firstAttribute="bottom" secondItem="stz-Li-ma3" secondAttribute="bottom" constant="16" id="62u-P5-EMK"/>
+                    <constraint firstAttribute="bottom" secondItem="stz-Li-ma3" secondAttribute="bottom" constant="20" id="62u-P5-EMK"/>
                     <constraint firstItem="stz-Li-ma3" firstAttribute="leading" secondItem="5Hj-29-maw" secondAttribute="trailing" constant="12" id="6Eu-Wq-K8C"/>
                     <constraint firstItem="stz-Li-ma3" firstAttribute="centerY" secondItem="5Hj-29-maw" secondAttribute="centerY" id="Qkx-8K-FXM"/>
                     <constraint firstItem="Ayu-rw-Sec" firstAttribute="leading" secondItem="stz-Li-ma3" secondAttribute="trailing" constant="12" id="a6q-AI-B8z"/>
-                    <constraint firstItem="stz-Li-ma3" firstAttribute="top" secondItem="kxk-7f-Yqj" secondAttribute="top" constant="16" id="e0a-od-c5n"/>
+                    <constraint firstItem="stz-Li-ma3" firstAttribute="top" secondItem="kxk-7f-Yqj" secondAttribute="top" constant="20" id="e0a-od-c5n"/>
                     <constraint firstItem="Ayu-rw-Sec" firstAttribute="centerY" secondItem="kxk-7f-Yqj" secondAttribute="centerY" id="kIW-eE-YOg"/>
                     <constraint firstAttribute="trailing" secondItem="Ayu-rw-Sec" secondAttribute="trailing" constant="20" id="pU7-HE-hHH"/>
                 </constraints>
