@@ -1,7 +1,7 @@
 
 import UIKit
 
-final class SectionSliderCell: UITableViewCell, NibLoadableReusable {
+final class SectionSliderCell: UITableViewCell, NibLoadableReusable, DetailCellConfigurable {
     
     @IBOutlet weak var reviewsHeadingLabel: UILabel!
     @IBOutlet weak var sliderControllerContainer: UIView!

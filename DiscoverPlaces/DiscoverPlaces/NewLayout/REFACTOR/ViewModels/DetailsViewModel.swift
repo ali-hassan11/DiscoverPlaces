@@ -25,19 +25,17 @@ final class DetailsViewModel: NSObject {
 extension DetailsViewModel {
     
     func fetchPlaceData(completion: @escaping (Error?) -> Void) {
-        
+         
         Service.shared.fetchPlaceDetails(placeId: placeId, fields: Constants.placeDetailFields) {  [weak self] (placeResponse, error) in
             guard let self = self else { return }
             
             if let error = error {
-                print("Falied to fetch: ", error)
                 completion(error)
                 return
             }
             
             //success
             guard let result = placeResponse?.result else {
-                print("No results?")
                 completion(error)
                 return
             }
@@ -47,61 +45,61 @@ extension DetailsViewModel {
     }
     
     private func populateDetailItems(with result: PlaceDetailResult, completion: @escaping (Error?) -> Void) {
+        
         var items = [DetailItem]()
         
-        //Photos
+        //Main Images Slider
         if let photos = result.photos {
             
             let distance = result.geometry?.distanceString(from: location.actualUserLocation ?? location.selectedLocation)
-            
+
             let mainImagesSliderItem = MainImageSliderItem(name: result.name, rating: result.rating, distance: distance, photos: photos)
-            items.append(Self.mainImageSlider(using: mainImagesSliderItem,
+            items.append(Self.configureMainImageSliderDetailItem(using: mainImagesSliderItem,
                                               typography: typography,
                                               theming: theming))
         }
         
         //Regular Cells
         if let vicinity = result.vicinity {
-            items.append(Self.vicinity(using: vicinity,
+            items.append(Self.configureAddressDetailItem(using: vicinity,
                                        typography: self.typography,
                                        theming: self.theming))
         }
         
         if let openingHours = result.opening_hours?.weekdayText {
-            items.append(Self.openingHours(using: openingHours,
+            items.append(Self.configureOpeningHoursDetailItem(using: openingHours,
                                            typography: self.typography,
                                            theming: self.theming))
         }
         
         if let phoneNumber = result.international_phone_number {
-            items.append(Self.phoneNumber(using: phoneNumber,
+            items.append(Self.configurePhoneNumberDetailItem(using: phoneNumber,
                                           typography: self.typography,
                                           theming: self.theming))
         }
         
         if let webAdress = result.website {
-            items.append(Self.website(using: webAdress,
+            items.append(Self.configureWebsiteDetailItem(using: webAdress,
                                       typography: self.typography,
                                       theming: self.theming))
         } else if let googleUrl = result.url {
-            items.append(Self.website(using: googleUrl,
+            items.append(Self.configureWebsiteDetailItem(using: googleUrl,
                                       typography: self.typography,
                                       theming: self.theming))
         }
         
         //Actions
-        items.append(Self.actions(placeId: placeId,
+        items.append(Self.configureActionsDetailItem(placeId: placeId,
                                   typography: typography,
                                   theming: theming))
         
         //Reviews
         if let reviews = result.reviews {
-        items.append(Self.reviews(reviews: reviews,
+        items.append(Self.configureReviewsDetailItem(reviews: reviews,
                                   typography: typography,
                                   theming: theming))
         }
         
-        #warning("FIX")
         if let location = result.geometry?.location {
             fetchMorePlacesData(near: location, items: items, completion: completion)
         }
@@ -111,17 +109,19 @@ extension DetailsViewModel {
         
         Service.shared.fetchNearbyPlaces(location: location, radius: 3000) { [weak self] (response, error) in
             guard let self = self else {
-                completion(nil)
+                completion(nil) //Call completion without appending morePlaces
                 return
             }
-            if let error = error {
-                print("Failed to fetch places: ", error)
+            
+            if let _ = error {
+                print("🚨 Failed to load more places 🚨")
+                completion(nil) //Call completion without appending morePlaces
                 return
             }
             
             //success
             guard let results = response?.results else {
-                print("No results?")
+                completion(nil) //Call completion without appending morePlaces
                 return
             }
             
@@ -129,9 +129,11 @@ extension DetailsViewModel {
             
             var items = items
             
-            items.append(Self.nearby(places: filteredResults,
+            items.append(Self.configureNearbyPlacesDetailItem(places: filteredResults,
                                      typography: self.typography,
                                      theming: self.theming))
+            
+            items.append(DetailItem(type: .googleFooter, action: nil))
             
             self.items = items
             DispatchQueue.main.async {
@@ -156,13 +158,13 @@ extension DetailsViewModel: UITableViewDataSource {
         
         switch item.type {
         case .regular(let regularDetailViewModel):
-            return regularDetailCell(at: indexPath, tableView: tableView, viewModel: regularDetailViewModel)
+            return configureCell(cellType: RegularCell.self, at: indexPath, tableView: tableView, viewModel: regularDetailViewModel)
         case .mainImagesSlider(let mainImageSliderViewModel):
-            return mainImageSliderCell(at: indexPath, tableView: tableView, viewModel: mainImageSliderViewModel)
+            return configureCell(cellType: MainImageSliderCell.self, at: indexPath, tableView: tableView, viewModel: mainImageSliderViewModel)
         case .actionButtons(let actionsViewModel):
-            return actionsCell(at: indexPath, tableView: tableView, viewModel: actionsViewModel)
+           return configureCell(cellType: DetailActionsCell.self, at: indexPath, tableView: tableView, viewModel: actionsViewModel)
         case .reviews(let reviewSliderViewModel):
-            return sectionSliderCell(at: indexPath, tableView: tableView, viewModel: reviewSliderViewModel)
+            return configureCell(cellType: SectionSliderCell.self, at: indexPath, tableView: tableView, viewModel: reviewSliderViewModel)
         case .morePlaces(let morePlacesViewmodel):
             return configureCell(cellType: SectionSliderCell.self, at: indexPath, tableView: tableView, viewModel: morePlacesViewmodel)
         case .googleFooter:
@@ -183,34 +185,20 @@ extension DetailsViewModel: UITableViewDelegate {
     
 }
 
-// MARK: Configure Cell Helpers
+// MARK: Configure Cell Methods
 extension DetailsViewModel {
 
     //Make into 1 method for all
-    private func regularDetailCell(at indexPath: IndexPath, tableView: UITableView, viewModel: RegularDetailViewModel) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RegularCell.reuseIdentifier, for: indexPath) as? RegularCell else {
+    typealias DetailCell = UITableViewCell & NibLoadableReusable & DetailCellConfigurable
+    
+    private func configureCell<T: DetailCell>(cellType: T.Type, at indexPath: IndexPath, tableView: UITableView, viewModel: DetailItemViewModel) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             return UITableViewCell()
         }
         cell.configure(using: viewModel)
         return cell
     }
-    
-    private func mainImageSliderCell(at indexPath: IndexPath, tableView: UITableView, viewModel: MainImageSliderViewModel) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainImageSliderCell.reuseIdentifier, for: indexPath) as? MainImageSliderCell else {
-            return UITableViewCell()
-        }
-        cell.configure(using: viewModel)
-        return cell
-    }
-    
-    private func actionsCell(at indexPath: IndexPath, tableView: UITableView, viewModel: DetailActionsViewModel) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailActionsCell.reuseIdentifier, for: indexPath) as? DetailActionsCell else {
-            return UITableViewCell()
-        }
-        cell.configure(using: viewModel)
-        return cell
-    }
-    
+  
     private func googleCell(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GoogleCell.reuseIdentifier, for: indexPath) as? GoogleCell else {
             return UITableViewCell()
@@ -224,13 +212,13 @@ extension DetailsViewModel {
 //MARK: Configure Detail Item Methods
 extension DetailsViewModel {
     
-    private static func mainImageSlider(using mainImageSliderItem: MainImageSliderItem, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func configureMainImageSliderDetailItem(using mainImageSliderItem: MainImageSliderItem, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         
         let viewModel = MainImageSliderViewModel(mainImageSliderItem: mainImageSliderItem, typography: typography, theming: theming)
         return DetailItem(type: .mainImagesSlider(viewModel), action: nil)
     }
     
-    private static func vicinity(using vicinity: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func configureAddressDetailItem(using vicinity: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         let action: () -> Void = {
             print("Open Maps")
         }
@@ -238,7 +226,7 @@ extension DetailsViewModel {
         return DetailItem(type: .regular(viewModel), action: action)
     }
     
-    private static func openingHours(using openingHours: [String], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func configureOpeningHoursDetailItem(using openingHours: [String], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         let action: () -> Void = {
             print("Open Opening Hours")
         }
@@ -248,7 +236,7 @@ extension DetailsViewModel {
         return DetailItem(type: .regular(viewModel), action: action)
     }
     
-    private static func phoneNumber(using phoneNumber: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func configurePhoneNumberDetailItem(using phoneNumber: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         let action: () -> Void = {
             print("Call Phone Number")
         }
@@ -256,7 +244,7 @@ extension DetailsViewModel {
         return DetailItem(type: .regular(viewModel), action: action)
     }
     
-    private static func website(using webAddress: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func configureWebsiteDetailItem(using webAddress: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         let action: () -> Void = {
             print("Open Website")
         }
@@ -264,7 +252,7 @@ extension DetailsViewModel {
         return DetailItem(type: .regular(viewModel), action: action) //Use webAdress for action
     }
     
-    private static func actions(placeId: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func configureActionsDetailItem(placeId: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         let isFave = DefaultsManager.isInList(placeId: placeId, listKey: .favourites)
         let isToDo = DefaultsManager.isInList(placeId: placeId, listKey: .toDo)
  
@@ -275,7 +263,7 @@ extension DetailsViewModel {
         return DetailItem(type: .actionButtons(viewModel), action: nil)
     }
     
-    private static func reviews(reviews: [Review], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func configureReviewsDetailItem(reviews: [Review], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         
         let action: (Review) -> Void = { review in print("push full eview") }
         
@@ -286,7 +274,7 @@ extension DetailsViewModel {
         return DetailItem(type: .reviews(viewModel), action: nil)
     }
     
-    private static func nearby(places: [PlaceResult], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func configureNearbyPlacesDetailItem(places: [PlaceResult], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         
         let action: (String) -> Void = { placeId in print("Push place: \(placeId)") }
         

@@ -1,6 +1,6 @@
 import UIKit
 
-final class RegularCell: UITableViewCell, NibLoadableReusable {
+final class RegularCell: UITableViewCell, NibLoadableReusable, DetailCellConfigurable {
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

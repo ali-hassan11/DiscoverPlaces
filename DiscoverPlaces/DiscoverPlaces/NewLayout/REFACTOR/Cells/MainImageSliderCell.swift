@@ -1,7 +1,7 @@
 
 import UIKit
 
-final class MainImageSliderCell: UITableViewCell, NibLoadableReusable {
+final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCellConfigurable {
     
     @IBOutlet weak var placeNameLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!

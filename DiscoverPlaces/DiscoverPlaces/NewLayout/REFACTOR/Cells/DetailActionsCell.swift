@@ -1,7 +1,7 @@
 
 import UIKit
 
-final class DetailActionsCell: UITableViewCell, NibLoadableReusable {
+final class DetailActionsCell: UITableViewCell, NibLoadableReusable, DetailCellConfigurable {
     
     @IBOutlet weak var favouriteButton: UIButton!
     @IBOutlet weak var toDoButton: UIButton!

@@ -123,6 +123,7 @@
 		CECDA14824025896005F85FB /* ReviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA14724025896005F85FB /* ReviewDetailViewController.swift */; };
 		CED250592496567900F3EDC2 /* GoogleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED250582496567900F3EDC2 /* GoogleCell.swift */; };
 		CED2505E24966A9B00F3EDC2 /* GoogleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED2505D24966A9B00F3EDC2 /* GoogleCell.xib */; };
+		CED250602496EF5900F3EDC2 /* DetailCellConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2505F2496EF5900F3EDC2 /* DetailCellConfigurable.swift */; };
 		CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */; };
 		CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5723E84978006D79E6 /* Spacing.swift */; };
 		CEEB4D5C23E84978006D79E6 /* HorizontalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */; };
@@ -275,6 +276,7 @@
 		CECDA14724025896005F85FB /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
 		CED250582496567900F3EDC2 /* GoogleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCell.swift; sourceTree = "<group>"; };
 		CED2505D24966A9B00F3EDC2 /* GoogleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleCell.xib; sourceTree = "<group>"; };
+		CED2505F2496EF5900F3EDC2 /* DetailCellConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellConfigurable.swift; sourceTree = "<group>"; };
 		CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalStackView.swift; sourceTree = "<group>"; };
 		CEEB4D5723E84978006D79E6 /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalSnappingController.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				CE698969249592860032B739 /* SectionSliderCell.swift */,
 				CED2505D24966A9B00F3EDC2 /* GoogleCell.xib */,
 				CED250582496567900F3EDC2 /* GoogleCell.swift */,
+				CED2505F2496EF5900F3EDC2 /* DetailCellConfigurable.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1070,6 +1073,7 @@
 				CE5835DB23DF1B7A00C89622 /* Service.swift in Sources */,
 				CE69896A249592860032B739 /* SectionSliderCell.swift in Sources */,
 				CE15FDA02494EDB400725A38 /* DetailActionsViewModel.swift in Sources */,
+				CED250602496EF5900F3EDC2 /* DetailCellConfigurable.swift in Sources */,
 				CE300D4624919970008F1931 /* Theming.swift in Sources */,
 				CE300D4A24919B30008F1931 /* DetailsViewModel.swift in Sources */,
 				CE2267DB2402A14E00E6385F /* OpeningHoursController.swift in Sources */,
