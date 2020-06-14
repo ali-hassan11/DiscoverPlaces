@@ -23,11 +23,11 @@ class SearchResponseFilter {
         return filteredResults
     }
     
-    public func morePlacesResults(from response: SearchResponse) -> [PlaceResult] {
+    public func morePlacesResults(from results: [PlaceResult]) -> [PlaceResult] {
         
         var filteredResults = [PlaceResult]()
         
-        response.results.forEach({ result in
+        results.forEach({ result in
             if result.containsPhotos() && result.containsDesiredTypes() {
                 var result = result
                 result.rating = nil // TODO: - This is just a temporary fix! shouldn't make rating mutable!

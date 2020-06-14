@@ -18,7 +18,7 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
     private var location: LocationItem
     private var category: Category
     
-    private var subCategoryGroups = [PlacesGroup]()
+    private var subCategoryGroups = [[PlaceResult]]()
     
     init(category: Category, location: LocationItem) {
         self.location = location
@@ -81,15 +81,14 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
             }
             
             let placeResults = self.searchResponseFilter.results(from: response)
-            subCategoryGroup = PlacesGroup(title: subCategory.formatted(), results: placeResults)
             
             guard let group = subCategoryGroup, group.results.count > 0 else {
                 self.dispatchGroup.leave()
                 return
             }
             
-            self.subCategoryGroups.append(group)
-            self.subCategoryGroups.sort{$0.results.count > $1.results.count}
+            self.subCategoryGroups.append(placeResults)
+            self.subCategoryGroups.sort{$0.count > $1.count}
             self.dispatchGroup.leave()
         }
         
@@ -151,8 +150,8 @@ extension MultipleCategoriesController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubCategoryiesHolder.id, for: indexPath) as! SubCategoryiesHolder
         
         let subCategoryGroup = subCategoryGroups[indexPath.item]
-        cell.subCategoryTitleLabel.text = subCategoryGroup.title
-        cell.horizontalController.placeGroup = subCategoryGroup
+        cell.subCategoryTitleLabel.text = "Temp Title"
+        cell.horizontalController.results = subCategoryGroup
         cell.horizontalController.location = self.location.selectedLocation
         cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
             guard let location = self?.location else { return }

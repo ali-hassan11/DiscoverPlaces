@@ -14,7 +14,7 @@ final class PlaceGroupHorizontalController: HorizontalSnappingController, UIColl
     
     var location: Location?
     
-    var placeGroup: PlacesGroup? {
+    var results: [PlaceResult]? {
         didSet {
             collectionView.reloadData()
         }
@@ -37,12 +37,12 @@ final class PlaceGroupHorizontalController: HorizontalSnappingController, UIColl
 
 extension PlaceGroupHorizontalController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return placeGroup?.results.count ?? 0
+        return results?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SmallPlaceCell.id, for: indexPath) as! SmallPlaceCell
-        cell.configure(place: placeGroup?.results[indexPath.item])
+        cell.configure(place: results?[indexPath.item])
         return cell
     }
     
@@ -51,7 +51,7 @@ extension PlaceGroupHorizontalController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let placeId = placeGroup?.results[indexPath.item].place_id else { return }
+        guard let placeId = results?[indexPath.item].place_id else { return }
         didSelectPlaceInCategoriesHandler?(placeId)
     }
 }

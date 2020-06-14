@@ -128,7 +128,7 @@ final class PlaceDetailsController: BaseCollectionViewController, UICollectionVi
                 return
             }
             
-            let filteredResults = self.searchResponseFilter.morePlacesResults(from: response)
+            let filteredResults = self.searchResponseFilter.morePlacesResults(from: response.results)
             self.handleMorePlacesSuccess(with: filteredResults)
         }
     }
@@ -283,7 +283,7 @@ extension PlaceDetailsController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MorePlacesHolder.id, for: indexPath) as! MorePlacesHolder
             cell.horizontalController.location = location.selectedLocation
             
-            cell.horizontalController.placeGroup = PlacesGroup(results: morePlaces)
+            cell.horizontalController.results = morePlaces
             cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
                 guard let location = self?.location else { return }
                 let detailController = PlaceDetailsController(placeId: placeId, location: location)

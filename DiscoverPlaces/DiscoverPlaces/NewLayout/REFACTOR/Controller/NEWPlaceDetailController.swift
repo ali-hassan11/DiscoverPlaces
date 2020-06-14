@@ -51,7 +51,7 @@ extension NEWPlaceDetailController {
         tableView.register(RegularCell.nib(), forCellReuseIdentifier: RegularCell.reuseIdentifier)
         tableView.register(MainImageSliderCell.nib(), forCellReuseIdentifier: MainImageSliderCell.reuseIdentifier)
         tableView.register(DetailActionsCell.nib(), forCellReuseIdentifier: DetailActionsCell.reuseIdentifier)
-        tableView.register(ReviewSliderCell.nib(), forCellReuseIdentifier: ReviewSliderCell.reuseIdentifier)
+        tableView.register(SectionSliderCell.nib(), forCellReuseIdentifier: SectionSliderCell.reuseIdentifier)
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension

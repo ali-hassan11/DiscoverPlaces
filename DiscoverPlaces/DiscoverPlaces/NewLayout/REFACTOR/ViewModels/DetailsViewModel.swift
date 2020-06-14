@@ -101,9 +101,43 @@ extension DetailsViewModel {
                                   theming: theming))
         }
         
-        self.items = items
-        DispatchQueue.main.async {
-            completion(nil)
+        #warning("FIX")
+        if let location = result.geometry?.location {
+            fetchMorePlacesData(near: location, items: items, completion: completion)
+        }
+    }
+    
+    func fetchMorePlacesData(near location: Location, items: [DetailItem], completion: @escaping (Error?) -> Void) {
+        
+        Service.shared.fetchNearbyPlaces(location: location, radius: 3000) { [weak self] (response, error) in
+            guard let self = self else {
+                completion(nil)
+                return
+            }
+            if let error = error {
+                print("Failed to fetch places: ", error)
+                return
+            }
+            
+            //success
+            guard let results = response?.results else {
+                print("No results?")
+                return
+            }
+            
+            let filteredResults = SearchResponseFilter().morePlacesResults(from: results)
+            
+            var items = items
+            
+            items.append(Self.nearby(places: filteredResults,
+                                     typography: self.typography,
+                                     theming: self.theming))
+            
+            self.items = items
+            DispatchQueue.main.async {
+                completion(nil)
+            }
+            
         }
     }
 }
@@ -128,7 +162,9 @@ extension DetailsViewModel: UITableViewDataSource {
         case .actionButtons(let actionsViewModel):
             return actionsCell(at: indexPath, tableView: tableView, viewModel: actionsViewModel)
         case .reviews(let reviewSliderViewModel):
-            return reviewSliderCell(at: indexPath, tableView: tableView, viewModel: reviewSliderViewModel)
+            return sectionSliderCell(at: indexPath, tableView: tableView, viewModel: reviewSliderViewModel)
+        case .morePlaces(let morePlacesViewmodel):
+            return sectionSliderCell(at: indexPath, tableView: tableView, viewModel: morePlacesViewmodel)
         default:
             fatalError()
         }
@@ -175,8 +211,8 @@ extension DetailsViewModel {
         return cell
     }
     
-    private func reviewSliderCell(at indexPath: IndexPath, tableView: UITableView, viewModel: ReviewSliderViewModel) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewSliderCell.reuseIdentifier, for: indexPath) as? ReviewSliderCell else {
+    private func sectionSliderCell(at indexPath: IndexPath, tableView: UITableView, viewModel: SectionSliderViewModel) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SectionSliderCell.reuseIdentifier, for: indexPath) as? SectionSliderCell else {
             return UITableViewCell()
         }
         cell.configure(using: viewModel)
@@ -233,7 +269,6 @@ extension DetailsViewModel {
         let isToDo = DefaultsManager.isInList(placeId: placeId, listKey: .toDo)
  
         let shareAction: () -> Void = { print("share place") }
-
         let actionsItem = DetailActionsItem(isFave: isFave, isToDo: isToDo, shareAction: shareAction)
 
         let viewModel = DetailActionsViewModel(actions: actionsItem, placeId: placeId, theming: theming)
@@ -242,8 +277,24 @@ extension DetailsViewModel {
     
     private static func reviews(reviews: [Review], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
         
-        let viewModel = ReviewSliderViewModel(reviews: reviews, typography: typography, theming: theming)
+        let action: (Review) -> Void = { review in print("push full eview") }
+        
+        let reviewsItem = ReviewSliderItem(reviews: reviews, sectionTitle: "Reviews", height: 125, action: action)
+        let sliderSectionItem = SliderSectionItem(type: .reviews(reviewsItem))
+        
+        let viewModel = SectionSliderViewModel(sliderSectionItem: sliderSectionItem, typography: typography, theming: theming)
         return DetailItem(type: .reviews(viewModel), action: nil)
+    }
+    
+    private static func nearby(places: [PlaceResult], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+        
+        let action: (String) -> Void = { placeId in print("Push place: \(placeId)") }
+        
+        let placeSliderItem = PlaceSliderItem(places: places, sectionTitle: "Nearby", height: 230, action: action)
+        let sliderSectionItem = SliderSectionItem(type: .nearby(placeSliderItem))
+        
+        let viewModel = SectionSliderViewModel(sliderSectionItem: sliderSectionItem, typography: typography, theming: theming)
+        return DetailItem(type: .morePlaces(viewModel), action: nil)
     }
     
     private static func todayOpeningHours(openingHours: [String]) -> String {
