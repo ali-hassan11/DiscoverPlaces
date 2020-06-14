@@ -17,7 +17,7 @@ final class NEWPlaceDetailController: UITableViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupTableView()
-        
+    
         guard Reachability.isConnectedToNetwork() else {
             return
         }
@@ -52,11 +52,12 @@ extension NEWPlaceDetailController {
         tableView.register(MainImageSliderCell.nib(), forCellReuseIdentifier: MainImageSliderCell.reuseIdentifier)
         tableView.register(DetailActionsCell.nib(), forCellReuseIdentifier: DetailActionsCell.reuseIdentifier)
         tableView.register(SectionSliderCell.nib(), forCellReuseIdentifier: SectionSliderCell.reuseIdentifier)
+        tableView.register(GoogleCell.nib(), forCellReuseIdentifier: GoogleCell.reuseIdentifier)
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
         tableView.contentInsetAdjustmentBehavior = .never
-        
+    
         tableView.delegate = viewModel
         tableView.dataSource = viewModel
     }

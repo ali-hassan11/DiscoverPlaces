@@ -164,9 +164,9 @@ extension DetailsViewModel: UITableViewDataSource {
         case .reviews(let reviewSliderViewModel):
             return sectionSliderCell(at: indexPath, tableView: tableView, viewModel: reviewSliderViewModel)
         case .morePlaces(let morePlacesViewmodel):
-            return sectionSliderCell(at: indexPath, tableView: tableView, viewModel: morePlacesViewmodel)
-        default:
-            fatalError()
+            return configureCell(cellType: SectionSliderCell.self, at: indexPath, tableView: tableView, viewModel: morePlacesViewmodel)
+        case .googleFooter:
+            return googleCell(at: indexPath, tableView: tableView)
         }
     }
 }
@@ -211,11 +211,11 @@ extension DetailsViewModel {
         return cell
     }
     
-    private func sectionSliderCell(at indexPath: IndexPath, tableView: UITableView, viewModel: SectionSliderViewModel) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SectionSliderCell.reuseIdentifier, for: indexPath) as? SectionSliderCell else {
+    private func googleCell(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GoogleCell.reuseIdentifier, for: indexPath) as? GoogleCell else {
             return UITableViewCell()
         }
-        cell.configure(using: viewModel)
+        cell.configure()
         return cell
     }
     

@@ -17,6 +17,7 @@ enum Icon: String {
     var name: String {
         return rawValue
     }
-    
 }
+
+//Images
 

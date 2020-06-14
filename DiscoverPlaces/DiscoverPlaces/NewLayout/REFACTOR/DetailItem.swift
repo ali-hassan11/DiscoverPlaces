@@ -11,7 +11,6 @@ struct DetailItem {
         case actionButtons(DetailActionsViewModel)
         case reviews(SectionSliderViewModel)
         case morePlaces(SectionSliderViewModel)
-        case googleCell
-        case separator
+        case googleFooter
      }
 }

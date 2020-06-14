@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/user/Documents/iOS-dev/iOS-Projects/DiscoverPlaces/DiscoverPlaces/DiscoverPlaces/NewLayout/REFACTOR/Cells/GoogleCell.xib">
+   </FileRef>
+   <FileRef
       location = "group:DiscoverPlaces.xcodeproj">
    </FileRef>
    <FileRef
