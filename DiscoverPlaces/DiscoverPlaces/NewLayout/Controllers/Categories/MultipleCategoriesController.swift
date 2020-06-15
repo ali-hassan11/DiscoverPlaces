@@ -65,7 +65,6 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
     
     private func fetchdata(subCategory: SubCategory, selectedLocation: Location) {
         
-        var subCategoryGroup: PlacesGroup?
         Service.shared.fetchNearbyPlaces(selectedLocation: selectedLocation, subCategory: subCategory) { (response, error) in
             
             if let error = error {
@@ -80,14 +79,14 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
                 return
             }
             
-            let placeResults = self.searchResponseFilter.results(from: response)
+            let results = self.searchResponseFilter.results(from: response)
             
-            guard let group = subCategoryGroup, group.results.count > 0 else {
+            guard results.count > 0 else {
                 self.dispatchGroup.leave()
                 return
             }
             
-            self.subCategoryGroups.append(placeResults)
+            self.subCategoryGroups.append(results)
             self.subCategoryGroups.sort{$0.count > $1.count}
             self.dispatchGroup.leave()
         }

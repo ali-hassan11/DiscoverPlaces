@@ -44,6 +44,7 @@ extension DetailsViewModel {
         }
     }
     
+    ///Create Custom error that contains a string & action?
     private func populateDetailItems(with result: PlaceDetailResult, completion: @escaping (Error?) -> Void) {
         
         var items = [DetailItem]()
@@ -102,9 +103,12 @@ extension DetailsViewModel {
         
         if let location = result.geometry?.location {
             fetchMorePlacesData(near: location, items: items, completion: completion)
+        } else {
+            completion(nil)
         }
     }
     
+    ///Create Custom error that contains a string & action?
     func fetchMorePlacesData(near location: Location, items: [DetailItem], completion: @escaping (Error?) -> Void) {
         
         Service.shared.fetchNearbyPlaces(location: location, radius: 3000) { [weak self] (response, error) in
@@ -139,9 +143,9 @@ extension DetailsViewModel {
             DispatchQueue.main.async {
                 completion(nil)
             }
-            
         }
     }
+    
 }
 
 
@@ -182,7 +186,6 @@ extension DetailsViewModel: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }
 
 // MARK: Configure Cell Methods
@@ -206,7 +209,6 @@ extension DetailsViewModel {
         cell.configure()
         return cell
     }
-    
 }
 
 //MARK: Configure Detail Item Methods
@@ -296,4 +298,3 @@ extension DetailsViewModel {
         return "Opening Times"
     }
 }
-
