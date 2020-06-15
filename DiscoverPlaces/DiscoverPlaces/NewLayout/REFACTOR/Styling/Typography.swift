@@ -1,13 +1,13 @@
 import UIKit
 import Foundation
 
-protocol TypographyProvider {
+protocol DefaultTypographyProvider {
     var distanceLabel: [NSAttributedString.Key: Any] { get }
     var regularCellTitle: [NSAttributedString.Key: Any] { get }
     var sectionHeading: [NSAttributedString.Key: Any] { get }
 }
 
-class DefaultTypography: TypographyProvider {
+class DefaultTypography: DefaultTypographyProvider {
     
     var distanceLabel: [NSAttributedString.Key: Any] {
         return [.font : UIFont.systemFont(ofSize: 15.5, weight: .medium),

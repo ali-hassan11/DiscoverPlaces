@@ -8,7 +8,7 @@ enum SliderType: CaseIterable {
 
 struct SectionSliderViewModel: DetailItemViewModel {
     
-    typealias Typography = TypographyProvider & PlaceDetailTypography
+    typealias Typography = DefaultTypographyProvider & PlaceDetailTypography
     
     let typography: Typography
     let theming: PlaceDetailTheming

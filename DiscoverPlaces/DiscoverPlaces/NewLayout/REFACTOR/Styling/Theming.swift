@@ -1,6 +1,6 @@
 import UIKit
 
-protocol ThemingProvider {
+protocol DefaultThemingProvider {
     
     var cellBackground: UIColor { get }
     var imagePlaceHolder: UIColor { get }
@@ -11,7 +11,7 @@ protocol ThemingProvider {
     
 }
 
-class DefaultThemingProvider: ThemingProvider {
+class DefaultTheming: DefaultThemingProvider {
     let cellBackground: UIColor = .systemBackground
     let imagePlaceHolder: UIColor = .secondarySystemBackground
     let starFill: UIColor = .systemPink
@@ -21,13 +21,13 @@ class DefaultThemingProvider: ThemingProvider {
 }
 
 //MARK: Place Detail
-protocol PlaceDetailTheming: ThemingProvider {
+protocol PlaceDetailTheming: DefaultThemingProvider {
     var cellIconTint: UIColor { get }
     var actionButtonBackground: UIColor { get }
     var actionButtonTint: UIColor { get }
 }
 
-extension DefaultThemingProvider: PlaceDetailTheming {
+extension DefaultTheming: PlaceDetailTheming {
     var cellIconTint: UIColor { return .label }
     var actionButtonBackground: UIColor { return .systemPink }
     var actionButtonTint: UIColor { return .white }
