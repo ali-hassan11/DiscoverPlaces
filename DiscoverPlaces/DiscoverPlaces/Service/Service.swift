@@ -13,6 +13,7 @@ import Foundation
 class Service {
     
     static let shared = Service() //singleton
+    private init() {}
     
     /* https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=(searchText)&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAgIjIKhiEllBtS2f_OSGTxZyHSJI-lXpg */
     
