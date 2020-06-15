@@ -32,7 +32,12 @@ final class SectionSliderCell: UITableViewCell, NibLoadableReusable, DetailCellC
         }
     }
     
+    private var shouldAddReviews = true
     private func add(_ reviewsController: ReviewsHorizontalController, using viewModel: SectionSliderViewModel) {
+        guard shouldAddReviews == true else { return }
+        shouldAddReviews = false
+        removeSliderContainerSubviews()
+
         let reviews = viewModel.items as? [Review]
         sliderController = reviewsController
         sliderControllerHeight.constant = viewModel.sectionHeight
@@ -42,7 +47,12 @@ final class SectionSliderCell: UITableViewCell, NibLoadableReusable, DetailCellC
         reviewsController.reviews = reviews //Dependency inject this.
     }
     
+    private var shouldAddMorePlaces = true
     private func add(_ placesController: PlaceGroupHorizontalController, using viewModel: SectionSliderViewModel) {
+        guard shouldAddMorePlaces == true else { return }
+        shouldAddMorePlaces = false
+        removeSliderContainerSubviews()
+        
         let placeResults = viewModel.items as? [PlaceResult]
         sliderController = placesController
         sliderControllerHeight.constant = viewModel.sectionHeight
@@ -52,5 +62,7 @@ final class SectionSliderCell: UITableViewCell, NibLoadableReusable, DetailCellC
         placesController.results = placeResults //Dependency inject this.
     }
     
-    
+    private func removeSliderContainerSubviews() {
+        sliderControllerContainer.subviews.forEach { $0.removeFromSuperview() }
+    }
 }
