@@ -119,6 +119,8 @@
 		CEB72F54243D19C3002F6131 /* TermsOfUseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB72F53243D19C2002F6131 /* TermsOfUseController.swift */; };
 		CEBDBDB3245EFB72008E80B4 /* ErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDBDB2245EFB72008E80B4 /* ErrorController.swift */; };
 		CEBEE6DB24333449002C43E8 /* PlaceResultsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */; };
+		CEBFA0202497FC16009D140D /* HomeTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBFA01F2497FC16009D140D /* HomeTabCoordinator.swift */; };
+		CEBFA0232497FC5B009D140D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBFA0222497FC5B009D140D /* Coordinator.swift */; };
 		CECDA1462401C51A005F85FB /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA1452401C51A005F85FB /* StarRatingView.swift */; };
 		CECDA14824025896005F85FB /* ReviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA14724025896005F85FB /* ReviewDetailViewController.swift */; };
 		CED250592496567900F3EDC2 /* GoogleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED250582496567900F3EDC2 /* GoogleCell.swift */; };
@@ -272,6 +274,8 @@
 		CEB72F53243D19C2002F6131 /* TermsOfUseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseController.swift; sourceTree = "<group>"; };
 		CEBDBDB2245EFB72008E80B4 /* ErrorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorController.swift; sourceTree = "<group>"; };
 		CEBEE6DA24333449002C43E8 /* PlaceResultsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceResultsFilter.swift; sourceTree = "<group>"; };
+		CEBFA01F2497FC16009D140D /* HomeTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabCoordinator.swift; sourceTree = "<group>"; };
+		CEBFA0222497FC5B009D140D /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		CECDA1452401C51A005F85FB /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		CECDA14724025896005F85FB /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
 		CED250582496567900F3EDC2 /* GoogleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCell.swift; sourceTree = "<group>"; };
@@ -686,6 +690,7 @@
 		CE9CDF7124365B4E008DF6DE /* REFACTOR */ = {
 			isa = PBXGroup;
 			children = (
+				CEBFA0212497FC3D009D140D /* Coordinators */,
 				CE300D3824918D0F008F1931 /* DetailItem.swift */,
 				CE300D40249193FA008F1931 /* DetailItemTypes */,
 				CE300D3624918CD6008F1931 /* ViewModels */,
@@ -725,6 +730,15 @@
 				CEBDBDB2245EFB72008E80B4 /* ErrorController.swift */,
 			);
 			path = ErrorController;
+			sourceTree = "<group>";
+		};
+		CEBFA0212497FC3D009D140D /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				CEBFA0222497FC5B009D140D /* Coordinator.swift */,
+				CEBFA01F2497FC16009D140D /* HomeTabCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		CF305D9416D220BB17DC1EAB /* Frameworks */ = {
@@ -1018,6 +1032,7 @@
 				CE15FD9E2494ECD600725A38 /* DetailActionsItem.swift in Sources */,
 				CE659A1123EF897000E531CD /* PlaceDetailsCell.swift in Sources */,
 				CE24AD82243F750B00852C91 /* LocationSearchController.swift in Sources */,
+				CEBFA0232497FC5B009D140D /* Coordinator.swift in Sources */,
 				CE327AEA241546E10010F400 /* SettingsController.swift in Sources */,
 				CE694B8724097DD400F37ED6 /* MyPlacesHorizontalController.swift in Sources */,
 				CE327AF1241696B60010F400 /* MultipleCategoriesController.swift in Sources */,
@@ -1038,6 +1053,7 @@
 				CE6599ED23EA68D100E531CD /* VerticalStackview.swift in Sources */,
 				CE5835CE23DE204B00C89622 /* BaseCollectionViewController.swift in Sources */,
 				CE659A0723EF87C100E531CD /* CategoriesHorizontalController.swift in Sources */,
+				CEBFA0202497FC16009D140D /* HomeTabCoordinator.swift in Sources */,
 				CE24AD88244102DB00852C91 /* Model.swift in Sources */,
 				CEB72F54243D19C3002F6131 /* TermsOfUseController.swift in Sources */,
 				CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */,

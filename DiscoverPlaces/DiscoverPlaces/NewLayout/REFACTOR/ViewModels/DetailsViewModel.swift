@@ -4,7 +4,7 @@ final class DetailsViewModel: NSObject {
     
     private var items: [DetailItem] = []
     
-    typealias Typography = DefaultTypographyProvider & PlaceDetailTypography
+    typealias Typography = DefaultTypographyProvider & PlaceDetailTypographyProvider
     private let typography: Typography
     private let theming: PlaceDetailTheming
     

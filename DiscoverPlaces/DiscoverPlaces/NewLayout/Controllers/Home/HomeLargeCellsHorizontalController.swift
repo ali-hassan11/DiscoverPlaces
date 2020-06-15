@@ -10,13 +10,13 @@ import UIKit
 
 final class HomeLargeCellsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
-    var didSelectHandler: ((String) -> ())?
+    var didTapPlaceHandler: ((String) -> ())?
     
     var userLocation: LocationItem?
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let result = results?[indexPath.item] {
-            didSelectHandler?(result.place_id)
+            didTapPlaceHandler?(result.place_id)
         }
     }
         

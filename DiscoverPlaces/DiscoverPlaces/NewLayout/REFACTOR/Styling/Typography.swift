@@ -26,11 +26,11 @@ class DefaultTypography: DefaultTypographyProvider {
 }
 
 //
-protocol PlaceDetailTypography {
+protocol PlaceDetailTypographyProvider {
     var placeNameLargeTitle: [NSAttributedString.Key: Any] { get }
 }
 
-extension DefaultTypography: PlaceDetailTypography {
+extension DefaultTypography: PlaceDetailTypographyProvider {
     
     var placeNameLargeTitle: [NSAttributedString.Key: Any] {
         return [.font : UIFont.systemFont(ofSize: 24, weight: .semibold),

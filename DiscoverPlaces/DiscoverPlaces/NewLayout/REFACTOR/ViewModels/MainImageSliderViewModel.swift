@@ -2,7 +2,7 @@ import UIKit
 
 struct MainImageSliderViewModel: DetailItemViewModel {
     
-    typealias Typography = DefaultTypographyProvider & PlaceDetailTypography
+    typealias Typography = DefaultTypographyProvider & PlaceDetailTypographyProvider
     let theming: PlaceDetailTheming
     
     let placeName: NSAttributedString

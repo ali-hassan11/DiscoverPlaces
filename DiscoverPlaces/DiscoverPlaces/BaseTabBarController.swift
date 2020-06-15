@@ -12,12 +12,22 @@ final class BaseTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let homeDependenceis = HomeTabCoordinator.Dependencies(defaultTypography: DefaultTypography(),
+                                                               defaultTheming: DefaultTheming(),
+                                                               placeDetailsTypography: DefaultTypography(),
+                                                               placeDetailsTheming: DefaultTheming()
+        )
+        
+        let homeNavController = UINavigationController()
+        let homeCoordinator = HomeTabCoordinator(navigationController: homeNavController, dependencies: homeDependenceis)
+        homeCoordinator.start()
+        
         viewControllers = [
-            createNavController(viewController: HomeController(),
-                                title: "Discover",
-                                selectedImageName: "house.fill",
-                                deselectedImageName: "house"),
+            configureNavController(navController: homeNavController,
+                                   title: "Home",
+                                   selectedImageName: "house.fill",
+                                   deselectedImageName: "house"),
             
             createNavController(viewController: SearchController(),
                                 title: "Search",
@@ -33,7 +43,11 @@ final class BaseTabBarController: UITabBarController {
         tabBar.tintColor = .systemPink
         
     }
+    
+}
 
+extension BaseTabBarController {
+    
     private func createNavController(viewController: UIViewController, title: String, selectedImageName: String, deselectedImageName: String) -> UIViewController {
         let navController = UINavigationController(rootViewController: viewController)
         
@@ -41,7 +55,7 @@ final class BaseTabBarController: UITabBarController {
         navController.tabBarItem.title = title
         navController.tabBarItem.selectedImage = UIImage(systemName: selectedImageName)
         navController.tabBarItem.image = UIImage(systemName: deselectedImageName)
-
+        
         navController.navigationBar.tintColor = UIColor.systemPink
         
         viewController.navigationItem.title = title
@@ -49,4 +63,25 @@ final class BaseTabBarController: UITabBarController {
         
         return navController
     }
+    
+    private func configureNavController(navController: UINavigationController, title: String, selectedImageName: String, deselectedImageName: String) -> UIViewController {
+        
+        navController.navigationBar.prefersLargeTitles = true
+        navController.tabBarItem.title = title
+        navController.tabBarItem.selectedImage = UIImage(systemName: selectedImageName)
+        navController.tabBarItem.image = UIImage(systemName: deselectedImageName)
+        
+        navController.navigationBar.tintColor = UIColor.systemPink
+        
+        return navController
+    }
 }
+
+
+//    createNavController(viewController: HomeController(),
+//                        title: "Discover",
+//                        selectedImageName: "house.fill",
+//                        deselectedImageName: "house"),
+
+
+

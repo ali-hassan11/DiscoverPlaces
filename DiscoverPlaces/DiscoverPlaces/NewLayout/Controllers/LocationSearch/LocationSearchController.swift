@@ -10,7 +10,7 @@ import UIKit
 import GooglePlaces
 
 final class LocationSearchController: UITableViewController, CLLocationManagerDelegate {
-    
+    //Change to LocationItem
     var selectedLocationCompletionHandler: ((Location, String?) -> ())?
     var determineUserLocationCompletionHandler: (()->())?
     
