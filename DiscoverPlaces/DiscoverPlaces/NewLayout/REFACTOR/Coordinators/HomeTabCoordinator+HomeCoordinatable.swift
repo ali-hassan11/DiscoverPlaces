@@ -4,6 +4,7 @@ protocol HomeCoordinatable {
     func pushPlaceDetail(id: String, userLocation: LocationItem)
     func pushSetLocationController(selectedLocationCompletion: @escaping ((Location, String?) -> Void), locateUserCompletion: @escaping () -> Void)
     func pushCategoriesController(category: Category, location: LocationItem)
+    func pushNoResultsController(message: String, buttonTitle: String, buttonHandler: @escaping () -> Void)
 }
 
 extension HomeTabCoordinator: HomeCoordinatable {
@@ -18,12 +19,20 @@ extension HomeTabCoordinator: HomeCoordinatable {
     func pushPlaceDetail(id: String, userLocation: LocationItem) {
         let placeDetailViewModel = DetailsViewModel(placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
         let newDetailsController = NEWPlaceDetailController(viewModel: placeDetailViewModel)
+        
         navigationController.pushViewController(newDetailsController, animated: true)
     }
     
     func pushCategoriesController(category: Category, location: LocationItem) {
         let multipleCategoriesController = MultipleCategoriesController(category: category, location: location)
+        
         navigationController.pushViewController(multipleCategoriesController, animated: true)
+    }
+    
+    func pushNoResultsController(message: String, buttonTitle: String, buttonHandler: @escaping () -> Void) {
+        let errorController = ErrorController(message: message, buttonTitle: buttonTitle, buttonHandler: buttonHandler)
+        
+        self.navigationController.pushViewController(errorController, animated: true)
     }
     
 }

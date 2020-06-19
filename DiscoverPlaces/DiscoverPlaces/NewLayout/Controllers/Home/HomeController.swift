@@ -1,3 +1,4 @@
+//TODO: Error controller if error in fetch
 
 import UIKit
 import CoreLocation
@@ -92,6 +93,7 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
             
             if let error = error {
                 print("Failed to fetch places: ", error)
+
                 return
             }
             
@@ -127,8 +129,7 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
     
     //TODO: Coordinator
     private func pushNoResultsController() {
-        let errorController = ErrorController(message: Constants.noResultsMessage, buttonTitle: Constants.tryDifferentLocationtext, buttonHandler: showSetLocationController)
-        self.navigationController?.pushViewController(errorController, animated: true)
+        coordinator.pushNoResultsController(message: Constants.noResultsMessage, buttonTitle: Constants.tryDifferentLocationtext, buttonHandler: showSetLocationController)
     }
     
     //TODO: Coordinator
