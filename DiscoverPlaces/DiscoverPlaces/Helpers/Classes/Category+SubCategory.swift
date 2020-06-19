@@ -83,7 +83,7 @@ enum SubCategory: String {
     case dentist
     case drugstore
         
-    func formatted() -> String {
+    func name() -> String {
         
         switch self {
         case .restaurant: return "Restaurant"

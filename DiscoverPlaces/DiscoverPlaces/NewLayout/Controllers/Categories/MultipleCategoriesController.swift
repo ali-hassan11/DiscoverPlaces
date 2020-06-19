@@ -17,8 +17,13 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
     
     private var location: LocationItem
     private var category: Category
-    
-    private var subCategoryGroups = [[PlaceResult]]()
+
+    struct SubCategoryGroup {
+        let name: String
+        let results: [PlaceResult]
+    }
+
+    private var subCategoryGroups = [SubCategoryGroup]()
     
     init(category: Category, location: LocationItem) {
         self.location = location
@@ -28,6 +33,7 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = category.rawValue
         view.backgroundColor = .systemBackground
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         setupCollectionView()
@@ -86,8 +92,9 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
                 return
             }
             
-            self.subCategoryGroups.append(results)
-            self.subCategoryGroups.sort{$0.count > $1.count}
+            let subCategoryGroup = SubCategoryGroup(name: subCategory.name(), results: results)
+            self.subCategoryGroups.append(subCategoryGroup)
+            self.subCategoryGroups.sort{$0.results.count > $1.results.count}
             self.dispatchGroup.leave()
         }
         
@@ -149,8 +156,8 @@ extension MultipleCategoriesController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubCategoryiesHolder.id, for: indexPath) as! SubCategoryiesHolder
         
         let subCategoryGroup = subCategoryGroups[indexPath.item]
-        cell.subCategoryTitleLabel.text = "Temp Title"
-        cell.horizontalController.results = subCategoryGroup
+        cell.subCategoryTitleLabel.text = subCategoryGroup.name
+        cell.horizontalController.results = subCategoryGroup.results
         cell.horizontalController.location = self.location.selectedLocation
         cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
             guard let location = self?.location else { return }
