@@ -4,7 +4,7 @@ import CoreLocation
 
 final class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    private let coordinator: Coordinator
+    private let coordinator: HomeCoordinatable
     
     private var userLocation: LocationItem?
     private var locationManager:CLLocationManager!
@@ -19,7 +19,7 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
         return v
     }()
     
-    init(coordinator: Coordinator) {
+    init(coordinator: HomeCoordinatable) {
         self.coordinator = coordinator
         super.init()
     }
@@ -134,7 +134,7 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
     //TODO: Coordinator
     @objc func showSetLocationController() -> () {
         coordinator.pushSetLocationController(selectedLocationCompletion: updateToSelectedLocation(location:name:),
-                                              currentLocationCompletion: updateToCurrentUserLocation)
+                                              locateUserCompletion: updateToCurrentUserLocation)
     }
     
     private func updateToSelectedLocation(location: Location, name: String?) -> () {
@@ -197,10 +197,7 @@ extension HomeController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesHolder.id, for: indexPath) as! CategoriesHolder
             cell.horizontalController.didSelectCategory = { [weak self] category in
                 guard let location = self?.userLocation else { return }
-                let multipleCategoriesController = MultipleCategoriesController(category: category, location: location)
-                multipleCategoriesController.title = category.rawValue
-                //TODO: Coordinator
-                self?.navigationController?.pushViewController(multipleCategoriesController, animated: true)
+                self?.coordinator.pushCategoriesController(category: category, location: location)
             }
             return cell
         default:

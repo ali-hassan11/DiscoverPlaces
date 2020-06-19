@@ -11,14 +11,24 @@ import GooglePlaces
 
 final class LocationSearchController: UITableViewController, CLLocationManagerDelegate {
     //Change to LocationItem
-    var selectedLocationCompletionHandler: ((Location, String?) -> ())?
-    var determineUserLocationCompletionHandler: (()->())?
+    var selectedLocationCompletionHandler: ((Location, String?) -> Void)?
+    var locateUserCompletionHandler: (() -> Void)?
     
     private var resultsViewController: GMSAutocompleteResultsViewController?
     private var searchController: UISearchController?
     
     private let locationManager = CLLocationManager()
     private var locationServicesEnabled = false
+    
+    init(selctedLocationHandler: ((Location, String?) -> ())?, locateUserHandler: (() -> Void)?) {
+        self.selectedLocationCompletionHandler = selctedLocationHandler
+        self.locateUserCompletionHandler = locateUserHandler
+        super.init(style: .plain)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +73,7 @@ final class LocationSearchController: UITableViewController, CLLocationManagerDe
     
     @objc func dismissAndLocateUser() {
         if locationServicesEnabled && Reachability.isConnectedToNetwork() {
-            determineUserLocationCompletionHandler?()
+            locateUserCompletionHandler?()
             navigationController?.popToRootViewController(animated: true)
         } else {
             pushErrorAlert()

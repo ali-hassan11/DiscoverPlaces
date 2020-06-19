@@ -126,6 +126,7 @@
 		CED250592496567900F3EDC2 /* GoogleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED250582496567900F3EDC2 /* GoogleCell.swift */; };
 		CED2505E24966A9B00F3EDC2 /* GoogleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED2505D24966A9B00F3EDC2 /* GoogleCell.xib */; };
 		CED250602496EF5900F3EDC2 /* DetailCellConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2505F2496EF5900F3EDC2 /* DetailCellConfigurable.swift */; };
+		CEE41B6B249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE41B6A249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift */; };
 		CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */; };
 		CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5723E84978006D79E6 /* Spacing.swift */; };
 		CEEB4D5C23E84978006D79E6 /* HorizontalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */; };
@@ -281,6 +282,7 @@
 		CED250582496567900F3EDC2 /* GoogleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCell.swift; sourceTree = "<group>"; };
 		CED2505D24966A9B00F3EDC2 /* GoogleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleCell.xib; sourceTree = "<group>"; };
 		CED2505F2496EF5900F3EDC2 /* DetailCellConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellConfigurable.swift; sourceTree = "<group>"; };
+		CEE41B6A249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeTabCoordinator+HomeCoordinatable.swift"; sourceTree = "<group>"; };
 		CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalStackView.swift; sourceTree = "<group>"; };
 		CEEB4D5723E84978006D79E6 /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalSnappingController.swift; sourceTree = "<group>"; };
@@ -737,6 +739,7 @@
 			children = (
 				CEBFA0222497FC5B009D140D /* Coordinator.swift */,
 				CEBFA01F2497FC16009D140D /* HomeTabCoordinator.swift */,
+				CEE41B6A249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1007,6 +1010,7 @@
 				CE616D052405D94D008E7067 /* ListType.swift in Sources */,
 				CEB41DBC249419A000DDFC53 /* MainImageSliderViewModel.swift in Sources */,
 				CEB41DAC2493AD4A00DDFC53 /* BundleHelper.swift in Sources */,
+				CEE41B6B249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift in Sources */,
 				60EADA7B23F6B0E60095DBF9 /* AddressCell.swift in Sources */,
 				CEB41DAA2493ACE200DDFC53 /* NibLoadable.swift in Sources */,
 				CEB72F52243D13B3002F6131 /* PrivacyPolicyController.swift in Sources */,
