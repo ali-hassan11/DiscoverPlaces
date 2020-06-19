@@ -24,11 +24,6 @@ final class NEWPlaceDetailController: UITableViewController {
         fetchData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
-    
     private func fetchData() {
         viewModel.fetchPlaceData { [weak self] error in
             
@@ -65,6 +60,21 @@ extension NEWPlaceDetailController {
     private func setupNavigationBar() {
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.hideBackButtonText()
-        navigationController?.navigationBar.makeTransparent()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.shadowImage = nil
+        navigationController?.navigationBar.isTranslucent = true
     }
 }

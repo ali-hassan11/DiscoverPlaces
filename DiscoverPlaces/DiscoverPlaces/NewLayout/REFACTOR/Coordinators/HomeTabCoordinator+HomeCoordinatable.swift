@@ -1,5 +1,7 @@
 import UIKit
 
+//typalias HomeCoordinator = CanPushDetail, CanPushLocation, CanPushCats, CanPushError
+
 protocol HomeCoordinatable {
     func pushPlaceDetail(id: String, userLocation: LocationItem)
     func pushSetLocationController(selectedLocationCompletion: @escaping ((Location, String?) -> Void), locateUserCompletion: @escaping () -> Void)
