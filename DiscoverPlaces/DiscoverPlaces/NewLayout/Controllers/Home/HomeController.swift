@@ -1,10 +1,4 @@
-//
-//  HomeController.swift
-//  DiscoverPlaces
-//
-//  Created by user on 05/02/2020.
-//  Copyright © 2020 AHApps. All rights reserved.
-//
+
 import UIKit
 import CoreLocation
 
