@@ -1,7 +1,5 @@
 import UIKit
 
-//typalias HomeCoordinator = CanPushDetail, CanPushLocation, CanPushCats, CanPushError
-
 protocol HomeCoordinatable {
     func pushPlaceDetail(id: String, userLocation: LocationItem)
     func pushSetLocationController(selectedLocationCompletion: @escaping ((Location, String?) -> Void), locateUserCompletion: @escaping () -> Void)
@@ -19,7 +17,7 @@ extension HomeTabCoordinator: HomeCoordinatable {
     }
     
     func pushPlaceDetail(id: String, userLocation: LocationItem) {
-        let placeDetailViewModel = DetailsViewModel(placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
+        let placeDetailViewModel = DetailsViewModel(delegate: self, placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
         let newDetailsController = NEWPlaceDetailController(viewModel: placeDetailViewModel)
         
         navigationController.pushViewController(newDetailsController, animated: true)

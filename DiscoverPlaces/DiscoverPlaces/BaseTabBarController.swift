@@ -16,8 +16,7 @@ final class BaseTabBarController: UITabBarController {
         let homeDependenceis = HomeTabCoordinator.Dependencies(defaultTypography: DefaultTypography(),
                                                                defaultTheming: DefaultTheming(),
                                                                placeDetailsTypography: DefaultTypography(),
-                                                               placeDetailsTheming: DefaultTheming()
-        )
+                                                               placeDetailsTheming: DefaultTheming())
         
         let homeNavController = UINavigationController()
         let homeCoordinator = HomeTabCoordinator(navigationController: homeNavController, dependencies: homeDependenceis)

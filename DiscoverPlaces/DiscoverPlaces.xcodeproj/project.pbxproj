@@ -127,6 +127,7 @@
 		CED2505E24966A9B00F3EDC2 /* GoogleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED2505D24966A9B00F3EDC2 /* GoogleCell.xib */; };
 		CED250602496EF5900F3EDC2 /* DetailCellConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2505F2496EF5900F3EDC2 /* DetailCellConfigurable.swift */; };
 		CEE41B6B249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE41B6A249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift */; };
+		CEE41B6D249D7FA900DCE6BD /* HomeTabCoordinator+DetailCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE41B6C249D7FA900DCE6BD /* HomeTabCoordinator+DetailCoordinatable.swift */; };
 		CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */; };
 		CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5723E84978006D79E6 /* Spacing.swift */; };
 		CEEB4D5C23E84978006D79E6 /* HorizontalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */; };
@@ -283,6 +284,7 @@
 		CED2505D24966A9B00F3EDC2 /* GoogleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleCell.xib; sourceTree = "<group>"; };
 		CED2505F2496EF5900F3EDC2 /* DetailCellConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellConfigurable.swift; sourceTree = "<group>"; };
 		CEE41B6A249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeTabCoordinator+HomeCoordinatable.swift"; sourceTree = "<group>"; };
+		CEE41B6C249D7FA900DCE6BD /* HomeTabCoordinator+DetailCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeTabCoordinator+DetailCoordinatable.swift"; sourceTree = "<group>"; };
 		CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalStackView.swift; sourceTree = "<group>"; };
 		CEEB4D5723E84978006D79E6 /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalSnappingController.swift; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 				CEBFA0222497FC5B009D140D /* Coordinator.swift */,
 				CEBFA01F2497FC16009D140D /* HomeTabCoordinator.swift */,
 				CEE41B6A249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift */,
+				CEE41B6C249D7FA900DCE6BD /* HomeTabCoordinator+DetailCoordinatable.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1058,6 +1061,7 @@
 				CE5835CE23DE204B00C89622 /* BaseCollectionViewController.swift in Sources */,
 				CE659A0723EF87C100E531CD /* CategoriesHorizontalController.swift in Sources */,
 				CEBFA0202497FC16009D140D /* HomeTabCoordinator.swift in Sources */,
+				CEE41B6D249D7FA900DCE6BD /* HomeTabCoordinator+DetailCoordinatable.swift in Sources */,
 				CE24AD88244102DB00852C91 /* Model.swift in Sources */,
 				CEB72F54243D19C3002F6131 /* TermsOfUseController.swift in Sources */,
 				CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */,

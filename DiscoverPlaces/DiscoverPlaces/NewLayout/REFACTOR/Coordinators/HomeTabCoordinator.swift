@@ -13,7 +13,7 @@ class HomeTabCoordinator: Coordinator {
         let placeDetailsTheming: PlaceDetailTheming
     }
     
-    private let dependencies: Dependencies
+    let dependencies: Dependencies
     
     init(navigationController: UINavigationController, dependencies: Dependencies) {
         self.navigationController = navigationController
