@@ -7,6 +7,8 @@ final class DetailActionsCell: UITableViewCell, NibLoadableReusable, DetailCellC
     @IBOutlet weak var toDoButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     
+    var shareAction: ((String) -> Void)?
+    
     var placeId: String?
     var isFave: Bool?
     var isToDo: Bool?

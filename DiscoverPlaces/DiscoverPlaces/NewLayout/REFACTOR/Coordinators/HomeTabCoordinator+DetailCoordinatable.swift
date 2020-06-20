@@ -29,27 +29,27 @@ extension HomeTabCoordinator: DetailCoordinatable {
     }
     
     func pushOpeningTimesController() {
-        
+        print("Setup Delegate Method: pushOpeningTimesController")
     }
     
     func pushWebsiteController() {
-        
+        print("Setup Delegate Method: pushWebsiteController")
     }
     
     func pushReviewController() {
-        
+        print("Setup Delegate Method: pushReviewController")
     }
     
     func pushDetailController() {
-        
+        print("Setup Delegate Method: pushDetailController")
     }
     
     func didTapPhoneNumber() {
-        
+        print("Setup Delegate Method: didTapPhoneNumber")
     }
     
     func didTapShare() {
-        
+        print("Setup Delegate Method: didTapShare")
     }
     
 }

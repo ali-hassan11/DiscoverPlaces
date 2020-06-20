@@ -11,7 +11,7 @@ struct DetailActionsViewModel: DetailItemViewModel {
     let actionButtonBackgroundColor: UIColor
     let actionButtonTint: UIColor
     
-    init( actions: DetailActionsItem, placeId: String, theming: PlaceDetailTheming) {
+    init(actions: DetailActionsItem, placeId: String, theming: PlaceDetailTheming) {
         self.placeId = placeId
         
         self.isFave = actions.isFave
