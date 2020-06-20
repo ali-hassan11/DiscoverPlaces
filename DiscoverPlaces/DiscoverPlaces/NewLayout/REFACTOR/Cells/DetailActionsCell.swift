@@ -7,7 +7,7 @@ final class DetailActionsCell: UITableViewCell, NibLoadableReusable, DetailCellC
     @IBOutlet weak var toDoButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     
-    var shareAction: ((String) -> Void)?
+    var shareAction: (() -> Void)?
     
     var placeId: String?
     var isFave: Bool?
@@ -18,6 +18,8 @@ final class DetailActionsCell: UITableViewCell, NibLoadableReusable, DetailCellC
         
         selectionStyle = .none
         placeId = viewModel.placeId
+        
+        shareAction = viewModel.shareAction
         
         isFave = DefaultsManager.isInList(placeId: viewModel.placeId, listKey: .favourites)
         isToDo = DefaultsManager.isInList(placeId: viewModel.placeId, listKey: .toDo)
@@ -63,6 +65,7 @@ final class DetailActionsCell: UITableViewCell, NibLoadableReusable, DetailCellC
     }
     
     @IBAction func didTapShare(_ sender: Any) {
+        shareAction?()
     }
     
     //TODO: Make signature more descriptive

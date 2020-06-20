@@ -100,9 +100,10 @@ extension DetailsViewModel {
         
         //Actions
         items.append(Self.configureActionsDetailItem(placeId: placeId,
-                                  typography: typography,
-                                  theming: theming,
-                                  delegate: delegate))
+                                                     result: result,
+                                                     typography: typography,
+                                                     theming: theming,
+                                                     delegate: delegate))
         
         //Reviews
         if let reviews = result.reviews {
@@ -162,8 +163,8 @@ extension DetailsViewModel {
 }
 
 
-//MARK: TableView DataSource
-extension DetailsViewModel: UITableViewDataSource {
+//MARK: TableView DataSource & DataSource
+extension DetailsViewModel: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
@@ -188,10 +189,6 @@ extension DetailsViewModel: UITableViewDataSource {
             return googleCell(at: indexPath, tableView: tableView)
         }
     }
-}
-
-//MARK: TableView Delegate
-extension DetailsViewModel: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = items[indexPath.row]
@@ -199,12 +196,8 @@ extension DetailsViewModel: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-}
 
-// MARK: Configure Cell Methods
-extension DetailsViewModel {
-
-    //Make into 1 method for all
+    //MARK: Configure Cell Helper Methods
     typealias DetailCell = UITableViewCell & NibLoadableReusable & DetailCellConfigurable
     
     private func configureCell<T: DetailCell>(cellType: T.Type, at indexPath: IndexPath, tableView: UITableView, viewModel: DetailItemViewModel) -> UITableViewCell {
@@ -267,12 +260,14 @@ extension DetailsViewModel {
         return DetailItem(type: .regular(viewModel), action: action) //Use webAdress for action
     }
     
-    private static func configureActionsDetailItem(placeId: String, typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
+    private static func configureActionsDetailItem(placeId: String, result: PlaceDetailResult, typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
         let isFave = DefaultsManager.isInList(placeId: placeId, listKey: .favourites)
         let isToDo = DefaultsManager.isInList(placeId: placeId, listKey: .toDo)
  
-        let shareAction: () -> Void = {  [weak delegate] in
-            delegate?.didTapShare()
+        let webAddressString = webAddress(for: result)
+        
+        let shareAction: (() -> Void)? = {  [weak delegate] in
+            delegate?.didTapShare(webAddress: webAddressString)
         }
         let actionsItem = DetailActionsItem(isFave: isFave, isToDo: isToDo, shareAction: shareAction)
 
@@ -306,6 +301,7 @@ extension DetailsViewModel {
         return DetailItem(type: .morePlaces(viewModel), action: nil)
     }
     
+    //MARK: Helper Methods
     private static func todayOpeningHours(openingHoursText: [String]) -> String {
         let today = Date().today()
         
@@ -316,4 +312,16 @@ extension DetailsViewModel {
         }
         return "Opening Times"
     }
+    
+    private static func webAddress(for place: PlaceDetailResult) -> String {
+        if let websiteString = place.website {
+            return websiteString
+        } else if let googleMapsUrlString = place.url {
+            return googleMapsUrlString
+        } else {
+            //Unable to retrieve info or something...
+            return ""
+        }
+    }
+    
 }

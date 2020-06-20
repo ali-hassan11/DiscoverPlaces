@@ -10,6 +10,7 @@ struct DetailActionsViewModel: DetailItemViewModel {
     let cellIconTint: UIColor
     let actionButtonBackgroundColor: UIColor
     let actionButtonTint: UIColor
+    let shareAction: (() -> Void)?
     
     init(actions: DetailActionsItem, placeId: String, theming: PlaceDetailTheming) {
         self.placeId = placeId
@@ -20,6 +21,7 @@ struct DetailActionsViewModel: DetailItemViewModel {
         self.cellIconTint = theming.cellIconTint
         self.actionButtonBackgroundColor = theming.actionButtonBackground
         self.actionButtonTint = theming.actionButtonTint
+        self.shareAction = actions.shareAction
     }
     
 }

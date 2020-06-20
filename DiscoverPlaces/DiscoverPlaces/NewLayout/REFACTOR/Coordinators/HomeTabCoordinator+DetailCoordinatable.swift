@@ -9,7 +9,7 @@ protocol DetailCoordinatable: AnyObject {
     func pushReviewController(review: Review)
     func pushDetailController(id: String, userLocation: LocationItem)
     func didTapPhoneNumber(number: String)
-    func didTapShare()
+    func didTapShare(webAddress: String)
     //func didTapFave & To-Do???
     
 }
@@ -58,8 +58,13 @@ extension HomeTabCoordinator: DetailCoordinatable {
         callNumber(number: number)
     }
     
-    func didTapShare() {
-        print("Setup Delegate Method: didTapShare")
+    func didTapShare(webAddress: String) {
+        
+        guard let url = URL(string: webAddress) else { return }
+        
+        let items: [Any] = [url]
+        let activityController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        navigationController.visibleViewController?.present(activityController, animated: true)
     }
     
 }
