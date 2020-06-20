@@ -1,15 +1,12 @@
-//
-//  HomeController.swift
-//  DiscoverPlaces
-//
-//  Created by user on 05/02/2020.
-//  Copyright © 2020 AHApps. All rights reserved.
-//
+//TODO: Error controller if error in fetch
+
 import UIKit
 import CoreLocation
 
 final class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    private let coordinator: HomeCoordinatable
+    
     private var userLocation: LocationItem?
     private var locationManager:CLLocationManager!
     
@@ -23,8 +20,18 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
         return v
     }()
     
+    init(coordinator: HomeCoordinatable) {
+        self.coordinator = coordinator
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Discover"
         setupLoadingView()
         navigationItem.largeTitleDisplayMode = .always
         setupBarButtons()
@@ -86,6 +93,7 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
             
             if let error = error {
                 print("Failed to fetch places: ", error)
+
                 return
             }
             
@@ -109,7 +117,7 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
                 self.fadeView.alpha = 0
             }) { _ in
                 if placeResults.isEmpty {
-                    self.pushNoResultsController()
+                    self.pushNoResultsController() //TODO: Coordinator
                 }
                 
                 self.fadeView.removeFromSuperview()
@@ -119,18 +127,15 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
         }
     }
     
+    //TODO: Coordinator
     private func pushNoResultsController() {
-        let errorController = ErrorController(message: Constants.noResultsMessage, buttonTitle: Constants.tryDifferentLocationtext, buttonHandler: showSetLocationController)
-        self.navigationController?.pushViewController(errorController, animated: true)
+        coordinator.pushNoResultsController(message: Constants.noResultsMessage, buttonTitle: Constants.tryDifferentLocationtext, buttonHandler: showSetLocationController)
     }
     
+    //TODO: Coordinator
     @objc func showSetLocationController() -> () {
-        let locationSearchController = LocationSearchController()
-        
-        locationSearchController.selectedLocationCompletionHandler = updateToSelectedLocation
-        locationSearchController.determineUserLocationCompletionHandler = updateToCurrentUserLocation
-        
-        navigationController?.pushViewController(locationSearchController, animated: true)
+        coordinator.pushSetLocationController(selectedLocationCompletion: updateToSelectedLocation(location:name:),
+                                              locateUserCompletion: updateToCurrentUserLocation)
     }
     
     private func updateToSelectedLocation(location: Location, name: String?) -> () {
@@ -155,12 +160,10 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
         guard let categoriesHolderCell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? CategoriesHolder else { return }
         categoriesHolderCell.horizontalController.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
     }
-    
-    private func presentDetailController(placeId: String) -> () {
+
+    private func didTapPlace(placeId: String) -> Void {
         guard let location = userLocation else { return }
-        let placeDetailViewModel = DetailsViewModel(placeId: placeId, location: location, typography: DefaultTypography(), theming: DefaultTheming())
-        let newDetailsController = NEWPlaceDetailController(viewModel: placeDetailViewModel)
-        navigationController?.pushViewController(newDetailsController, animated: true)
+        coordinator.pushPlaceDetail(id: placeId, userLocation: location)
     }
 }
 
@@ -172,7 +175,7 @@ extension HomeController {
             cell.horizontalController.userLocation = self.userLocation
             cell.horizontalController.results = placeResults
             cell.configureTitle(with: userLocation?.name)
-            cell.horizontalController.didSelectHandler = presentDetailController
+            cell.horizontalController.didTapPlaceHandler = didTapPlace
             return cell
         } else {
             let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
@@ -195,9 +198,7 @@ extension HomeController {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoriesHolder.id, for: indexPath) as! CategoriesHolder
             cell.horizontalController.didSelectCategory = { [weak self] category in
                 guard let location = self?.userLocation else { return }
-                let multipleCategoriesController = MultipleCategoriesController(category: category, location: location)
-                multipleCategoriesController.title = category.rawValue
-                self?.navigationController?.pushViewController(multipleCategoriesController, animated: true)
+                self?.coordinator.pushCategoriesController(category: category, location: location)
             }
             return cell
         default:

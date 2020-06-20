@@ -4,7 +4,7 @@ final class DetailsViewModel: NSObject {
     
     private var items: [DetailItem] = []
     
-    typealias Typography = DefaultTypographyProvider & PlaceDetailTypography
+    typealias Typography = DefaultTypographyProvider & PlaceDetailTypographyProvider
     private let typography: Typography
     private let theming: PlaceDetailTheming
     
@@ -13,11 +13,14 @@ final class DetailsViewModel: NSObject {
     
     private var result: PlaceDetailResult?
     
-    init(placeId: String, location: LocationItem, typography: Typography, theming: PlaceDetailTheming) {
+    private weak var delegate: DetailCoordinatable?
+    
+    init(delegate: DetailCoordinatable?, placeId: String, location: LocationItem, typography: Typography, theming: PlaceDetailTheming) {
         self.placeId = placeId
         self.location = location
         self.typography = typography
         self.theming = theming
+        self.delegate = delegate
     }
 }
 
@@ -62,9 +65,11 @@ extension DetailsViewModel {
         
         //Regular Cells
         if let vicinity = result.vicinity {
-            items.append(Self.configureAddressDetailItem(using: vicinity,
+            items.append(Self.configureAddressDetailItem(using: result,
+                                                         vicinity: vicinity,
                                        typography: self.typography,
-                                       theming: self.theming))
+                                       theming: self.theming,
+                                       delegate: delegate))
         }
         
         if let openingHours = result.opening_hours?.weekdayText {
@@ -220,10 +225,8 @@ extension DetailsViewModel {
         return DetailItem(type: .mainImagesSlider(viewModel), action: nil)
     }
     
-    private static func configureAddressDetailItem(using vicinity: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
-        let action: () -> Void = {
-            print("Open Maps")
-        }
+    private static func configureAddressDetailItem(using place: PlaceDetailResult, vicinity: String, typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
+        let action: () -> Void = { [weak delegate] in delegate?.openInMaps(place: place) }
         let viewModel = RegularDetailViewModel(icon: .mapPin, title: vicinity, typography: typography, theming: theming)
         return DetailItem(type: .regular(viewModel), action: action)
     }

@@ -2,7 +2,7 @@ import UIKit
 
 struct RegularDetailViewModel: DetailItemViewModel {
     
-    typealias Typography = DefaultTypographyProvider & PlaceDetailTypography
+    typealias Typography = DefaultTypographyProvider & PlaceDetailTypographyProvider
     
     let title: NSAttributedString
     let backgroundColor: UIColor
