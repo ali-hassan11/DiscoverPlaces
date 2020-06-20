@@ -367,8 +367,8 @@ extension PlaceDetailsController {
             openInMaps(place: place, longitude: longitude, latitude: latitude)
             
         case Detail.openingHours.rawValue:
-            let openingHoursController = OpeningHoursController()
-            openingHoursController.openingHours = placeDetailResult?.opening_hours
+            guard let openingHoursText = placeDetailResult?.opening_hours?.weekdayText else { return }
+            let openingHoursController = OpeningHoursController(openingHours: openingHoursText)
             navigationController?.show(openingHoursController, sender: self)
             
         case Detail.website.rawValue:

@@ -75,35 +75,41 @@ extension DetailsViewModel {
         if let openingHours = result.opening_hours?.weekdayText {
             items.append(Self.configureOpeningHoursDetailItem(using: openingHours,
                                            typography: self.typography,
-                                           theming: self.theming))
+                                           theming: self.theming,
+                                           delegate: delegate))
         }
         
         if let phoneNumber = result.international_phone_number {
             items.append(Self.configurePhoneNumberDetailItem(using: phoneNumber,
                                           typography: self.typography,
-                                          theming: self.theming))
+                                          theming: self.theming,
+                                          delegate: delegate))
         }
         
         if let webAdress = result.website {
             items.append(Self.configureWebsiteDetailItem(using: webAdress,
                                       typography: self.typography,
-                                      theming: self.theming))
+                                      theming: self.theming,
+                                      delegate: delegate))
         } else if let googleUrl = result.url {
             items.append(Self.configureWebsiteDetailItem(using: googleUrl,
                                       typography: self.typography,
-                                      theming: self.theming))
+                                      theming: self.theming,
+                                      delegate: delegate))
         }
         
         //Actions
         items.append(Self.configureActionsDetailItem(placeId: placeId,
                                   typography: typography,
-                                  theming: theming))
+                                  theming: theming,
+                                  delegate: delegate))
         
         //Reviews
         if let reviews = result.reviews {
         items.append(Self.configureReviewsDetailItem(reviews: reviews,
                                   typography: typography,
-                                  theming: theming))
+                                  theming: theming,
+                                  delegate: delegate))
         }
         
         if let location = result.geometry?.location {
@@ -140,7 +146,8 @@ extension DetailsViewModel {
             
             items.append(Self.configureNearbyPlacesDetailItem(places: filteredResults,
                                      typography: self.typography,
-                                     theming: self.theming))
+                                     theming: self.theming,
+                                     delegate: self.delegate))
             
             items.append(DetailItem(type: .googleFooter, action: nil))
             
@@ -226,51 +233,57 @@ extension DetailsViewModel {
     }
     
     private static func configureAddressDetailItem(using place: PlaceDetailResult, vicinity: String, typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
-        let action: () -> Void = { [weak delegate] in delegate?.openInMaps(place: place) }
+        let action: () -> Void = { [weak delegate] in
+            delegate?.openInMaps(place: place)
+        }
         let viewModel = RegularDetailViewModel(icon: .mapPin, title: vicinity, typography: typography, theming: theming)
         return DetailItem(type: .regular(viewModel), action: action)
     }
     
-    private static func configureOpeningHoursDetailItem(using openingHours: [String], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
-        let action: () -> Void = {
-            print("Open Opening Hours")
+    private static func configureOpeningHoursDetailItem(using openingHoursText: [String], typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
+        let action: () -> Void = { [weak delegate] in
+            delegate?.pushOpeningTimesController(openingHoursText: openingHoursText)
         }
-        let todaysOpeningHoursText = todayOpeningHours(openingHours: openingHours)
+        let todaysOpeningHoursText = todayOpeningHours(openingHoursText: openingHoursText)
         
         let viewModel = RegularDetailViewModel(icon: .time, title: todaysOpeningHoursText, typography: typography, theming: theming)
         return DetailItem(type: .regular(viewModel), action: action)
     }
     
-    private static func configurePhoneNumberDetailItem(using phoneNumber: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
-        let action: () -> Void = {
-            print("Call Phone Number")
+    private static func configurePhoneNumberDetailItem(using phoneNumber: String, typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
+        let action: () -> Void = { [weak delegate] in
+            delegate?.didTapPhoneNumber()
         }
         let viewModel = RegularDetailViewModel(icon: .phone, title: phoneNumber, typography: typography, theming: theming)
         return DetailItem(type: .regular(viewModel), action: action)
     }
     
-    private static func configureWebsiteDetailItem(using webAddress: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
-        let action: () -> Void = {
-            print("Open Website")
+    private static func configureWebsiteDetailItem(using webAddress: String, typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
+        let action: () -> Void = { [weak delegate] in
+            delegate?.pushWebsiteController()
         }
         let viewModel = RegularDetailViewModel(icon: .browser, title: "Website", typography: typography, theming: theming, action: action)
         return DetailItem(type: .regular(viewModel), action: action) //Use webAdress for action
     }
     
-    private static func configureActionsDetailItem(placeId: String, typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func configureActionsDetailItem(placeId: String, typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
         let isFave = DefaultsManager.isInList(placeId: placeId, listKey: .favourites)
         let isToDo = DefaultsManager.isInList(placeId: placeId, listKey: .toDo)
  
-        let shareAction: () -> Void = { print("share place") }
+        let shareAction: () -> Void = {  [weak delegate] in
+            delegate?.didTapShare()
+        }
         let actionsItem = DetailActionsItem(isFave: isFave, isToDo: isToDo, shareAction: shareAction)
 
         let viewModel = DetailActionsViewModel(actions: actionsItem, placeId: placeId, theming: theming)
         return DetailItem(type: .actionButtons(viewModel), action: nil)
     }
     
-    private static func configureReviewsDetailItem(reviews: [Review], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func configureReviewsDetailItem(reviews: [Review], typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
         
-        let action: (Review) -> Void = { review in print("push full eview") }
+        let action: (Review) -> Void = {  [weak delegate] review in
+            delegate?.pushReviewController()
+        }
         
         let reviewsItem = ReviewSliderItem(reviews: reviews, sectionTitle: "Reviews", height: 125, action: action)
         let sliderSectionItem = SliderSectionItem(type: .reviews(reviewsItem))
@@ -279,9 +292,11 @@ extension DetailsViewModel {
         return DetailItem(type: .reviews(viewModel), action: nil)
     }
     
-    private static func configureNearbyPlacesDetailItem(places: [PlaceResult], typography: Typography, theming: PlaceDetailTheming) -> DetailItem {
+    private static func configureNearbyPlacesDetailItem(places: [PlaceResult], typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
         
-        let action: (String) -> Void = { placeId in print("Push place: \(placeId)") }
+        let action: (String) -> Void = { [weak delegate] place in
+            delegate?.pushDetailController()
+        }
         
         let placeSliderItem = PlaceSliderItem(places: places, sectionTitle: "Nearby", height: 230, action: action)
         let sliderSectionItem = SliderSectionItem(type: .nearby(placeSliderItem))
@@ -290,10 +305,10 @@ extension DetailsViewModel {
         return DetailItem(type: .morePlaces(viewModel), action: nil)
     }
     
-    private static func todayOpeningHours(openingHours: [String]) -> String {
+    private static func todayOpeningHours(openingHoursText: [String]) -> String {
         let today = Date().today()
         
-        for weekDay in openingHours {
+        for weekDay in openingHoursText {
             if weekDay.hasPrefix(today) {
                 return weekDay
             }
