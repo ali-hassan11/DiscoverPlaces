@@ -1,9 +1,9 @@
 
 import UIKit
 
-enum SliderType: CaseIterable {
-     case reviews
-     case places
+enum SliderAction {
+     case reviews(((Review) -> Void)?)
+     case places(((String) -> Void)?)
  }
 
 struct SectionSliderViewModel: DetailItemViewModel {
@@ -16,8 +16,9 @@ struct SectionSliderViewModel: DetailItemViewModel {
     let items: [Any]
     let sectionTitle: NSAttributedString
     let sectionHeight: CGFloat
-    let sliderType: SliderType
     
+    let didSelectItemAction: SliderAction
+
     init(sliderSectionItem: SliderSectionItem, typography: Typography, theming: PlaceDetailTheming) {
         self.typography = typography
         self.theming = theming
@@ -27,40 +28,14 @@ struct SectionSliderViewModel: DetailItemViewModel {
         case .reviews(let reviewsItem):
             items = reviewsItem.reviews
             sectionHeight = reviewsItem.height
-            sliderType = .reviews
             sectionTitle = NSAttributedString(string: reviewsItem.sectionTitle, attributes: typography.sectionHeading)
+            didSelectItemAction = .reviews(reviewsItem.action)
         case .nearby(let placeSliderItem):
             items = placeSliderItem.places
             sectionHeight = placeSliderItem.height
-            sliderType = .places
             sectionTitle = NSAttributedString(string: placeSliderItem.sectionTitle, attributes: typography.sectionHeading)
+            didSelectItemAction = .places(placeSliderItem.action)
         }
-        
     }
+    
 }
-
-//
-enum SectionType {
-    case reviews(ReviewSliderItem)
-    case nearby(PlaceSliderItem)
-}
-struct SliderSectionItem {
-    let type: SectionType
-}
-//
-
-
-struct ReviewSliderItem {
-    let reviews: [Review]
-    let sectionTitle: String
-    let height: CGFloat
-    let action: (Review) -> Void
-}
-
-struct PlaceSliderItem {
-    let places: [PlaceResult]
-    let sectionTitle: String
-    let height: CGFloat
-    let action: (String) -> Void
-}
-

@@ -7,12 +7,7 @@ final class SectionSliderCell: UITableViewCell, NibLoadableReusable, DetailCellC
     @IBOutlet weak var sliderControllerContainer: UIView!
     var sliderController: HorizontalSnappingController?
     @IBOutlet weak var sliderControllerHeight: NSLayoutConstraint!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
- 
-    }
-    
+        
     func configure(using viewModel: DetailItemViewModel) {
         guard let viewModel = viewModel as? SectionSliderViewModel else { return }
         
@@ -24,11 +19,14 @@ final class SectionSliderCell: UITableViewCell, NibLoadableReusable, DetailCellC
     
     private func configureSliderController(using viewModel: SectionSliderViewModel) {
         
-        switch viewModel.sliderType {
-        case .reviews:
-            add(ReviewsHorizontalController(), using: viewModel)
-        case .places:
-            add(PlaceGroupHorizontalController(), using: viewModel)
+        switch viewModel.didSelectItemAction {
+        case .reviews(let didSelecthandler):
+            let reviewsController = ReviewsHorizontalController(didSelectHandler: didSelecthandler)
+            add(reviewsController, using: viewModel)
+        case .places(let didSelectHandler):
+            let placeGroupController = PlaceGroupHorizontalController(didSelectHandler: didSelectHandler)
+            placeGroupController.didSelectPlaceHandler = didSelectHandler
+            add(placeGroupController, using: viewModel)
         }
     }
     
@@ -45,6 +43,8 @@ final class SectionSliderCell: UITableViewCell, NibLoadableReusable, DetailCellC
         sliderControllerContainer.addSubview(reviewsController.view)
         reviewsController.view.fillSuperview()
         reviewsController.reviews = reviews //Dependency inject this.
+        
+//        reviewsController.didSelectHandler = viewModel.didSelectHandler
     }
     
     private var shouldAddMorePlaces = true

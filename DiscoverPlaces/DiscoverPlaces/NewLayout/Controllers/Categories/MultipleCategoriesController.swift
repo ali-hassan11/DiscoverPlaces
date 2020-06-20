@@ -152,7 +152,7 @@ extension MultipleCategoriesController {
         cell.subCategoryTitleLabel.text = subCategoryGroup.name
         cell.horizontalController.results = subCategoryGroup.results
         cell.horizontalController.location = self.location.selectedLocation
-        cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
+        cell.horizontalController.didSelectPlaceHandler = { [weak self] placeId in
             guard let location = self?.location else { return }
             let detailsController = PlaceDetailsController(placeId: placeId, location: location)
             self?.navigationController?.pushViewController(detailsController, animated: true)

@@ -44,6 +44,7 @@
 		CE327AEA241546E10010F400 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AE9241546E10010F400 /* SettingsController.swift */; };
 		CE327AF1241696B60010F400 /* MultipleCategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */; };
 		CE327AF324169DD20010F400 /* PlaceGroupHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */; };
+		CE3D1D37249E3985007B8E33 /* SliderSectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D1D36249E3985007B8E33 /* SliderSectionItem.swift */; };
 		CE42F3862437161800C394EC /* ErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42F3852437161800C394EC /* ErrorCell.swift */; };
 		CE45B49D2451D6D400656339 /* PlacesGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE45B49C2451D6D400656339 /* PlacesGroup.swift */; };
 		CE45B49F2451D9C400656339 /* LoadingindicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE45B49E2451D9C400656339 /* LoadingindicatorView.swift */; };
@@ -195,6 +196,7 @@
 		CE327AE9241546E10010F400 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCategoriesController.swift; sourceTree = "<group>"; };
 		CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceGroupHorizontalController.swift; sourceTree = "<group>"; };
+		CE3D1D36249E3985007B8E33 /* SliderSectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderSectionItem.swift; sourceTree = "<group>"; };
 		CE42F3852437161800C394EC /* ErrorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCell.swift; sourceTree = "<group>"; };
 		CE45B49C2451D6D400656339 /* PlacesGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesGroup.swift; sourceTree = "<group>"; };
 		CE45B49E2451D9C400656339 /* LoadingindicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingindicatorView.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				CE300D3C24918FB3008F1931 /* RegularDetailItem.swift */,
 				CE300D3A24918EE7008F1931 /* MainImageSliderItem.swift */,
 				CE15FD9D2494ECD600725A38 /* DetailActionsItem.swift */,
+				CE3D1D36249E3985007B8E33 /* SliderSectionItem.swift */,
 			);
 			path = DetailItemTypes;
 			sourceTree = "<group>";
@@ -1028,6 +1031,7 @@
 				CE6599FF23EF872900E531CD /* HomeLargeCellHolder.swift in Sources */,
 				CE24AD862440C3AB00852C91 /* GoogleLogoCell.swift in Sources */,
 				CE8A2FD523F1CE0800CDF866 /* DetailsTopSectionCellXib.swift in Sources */,
+				CE3D1D37249E3985007B8E33 /* SliderSectionItem.swift in Sources */,
 				CE659A0323EF876600E531CD /* LargePlaceCell.swift in Sources */,
 				CE5835D423DEB7C500C89622 /* SearchCell.swift in Sources */,
 				CECDA14824025896005F85FB /* ReviewDetailViewController.swift in Sources */,

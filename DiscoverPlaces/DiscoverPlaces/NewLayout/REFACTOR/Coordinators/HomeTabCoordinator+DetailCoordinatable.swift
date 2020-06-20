@@ -6,8 +6,8 @@ protocol DetailCoordinatable: AnyObject {
     func openInMaps(place: PlaceDetailResult)
     func pushOpeningTimesController(openingHoursText: [String]?)
     func pushWebsiteController(webAddress: String?)
-    func pushReviewController()
-    func pushDetailController()
+    func pushReviewController(review: Review)
+    func pushDetailController(id: String, userLocation: LocationItem)
     func didTapPhoneNumber()
     func didTapShare()
     //func didTapFave & To-Do???
@@ -41,12 +41,17 @@ extension HomeTabCoordinator: DetailCoordinatable {
         navigationController.show(websiteViewController, sender: self)
     }
     
-    func pushReviewController() {
-        print("Setup Delegate Method: pushReviewController")
+    func pushReviewController(review: Review) {
+        let reviewViewController = ReviewDetailViewController()
+        reviewViewController.review = review
+        navigationController.show(reviewViewController, sender: self)
     }
     
-    func pushDetailController() {
-        print("Setup Delegate Method: pushDetailController")
+    func pushDetailController(id: String, userLocation: LocationItem) {
+       let placeDetailViewModel = DetailsViewModel(delegate: self, placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
+        let newDetailsController = NEWPlaceDetailController(viewModel: placeDetailViewModel)
+        
+        navigationController.pushViewController(newDetailsController, animated: true)
     }
     
     func didTapPhoneNumber() {

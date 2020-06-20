@@ -9,7 +9,7 @@ final class DetailsViewModel: NSObject {
     private let theming: PlaceDetailTheming
     
     private let placeId: String
-    private let location: LocationItem
+    private let userLocation: LocationItem
     
     private var result: PlaceDetailResult?
     
@@ -17,7 +17,7 @@ final class DetailsViewModel: NSObject {
     
     init(delegate: DetailCoordinatable?, placeId: String, location: LocationItem, typography: Typography, theming: PlaceDetailTheming) {
         self.placeId = placeId
-        self.location = location
+        self.userLocation = location
         self.typography = typography
         self.theming = theming
         self.delegate = delegate
@@ -55,7 +55,7 @@ extension DetailsViewModel {
         //Main Images Slider
         if let photos = result.photos {
             
-            let distance = result.geometry?.distanceString(from: location.actualUserLocation ?? location.selectedLocation)
+            let distance = result.geometry?.distanceString(from: userLocation.actualUserLocation ?? userLocation.selectedLocation)
 
             let mainImagesSliderItem = MainImageSliderItem(name: result.name, rating: result.rating, distance: distance, photos: photos)
             items.append(Self.configureMainImageSliderDetailItem(using: mainImagesSliderItem,
@@ -145,9 +145,10 @@ extension DetailsViewModel {
             var items = items
             
             items.append(Self.configureNearbyPlacesDetailItem(places: filteredResults,
-                                     typography: self.typography,
-                                     theming: self.theming,
-                                     delegate: self.delegate))
+                                                              userLocation: self.userLocation,
+                                                              typography: self.typography,
+                                                              theming: self.theming,
+                                                              delegate: self.delegate))
             
             items.append(DetailItem(type: .googleFooter, action: nil))
             
@@ -281,21 +282,21 @@ extension DetailsViewModel {
     
     private static func configureReviewsDetailItem(reviews: [Review], typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
         
-        let action: (Review) -> Void = {  [weak delegate] review in
-            delegate?.pushReviewController()
+        let didSelectReviewHandler: ((Review) -> Void)? = {  [weak delegate] review in
+            delegate?.pushReviewController(review: review)
         }
-        
-        let reviewsItem = ReviewSliderItem(reviews: reviews, sectionTitle: "Reviews", height: 125, action: action)
+ 
+        let reviewsItem = ReviewSliderItem(reviews: reviews, sectionTitle: "Reviews", height: 125, action: didSelectReviewHandler)
         let sliderSectionItem = SliderSectionItem(type: .reviews(reviewsItem))
         
         let viewModel = SectionSliderViewModel(sliderSectionItem: sliderSectionItem, typography: typography, theming: theming)
         return DetailItem(type: .reviews(viewModel), action: nil)
     }
     
-    private static func configureNearbyPlacesDetailItem(places: [PlaceResult], typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
+    private static func configureNearbyPlacesDetailItem(places: [PlaceResult], userLocation: LocationItem, typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
         
-        let action: (String) -> Void = { [weak delegate] place in
-            delegate?.pushDetailController()
+        let action: (String) -> Void = { [weak delegate] placeId in
+            delegate?.pushDetailController(id: placeId, userLocation: userLocation)
         }
         
         let placeSliderItem = PlaceSliderItem(places: places, sectionTitle: "Nearby", height: 230, action: action)

@@ -20,7 +20,16 @@ final class PlaceGroupHorizontalController: HorizontalSnappingController, UIColl
         }
     }
     
-    var didSelectPlaceInCategoriesHandler: ((String) -> ())?
+    var didSelectPlaceHandler: ((String) -> ())?
+    
+    init(didSelectHandler: ((String) -> ())?) {
+        self.didSelectPlaceHandler = didSelectHandler
+        super.init()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +41,7 @@ final class PlaceGroupHorizontalController: HorizontalSnappingController, UIColl
         collectionView.register(SmallPlaceCell.self, forCellWithReuseIdentifier: SmallPlaceCell.id)
         collectionView.contentInset = .init(top: 0, left: Constants.sidePadding, bottom: 0, right: Constants.sidePadding)
     }
-    
-}
 
-extension PlaceGroupHorizontalController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return results?.count ?? 0
     }
@@ -52,6 +58,7 @@ extension PlaceGroupHorizontalController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let placeId = results?[indexPath.item].place_id else { return }
-        didSelectPlaceInCategoriesHandler?(placeId)
+        didSelectPlaceHandler?(placeId)
     }
+    
 }

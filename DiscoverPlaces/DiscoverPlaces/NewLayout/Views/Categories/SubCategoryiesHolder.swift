@@ -6,7 +6,7 @@ class SubCategoryiesHolder: UICollectionViewCell {
     public static let id = "subCategoryiesHolderId"
     
     var subCategoryTitleLabel = UILabel(text: "Sub-Category", font: .systemFont(ofSize: 20, weight: .semibold),color: .label, numberOfLines: 0)
-    var horizontalController = PlaceGroupHorizontalController()
+    var horizontalController = PlaceGroupHorizontalController(didSelectHandler: nil)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

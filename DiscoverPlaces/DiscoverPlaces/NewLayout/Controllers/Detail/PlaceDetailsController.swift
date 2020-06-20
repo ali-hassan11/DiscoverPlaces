@@ -277,7 +277,7 @@ extension PlaceDetailsController {
             cell.horizontalController.location = location.selectedLocation
             
             cell.horizontalController.results = morePlaces
-            cell.horizontalController.didSelectPlaceInCategoriesHandler = { [weak self] placeId in
+            cell.horizontalController.didSelectPlaceHandler = { [weak self] placeId in
                 guard let location = self?.location else { return }
                 let detailController = PlaceDetailsController(placeId: placeId, location: location)
                 self?.navigationController?.show(detailController, sender: self)
