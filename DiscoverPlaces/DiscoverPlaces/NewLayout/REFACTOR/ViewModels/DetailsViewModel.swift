@@ -240,11 +240,11 @@ extension DetailsViewModel {
         return DetailItem(type: .regular(viewModel), action: action)
     }
     
-    private static func configureOpeningHoursDetailItem(using openingHours: [String], typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
+    private static func configureOpeningHoursDetailItem(using openingHoursText: [String], typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
         let action: () -> Void = { [weak delegate] in
-            delegate?.pushOpeningTimesController()
+            delegate?.pushOpeningTimesController(openingHoursText: openingHoursText)
         }
-        let todaysOpeningHoursText = todayOpeningHours(openingHours: openingHours)
+        let todaysOpeningHoursText = todayOpeningHours(openingHoursText: openingHoursText)
         
         let viewModel = RegularDetailViewModel(icon: .time, title: todaysOpeningHoursText, typography: typography, theming: theming)
         return DetailItem(type: .regular(viewModel), action: action)
@@ -305,10 +305,10 @@ extension DetailsViewModel {
         return DetailItem(type: .morePlaces(viewModel), action: nil)
     }
     
-    private static func todayOpeningHours(openingHours: [String]) -> String {
+    private static func todayOpeningHours(openingHoursText: [String]) -> String {
         let today = Date().today()
         
-        for weekDay in openingHours {
+        for weekDay in openingHoursText {
             if weekDay.hasPrefix(today) {
                 return weekDay
             }
