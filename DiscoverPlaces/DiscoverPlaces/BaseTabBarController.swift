@@ -1,10 +1,3 @@
-//
-//  BaseTabBarController.swift
-//  DiscoverPlaces
-//
-//  Created by user on 26/01/2020.
-//  Copyright © 2020 AHApps. All rights reserved.
-//
 
 import UIKit
 
@@ -18,12 +11,11 @@ final class BaseTabBarController: UITabBarController {
                                                                placeDetailsTypography: DefaultTypography(),
                                                                placeDetailsTheming: DefaultTheming())
         
-        let homeNavController = UINavigationController()
-        let homeCoordinator = HomeTabCoordinator(navigationController: homeNavController, dependencies: homeDependenceis)
+        let homeCoordinator = HomeTabCoordinator(navigationController: UINavigationController(), dependencies: homeDependenceis)
         homeCoordinator.start()
         
         viewControllers = [
-            configureNavController(navController: homeNavController,
+            configureNavController(navController: homeCoordinator.navigationController,
                                    title: "Home",
                                    selectedImageName: "house.fill",
                                    deselectedImageName: "house"),
@@ -75,12 +67,4 @@ extension BaseTabBarController {
         return navController
     }
 }
-
-
-//    createNavController(viewController: HomeController(),
-//                        title: "Discover",
-//                        selectedImageName: "house.fill",
-//                        deselectedImageName: "house"),
-
-
 
