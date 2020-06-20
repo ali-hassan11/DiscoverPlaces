@@ -253,7 +253,7 @@ extension DetailsViewModel {
     
     private static func configurePhoneNumberDetailItem(using phoneNumber: String, typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
         let action: () -> Void = { [weak delegate] in
-            delegate?.didTapPhoneNumber()
+            delegate?.didTapPhoneNumber(number: phoneNumber)
         }
         let viewModel = RegularDetailViewModel(icon: .phone, title: phoneNumber, typography: typography, theming: theming)
         return DetailItem(type: .regular(viewModel), action: action)

@@ -10,7 +10,7 @@ protocol HomeCoordinatable {
 extension HomeTabCoordinator: HomeCoordinatable {
 
     func pushSetLocationController(selectedLocationCompletion: @escaping ((Location, String?) -> Void), locateUserCompletion: @escaping () -> Void) {
-        
+    
         let locationSearchController = LocationSearchController(selctedLocationHandler: selectedLocationCompletion, locateUserHandler: locateUserCompletion)
         
         navigationController.pushViewController(locationSearchController, animated: true)
