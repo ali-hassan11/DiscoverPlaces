@@ -5,7 +5,7 @@ import MapKit
 protocol DetailCoordinatable: AnyObject {
     func openInMaps(place: PlaceDetailResult)
     func pushOpeningTimesController(openingHoursText: [String]?)
-    func pushWebsiteController()
+    func pushWebsiteController(webAddress: String?)
     func pushReviewController()
     func pushDetailController()
     func didTapPhoneNumber()
@@ -34,8 +34,11 @@ extension HomeTabCoordinator: DetailCoordinatable {
         navigationController.show(openingHoursController, sender: self)
     }
     
-    func pushWebsiteController() {
-        print("Setup Delegate Method: pushWebsiteController")
+    func pushWebsiteController(webAddress: String?) {
+        guard let webAddress = webAddress else { return }
+        let websiteViewController = WebsiteViewController(webAddress: webAddress)
+        websiteViewController.webAddress = webAddress
+        navigationController.show(websiteViewController, sender: self)
     }
     
     func pushReviewController() {

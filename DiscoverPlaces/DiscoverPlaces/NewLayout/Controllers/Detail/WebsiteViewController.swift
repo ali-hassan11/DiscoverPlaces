@@ -12,10 +12,10 @@ import SafariServices
 
 final class WebsiteViewController: UIViewController {
     
-    var urlString: String? {
+    var webAddress: String? {
         didSet {
-            guard let url = URL(string: urlString ?? "") else {
-                //URL Not valid
+            guard let url = URL(string: webAddress ?? "") else {
+                //TODO: URL Not valid, show error
                 return
             }
             let request = URLRequest(url: url)
@@ -23,10 +23,26 @@ final class WebsiteViewController: UIViewController {
         }
     }
     
+    let safariIcon = UIImage(systemName: "safari")
     let webView = WKWebView()
+    
+    init(webAddress: String) {
+        self.webAddress = webAddress
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         self.view = webView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let openInSafariBarButton = UIBarButtonItem(image: safariIcon, style: .plain, target: self, action: #selector(openInSafari))
+        navigationItem.rightBarButtonItem = openInSafariBarButton
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,16 +56,9 @@ final class WebsiteViewController: UIViewController {
             return
         }
     }
-    
-    let safariImage = UIImage(systemName: "safari")
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let openInSafariBarButton = UIBarButtonItem(image: safariImage, style: .plain, target: self, action: #selector(openInSafari))
-        navigationItem.rightBarButtonItem = openInSafariBarButton
-    }
-    
+        
     @objc private func openInSafari() {
-        guard let url = URL(string: urlString ?? "") else { return }
+        guard let url = URL(string: webAddress ?? "") else { return }
         UIApplication.shared.open(url)
     }
 }

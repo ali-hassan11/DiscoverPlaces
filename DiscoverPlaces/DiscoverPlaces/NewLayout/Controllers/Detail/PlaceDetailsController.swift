@@ -365,8 +365,7 @@ extension PlaceDetailsController {
             navigationController?.show(openingHoursController, sender: self)
             
         case Detail.website.rawValue:
-            let websiteViewController = WebsiteViewController()
-            websiteViewController.urlString = placeDetailResult?.website
+            let websiteViewController = WebsiteViewController(webAddress: placeDetailResult?.website ?? "")
             navigationController?.show(websiteViewController, sender: self)
             
         case Detail.phoneNumber.rawValue:

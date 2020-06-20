@@ -260,7 +260,7 @@ extension DetailsViewModel {
     
     private static func configureWebsiteDetailItem(using webAddress: String, typography: Typography, theming: PlaceDetailTheming, delegate: DetailCoordinatable?) -> DetailItem {
         let action: () -> Void = { [weak delegate] in
-            delegate?.pushWebsiteController()
+            delegate?.pushWebsiteController(webAddress: webAddress)
         }
         let viewModel = RegularDetailViewModel(icon: .browser, title: "Website", typography: typography, theming: theming, action: action)
         return DetailItem(type: .regular(viewModel), action: action) //Use webAdress for action
