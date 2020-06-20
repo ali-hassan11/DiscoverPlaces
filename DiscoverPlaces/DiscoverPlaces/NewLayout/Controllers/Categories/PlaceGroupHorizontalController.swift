@@ -22,8 +22,9 @@ final class PlaceGroupHorizontalController: HorizontalSnappingController, UIColl
     
     var didSelectPlaceHandler: ((String) -> ())?
     
-    init(didSelectHandler: ((String) -> ())?) {
+    init(results: [PlaceResult]?, didSelectHandler: ((String) -> ())?) {
         self.didSelectPlaceHandler = didSelectHandler
+        self.results = results
         super.init()
     }
     

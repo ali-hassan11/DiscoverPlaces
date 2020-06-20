@@ -5,6 +5,7 @@ final class SectionSliderCell: UITableViewCell, NibLoadableReusable, DetailCellC
     
     @IBOutlet weak var reviewsHeadingLabel: UILabel!
     @IBOutlet weak var sliderControllerContainer: UIView!
+    
     var sliderController: HorizontalSnappingController?
     @IBOutlet weak var sliderControllerHeight: NSLayoutConstraint!
         
@@ -21,13 +22,15 @@ final class SectionSliderCell: UITableViewCell, NibLoadableReusable, DetailCellC
         
         switch viewModel.didSelectItemAction {
         case .reviews(let didSelecthandler):
-            let reviewsController = ReviewsHorizontalController(didSelectHandler: didSelecthandler)
+            let reviewsController = ReviewsHorizontalController(reviews: viewModel.items as? [Review], didSelectHandler: didSelecthandler)
             add(reviewsController, using: viewModel)
         case .places(let didSelectHandler):
-            let placeGroupController = PlaceGroupHorizontalController(didSelectHandler: didSelectHandler)
-            placeGroupController.didSelectPlaceHandler = didSelectHandler
+            let placeGroupController = PlaceGroupHorizontalController(results: viewModel.items as? [PlaceResult], didSelectHandler: didSelectHandler)
             add(placeGroupController, using: viewModel)
         }
+        
+        sliderControllerHeight.constant = viewModel.sectionHeight
+        sliderControllerContainer.backgroundColor = .clear
     }
     
     private var shouldAddReviews = true
@@ -36,15 +39,9 @@ final class SectionSliderCell: UITableViewCell, NibLoadableReusable, DetailCellC
         shouldAddReviews = false
         removeSliderContainerSubviews()
 
-        let reviews = viewModel.items as? [Review]
         sliderController = reviewsController
-        sliderControllerHeight.constant = viewModel.sectionHeight
-        sliderControllerContainer.backgroundColor = .clear
         sliderControllerContainer.addSubview(reviewsController.view)
         reviewsController.view.fillSuperview()
-        reviewsController.reviews = reviews //Dependency inject this.
-        
-//        reviewsController.didSelectHandler = viewModel.didSelectHandler
     }
     
     private var shouldAddMorePlaces = true
@@ -53,13 +50,9 @@ final class SectionSliderCell: UITableViewCell, NibLoadableReusable, DetailCellC
         shouldAddMorePlaces = false
         removeSliderContainerSubviews()
         
-        let placeResults = viewModel.items as? [PlaceResult]
         sliderController = placesController
-        sliderControllerHeight.constant = viewModel.sectionHeight
-        sliderControllerContainer.backgroundColor = .clear
         sliderControllerContainer.addSubview(placesController.view)
         placesController.view.fillSuperview()
-        placesController.results = placeResults //Dependency inject this.
     }
     
     private func removeSliderContainerSubviews() {

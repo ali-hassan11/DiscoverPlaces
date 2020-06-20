@@ -18,8 +18,9 @@ final class ReviewsHorizontalController: HorizontalSnappingController, UICollect
     
     var didSelectHandler: ((Review) -> ())?
     
-    init(didSelectHandler: ((Review) -> ())?) {
+    init(reviews: [Review]?, didSelectHandler: ((Review) -> ())?) {
         self.didSelectHandler = didSelectHandler
+        self.reviews = reviews
         super.init()
     }
     

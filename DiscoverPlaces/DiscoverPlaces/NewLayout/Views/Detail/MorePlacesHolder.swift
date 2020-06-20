@@ -12,7 +12,7 @@ final class MorePlacesHolder: UICollectionViewCell {
     
     public static let id = "morePlacesHolderId"
 
-    var horizontalController = PlaceGroupHorizontalController(didSelectHandler: nil)
+    var horizontalController = PlaceGroupHorizontalController(results: nil, didSelectHandler: nil)
     
     let sectionTitle = UILabel(text: "Nearby", font: .systemFont(ofSize: 19, weight: .medium), color: .label, numberOfLines: 1)
     

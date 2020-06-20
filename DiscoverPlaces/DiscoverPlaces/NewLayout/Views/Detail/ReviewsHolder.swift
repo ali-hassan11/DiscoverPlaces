@@ -12,7 +12,7 @@ final class ReviewsHolder: UICollectionViewCell {
 
     public static let id = "reviewsHolderId"
     
-    let horizontalController = ReviewsHorizontalController(didSelectHandler: nil)
+    let horizontalController = ReviewsHorizontalController(reviews: nil, didSelectHandler: nil)
     let sectionTitle = UILabel(text: "Reviews", font: .systemFont(ofSize: 19, weight: .medium), color: .label, numberOfLines: 1)
 
     override init(frame: CGRect) {
