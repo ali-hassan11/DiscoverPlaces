@@ -18,7 +18,7 @@ extension HomeTabCoordinator: HomeCoordinatable {
     
     func pushPlaceDetail(id: String, userLocation: LocationItem) {
         let placeDetailViewModel = DetailsViewModel(delegate: self, placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
-        let newDetailsController = NEWPlaceDetailController(viewModel: placeDetailViewModel)
+        let newDetailsController = NEWPlaceDetailController(coordinator: self, viewModel: placeDetailViewModel)
         
         navigationController.pushViewController(newDetailsController, animated: true)
     }

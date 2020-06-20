@@ -3,9 +3,11 @@ import UIKit
 final class NEWPlaceDetailController: UITableViewController {
     
     private let viewModel: DetailsViewModel
+    private let coordinator: DetailCoordinatable
     
-    init(viewModel: DetailsViewModel) {
+    init(coordinator: DetailCoordinatable, viewModel: DetailsViewModel) {
         self.viewModel = viewModel
+        self.coordinator = coordinator
         super.init(style: .plain)
     }
     
@@ -28,10 +30,12 @@ final class NEWPlaceDetailController: UITableViewController {
         viewModel.fetchPlaceData { [weak self] error in
             
             if let error = error {
-                print("delegate.showErrorAlert \(error)")
+                self?.coordinator.showError(title: error.title, message: error.message)
             }
             
-            self?.tableView.reloadData()
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
         }
     }
 }

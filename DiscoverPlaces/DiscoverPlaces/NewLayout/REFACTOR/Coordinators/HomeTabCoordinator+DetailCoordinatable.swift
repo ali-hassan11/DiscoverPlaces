@@ -10,6 +10,7 @@ protocol DetailCoordinatable: AnyObject {
     func pushDetailController(id: String, userLocation: LocationItem)
     func didTapPhoneNumber(number: String)
     func didTapShare(webAddress: String)
+    func showError(title: String, message: String)
     //func didTapFave & To-Do???
     
 }
@@ -49,9 +50,14 @@ extension HomeTabCoordinator: DetailCoordinatable {
     
     func pushDetailController(id: String, userLocation: LocationItem) {
        let placeDetailViewModel = DetailsViewModel(delegate: self, placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
-        let newDetailsController = NEWPlaceDetailController(viewModel: placeDetailViewModel)
+        let newDetailsController = NEWPlaceDetailController(coordinator: self, viewModel: placeDetailViewModel)
         
         navigationController.pushViewController(newDetailsController, animated: true)
+    }
+        
+    func showError(title: String, message: String) {
+        let errorController = ErrorController(message: message, buttonTitle: Constants.okText, buttonHandler: popTwoControllers)
+        navigationController.pushViewController(errorController, animated: true)
     }
     
     func didTapPhoneNumber(number: String) {
@@ -70,6 +76,11 @@ extension HomeTabCoordinator: DetailCoordinatable {
 }
 
 private extension HomeTabCoordinator {
+    
+    func popTwoControllers() -> Void {
+        let viewControllers = navigationController.viewControllers
+        navigationController.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+    }
     
     func callNumber(number: String) {
         

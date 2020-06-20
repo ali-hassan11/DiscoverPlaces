@@ -28,7 +28,7 @@ final class ErrorController: UIViewController {
         didTapActionButtonHandler?()
     }
     
-    init(message: String? = nil, buttonTitle: String, buttonHandler: @escaping (()->())) {
+    init(message: String? = nil, buttonTitle: String, buttonHandler: @escaping (() -> Void)) {
         super.init(nibName: nil, bundle: nil)
         
         errorIconView.tintColor = .systemPink

@@ -25,21 +25,28 @@ final class DetailsViewModel: NSObject {
 }
 
 //MARK: FetchData
+struct CustomError {
+    let title: String
+    let message: String
+}
+
 extension DetailsViewModel {
     
-    func fetchPlaceData(completion: @escaping (Error?) -> Void) {
+    func fetchPlaceData(completion: @escaping (CustomError?) -> Void) {
          
         Service.shared.fetchPlaceDetails(placeId: placeId, fields: Constants.placeDetailFields) {  [weak self] (placeResponse, error) in
             guard let self = self else { return }
             
-            if let error = error {
-                completion(error)
+            if error != nil {
+                let customError = CustomError(title: Constants.noInternetConnectionTitle, message: Constants.genericNoConnectionMessage)
+                completion(customError)
                 return
             }
             
             //success
             guard let result = placeResponse?.result else {
-                completion(error)
+                let customError = CustomError(title: "NOT SURE WHAT MESSAGE TO PUT HERE", message: "NOT SURE WHAT MESSAGE TO PUT HERE")
+                completion(customError)
                 return
             }
             
@@ -48,7 +55,7 @@ extension DetailsViewModel {
     }
     
     ///Create Custom error that contains a string & action?
-    private func populateDetailItems(with result: PlaceDetailResult, completion: @escaping (Error?) -> Void) {
+    private func populateDetailItems(with result: PlaceDetailResult, completion: @escaping (CustomError?) -> Void) {
         
         var items = [DetailItem]()
         
@@ -113,6 +120,8 @@ extension DetailsViewModel {
                                   delegate: delegate))
         }
         
+        self.items = items
+        
         if let location = result.geometry?.location {
             fetchMorePlacesData(near: location, items: items, completion: completion)
         } else {
@@ -121,23 +130,23 @@ extension DetailsViewModel {
     }
     
     ///Create Custom error that contains a string & action?
-    func fetchMorePlacesData(near location: Location, items: [DetailItem], completion: @escaping (Error?) -> Void) {
+    func fetchMorePlacesData(near location: Location, items: [DetailItem], completion: @escaping (CustomError?) -> Void) {
         
         Service.shared.fetchNearbyPlaces(location: location, radius: 3000) { [weak self] (response, error) in
             guard let self = self else {
-                completion(nil) //Call completion without appending morePlaces
+                completion(nil) ///Call completion without appending morePlaces
                 return
             }
             
             if let _ = error {
                 print("🚨 Failed to load more places 🚨")
-                completion(nil) //Call completion without appending morePlaces
+                completion(nil) ///Call completion without appending morePlaces
                 return
             }
             
             //success
             guard let results = response?.results else {
-                completion(nil) //Call completion without appending morePlaces
+                completion(nil) ///Call completion without appending morePlaces
                 return
             }
             
@@ -154,9 +163,7 @@ extension DetailsViewModel {
             items.append(DetailItem(type: .googleFooter, action: nil))
             
             self.items = items
-            DispatchQueue.main.async {
-                completion(nil)
-            }
+            completion(nil)
         }
     }
     

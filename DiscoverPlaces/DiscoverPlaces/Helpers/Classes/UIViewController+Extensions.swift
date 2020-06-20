@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController {
     
     func popTwoViewControllers() {
-        let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+        guard let viewControllers: [UIViewController] = self.navigationController?.viewControllers else { return }
         self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
     }
     
