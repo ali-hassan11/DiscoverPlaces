@@ -193,7 +193,7 @@ extension DetailsViewModel: UITableViewDataSource, UITableViewDelegate {
         case .morePlaces(let morePlacesViewmodel):
             return configureCell(cellType: PlaceSliderCell.self, at: indexPath, tableView: tableView, viewModel: morePlacesViewmodel)
         case .googleFooter:
-            return googleCell(at: indexPath, tableView: tableView)
+            return configureCell(cellType: GoogleCell.self, at: indexPath, tableView: tableView, viewModel: GoogleCellViewModel())
         }
     }
     
@@ -204,6 +204,12 @@ extension DetailsViewModel: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            scrollView.contentOffset.y = 0
+        }
+    }
+    
     //MARK: Configure Cell Helper Methods
     typealias DetailCell = UITableViewCell & NibLoadableReusable & DetailCellConfigurable
     
@@ -212,14 +218,6 @@ extension DetailsViewModel: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         cell.configure(using: viewModel)
-        return cell
-    }
-  
-    private func googleCell(at indexPath: IndexPath, tableView: UITableView) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: GoogleCell.reuseIdentifier, for: indexPath) as? GoogleCell else {
-            return UITableViewCell()
-        }
-        cell.configure()
         return cell
     }
 }

@@ -8,28 +8,32 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GoogleCell" rowHeight="83" id="60b-zP-hI4" customClass="GoogleCell">
-            <rect key="frame" x="0.0" y="0.0" width="492" height="83"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GoogleCell" rowHeight="49" id="DBv-Wu-lhE" customClass="GoogleCell" customModule="DiscoverPlaces" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="60b-zP-hI4" id="MqC-g5-Bjo">
-                <rect key="frame" x="0.0" y="0.0" width="492" height="83"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DBv-Wu-lhE" id="H9U-Xz-eZl">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W3s-wj-XmL">
-                        <rect key="frame" x="171" y="8" width="150" height="65"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yiY-kL-XRf">
+                        <rect key="frame" x="8" y="12" width="398" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="CPD-c9-ZWo"/>
-                            <constraint firstAttribute="height" constant="65" id="e8E-Hw-FQ6"/>
+                            <constraint firstAttribute="height" constant="18" id="osa-S4-NZh"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="W3s-wj-XmL" firstAttribute="centerX" secondItem="MqC-g5-Bjo" secondAttribute="centerX" id="NuZ-YW-aWE"/>
-                    <constraint firstItem="W3s-wj-XmL" firstAttribute="top" secondItem="MqC-g5-Bjo" secondAttribute="top" constant="8" id="O7t-Fd-wgP"/>
-                    <constraint firstAttribute="bottom" secondItem="W3s-wj-XmL" secondAttribute="bottom" constant="8" id="TLA-aQ-T99"/>
+                    <constraint firstAttribute="bottom" secondItem="yiY-kL-XRf" secondAttribute="bottom" constant="12" id="DtW-eu-K93"/>
+                    <constraint firstItem="yiY-kL-XRf" firstAttribute="top" secondItem="H9U-Xz-eZl" secondAttribute="top" constant="12" id="SpS-c3-Dji"/>
+                    <constraint firstItem="yiY-kL-XRf" firstAttribute="leading" secondItem="H9U-Xz-eZl" secondAttribute="leading" constant="8" id="eWg-eE-II0"/>
+                    <constraint firstAttribute="trailing" secondItem="yiY-kL-XRf" secondAttribute="trailing" constant="8" id="gcP-ix-Lo3"/>
+                    <constraint firstItem="yiY-kL-XRf" firstAttribute="centerY" secondItem="H9U-Xz-eZl" secondAttribute="centerY" id="z6P-GG-Lz2"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-271.01449275362319" y="416.18303571428572"/>
+            <connections>
+                <outlet property="googleImageView" destination="yiY-kL-XRf" id="9jd-IP-E0K"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="69.977678571428569"/>
         </tableViewCell>
     </objects>
 </document>

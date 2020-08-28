@@ -79,16 +79,15 @@ final class MyPlacesViewController: UIViewController {
         switch sender.selectedSegmentIndex {
         case 0:
             addChildVC(favouritesController, on: listControllersContainer, completion: { [weak self] in
-                self?.toDoController.remove()
+                self?.toDoController.removeFromParentVC()
             })
         case 1:
             addChildVC(toDoController, on: listControllersContainer, completion: { [weak self] in
-                self?.favouritesController.remove()
+                self?.favouritesController.removeFromParentVC()
             })
         default:
             break
         }
-        
     }
     
     private func pushNoResultsController() {
@@ -120,6 +119,7 @@ final class MyPlacesViewController: UIViewController {
 
 
 @nonobjc fileprivate extension UIViewController {
+    
     func addChildVC(_ child: UIViewController, on view: UIView, completion: (()->())?) {
         addChild(child)
         
@@ -134,7 +134,7 @@ final class MyPlacesViewController: UIViewController {
         }
     }
     
-    func remove() {
+    func removeFromParentVC() {
         willMove(toParent: nil)
         view.removeFromSuperview()
         removeFromParent()

@@ -1,16 +1,14 @@
 
 import UIKit
 
-final class GoogleCell: UITableViewCell, NibLoadableReusable {
+final class GoogleCell: UITableViewCell, DetailCellConfigurable, NibLoadableReusable {
     
-//    @IBOutlet weak var googleImage: UIImageView!
+    @IBOutlet weak var googleImageView: UIImageView!
     
-    func configure() {
+    func configure(using viewModel: DetailItemViewModel) {
         let image = UIImage(named: "googleLogo")
-        let imageView = UIImageView(image: image)
-        
-        addSubview(imageView)
-        imageView.fillSuperview()
+        googleImageView.image = image
+        googleImageView.contentMode = .scaleAspectFit
     }
 }
 
