@@ -44,9 +44,8 @@ extension DetailsViewModel {
             }
             
             //success
-            #warning("FIX")
             guard let result = placeResponse?.result else {
-                let customError = CustomError(title: "NOT SURE WHAT MESSAGE TO PUT HERE", message: "NOT SURE WHAT MESSAGE TO PUT HERE")
+                let customError = CustomError(title: Constants.noResultsTitle, message: Constants.genericNoConnectionMessage)
                 completion(customError)
                 return
             }
