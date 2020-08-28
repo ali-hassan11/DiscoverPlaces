@@ -50,7 +50,9 @@ extension NEWPlaceDetailController {
         tableView.register(RegularCell.nib(), forCellReuseIdentifier: RegularCell.reuseIdentifier)
         tableView.register(MainImageSliderCell.nib(), forCellReuseIdentifier: MainImageSliderCell.reuseIdentifier)
         tableView.register(DetailActionsCell.nib(), forCellReuseIdentifier: DetailActionsCell.reuseIdentifier)
-        tableView.register(SectionSliderCell.nib(), forCellReuseIdentifier: SectionSliderCell.reuseIdentifier)
+//        tableView.register(SectionSliderCell.nib(), forCellReuseIdentifier: SectionSliderCell.reuseIdentifier)
+        tableView.register(ReviewSliderCell.nib(), forCellReuseIdentifier: ReviewSliderCell.reuseIdentifier)
+        tableView.register(PlaceSliderCell.nib(), forCellReuseIdentifier: PlaceSliderCell.reuseIdentifier)
         tableView.register(GoogleCell.nib(), forCellReuseIdentifier: GoogleCell.reuseIdentifier)
         
         tableView.estimatedRowHeight = 44

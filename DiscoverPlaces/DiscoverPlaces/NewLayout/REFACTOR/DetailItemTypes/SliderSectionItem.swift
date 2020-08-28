@@ -1,14 +1,6 @@
 
 import UIKit
 
-enum SliderSectionType {
-    case reviews(ReviewSliderItem)
-    case nearby(PlaceSliderItem)
-}
-struct SliderSectionItem {
-    let type: SliderSectionType
-}
-
 struct ReviewSliderItem {
     let reviews: [Review]
     let sectionTitle: String

@@ -44,6 +44,7 @@ extension DetailsViewModel {
             }
             
             //success
+            #warning("FIX")
             guard let result = placeResponse?.result else {
                 let customError = CustomError(title: "NOT SURE WHAT MESSAGE TO PUT HERE", message: "NOT SURE WHAT MESSAGE TO PUT HERE")
                 completion(customError)
@@ -189,9 +190,9 @@ extension DetailsViewModel: UITableViewDataSource, UITableViewDelegate {
         case .actionButtons(let actionsViewModel):
            return configureCell(cellType: DetailActionsCell.self, at: indexPath, tableView: tableView, viewModel: actionsViewModel)
         case .reviews(let reviewSliderViewModel):
-            return configureCell(cellType: SectionSliderCell.self, at: indexPath, tableView: tableView, viewModel: reviewSliderViewModel)
+            return configureCell(cellType: ReviewSliderCell.self, at: indexPath, tableView: tableView, viewModel: reviewSliderViewModel)
         case .morePlaces(let morePlacesViewmodel):
-            return configureCell(cellType: SectionSliderCell.self, at: indexPath, tableView: tableView, viewModel: morePlacesViewmodel)
+            return configureCell(cellType: PlaceSliderCell.self, at: indexPath, tableView: tableView, viewModel: morePlacesViewmodel)
         case .googleFooter:
             return googleCell(at: indexPath, tableView: tableView)
         }
@@ -288,10 +289,9 @@ extension DetailsViewModel {
             delegate?.pushReviewController(review: review)
         }
  
-        let reviewsItem = ReviewSliderItem(reviews: reviews, sectionTitle: "Reviews", height: 125, action: didSelectReviewHandler)
-        let sliderSectionItem = SliderSectionItem(type: .reviews(reviewsItem))
+        let reviewSliderItem = ReviewSliderItem(reviews: reviews, sectionTitle: "Reviews", height: 125, action: didSelectReviewHandler)
         
-        let viewModel = SectionSliderViewModel(sliderSectionItem: sliderSectionItem, typography: typography, theming: theming)
+        let viewModel = ReviewsSliderViewModel(reviewSliderItem: reviewSliderItem, typography: typography, theming: theming)
         return DetailItem(type: .reviews(viewModel), action: nil)
     }
     
@@ -302,9 +302,8 @@ extension DetailsViewModel {
         }
         
         let placeSliderItem = PlaceSliderItem(places: places, sectionTitle: "Nearby", height: 230, action: action)
-        let sliderSectionItem = SliderSectionItem(type: .nearby(placeSliderItem))
         
-        let viewModel = SectionSliderViewModel(sliderSectionItem: sliderSectionItem, typography: typography, theming: theming)
+        let viewModel = PlacesSliderViewModel(placeSliderItem: placeSliderItem, typography: typography, theming: theming)
         return DetailItem(type: .morePlaces(viewModel), action: nil)
     }
     
