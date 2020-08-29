@@ -20,8 +20,10 @@ final class NEWPlaceDetailController: UITableViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupTableView()
-    
+        
         guard Reachability.isConnectedToNetwork() else {
+            self.showErrorController(error: .init(title: Constants.noInternetConnectionTitle,
+                                                  message: Constants.noInternetConnetionMessage))
             return
         }
         fetchData()
@@ -30,15 +32,22 @@ final class NEWPlaceDetailController: UITableViewController {
     private func fetchData() {
         viewModel.fetchPlaceData { [weak self] error in
             
-            if let error = error {
-                print(error)
-                #warning("FIX")
+            if error != nil {
+                DispatchQueue.main.async {
+                    self?.showErrorController(error: .init(title: Constants.noResultsTitle,
+                                                           message: Constants.genericNoConnectionMessage))
+                    return
+                }
             }
             
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
         }
+    }
+    
+    private func showErrorController(error: CustomError) {
+        coordinator.showErrorController(title: error.title, message: error.message)
     }
 }
 

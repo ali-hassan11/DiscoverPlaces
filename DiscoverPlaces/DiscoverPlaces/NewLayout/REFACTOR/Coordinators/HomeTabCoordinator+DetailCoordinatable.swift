@@ -10,7 +10,7 @@ protocol DetailCoordinatable: AnyObject {
     func pushDetailController(id: String, userLocation: LocationItem)
     func didTapPhoneNumber(number: String)
     func didTapShare(webAddress: String)
-    func showError(title: String, message: String)
+    func showErrorController(title: String, message: String)
     //func didTapFave & To-Do???
     
 }
@@ -55,7 +55,7 @@ extension HomeTabCoordinator: DetailCoordinatable {
         navigationController.pushViewController(newDetailsController, animated: true)
     }
         
-    func showError(title: String, message: String) {
+    func showErrorController(title: String, message: String) {
         let errorController = ErrorController(message: message, buttonTitle: Constants.okText, buttonHandler: popTwoControllers)
         navigationController.pushViewController(errorController, animated: true)
     }
