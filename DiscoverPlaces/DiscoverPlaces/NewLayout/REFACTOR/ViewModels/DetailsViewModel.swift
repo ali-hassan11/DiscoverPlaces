@@ -197,6 +197,16 @@ extension DetailsViewModel: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    typealias DetailCell = UITableViewCell & NibLoadableReusable & DetailCellConfigurable
+    
+    private func configureCell<T: DetailCell>(cellType: T.Type, at indexPath: IndexPath, tableView: UITableView, viewModel: DetailItemViewModel) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
+            return UITableViewCell()
+        }
+        cell.configure(using: viewModel)
+        return cell
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = items[indexPath.row]
         item.action?()
@@ -208,17 +218,6 @@ extension DetailsViewModel: UITableViewDataSource, UITableViewDelegate {
         if scrollView.contentOffset.y < 0 {
             scrollView.contentOffset.y = 0
         }
-    }
-    
-    //MARK: Configure Cell Helper Methods
-    typealias DetailCell = UITableViewCell & NibLoadableReusable & DetailCellConfigurable
-    
-    private func configureCell<T: DetailCell>(cellType: T.Type, at indexPath: IndexPath, tableView: UITableView, viewModel: DetailItemViewModel) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
-            return UITableViewCell()
-        }
-        cell.configure(using: viewModel)
-        return cell
     }
 }
 
