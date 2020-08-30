@@ -12,7 +12,6 @@ protocol DetailCoordinatable: AnyObject {
     func didTapShare(webAddress: String)
     func pushErrorController(message: String)
     //func didTapFave & To-Do???
-    
 }
 
 extension HomeTabCoordinator: DetailCoordinatable {

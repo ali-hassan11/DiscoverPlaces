@@ -131,7 +131,7 @@ final class LoadingView: UIView, LoadingViewType {
     }
     
     func didFinishLoading() {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.alpha = 0
         }) { _ in
             self.loadingIndicator.stopAnimating()

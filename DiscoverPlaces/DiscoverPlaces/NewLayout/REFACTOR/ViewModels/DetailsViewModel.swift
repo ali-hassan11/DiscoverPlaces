@@ -13,16 +13,16 @@ final class DetailsViewModel: NSObject {
     
     private var result: PlaceDetailResult?
     
-    private weak var delegate: DetailCoordinatable?
+    private weak var coordinator: DetailCoordinatable?
     
     public let backgroundColor: UIColor
     
-    init(delegate: DetailCoordinatable?, placeId: String, location: LocationItem, typography: Typography, theming: PlaceDetailTheming) {
+    init(coordinator: DetailCoordinatable?, placeId: String, location: LocationItem, typography: Typography, theming: PlaceDetailTheming) {
         self.placeId = placeId
         self.userLocation = location
         self.typography = typography
         self.theming = theming
-        self.delegate = delegate
+        self.coordinator = coordinator
         self.backgroundColor = theming.background
     }
 }
@@ -79,33 +79,33 @@ extension DetailsViewModel {
                                                          vicinity: vicinity,
                                        typography: self.typography,
                                        theming: self.theming,
-                                       delegate: delegate))
+                                       delegate: coordinator))
         }
         
         if let openingHours = result.opening_hours?.weekdayText {
             items.append(Self.configureOpeningHoursDetailItem(using: openingHours,
                                            typography: self.typography,
                                            theming: self.theming,
-                                           delegate: delegate))
+                                           delegate: coordinator))
         }
         
         if let phoneNumber = result.international_phone_number {
             items.append(Self.configurePhoneNumberDetailItem(using: phoneNumber,
                                           typography: self.typography,
                                           theming: self.theming,
-                                          delegate: delegate))
+                                          delegate: coordinator))
         }
         
         if let webAdress = result.website {
             items.append(Self.configureWebsiteDetailItem(using: webAdress,
                                       typography: self.typography,
                                       theming: self.theming,
-                                      delegate: delegate))
+                                      delegate: coordinator))
         } else if let googleUrl = result.url {
             items.append(Self.configureWebsiteDetailItem(using: googleUrl,
                                       typography: self.typography,
                                       theming: self.theming,
-                                      delegate: delegate))
+                                      delegate: coordinator))
         }
         
         //Actions
@@ -113,14 +113,14 @@ extension DetailsViewModel {
                                                      result: result,
                                                      typography: typography,
                                                      theming: theming,
-                                                     delegate: delegate))
+                                                     delegate: coordinator))
         
         //Reviews
         if let reviews = result.reviews {
         items.append(Self.configureReviewsDetailItem(reviews: reviews,
                                   typography: typography,
                                   theming: theming,
-                                  delegate: delegate))
+                                  delegate: coordinator))
         }
         
         self.items = items
@@ -161,7 +161,7 @@ extension DetailsViewModel {
                                                               userLocation: self.userLocation,
                                                               typography: self.typography,
                                                               theming: self.theming,
-                                                              delegate: self.delegate))
+                                                              delegate: self.coordinator))
             
             items.append(DetailItem(type: .googleFooter, action: nil))
             

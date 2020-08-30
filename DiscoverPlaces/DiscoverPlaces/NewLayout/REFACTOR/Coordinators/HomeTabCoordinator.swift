@@ -26,7 +26,7 @@ class HomeTabCoordinator: Coordinator {
     }
     
     func pushDetailController(id: String, userLocation: LocationItem) {
-        let placeDetailViewModel = DetailsViewModel(delegate: self, placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
+        let placeDetailViewModel = DetailsViewModel(coordinator: self, placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
         let newDetailsController = NEWPlaceDetailController(coordinator: self, viewModel: placeDetailViewModel)
         
         navigationController.pushViewController(newDetailsController, animated: true)

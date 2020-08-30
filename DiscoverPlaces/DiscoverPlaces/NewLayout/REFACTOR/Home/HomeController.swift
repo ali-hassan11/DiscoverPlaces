@@ -8,10 +8,9 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
     private let coordinator: HomeCoordinatable
     
     private var userLocation: LocationItem?
-    private var locationManager:CLLocationManager!
+    private var locationManager: CLLocationManager!
     
     private var placeResults = [PlaceResult]()
-    private let searchResponseFilter = SearchResponseFilter()
     
     private let activityIndicatorView = LoadingIndicatorView()
     private let fadeView: UIView = {
@@ -103,7 +102,7 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
                 return
             }
             
-            let placeResults = self.searchResponseFilter.results(from: response)
+            let placeResults = SearchResponseFilter().results(from: response)
             self.handleFetchSuccess(with: placeResults)
         }
     }
