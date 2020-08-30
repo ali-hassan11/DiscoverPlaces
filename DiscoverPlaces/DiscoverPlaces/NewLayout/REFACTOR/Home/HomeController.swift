@@ -163,7 +163,7 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
 
     private func didTapPlace(placeId: String) -> Void {
         guard let location = userLocation else { return }
-        coordinator.pushPlaceDetail(id: placeId, userLocation: location)
+        coordinator.pushDetailController(id: placeId, userLocation: location)
     }
 }
 

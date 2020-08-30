@@ -1,6 +1,6 @@
 import UIKit
 
-struct MainImageSliderViewModel: DetailItemViewModel {
+struct MainImageSliderViewModel: DetailItemViewModelType {
     
     typealias Typography = DefaultTypographyProvider & PlaceDetailTypographyProvider
     let theming: PlaceDetailTheming

@@ -17,7 +17,7 @@ final class PlaceSliderCell:  UITableViewCell, NibLoadableReusable, DetailCellCo
     
     @IBOutlet weak var sliderControllerHeight: NSLayoutConstraint!
     
-    func configure(using viewModel: DetailItemViewModel) {
+    func configure(using viewModel: DetailItemViewModelType) {
         guard let viewModel = viewModel as? PlacesSliderViewModel else { return }
         
         sectionTitleLabel.attributedText = viewModel.sectionTitle

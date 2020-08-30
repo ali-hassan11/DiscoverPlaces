@@ -5,7 +5,7 @@ final class GoogleCell: UITableViewCell, DetailCellConfigurable, NibLoadableReus
     
     @IBOutlet weak var googleImageView: UIImageView!
     
-    func configure(using viewModel: DetailItemViewModel) {
+    func configure(using viewModel: DetailItemViewModelType) {
         let image = UIImage(named: "googleLogo")
         googleImageView.image = image
         googleImageView.contentMode = .scaleAspectFit

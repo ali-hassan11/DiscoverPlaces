@@ -6,6 +6,4 @@
 //  Copyright © 2020 AHApps. All rights reserved.
 //
 
-protocol DetailItemViewModel {
-    
-}
+protocol DetailItemViewModelType { }

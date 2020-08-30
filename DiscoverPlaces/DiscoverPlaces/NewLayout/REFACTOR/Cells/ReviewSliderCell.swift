@@ -17,7 +17,7 @@ final class ReviewSliderCell:  UITableViewCell, NibLoadableReusable, DetailCellC
     
     @IBOutlet weak var sliderControllerHeight: NSLayoutConstraint!
 
-    func configure(using viewModel: DetailItemViewModel) {
+    func configure(using viewModel: DetailItemViewModelType) {
         guard let viewModel = viewModel as? ReviewsSliderViewModel else { return }
         
         sectionTitleLabel.attributedText = viewModel.sectionTitle

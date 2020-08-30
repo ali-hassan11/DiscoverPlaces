@@ -55,7 +55,7 @@ final class NEWPlaceDetailController: UIViewController {
     }
     
     private func showErrorController(error: CustomError) {
-        coordinator.showErrorController(title: error.title, message: error.message)
+        coordinator.pushErrorController(message: error.message)
     }
 }
 

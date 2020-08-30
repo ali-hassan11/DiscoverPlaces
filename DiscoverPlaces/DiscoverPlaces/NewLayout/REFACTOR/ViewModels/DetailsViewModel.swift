@@ -202,7 +202,7 @@ extension DetailsViewModel: UITableViewDataSource, UITableViewDelegate {
     
     typealias DetailCell = UITableViewCell & NibLoadableReusable & DetailCellConfigurable
     
-    private func configureCell<T: DetailCell>(cellType: T.Type, at indexPath: IndexPath, tableView: UITableView, viewModel: DetailItemViewModel) -> UITableViewCell {
+    private func configureCell<T: DetailCell>(cellType: T.Type, at indexPath: IndexPath, tableView: UITableView, viewModel: DetailItemViewModelType) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             return UITableViewCell()
         }

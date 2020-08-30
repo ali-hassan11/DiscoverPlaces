@@ -22,7 +22,7 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCel
         configureGradient()
     }
     
-    func configure(using viewModel: DetailItemViewModel) {
+    func configure(using viewModel: DetailItemViewModelType) {
         guard let viewModel = viewModel as? MainImageSliderViewModel else { return }
     
         configureLabels(using: viewModel)

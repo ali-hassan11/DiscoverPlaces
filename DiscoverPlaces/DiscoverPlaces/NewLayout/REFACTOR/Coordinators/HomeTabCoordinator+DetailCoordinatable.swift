@@ -10,7 +10,7 @@ protocol DetailCoordinatable: AnyObject {
     func pushDetailController(id: String, userLocation: LocationItem)
     func didTapPhoneNumber(number: String)
     func didTapShare(webAddress: String)
-    func showErrorController(title: String, message: String)
+    func pushErrorController(message: String)
     //func didTapFave & To-Do???
     
 }
@@ -35,33 +35,15 @@ extension HomeTabCoordinator: DetailCoordinatable {
         navigationController.show(openingHoursController, sender: self)
     }
     
+    func didTapPhoneNumber(number: String) {
+        callNumber(number: number)
+    }
+    
     func pushWebsiteController(webAddress: String?) {
         guard let webAddress = webAddress else { return }
         let websiteViewController = WebsiteViewController(webAddress: webAddress)
         websiteViewController.webAddress = webAddress
         navigationController.show(websiteViewController, sender: self)
-    }
-    
-    func pushReviewController(review: Review) {
-        let reviewViewController = ReviewDetailViewController()
-        reviewViewController.review = review
-        navigationController.show(reviewViewController, sender: self)
-    }
-    
-    func pushDetailController(id: String, userLocation: LocationItem) {
-       let placeDetailViewModel = DetailsViewModel(delegate: self, placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
-        let newDetailsController = NEWPlaceDetailController(coordinator: self, viewModel: placeDetailViewModel)
-        
-        navigationController.pushViewController(newDetailsController, animated: true)
-    }
-        
-    func showErrorController(title: String, message: String) {
-        let errorController = ErrorController(message: message, buttonTitle: Constants.okText, buttonHandler: popTwoControllers)
-        navigationController.pushViewController(errorController, animated: true)
-    }
-    
-    func didTapPhoneNumber(number: String) {
-        callNumber(number: number)
     }
     
     func didTapShare(webAddress: String) {
@@ -73,14 +55,14 @@ extension HomeTabCoordinator: DetailCoordinatable {
         navigationController.visibleViewController?.present(activityController, animated: true)
     }
     
+    func pushReviewController(review: Review) {
+        let reviewViewController = ReviewDetailViewController()
+        reviewViewController.review = review
+        navigationController.show(reviewViewController, sender: self)
+    }
 }
 
 private extension HomeTabCoordinator {
-    
-    func popTwoControllers() -> Void {
-        let viewControllers = navigationController.viewControllers
-        navigationController.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
-    }
     
     func callNumber(number: String) {
         

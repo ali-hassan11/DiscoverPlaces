@@ -6,4 +6,4 @@
 //  Copyright © 2020 AHApps. All rights reserved.
 //
 
-struct GoogleCellViewModel: DetailItemViewModel {}
+struct GoogleCellViewModel: DetailItemViewModelType { }

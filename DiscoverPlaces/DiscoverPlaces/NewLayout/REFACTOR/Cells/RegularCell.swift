@@ -6,7 +6,7 @@ final class RegularCell: UITableViewCell, NibLoadableReusable, DetailCellConfigu
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var disclosureIndicatorImageView: UIImageView!
     
-    func configure(using viewModel: DetailItemViewModel) {
+    func configure(using viewModel: DetailItemViewModelType) {
         guard let viewModel = viewModel as? RegularDetailViewModel else { return }
         
         titleLabel.attributedText = viewModel.title

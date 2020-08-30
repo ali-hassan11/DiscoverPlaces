@@ -13,7 +13,7 @@ final class DetailActionsCell: UITableViewCell, NibLoadableReusable, DetailCellC
     var isFave: Bool?
     var isToDo: Bool?
 
-    func configure(using viewModel: DetailItemViewModel) {
+    func configure(using viewModel: DetailItemViewModelType) {
         guard let viewModel = viewModel as? DetailActionsViewModel else { return }
         
         selectionStyle = .none

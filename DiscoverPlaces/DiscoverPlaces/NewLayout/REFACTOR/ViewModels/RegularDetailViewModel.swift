@@ -1,6 +1,6 @@
 import UIKit
 
-struct RegularDetailViewModel: DetailItemViewModel {
+struct RegularDetailViewModel: DetailItemViewModelType {
     
     typealias Typography = DefaultTypographyProvider & PlaceDetailTypographyProvider
     

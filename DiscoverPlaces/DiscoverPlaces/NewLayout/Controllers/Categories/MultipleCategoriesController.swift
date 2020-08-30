@@ -10,6 +10,8 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
     
     private var location: LocationItem
     private var category: Category
+    
+    private let coordinator: CategoriesCoordinatable
 
     struct SubCategoryGroup {
         let name: String
@@ -18,9 +20,10 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
 
     private var subCategoryGroups = [SubCategoryGroup]()
     
-    init(category: Category, location: LocationItem) {
+    init(coordinator: CategoriesCoordinatable, category: Category, location: LocationItem) {
         self.location = location
         self.category = category
+        self.coordinator = coordinator
         super.init()
     }
     
@@ -46,7 +49,8 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
     private func fetchSubCategoryGroups(category: Category, selectedLocation: Location?) {
         
         guard Reachability.isConnectedToNetwork() else {
-            pushNoConnectionController()
+            self.showErrorController(error: .init(title: Constants.noInternetConnectionTitle,
+                                                  message: Constants.noInternetConnetionMessage))
             return
         }
         
@@ -93,12 +97,16 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
         
     }
     
-    private func pushNoConnectionController() {
-        let errorController = ErrorController(message: Constants.genericNoConnectionMessage, buttonTitle: Constants.backtext) {
-            ///DidTapRetryButtonHandler
-            self.navigationController?.popToRootViewController(animated: true)
-        }
-        self.navigationController?.pushViewController(errorController, animated: true)
+//    private func pushNoConnectionController() {
+//        let errorController = ErrorController(message: Constants.genericNoConnectionMessage, buttonTitle: Constants.backtext) {
+//            ///DidTapRetryButtonHandler
+//            self.navigationController?.popToRootViewController(animated: true)
+//        }
+//        self.navigationController?.pushViewController(errorController, animated: true)
+//    }
+//    
+    private func showErrorController(error: CustomError) {
+        coordinator.pushErrorController(message: error.message)
     }
     
     private func fetchCompletion() {
@@ -107,7 +115,7 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
             self.activityIndicatorView.stopAnimating()
             
             guard self.subCategoryGroups.isEmpty == false else {
-                self.pushNoResultsController()
+                self.coordinator.pushErrorController(message: Constants.noResultsMessage)
                 return
             }
             
@@ -154,8 +162,7 @@ extension MultipleCategoriesController {
         cell.horizontalController.location = self.location.selectedLocation
         cell.horizontalController.didSelectPlaceHandler = { [weak self] placeId in
             guard let location = self?.location else { return }
-            let detailsController = PlaceDetailsController(placeId: placeId, location: location)
-            self?.navigationController?.pushViewController(detailsController, animated: true)
+            self?.coordinator.pushDetailController(id: placeId, userLocation: location)
         }
         return cell
     }

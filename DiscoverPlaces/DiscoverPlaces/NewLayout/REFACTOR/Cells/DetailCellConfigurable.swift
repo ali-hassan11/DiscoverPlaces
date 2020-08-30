@@ -1,5 +1,5 @@
 
 protocol DetailCellConfigurable {
-    func configure(using viewModel: DetailItemViewModel)
+    func configure(using viewModel: DetailItemViewModelType)
 }
 

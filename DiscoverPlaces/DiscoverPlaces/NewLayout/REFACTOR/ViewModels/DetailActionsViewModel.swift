@@ -1,7 +1,7 @@
 
 import UIKit
 
-struct DetailActionsViewModel: DetailItemViewModel {
+struct DetailActionsViewModel: DetailItemViewModelType {
     
     let isFave: Bool
     let isTodo: Bool

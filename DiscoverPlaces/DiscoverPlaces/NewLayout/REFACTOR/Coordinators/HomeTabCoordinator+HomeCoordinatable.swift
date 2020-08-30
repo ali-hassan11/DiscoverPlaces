@@ -1,10 +1,11 @@
 import UIKit
 
 protocol HomeCoordinatable {
-    func pushPlaceDetail(id: String, userLocation: LocationItem)
     func pushSetLocationController(selectedLocationCompletion: @escaping ((Location, String?) -> Void), locateUserCompletion: @escaping () -> Void)
+    func pushDetailController(id: String, userLocation: LocationItem)
     func pushCategoriesController(category: Category, location: LocationItem)
     func pushNoResultsController(message: String, buttonTitle: String, buttonHandler: @escaping () -> Void)
+    //PushNoError
 }
 
 extension HomeTabCoordinator: HomeCoordinatable {
@@ -16,15 +17,8 @@ extension HomeTabCoordinator: HomeCoordinatable {
         navigationController.pushViewController(locationSearchController, animated: true)
     }
     
-    func pushPlaceDetail(id: String, userLocation: LocationItem) {
-        let placeDetailViewModel = DetailsViewModel(delegate: self, placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
-        let newDetailsController = NEWPlaceDetailController(coordinator: self, viewModel: placeDetailViewModel)
-        
-        navigationController.pushViewController(newDetailsController, animated: true)
-    }
-    
     func pushCategoriesController(category: Category, location: LocationItem) {
-        let multipleCategoriesController = MultipleCategoriesController(category: category, location: location)
+        let multipleCategoriesController = MultipleCategoriesController(coordinator: self, category: category, location: location)
         
         navigationController.pushViewController(multipleCategoriesController, animated: true)
     }
@@ -34,6 +28,5 @@ extension HomeTabCoordinator: HomeCoordinatable {
         
         self.navigationController.pushViewController(errorController, animated: true)
     }
-    
 }
 
