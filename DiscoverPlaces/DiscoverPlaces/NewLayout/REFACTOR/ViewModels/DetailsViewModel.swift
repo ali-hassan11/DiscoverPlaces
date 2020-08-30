@@ -15,12 +15,15 @@ final class DetailsViewModel: NSObject {
     
     private weak var delegate: DetailCoordinatable?
     
+    public let backgroundColor: UIColor
+    
     init(delegate: DetailCoordinatable?, placeId: String, location: LocationItem, typography: Typography, theming: PlaceDetailTheming) {
         self.placeId = placeId
         self.userLocation = location
         self.typography = typography
         self.theming = theming
         self.delegate = delegate
+        self.backgroundColor = theming.background
     }
 }
 

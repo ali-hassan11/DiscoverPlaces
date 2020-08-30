@@ -2,6 +2,7 @@ import UIKit
 
 protocol DefaultThemingProvider {
     
+    var background: UIColor { get }
     var cellBackground: UIColor { get }
     var imagePlaceHolder: UIColor { get }
     var starFill: UIColor { get }
@@ -12,6 +13,7 @@ protocol DefaultThemingProvider {
 }
 
 class DefaultTheming: DefaultThemingProvider {
+    var background: UIColor = .systemBackground
     let cellBackground: UIColor = .systemBackground
     let imagePlaceHolder: UIColor = .secondarySystemBackground
     let starFill: UIColor = .systemPink

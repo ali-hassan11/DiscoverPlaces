@@ -118,7 +118,7 @@ final class MyPlacesViewController: UIViewController {
 }
 
 
-@nonobjc fileprivate extension UIViewController {
+@nonobjc extension UIViewController {
     
     func addChildVC(_ child: UIViewController, on view: UIView, completion: (()->())?) {
         addChild(child)

@@ -1,15 +1,19 @@
 import UIKit
 
-final class NEWPlaceDetailController: UITableViewController {
+final class NEWPlaceDetailController: UIViewController {
   
+    private let tableView = UITableView(frame: .zero, style: .plain)
     
     private let viewModel: DetailsViewModel
     private let coordinator: DetailCoordinatable
     
+    private let loadingView: LoadingView
+    
     init(coordinator: DetailCoordinatable, viewModel: DetailsViewModel) {
         self.viewModel = viewModel
         self.coordinator = coordinator
-        super.init(style: .plain)
+        self.loadingView = LoadingView(backgroundColor: viewModel.backgroundColor)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -18,10 +22,12 @@ final class NEWPlaceDetailController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
+        addViews()
         setupTableView()
-        
+        setupNavigationBar()
+                
         guard Reachability.isConnectedToNetwork() else {
+            self.loadingView.didFinishLoading()
             self.showErrorController(error: .init(title: Constants.noInternetConnectionTitle,
                                                   message: Constants.noInternetConnetionMessage))
             return
@@ -34,6 +40,7 @@ final class NEWPlaceDetailController: UITableViewController {
             
             if error != nil {
                 DispatchQueue.main.async {
+                    self?.loadingView.didFinishLoading()
                     self?.showErrorController(error: .init(title: Constants.noResultsTitle,
                                                            message: Constants.genericNoConnectionMessage))
                     return
@@ -41,6 +48,7 @@ final class NEWPlaceDetailController: UITableViewController {
             }
             
             DispatchQueue.main.async {
+                self?.loadingView.didFinishLoading()
                 self?.tableView.reloadData()
             }
         }
@@ -51,8 +59,16 @@ final class NEWPlaceDetailController: UITableViewController {
     }
 }
 
-//MARK: Setup Methods
+//MARK: Helper Methods
 extension NEWPlaceDetailController {
+    
+    private func addViews() {
+        view.addSubview(tableView)
+        tableView.fillSuperview()
+        
+        view.addSubview(loadingView)
+        loadingView.fillSuperview()
+    }
     
     private func setupTableView() {
         edgesForExtendedLayout = [.top, .left, .right]
@@ -92,5 +108,34 @@ extension NEWPlaceDetailController {
         navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
         navigationController?.navigationBar.shadowImage = nil
         navigationController?.navigationBar.isTranslucent = true
+    }
+}
+
+protocol LoadingViewType {
+    func didFinishLoading()
+}
+
+final class LoadingView: UIView, LoadingViewType {
+    
+    internal var loadingIndicator = LoadingIndicatorView()
+    
+    init(backgroundColor: UIColor) {
+        super.init(frame: .zero)
+        addSubview(loadingIndicator)
+        loadingIndicator.centerInSuperview()
+        self.backgroundColor = backgroundColor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func didFinishLoading() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.alpha = 0
+        }) { _ in
+            self.loadingIndicator.stopAnimating()
+            self.removeFromSuperview()
+        }
     }
 }
