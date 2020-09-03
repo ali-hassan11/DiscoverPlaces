@@ -8,12 +8,10 @@
 
 import UIKit
 
-final class SearchController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+final class SearchController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchResults = [PlaceResult]()
-    private let searchResponseFilter = SearchResponseFilter()
-    
     
     ///SearchLocation and userLocation need to be separate because if I allow users to change the search location, I will need a reference to user location to calculate distance
     private var searchLocation: LocationItem ///Decided not to allow changing search location, just uses location set form home
@@ -37,15 +35,18 @@ final class SearchController: BaseCollectionViewController, UICollectionViewDele
         super.init()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController.searchBar.placeholder = "Search..." ///Array or different quiries and switch between every 3 seconds?, or just every time loads
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         addEmptyView()
         setupSearchBar()
         setupCollectionView()
-        prepareLoadingView()
+        prepareLoadingView()//Use LoadingView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,28 +55,7 @@ final class SearchController: BaseCollectionViewController, UICollectionViewDele
         self.userLocation = UserLoation.lastSavedLocation()
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        guard Reachability.isConnectedToNetwork() else {
-            pushNoConnectionController()
-            return
-        }
-        
-        guard let searchText = searchBar.text else { return }
-        let queryText = searchText.replacingOccurrences(of: " ", with: "%20")
-        
-        fetchData(for: queryText, location: searchLocation.selectedLocation)
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        UserDefaults.standard.set(searchText, forKey: Constants.placeSearchBarTextKey)
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        guard let text = UserDefaults.standard.string(forKey: Constants.placeSearchBarTextKey) else { return }
-        searchBar.text = text
-    }
-    
+    //Move to a viewModel, that just returns the results?
     private func fetchData(for searchText: String, location: Location) {
         startLoadingView()
         Service.shared.fetchSearchResults(for: searchText, location: location) { (response, error) in
@@ -88,95 +68,41 @@ final class SearchController: BaseCollectionViewController, UICollectionViewDele
             //success
             guard let response = response else { return }
             
-            let filteredResults = self.searchResponseFilter.results(from: response)
+            let filteredResults = SearchResponseFilter().results(from: response)
             self.searchResults = filteredResults
             self.updateUI(searchText: searchText)
         }
     }
-    
-    private func updateUI(searchText: String) {
-        DispatchQueue.main.async {
-            self.hideLoadingView()
-            self.searchController.isActive = false
-            self.collectionView.reloadData()
-            
-            if self.searchResults.isEmpty {
-                
-                if !searchText.isEmpty {
-                    self.enterSearchTextlabel.text = "Sorry, we couldn't find anything for \"\(searchText.replacingOccurrences(of: "%20", with: " "))\""
-                }
-                
-            } else {
-                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
-            }
-        }
-    }
-    
-    private func pushNoConnectionController() {
-        let errorController = ErrorController(message: Constants.genericNoConnectionMessage, buttonTitle: Constants.backtext) {
-            ///DidTapActionButtonHandler
-            self.navigationController?.popToRootViewController(animated: true)
-        }
-        self.navigationController?.pushViewController(errorController, animated: true)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
-extension SearchController {
+//MARK: - SearchBar Methods
+extension SearchController: UISearchBarDelegate {
     
-    private func setupCollectionView() {
-        collectionView.backgroundColor = .systemBackground
-        collectionView.contentInset = .init(top: 12, left: 0, bottom: 0, right: 0)
-        collectionView.register(SmallPlaceCell.self, forCellWithReuseIdentifier: SmallPlaceCell.id)
-        collectionView.register(GoogleLogoCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GoogleLogoCell.id)
-    }
-    
-    private func addEmptyView() {
-        searchIcon.constrainHeight(constant: 90)
-        searchIcon.constrainWidth(constant: 90)
-        searchIcon.tintColor = .systemPink
-        
-        let stackView = VerticalStackView(arrangedSubviews: [searchIcon, enterSearchTextlabel], spacing: 8)
-        collectionView.addSubview(stackView)
-        stackView.constrainWidth(constant: view.frame.width - 40)
-        stackView.centerXInSuperview()
-        stackView.alignment = .center
-        stackView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 100).isActive = true
-    }
-    
-    private func setupSearchBar() {
-        definesPresentationContext = true
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.searchBar.delegate = self
-    }
-    
-    private func prepareLoadingView() {
-        view.addSubview(fadeView)
-        fadeView.alpha = 0
-        fadeView.fillSuperview()
-        
-        fadeView.addSubview(activityIndicatorView)
-        activityIndicatorView.fillSuperview()
-    }
-    
-    private func startLoadingView() {
-        fadeView.alpha = 1
-        activityIndicatorView.startAnimating()
-    }
-    
-    private func hideLoadingView() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.fadeView.alpha = 0
-        }) { (_) in
-            self.activityIndicatorView.stopAnimating()
-        }
-    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+           
+           guard Reachability.isConnectedToNetwork() else {
+               pushNoConnectionController()
+               return
+           }
+           
+           guard let searchText = searchBar.text else { return }
+           let queryText = searchText.replacingOccurrences(of: " ", with: "%20")
+           
+           fetchData(for: queryText, location: searchLocation.selectedLocation)
+       }
+       
+       func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+           UserDefaults.standard.set(searchText, forKey: Constants.placeSearchBarTextKey)
+       }
+       
+       func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+           guard let text = UserDefaults.standard.string(forKey: Constants.placeSearchBarTextKey) else { return }
+           searchBar.text = text
+       }
 }
 
+
+//MARK: - CollectionView Methods
 extension SearchController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -210,7 +136,7 @@ extension SearchController {
         return .init(top: 0, left: Constants.sidePadding, bottom: 0, right: Constants.sidePadding)
     }
     
-    // MARK: GoogleCell Footer
+    // GoogleCell Footer
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: GoogleLogoCell.id, for: indexPath) as! GoogleLogoCell
         return cell
@@ -218,5 +144,87 @@ extension SearchController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return .init(width: view.frame.width, height: searchResults.count > 0 ? Constants.googleFooterHeight : .zero)
+    }
+}
+
+
+//MARK: - Helper Methods
+extension SearchController {
+    
+    private func updateUI(searchText: String) {
+        DispatchQueue.main.async {
+            self.hideLoadingView()
+            self.searchController.isActive = false
+            self.collectionView.reloadData()
+            
+            if self.searchResults.isEmpty {
+                
+                if !searchText.isEmpty {
+                    self.enterSearchTextlabel.text = "Sorry, we couldn't find anything for \"\(searchText.replacingOccurrences(of: "%20", with: " "))\""
+                }
+                
+            } else {
+                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+            }
+        }
+    }
+    
+    //Coordinator
+    private func pushNoConnectionController() {
+        let errorController = ErrorController(message: Constants.genericNoConnectionMessage, buttonTitle: Constants.backtext) {
+            ///DidTapActionButtonHandler
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        self.navigationController?.pushViewController(errorController, animated: true)
+    }
+    
+    private func setupCollectionView() {
+        collectionView.backgroundColor = .systemBackground
+        collectionView.contentInset = .init(top: 12, left: 0, bottom: 0, right: 0)
+        collectionView.register(SmallPlaceCell.self, forCellWithReuseIdentifier: SmallPlaceCell.id)
+        collectionView.register(GoogleLogoCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: GoogleLogoCell.id)
+    }
+    
+    private func addEmptyView() {
+        searchIcon.constrainHeight(constant: 90)
+        searchIcon.constrainWidth(constant: 90)
+        searchIcon.tintColor = .systemPink
+        
+        let stackView = VerticalStackView(arrangedSubviews: [searchIcon, enterSearchTextlabel], spacing: 8)
+        collectionView.addSubview(stackView)
+        stackView.constrainWidth(constant: view.frame.width - 40)
+        stackView.centerXInSuperview()
+        stackView.alignment = .center
+        stackView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 100).isActive = true
+    }
+    
+    private func setupSearchBar() {
+        definesPresentationContext = true
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search..." ///Array or different quiries and switch between every 3 seconds?, or just every time loads
+    }
+    
+    private func prepareLoadingView() {
+        view.addSubview(fadeView)
+        fadeView.alpha = 0
+        fadeView.fillSuperview()
+        
+        fadeView.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
+    }
+    
+    private func startLoadingView() {
+        fadeView.alpha = 1
+        activityIndicatorView.startAnimating()
+    }
+    
+    private func hideLoadingView() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.fadeView.alpha = 0
+        }) { (_) in
+            self.activityIndicatorView.stopAnimating()
+        }
     }
 }

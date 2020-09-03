@@ -126,7 +126,7 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
         }
     }
     
-    //TODO: Coordinator
+    //TODO: coordinator.pushErrorCon..
     private func pushNoResultsController() {
         coordinator.pushNoResultsController(message: Constants.noResultsMessage, buttonTitle: Constants.tryDifferentLocationtext, buttonHandler: showSetLocationController)
     }
