@@ -12,7 +12,7 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCel
     @IBOutlet weak var gradientView: UIView!
     
     private var imagesController: ImagesHorizontalController?
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -28,10 +28,15 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCel
         configureLabels(using: viewModel)
         configureStars(using: viewModel)
         configureImageSlider(using: viewModel)
-        configurePageIndicator(using: viewModel)
+        if !pageIndicatoinrIsConfigured {
+            configurePageIndicator(using: viewModel)
+        }
     }
             
+    private var isStarViewAdded = false
     private func configureStars(using viewModel: MainImageSliderViewModel) {
+        guard !isStarViewAdded else { return }
+        
         guard let rating = viewModel.rating else {
             starsContainer.backgroundColor = .clear
             starsContainer.isHidden = true
@@ -45,6 +50,7 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCel
         starsContainer.addSubview(starsView)
         starsContainer.backgroundColor = .clear
         starsView.fillSuperview()
+        isStarViewAdded = true
     }
     
     private func configureLabels(using viewModel: MainImageSliderViewModel) {
@@ -71,6 +77,7 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCel
         addGradient(firstColor: .clear, secondColor: .black, view: gradientView, start: 0.69, end: 0.96)
     }
     
+    private var pageIndicatoinrIsConfigured = false
     private func configurePageIndicator(using viewModel: MainImageSliderViewModel) {
         guard let count = viewModel.photos?.count else { return }
         
@@ -80,6 +87,7 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCel
         pageIndicator.backgroundColor = .black
         pageIndicator.selectedSegmentTintColor = viewModel.pageIndicatorColor
         pageIndicator.selectedSegmentIndex = 0
+        pageIndicatoinrIsConfigured = true
     }
     
     private func populatePageIndicator(with count: Int) {
