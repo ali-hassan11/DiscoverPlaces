@@ -11,7 +11,7 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
     private var location: LocationItem
     private var category: Category
     
-    private let coordinator: DetailCoordinatable
+    private let coordinator: MultipleCategoriesCoordinatable
 
     struct SubCategoryGroup {
         let name: String
@@ -20,7 +20,7 @@ final class MultipleCategoriesController: BaseCollectionViewController, UICollec
 
     private var subCategoryGroups = [SubCategoryGroup]()
     
-    init(coordinator: DetailCoordinatable, category: Category, location: LocationItem) {
+    init(coordinator: MultipleCategoriesCoordinatable, category: Category, location: LocationItem) {
         self.location = location
         self.category = category
         self.coordinator = coordinator

@@ -111,6 +111,7 @@
 		CEA988F5243A1252002A1FDE /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F4243A1252002A1FDE /* UIViewController+Extensions.swift */; };
 		CEA988F7243A158A002A1FDE /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F6243A158A002A1FDE /* AboutController.swift */; };
 		CEABA02E24177AC90057A955 /* Category+SubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABA02D24177AC90057A955 /* Category+SubCategory.swift */; };
+		CEB241E3252FA13900A30FB2 /* MultipleCategoriesCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB241E2252FA13900A30FB2 /* MultipleCategoriesCoordinatable.swift */; };
 		CEB36BA0252F96740098FA27 /* NEWHomeTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB36B9F252F96740098FA27 /* NEWHomeTabCoordinator.swift */; };
 		CEB41DA42493A02F00DDFC53 /* RegularCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB41DA32493A02F00DDFC53 /* RegularCell.xib */; };
 		CEB41DA92493ACE200DDFC53 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB41DA72493ACE100DDFC53 /* ReuseIdentifiable.swift */; };
@@ -275,6 +276,7 @@
 		CEA988F4243A1252002A1FDE /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CEA988F6243A158A002A1FDE /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		CEABA02D24177AC90057A955 /* Category+SubCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+SubCategory.swift"; sourceTree = "<group>"; };
+		CEB241E2252FA13900A30FB2 /* MultipleCategoriesCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCategoriesCoordinatable.swift; sourceTree = "<group>"; };
 		CEB36B9F252F96740098FA27 /* NEWHomeTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEWHomeTabCoordinator.swift; sourceTree = "<group>"; };
 		CEB41DA32493A02F00DDFC53 /* RegularCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegularCell.xib; sourceTree = "<group>"; };
 		CEB41DA72493ACE100DDFC53 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
@@ -772,6 +774,7 @@
 				CEE41B6A249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift */,
 				CEE41B6C249D7FA900DCE6BD /* HomeTabCoordinator+DetailCoordinatable.swift */,
 				CE31ACA824FBB4FE00318441 /* HomeTabCoordinator+CategoriesCoordinatable.swift */,
+				CEB241E2252FA13900A30FB2 /* MultipleCategoriesCoordinatable.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1126,6 +1129,7 @@
 				CEFD55C6241B1204001E21AC /* SmallPlaceCell.swift in Sources */,
 				CE659A0123EF874C00E531CD /* HomeLargeCellsHorizontalController.swift in Sources */,
 				CE5835D123DE224C00C89622 /* UIView+Layout.swift in Sources */,
+				CEB241E3252FA13900A30FB2 /* MultipleCategoriesCoordinatable.swift in Sources */,
 				CE8A2FCF23F08A0E00CDF866 /* DetailsTopSectionCell.swift in Sources */,
 				CEB41DB82494146800DDFC53 /* MainImageSliderCell.swift in Sources */,
 				CE5835DB23DF1B7A00C89622 /* Service.swift in Sources */,

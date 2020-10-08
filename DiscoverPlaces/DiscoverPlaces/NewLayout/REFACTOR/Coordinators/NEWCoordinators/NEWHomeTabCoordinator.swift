@@ -11,7 +11,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-protocol NEWHomeTabCoordinatable:  Coordinator, HomeCoordinatable, DetailCoordinatable {}
+protocol NEWHomeTabCoordinatable:  Coordinator, HomeCoordinatable, DetailCoordinatable, MultipleCategoriesCoordinatable {}
 
 class NEWHomeTabCoordinator: NEWHomeTabCoordinatable {
     
@@ -56,7 +56,7 @@ class NEWHomeTabCoordinator: NEWHomeTabCoordinatable {
         self.navigationController.pushViewController(errorController, animated: true)
     }
     
-    //MARK: - Detail & Home
+    //MARK: - Detail & Home & MultipleCategories
     func pushDetailController(id: String, userLocation: LocationItem) {
         let placeDetailViewModel = DetailsViewModel(coordinator: self, placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
         let newDetailsController = NEWPlaceDetailController(coordinator: self, viewModel: placeDetailViewModel)
@@ -64,14 +64,14 @@ class NEWHomeTabCoordinator: NEWHomeTabCoordinatable {
         navigationController.pushViewController(newDetailsController, animated: true)
     }
     
-    //MARK: - Detail
-    func didTapPhoneNumber(number: String) {
-        callNumber(number: number)
-    }
-    
     func pushErrorController(message: String) {
         let errorController = ErrorController(message: message, buttonTitle: Constants.okText, buttonHandler: popTwoControllers)
         navigationController.pushViewController(errorController, animated: true)
+    }
+    
+    //MARK: - Detail
+    func didTapPhoneNumber(number: String) {
+        callNumber(number: number)
     }
     
     func openInMaps(place: PlaceDetailResult) {
