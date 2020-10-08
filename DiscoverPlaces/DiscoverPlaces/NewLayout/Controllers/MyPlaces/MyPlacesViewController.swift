@@ -40,6 +40,7 @@ final class MyPlacesViewController: UIViewController {
         
         navigationItem.largeTitleDisplayMode = .always
 
+        setUpSwipeGestures()
         setupViews()
         setupSegmentedControl()
         setupListControllers()
@@ -47,11 +48,15 @@ final class MyPlacesViewController: UIViewController {
         setupDidTapPlaceHandler()
     }
     
+    private func setUpSwipeGestures() {
         
-        guard Reachability.isConnectedToNetwork() else {
-            pushNoResultsController()
-            return
-        }
+        let leftSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeLeft))
+        leftSwipeGesture.direction = .left
+        view.addGestureRecognizer(leftSwipeGesture)
+        
+        let rightSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeRight))
+        rightSwipeGesture.direction = .right
+        view.addGestureRecognizer(rightSwipeGesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,6 +129,16 @@ final class MyPlacesViewController: UIViewController {
         
         favouritesController.didSelectPlaceInListHandler = didTapComletionHandler
         toDoController.didSelectPlaceInListHandler = didTapComletionHandler
+    }
+    
+    @objc
+    private func didSwipeLeft() {
+        switchToToDo()
+    }
+    
+    @objc
+    private func didSwipeRight() {
+        switchToFavourites()
     }
 }
 
