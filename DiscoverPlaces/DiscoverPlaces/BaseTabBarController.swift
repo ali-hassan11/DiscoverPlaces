@@ -6,12 +6,13 @@ final class BaseTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let homeDependenceis = HomeTabCoordinator.Dependencies(defaultTypography: DefaultTypography(),
+        
+        let homeDependenceis = NEWHomeTabCoordinator.Dependencies(defaultTypography: DefaultTypography(),
                                                                defaultTheming: DefaultTheming(),
                                                                placeDetailsTypography: DefaultTypography(),
                                                                placeDetailsTheming: DefaultTheming())
         
-        let homeCoordinator = HomeTabCoordinator(navigationController: UINavigationController(), dependencies: homeDependenceis)
+        let homeCoordinator = NEWHomeTabCoordinator(navigationController: UINavigationController(), dependencies: homeDependenceis)
         homeCoordinator.start()
         
         viewControllers = [

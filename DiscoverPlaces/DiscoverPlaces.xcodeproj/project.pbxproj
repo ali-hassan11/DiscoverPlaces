@@ -111,6 +111,7 @@
 		CEA988F5243A1252002A1FDE /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F4243A1252002A1FDE /* UIViewController+Extensions.swift */; };
 		CEA988F7243A158A002A1FDE /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F6243A158A002A1FDE /* AboutController.swift */; };
 		CEABA02E24177AC90057A955 /* Category+SubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABA02D24177AC90057A955 /* Category+SubCategory.swift */; };
+		CEB36BA0252F96740098FA27 /* NEWHomeTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB36B9F252F96740098FA27 /* NEWHomeTabCoordinator.swift */; };
 		CEB41DA42493A02F00DDFC53 /* RegularCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB41DA32493A02F00DDFC53 /* RegularCell.xib */; };
 		CEB41DA92493ACE200DDFC53 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB41DA72493ACE100DDFC53 /* ReuseIdentifiable.swift */; };
 		CEB41DAA2493ACE200DDFC53 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB41DA82493ACE200DDFC53 /* NibLoadable.swift */; };
@@ -274,6 +275,7 @@
 		CEA988F4243A1252002A1FDE /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		CEA988F6243A158A002A1FDE /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		CEABA02D24177AC90057A955 /* Category+SubCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+SubCategory.swift"; sourceTree = "<group>"; };
+		CEB36B9F252F96740098FA27 /* NEWHomeTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEWHomeTabCoordinator.swift; sourceTree = "<group>"; };
 		CEB41DA32493A02F00DDFC53 /* RegularCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegularCell.xib; sourceTree = "<group>"; };
 		CEB41DA72493ACE100DDFC53 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
 		CEB41DA82493ACE200DDFC53 /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
@@ -417,7 +419,6 @@
 		CE31ACA224FBB12800318441 /* PlaceDetail */ = {
 			isa = PBXGroup;
 			children = (
-				CE300D3324918C8D008F1931 /* NEWPlaceDetailController.swift */,
 				CE31ACA324FBB27C00318441 /* Controllers */,
 				CE300D40249193FA008F1931 /* DetailItems */,
 			);
@@ -427,6 +428,7 @@
 		CE31ACA324FBB27C00318441 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CE300D3324918C8D008F1931 /* NEWPlaceDetailController.swift */,
 				CE659A0C23EF884700E531CD /* ImagesHorizontalController.swift */,
 				60EADA8223F6D96B0095DBF9 /* ReviewsHorizontalController.swift */,
 				CECDA14724025896005F85FB /* ReviewDetailViewController.swift */,
@@ -724,6 +726,14 @@
 			path = NewLayout/REFACTOR;
 			sourceTree = "<group>";
 		};
+		CEB36BA4252F9B500098FA27 /* NEWCoordinators */ = {
+			isa = PBXGroup;
+			children = (
+				CEB36B9F252F96740098FA27 /* NEWHomeTabCoordinator.swift */,
+			);
+			path = NEWCoordinators;
+			sourceTree = "<group>";
+		};
 		CEB41DAD2493F5AF00DDFC53 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -756,6 +766,7 @@
 		CEBFA0212497FC3D009D140D /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				CEB36BA4252F9B500098FA27 /* NEWCoordinators */,
 				CEBFA0222497FC5B009D140D /* Coordinator.swift */,
 				CEBFA01F2497FC16009D140D /* HomeTabCoordinator.swift */,
 				CEE41B6A249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift */,
@@ -1107,6 +1118,7 @@
 				CE659A0523EF87A200E531CD /* CategoriesHolder.swift in Sources */,
 				60EADA8923F706EB0095DBF9 /* PlaceDetailResponse.swift in Sources */,
 				60EADA8323F6D96B0095DBF9 /* ReviewsHorizontalController.swift in Sources */,
+				CEB36BA0252F96740098FA27 /* NEWHomeTabCoordinator.swift in Sources */,
 				CE300D4424919787008F1931 /* Typography.swift in Sources */,
 				CEABA02E24177AC90057A955 /* Category+SubCategory.swift in Sources */,
 				CEB41DB22493F6A200DDFC53 /* NavItem+Extensions.swift in Sources */,

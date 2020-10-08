@@ -8,25 +8,25 @@ protocol HomeCoordinatable {
     //PushNoError
 }
 
-extension HomeTabCoordinator: HomeCoordinatable {
-
-    func pushSetLocationController(selectedLocationCompletion: @escaping ((Location, String?) -> Void), locateUserCompletion: @escaping () -> Void) {
-    
-        let locationSearchController = LocationSearchController(selctedLocationHandler: selectedLocationCompletion, locateUserHandler: locateUserCompletion)
-        
-        navigationController.pushViewController(locationSearchController, animated: true)
-    }
-    
-    func pushCategoriesController(category: Category, location: LocationItem) {
-        let multipleCategoriesController = MultipleCategoriesController(coordinator: self, category: category, location: location)
-        
-        navigationController.pushViewController(multipleCategoriesController, animated: true)
-    }
-    
-    func pushNoResultsController(message: String, buttonTitle: String, buttonHandler: @escaping () -> Void) {
-        let errorController = ErrorController(message: message, buttonTitle: buttonTitle, buttonHandler: buttonHandler)
-        
-        self.navigationController.pushViewController(errorController, animated: true)
-    }
-}
-
+//extension HomeTabCoordinator: HomeCoordinatable {
+//
+//    func pushSetLocationController(selectedLocationCompletion: @escaping ((Location, String?) -> Void), locateUserCompletion: @escaping () -> Void) {
+//    
+//        let locationSearchController = LocationSearchController(selctedLocationHandler: selectedLocationCompletion, locateUserHandler: locateUserCompletion)
+//        
+//        navigationController.pushViewController(locationSearchController, animated: true)
+//    }
+//    
+//    func pushCategoriesController(category: Category, location: LocationItem) {
+//        let multipleCategoriesController = MultipleCategoriesController(coordinator: self, category: category, location: location)
+//        
+//        navigationController.pushViewController(multipleCategoriesController, animated: true)
+//    }
+//    
+//    func pushNoResultsController(message: String, buttonTitle: String, buttonHandler: @escaping () -> Void) {
+//        let errorController = ErrorController(message: message, buttonTitle: buttonTitle, buttonHandler: buttonHandler)
+//        
+//        self.navigationController.pushViewController(errorController, animated: true)
+//    }
+//}
+//

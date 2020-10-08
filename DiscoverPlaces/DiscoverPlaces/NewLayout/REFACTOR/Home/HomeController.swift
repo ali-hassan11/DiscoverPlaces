@@ -3,9 +3,18 @@
 import UIKit
 import CoreLocation
 
+//protocol HasDetailCoordinator {
+//    var coordinator: DetailCoordinatable { get }
+//}
+//protocol HasHomeCoorinator  {
+//    var coordinator: HomeCoordinatable { get }
+//}
+
 final class HomeController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    private let coordinator: HomeCoordinatable
+//    let coord = (HasDetailCoordinator & HasHomeCoorinator).self
+    
+    private let coordinator: NEWHomeTabCoordinatable
     
     private var userLocation: LocationItem?
     private var locationManager: CLLocationManager!
@@ -19,9 +28,10 @@ final class HomeController: BaseCollectionViewController, UICollectionViewDelega
         return v
     }()
     
-    init(coordinator: HomeCoordinatable) {
+    init(coordinator: NEWHomeTabCoordinatable) {
         self.coordinator = coordinator
         super.init()
+        
     }
     
     required init?(coder: NSCoder) {
