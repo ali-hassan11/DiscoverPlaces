@@ -2,7 +2,7 @@
 
 import Foundation
 
-protocol MultipleCategoriesCoordinatable {
+protocol SearchCoordinatable {
     func pushDetailController(id: String, userLocation: LocationItem)
     func pushErrorController(message: String)
 }

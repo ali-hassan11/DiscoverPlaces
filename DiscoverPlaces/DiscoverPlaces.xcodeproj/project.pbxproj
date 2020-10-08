@@ -48,7 +48,7 @@
 		CE31AC9E24F9386400318441 /* GoogleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE31AC9D24F9386400318441 /* GoogleCell.xib */; };
 		CE31ACA524FBB38300318441 /* ReviewsSliderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31ACA424FBB38300318441 /* ReviewsSliderViewModel.swift */; };
 		CE31ACA724FBB3BD00318441 /* PlacesSliderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31ACA624FBB3BD00318441 /* PlacesSliderViewModel.swift */; };
-		CE31ACA924FBB4FE00318441 /* HomeTabCoordinator+CategoriesCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31ACA824FBB4FE00318441 /* HomeTabCoordinator+CategoriesCoordinatable.swift */; };
+		CE31ACA924FBB4FE00318441 /* CategoriesCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31ACA824FBB4FE00318441 /* CategoriesCoordinatable.swift */; };
 		CE327AEA241546E10010F400 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AE9241546E10010F400 /* SettingsController.swift */; };
 		CE327AF1241696B60010F400 /* MultipleCategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */; };
 		CE327AF324169DD20010F400 /* PlaceGroupHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */; };
@@ -112,6 +112,8 @@
 		CEA988F7243A158A002A1FDE /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA988F6243A158A002A1FDE /* AboutController.swift */; };
 		CEABA02E24177AC90057A955 /* Category+SubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABA02D24177AC90057A955 /* Category+SubCategory.swift */; };
 		CEB241E3252FA13900A30FB2 /* MultipleCategoriesCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB241E2252FA13900A30FB2 /* MultipleCategoriesCoordinatable.swift */; };
+		CEB241EB252FA40900A30FB2 /* NEWSearchTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB241EA252FA40900A30FB2 /* NEWSearchTabCoordinator.swift */; };
+		CEB241FD252FA50C00A30FB2 /* SearchCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB241FC252FA50C00A30FB2 /* SearchCoordinatable.swift */; };
 		CEB36BA0252F96740098FA27 /* NEWHomeTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB36B9F252F96740098FA27 /* NEWHomeTabCoordinator.swift */; };
 		CEB41DA42493A02F00DDFC53 /* RegularCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB41DA32493A02F00DDFC53 /* RegularCell.xib */; };
 		CEB41DA92493ACE200DDFC53 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB41DA72493ACE100DDFC53 /* ReuseIdentifiable.swift */; };
@@ -134,8 +136,8 @@
 		CECDA14824025896005F85FB /* ReviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDA14724025896005F85FB /* ReviewDetailViewController.swift */; };
 		CED250592496567900F3EDC2 /* GoogleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED250582496567900F3EDC2 /* GoogleCell.swift */; };
 		CED250602496EF5900F3EDC2 /* DetailCellConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2505F2496EF5900F3EDC2 /* DetailCellConfigurable.swift */; };
-		CEE41B6B249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE41B6A249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift */; };
-		CEE41B6D249D7FA900DCE6BD /* HomeTabCoordinator+DetailCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE41B6C249D7FA900DCE6BD /* HomeTabCoordinator+DetailCoordinatable.swift */; };
+		CEE41B6B249D4C6D00DCE6BD /* HomeCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE41B6A249D4C6D00DCE6BD /* HomeCoordinatable.swift */; };
+		CEE41B6D249D7FA900DCE6BD /* DetailCoordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE41B6C249D7FA900DCE6BD /* DetailCoordinatable.swift */; };
 		CEEB4D5A23E84978006D79E6 /* HorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */; };
 		CEEB4D5B23E84978006D79E6 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5723E84978006D79E6 /* Spacing.swift */; };
 		CEEB4D5C23E84978006D79E6 /* HorizontalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */; };
@@ -207,7 +209,7 @@
 		CE31AC9D24F9386400318441 /* GoogleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleCell.xib; sourceTree = "<group>"; };
 		CE31ACA424FBB38300318441 /* ReviewsSliderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsSliderViewModel.swift; sourceTree = "<group>"; };
 		CE31ACA624FBB3BD00318441 /* PlacesSliderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesSliderViewModel.swift; sourceTree = "<group>"; };
-		CE31ACA824FBB4FE00318441 /* HomeTabCoordinator+CategoriesCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeTabCoordinator+CategoriesCoordinatable.swift"; sourceTree = "<group>"; };
+		CE31ACA824FBB4FE00318441 /* CategoriesCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCoordinatable.swift; sourceTree = "<group>"; };
 		CE327AE9241546E10010F400 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		CE327AF0241696B50010F400 /* MultipleCategoriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCategoriesController.swift; sourceTree = "<group>"; };
 		CE327AF224169DD20010F400 /* PlaceGroupHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceGroupHorizontalController.swift; sourceTree = "<group>"; };
@@ -277,6 +279,8 @@
 		CEA988F6243A158A002A1FDE /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		CEABA02D24177AC90057A955 /* Category+SubCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+SubCategory.swift"; sourceTree = "<group>"; };
 		CEB241E2252FA13900A30FB2 /* MultipleCategoriesCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCategoriesCoordinatable.swift; sourceTree = "<group>"; };
+		CEB241EA252FA40900A30FB2 /* NEWSearchTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEWSearchTabCoordinator.swift; sourceTree = "<group>"; };
+		CEB241FC252FA50C00A30FB2 /* SearchCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinatable.swift; sourceTree = "<group>"; };
 		CEB36B9F252F96740098FA27 /* NEWHomeTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEWHomeTabCoordinator.swift; sourceTree = "<group>"; };
 		CEB41DA32493A02F00DDFC53 /* RegularCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegularCell.xib; sourceTree = "<group>"; };
 		CEB41DA72493ACE100DDFC53 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
@@ -299,8 +303,8 @@
 		CECDA14724025896005F85FB /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
 		CED250582496567900F3EDC2 /* GoogleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCell.swift; sourceTree = "<group>"; };
 		CED2505F2496EF5900F3EDC2 /* DetailCellConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCellConfigurable.swift; sourceTree = "<group>"; };
-		CEE41B6A249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeTabCoordinator+HomeCoordinatable.swift"; sourceTree = "<group>"; };
-		CEE41B6C249D7FA900DCE6BD /* HomeTabCoordinator+DetailCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeTabCoordinator+DetailCoordinatable.swift"; sourceTree = "<group>"; };
+		CEE41B6A249D4C6D00DCE6BD /* HomeCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinatable.swift; sourceTree = "<group>"; };
+		CEE41B6C249D7FA900DCE6BD /* DetailCoordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCoordinatable.swift; sourceTree = "<group>"; };
 		CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalStackView.swift; sourceTree = "<group>"; };
 		CEEB4D5723E84978006D79E6 /* Spacing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		CEEB4D5823E84978006D79E6 /* HorizontalSnappingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalSnappingController.swift; sourceTree = "<group>"; };
@@ -728,10 +732,19 @@
 			path = NewLayout/REFACTOR;
 			sourceTree = "<group>";
 		};
+		CEB241EF252FA4A600A30FB2 /* Trash */ = {
+			isa = PBXGroup;
+			children = (
+				CEBFA01F2497FC16009D140D /* HomeTabCoordinator.swift */,
+			);
+			path = Trash;
+			sourceTree = "<group>";
+		};
 		CEB36BA4252F9B500098FA27 /* NEWCoordinators */ = {
 			isa = PBXGroup;
 			children = (
 				CEB36B9F252F96740098FA27 /* NEWHomeTabCoordinator.swift */,
+				CEB241EA252FA40900A30FB2 /* NEWSearchTabCoordinator.swift */,
 			);
 			path = NEWCoordinators;
 			sourceTree = "<group>";
@@ -768,13 +781,14 @@
 		CEBFA0212497FC3D009D140D /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				CEB36BA4252F9B500098FA27 /* NEWCoordinators */,
 				CEBFA0222497FC5B009D140D /* Coordinator.swift */,
-				CEBFA01F2497FC16009D140D /* HomeTabCoordinator.swift */,
-				CEE41B6A249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift */,
-				CEE41B6C249D7FA900DCE6BD /* HomeTabCoordinator+DetailCoordinatable.swift */,
-				CE31ACA824FBB4FE00318441 /* HomeTabCoordinator+CategoriesCoordinatable.swift */,
+				CEB36BA4252F9B500098FA27 /* NEWCoordinators */,
+				CEE41B6A249D4C6D00DCE6BD /* HomeCoordinatable.swift */,
+				CEE41B6C249D7FA900DCE6BD /* DetailCoordinatable.swift */,
+				CE31ACA824FBB4FE00318441 /* CategoriesCoordinatable.swift */,
 				CEB241E2252FA13900A30FB2 /* MultipleCategoriesCoordinatable.swift */,
+				CEB241FC252FA50C00A30FB2 /* SearchCoordinatable.swift */,
+				CEB241EF252FA4A600A30FB2 /* Trash */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1047,7 +1061,7 @@
 				CE616D052405D94D008E7067 /* ListType.swift in Sources */,
 				CEB41DBC249419A000DDFC53 /* MainImageSliderViewModel.swift in Sources */,
 				CEB41DAC2493AD4A00DDFC53 /* BundleHelper.swift in Sources */,
-				CEE41B6B249D4C6D00DCE6BD /* HomeTabCoordinator+HomeCoordinatable.swift in Sources */,
+				CEE41B6B249D4C6D00DCE6BD /* HomeCoordinatable.swift in Sources */,
 				60EADA7B23F6B0E60095DBF9 /* AddressCell.swift in Sources */,
 				CEB41DAA2493ACE200DDFC53 /* NibLoadable.swift in Sources */,
 				CEB72F52243D13B3002F6131 /* PrivacyPolicyController.swift in Sources */,
@@ -1096,7 +1110,7 @@
 				CE5835CE23DE204B00C89622 /* BaseCollectionViewController.swift in Sources */,
 				CE659A0723EF87C100E531CD /* CategoriesHorizontalController.swift in Sources */,
 				CEBFA0202497FC16009D140D /* HomeTabCoordinator.swift in Sources */,
-				CEE41B6D249D7FA900DCE6BD /* HomeTabCoordinator+DetailCoordinatable.swift in Sources */,
+				CEE41B6D249D7FA900DCE6BD /* DetailCoordinatable.swift in Sources */,
 				CE24AD88244102DB00852C91 /* Model.swift in Sources */,
 				CEB72F54243D19C3002F6131 /* TermsOfUseController.swift in Sources */,
 				CE5835DD23DF62CE00C89622 /* UrlBuilder.swift in Sources */,
@@ -1111,12 +1125,13 @@
 				CE300D3D24918FB3008F1931 /* RegularDetailItem.swift in Sources */,
 				CE45B49F2451D9C400656339 /* LoadingindicatorView.swift in Sources */,
 				CE694B8E24097EC400F37ED6 /* FavouritesListHolderCell.swift in Sources */,
-				CE31ACA924FBB4FE00318441 /* HomeTabCoordinator+CategoriesCoordinatable.swift in Sources */,
+				CE31ACA924FBB4FE00318441 /* CategoriesCoordinatable.swift in Sources */,
 				CE319CDD23E0ECBD0088B9D1 /* UIElementsExtensions.swift in Sources */,
 				CE24AD84244068A800852C91 /* LocationItem.swift in Sources */,
 				CE6599F223EC96A200E531CD /* PlaceDetailsController.swift in Sources */,
 				CE659A0F23EF888900E531CD /* ImageCell.swift in Sources */,
 				CE8A2FCB23F088D200CDF866 /* MorePlacesHorizontalController.swift in Sources */,
+				CEB241FD252FA50C00A30FB2 /* SearchCoordinatable.swift in Sources */,
 				CE694B8B24097E2700F37ED6 /* ToDoListController.swift in Sources */,
 				CE659A0523EF87A200E531CD /* CategoriesHolder.swift in Sources */,
 				60EADA8923F706EB0095DBF9 /* PlaceDetailResponse.swift in Sources */,
@@ -1147,6 +1162,7 @@
 				CE5835D823DF145900C89622 /* SearchResponse.swift in Sources */,
 				CE58359B23DE16B000C89622 /* SceneDelegate.swift in Sources */,
 				CE616D002405BE28008E7067 /* WebsiteViewController.swift in Sources */,
+				CEB241EB252FA40900A30FB2 /* NEWSearchTabCoordinator.swift in Sources */,
 				CEBEE6DB24333449002C43E8 /* PlaceResultsFilter.swift in Sources */,
 				CE15FD9C2494EB6900725A38 /* DetailActionsCell.swift in Sources */,
 				CE300D3924918D0F008F1931 /* DetailItem.swift in Sources */,

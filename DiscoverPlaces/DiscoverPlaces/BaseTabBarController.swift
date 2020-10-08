@@ -6,7 +6,7 @@ final class BaseTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        //Home
         let homeDependenceis = NEWHomeTabCoordinator.Dependencies(defaultTypography: DefaultTypography(),
                                                                defaultTheming: DefaultTheming(),
                                                                placeDetailsTypography: DefaultTypography(),
@@ -15,16 +15,26 @@ final class BaseTabBarController: UITabBarController {
         let homeCoordinator = NEWHomeTabCoordinator(navigationController: UINavigationController(), dependencies: homeDependenceis)
         homeCoordinator.start()
         
+        
+        //Search
+        let searchDependenceis = NEWSearchTabCoordinator.Dependencies(defaultTypography: DefaultTypography(),
+                                                               defaultTheming: DefaultTheming(),
+                                                               placeDetailsTypography: DefaultTypography(),
+                                                               placeDetailsTheming: DefaultTheming())
+        
+        let searchCoordinator = NEWSearchTabCoordinator(navigationController: UINavigationController(), dependencies: searchDependenceis)
+        searchCoordinator.start()
+        
         viewControllers = [
             configureNavController(navController: homeCoordinator.navigationController,
-                                   title: "Home",
+                                   tabName: "Home",
                                    selectedImageName: "house.fill",
                                    deselectedImageName: "house"),
             
-            createNavController(viewController: SearchController(),
-                                title: "Search",
-                                selectedImageName: "magnifyingglass",
-                                deselectedImageName: "magnifyingglass"),
+            configureNavController(navController: searchCoordinator.navigationController,
+                                   tabName: "Search",
+                                   selectedImageName: "magnifyingglass",
+                                   deselectedImageName: "magnifyingglass"),
             
             createNavController(viewController: MyPlacesViewController(),
                                 title: "My Places",
@@ -56,13 +66,12 @@ extension BaseTabBarController {
         return navController
     }
     
-    private func configureNavController(navController: UINavigationController, title: String, selectedImageName: String, deselectedImageName: String) -> UIViewController {
+    private func configureNavController(navController: UINavigationController, tabName: String, selectedImageName: String, deselectedImageName: String) -> UIViewController {
         
         navController.navigationBar.prefersLargeTitles = true
-        navController.tabBarItem.title = title
+        navController.tabBarItem.title = tabName
         navController.tabBarItem.selectedImage = UIImage(systemName: selectedImageName)
         navController.tabBarItem.image = UIImage(systemName: deselectedImageName)
-        
         navController.navigationBar.tintColor = UIColor.systemPink
         
         return navController

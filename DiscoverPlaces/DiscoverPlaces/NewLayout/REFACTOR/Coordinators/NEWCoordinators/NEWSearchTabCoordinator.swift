@@ -1,19 +1,18 @@
 //
-//  NEWHomeTabCoordinator.swift
+//  NEWSearchTabCoordinator.swift
 //  DiscoverPlaces
 //
 //  Created by user on 08/10/2020.
 //  Copyright © 2020 AHApps. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import CoreLocation
 import MapKit
 
-protocol NEWHomeTabCoordinatable:  Coordinator, HomeCoordinatable, DetailCoordinatable, MultipleCategoriesCoordinatable {}
+protocol NEWSearchTabCoordinatable:  Coordinator, SearchCoordinatable, DetailCoordinatable {}
 
-class NEWHomeTabCoordinator: NEWHomeTabCoordinatable {
-    
+class NEWSearchTabCoordinator: NEWSearchTabCoordinatable {
     
     struct Dependencies {
         let defaultTypography: DefaultTypographyProvider
@@ -31,31 +30,11 @@ class NEWHomeTabCoordinator: NEWHomeTabCoordinatable {
     }
 
     func start() {
-        let homeController = HomeController(coordinator: self)
-        navigationController.pushViewController(homeController, animated: true)
+        let searchController = SearchController(coordinator: self)
+        navigationController.pushViewController(searchController, animated: true)
     }
-    
-    //MARK: - Home
-    func pushSetLocationController(selectedLocationCompletion: @escaping ((Location, String?) -> Void), locateUserCompletion: @escaping () -> Void) {
-    
-        let locationSearchController = LocationSearchController(selctedLocationHandler: selectedLocationCompletion, locateUserHandler: locateUserCompletion)
-        
-        navigationController.pushViewController(locationSearchController, animated: true)
-    }
-    
-    func pushCategoriesController(category: Category, location: LocationItem) {
-        let multipleCategoriesController = MultipleCategoriesController(coordinator: self, category: category, location: location)
-        
-        navigationController.pushViewController(multipleCategoriesController, animated: true)
-    }
-    
-    func pushNoResultsController(message: String, buttonTitle: String, buttonHandler: @escaping () -> Void) {
-        let errorController = ErrorController(message: message, buttonTitle: buttonTitle, buttonHandler: buttonHandler)
-        
-        self.navigationController.pushViewController(errorController, animated: true)
-    }
-    
-    //MARK: - Detail & Home & MultipleCategories
+ 
+    //MARK: - Search & Detail
     func pushDetailController(id: String, userLocation: LocationItem) {
         let placeDetailViewModel = DetailsViewModel(coordinator: self, placeId: id, location: userLocation, typography: DefaultTypography(), theming: DefaultTheming())
         let newDetailsController = NEWPlaceDetailController(coordinator: self, viewModel: placeDetailViewModel)
@@ -67,7 +46,7 @@ class NEWHomeTabCoordinator: NEWHomeTabCoordinatable {
         let errorController = ErrorController(message: message, buttonTitle: Constants.okText, buttonHandler: popTwoControllers)
         navigationController.pushViewController(errorController, animated: true)
     }
-    
+ 
     //MARK: - Detail
     func didTapPhoneNumber(number: String) {
         callNumber(number: number)
@@ -84,7 +63,6 @@ class NEWHomeTabCoordinator: NEWHomeTabCoordinatable {
         }
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
     }
-    
     
     func pushOpeningTimesController(openingHoursText: [String]?) {
         guard let openingHoursText = openingHoursText else { return }

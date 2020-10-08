@@ -27,11 +27,13 @@ final class SearchController: BaseCollectionViewController, UICollectionViewDele
         return v
     }()
     
-    override init() {
+    private let coordinator: SearchCoordinatable
+    
+    init(coordinator: SearchCoordinatable) {
         ///Search currently uses searchLocation in fetch, which is just the last saved location, however if I decide to add search by location feature, then the user will be able to change the searchLocation, and userLocation will remain the same so that you can calculate the distance between the userLocation and searchLocation
         self.searchLocation = UserLoation.lastSavedLocation()
         self.userLocation = UserLoation.lastSavedLocation()
-        
+        self.coordinator = coordinator
         super.init()
     }
     
@@ -43,6 +45,7 @@ final class SearchController: BaseCollectionViewController, UICollectionViewDele
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
+        title = "Search"
         addEmptyView()
         setupSearchBar()
         setupCollectionView()
@@ -53,6 +56,11 @@ final class SearchController: BaseCollectionViewController, UICollectionViewDele
         super.viewWillAppear(animated)
         self.searchLocation = UserLoation.lastSavedLocation()
         self.userLocation = UserLoation.lastSavedLocation()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchController.searchBar.becomeFirstResponder()
     }
     
     //Move to a viewModel, that just returns the results?
@@ -79,26 +87,26 @@ final class SearchController: BaseCollectionViewController, UICollectionViewDele
 extension SearchController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-           
-           guard Reachability.isConnectedToNetwork() else {
-               pushNoConnectionController()
-               return
-           }
-           
-           guard let searchText = searchBar.text else { return }
-           let queryText = searchText.replacingOccurrences(of: " ", with: "%20")
-           
-           fetchData(for: queryText, location: searchLocation.selectedLocation)
-       }
-       
-       func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-           UserDefaults.standard.set(searchText, forKey: Constants.placeSearchBarTextKey)
-       }
-       
-       func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-           guard let text = UserDefaults.standard.string(forKey: Constants.placeSearchBarTextKey) else { return }
-           searchBar.text = text
-       }
+        
+        guard Reachability.isConnectedToNetwork() else {
+            coordinator.pushErrorController(message: Constants.genericNoConnectionMessage)
+            return
+        }
+        
+        guard let searchText = searchBar.text else { return }
+        let queryText = searchText.replacingOccurrences(of: " ", with: "%20")
+        
+        fetchData(for: queryText, location: searchLocation.selectedLocation)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        UserDefaults.standard.set(searchText, forKey: Constants.placeSearchBarTextKey)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        guard let lastSavedText = UserDefaults.standard.string(forKey: Constants.placeSearchBarTextKey) else { return }
+        searchBar.text = lastSavedText
+    }
 }
 
 
@@ -120,8 +128,7 @@ extension SearchController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let placeId = searchResults[indexPath.row].place_id
-        let placeDetailController = PlaceDetailsController(placeId: placeId, location: userLocation)
-        navigationController?.pushViewController(placeDetailController, animated: true)
+        coordinator.pushDetailController(id: placeId, userLocation: userLocation)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -167,15 +174,6 @@ extension SearchController {
                 self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
             }
         }
-    }
-    
-    //Coordinator
-    private func pushNoConnectionController() {
-        let errorController = ErrorController(message: Constants.genericNoConnectionMessage, buttonTitle: Constants.backtext) {
-            ///DidTapActionButtonHandler
-            self.navigationController?.popToRootViewController(animated: true)
-        }
-        self.navigationController?.pushViewController(errorController, animated: true)
     }
     
     private func setupCollectionView() {
