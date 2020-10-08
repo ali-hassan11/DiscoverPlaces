@@ -12,8 +12,8 @@ final class BaseTabBarController: UITabBarController {
                                                                placeDetailsTypography: DefaultTypography(),
                                                                placeDetailsTheming: DefaultTheming())
         
-        let homeCoordinator = NEWHomeTabCoordinator(navigationController: UINavigationController(), dependencies: homeDependenceis)
-        homeCoordinator.start()
+        let homeTabCoordinator = NEWHomeTabCoordinator(navigationController: UINavigationController(), dependencies: homeDependenceis)
+        homeTabCoordinator.start()
         
         
         //Search
@@ -22,24 +22,33 @@ final class BaseTabBarController: UITabBarController {
                                                                placeDetailsTypography: DefaultTypography(),
                                                                placeDetailsTheming: DefaultTheming())
         
-        let searchCoordinator = NEWSearchTabCoordinator(navigationController: UINavigationController(), dependencies: searchDependenceis)
-        searchCoordinator.start()
+        let searchTabCoordinator = NEWSearchTabCoordinator(navigationController: UINavigationController(), dependencies: searchDependenceis)
+        searchTabCoordinator.start()
+        
+        //MyPlaces
+        let myPlacesDependenceis = NEWMyPlacesTabCoorinator.Dependencies(defaultTypography: DefaultTypography(),
+                                                               defaultTheming: DefaultTheming(),
+                                                               placeDetailsTypography: DefaultTypography(),
+                                                               placeDetailsTheming: DefaultTheming())
+        
+        let myPlacesTabCoordinator = NEWMyPlacesTabCoorinator(navigationController: UINavigationController(), dependencies: myPlacesDependenceis)
+        myPlacesTabCoordinator.start()
         
         viewControllers = [
-            configureNavController(navController: homeCoordinator.navigationController,
+            configureNavController(navController: homeTabCoordinator.navigationController,
                                    tabName: "Home",
                                    selectedImageName: "house.fill",
                                    deselectedImageName: "house"),
             
-            configureNavController(navController: searchCoordinator.navigationController,
+            configureNavController(navController: searchTabCoordinator.navigationController,
                                    tabName: "Search",
                                    selectedImageName: "magnifyingglass",
                                    deselectedImageName: "magnifyingglass"),
             
-            createNavController(viewController: MyPlacesViewController(),
-                                title: "My Places",
-                                selectedImageName: "person.fill",
-                                deselectedImageName: "person")
+            configureNavController(navController: myPlacesTabCoordinator.navigationController,
+                                   tabName: "My Places",
+                                   selectedImageName: "person.fill",
+                                   deselectedImageName: "person")
         ]
         
         tabBar.tintColor = .systemPink

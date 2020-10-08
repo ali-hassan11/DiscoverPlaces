@@ -11,13 +11,26 @@ import UIKit
 
 final class MyPlacesViewController: UIViewController {
     
+    private var location: LocationItem?
+
     let listSelector = UISegmentedControl(items: ["Favourites", "To-Do"])
     let listControllersContainer = UIView()
     
     let favouritesController = PlaceListController(listType: .favourites)
     let toDoController = PlaceListController(listType: .toDo)
     
-    private var location: LocationItem?
+    var didTapComletionHandler: ((String, Location) -> ())?
+    
+    private let coordinator: NEWPlacesTabCoordinatable
+    
+    init(coordinator: NEWPlacesTabCoordinatable) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +39,14 @@ final class MyPlacesViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         navigationItem.largeTitleDisplayMode = .always
-        
+
         setupViews()
         setupSegmentedControl()
         setupListControllers()
         setupContraints()
         setupDidTapPlaceHandler()
+    }
+    
         
         guard Reachability.isConnectedToNetwork() else {
             pushNoResultsController()
@@ -45,8 +60,7 @@ final class MyPlacesViewController: UIViewController {
     }
     
     @objc func settingsTapped() {
-        let settingsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "SettingsVCId") as UITableViewController
-        navigationController?.pushViewController(settingsController, animated: true)
+        coordinator.pushSettings()
     }
     
     private func setupViews() {
@@ -75,41 +89,37 @@ final class MyPlacesViewController: UIViewController {
     }
     
     @objc private func toggleList(sender: UISegmentedControl) {
-        
-        switch sender.selectedSegmentIndex {
-        case 0:
-            addChildVC(favouritesController, on: listControllersContainer, completion: { [weak self] in
-                self?.toDoController.removeFromParentVC()
-            })
-        case 1:
-            addChildVC(toDoController, on: listControllersContainer, completion: { [weak self] in
-                self?.favouritesController.removeFromParentVC()
-            })
-        default:
-            break
-        }
+        sender.selectedSegmentIndex == 0 ? switchToFavourites() : switchToToDo()
     }
     
-    private func pushNoResultsController() {
-        let errorController = ErrorController(message: Constants.genericNoConnectionMessage, buttonTitle: Constants.backtext) {
-            ///DidTapActionButtonHandler
-            self.navigationController?.popViewController(animated: true)
-        }
-        self.navigationController?.pushViewController(errorController, animated: true)
+    private var isOnFavourites = true
+    private func switchToFavourites() {
+        if isOnFavourites { return }
+        addChildVC(favouritesController, on: listControllersContainer, completion: { [weak self] in
+            self?.toDoController.removeFromParentVC()
+        })
+        isOnFavourites = true
+        listSelector.selectedSegmentIndex = 0
+    }
+    
+    private func switchToToDo() {
+        if !isOnFavourites { return }
+        addChildVC(toDoController, on: listControllersContainer, completion: { [weak self] in
+            self?.favouritesController.removeFromParentVC()
+        })
+       isOnFavourites = false
+       listSelector.selectedSegmentIndex = 1
     }
     
     private func setupContraints() {
         listSelector.anchor(top: view.layoutMarginsGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: Constants.sidePadding, bottom: 0, right: Constants.sidePadding))
         listControllersContainer.anchor(top: listSelector.bottomAnchor, leading: view.leadingAnchor, bottom: view.layoutMarginsGuide.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
     }
-    
-    var didTapComletionHandler: ((String, Location) -> ())?
-    
+        
     private func setupDidTapPlaceHandler() {
         didTapComletionHandler = { [weak self] placeId, location in  //Don't think location this is used
             guard let location = self?.location else { return }
-            let detailController = PlaceDetailsController(placeId: placeId, location: location)
-            self?.navigationController?.pushViewController(detailController, animated: true)
+            self?.coordinator.pushDetailController(id: placeId, userLocation: location)
         }
         
         favouritesController.didSelectPlaceInListHandler = didTapComletionHandler

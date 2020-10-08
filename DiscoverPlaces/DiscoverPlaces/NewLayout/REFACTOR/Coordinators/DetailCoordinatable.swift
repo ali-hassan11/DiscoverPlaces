@@ -1,4 +1,5 @@
 //
+
 import Foundation
 
 protocol DetailCoordinatable: AnyObject {
@@ -10,5 +11,4 @@ protocol DetailCoordinatable: AnyObject {
     func didTapPhoneNumber(number: String)
     func didTapShare(webAddress: String)
     func pushErrorController(message: String)
-    //func didTapFave & To-Do???
 }
