@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ImageCell: UICollectionViewCell {
+final class ImageCell: UICollectionViewCell, ReuseIdentifiable {
         
     let imageView = UIImageView()
     

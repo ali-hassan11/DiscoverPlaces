@@ -21,7 +21,7 @@ final class ImagesHorizontalController: HorizontalSnappingController, UICollecti
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = .clear
         collectionView.scrollsToTop = true
-        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "imageCell")
+        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: ImageCell.reuseIdentifier)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -29,7 +29,7 @@ final class ImagesHorizontalController: HorizontalSnappingController, UICollecti
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.reuseIdentifier, for: indexPath) as! ImageCell
         cell.photo = photos?[indexPath.item]
         return cell
     }

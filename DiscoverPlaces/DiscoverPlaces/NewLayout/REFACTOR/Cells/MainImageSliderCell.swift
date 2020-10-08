@@ -29,8 +29,6 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCel
         configureStars(using: viewModel)
         configureImageSlider(using: viewModel)
         configurePageIndicator(using: viewModel)
-        
-//        backgroundColor = viewModel.backgroundColor
     }
             
     private func configureStars(using viewModel: MainImageSliderViewModel) {
@@ -81,7 +79,6 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCel
         pageIndicator.isUserInteractionEnabled = false
         pageIndicator.backgroundColor = .black
         pageIndicator.selectedSegmentTintColor = viewModel.pageIndicatorColor
-        
         pageIndicator.selectedSegmentIndex = 0
     }
     
