@@ -491,7 +491,6 @@
 		CE4FF630243175CA0090AFA0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				CE45B4A02451DD9B00656339 /* Views */,
 				CE50CD4924437B6C00E91643 /* Reachability.swift */,
 				CEA988F4243A1252002A1FDE /* UIViewController+Extensions.swift */,
 				CEABA02D24177AC90057A955 /* Category+SubCategory.swift */,
@@ -567,6 +566,7 @@
 		CE5835CF23DE223800C89622 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CE45B4A02451DD9B00656339 /* Views */,
 				CE4FF630243175CA0090AFA0 /* Classes */,
 				CE6599EC23EA68D000E531CD /* VerticalStackview.swift */,
 				CEEB4D5623E84977006D79E6 /* HorizontalStackView.swift */,

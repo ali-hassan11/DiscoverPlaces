@@ -23,12 +23,9 @@ final class HomeLargeCellHolder: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-//        backgroundColor = .blue
-//        sectionDescriptionLabel.backgroundColor = .green
         let stackView = VerticalStackView(arrangedSubviews: [UIStackView(arrangedSubviews: [leftPadding, placesOfInterestLabel, placeNameLabel, UIView(), rightPadding]), horizontalController.view], spacing: 12)
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 10, left: 0, bottom: 8, right: 0))
-        
     }
     
     func configureTitle(with placeName: String?) {

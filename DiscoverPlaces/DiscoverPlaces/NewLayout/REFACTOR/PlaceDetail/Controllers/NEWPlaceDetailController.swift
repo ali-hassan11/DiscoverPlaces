@@ -7,12 +7,12 @@ final class NEWPlaceDetailController: UIViewController {
     private let viewModel: DetailsViewModel
     private let coordinator: DetailCoordinatable
     
-    private let loadingView: LoadingView
+    private let loadingView: DetailLoadingView
     
     init(coordinator: DetailCoordinatable, viewModel: DetailsViewModel) {
         self.viewModel = viewModel
         self.coordinator = coordinator
-        self.loadingView = LoadingView(backgroundColor: viewModel.backgroundColor)
+        self.loadingView = DetailLoadingView()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -139,3 +139,40 @@ final class LoadingView: UIView, LoadingViewType {
         }
     }
 }
+
+final class DetailLoadingView: UIView, LoadingViewType {
+    
+    var loadingIndicator = LoadingIndicatorView()
+    
+    init() {
+        super.init(frame: .zero)
+        
+        let topView = UIView()
+        topView.constrainHeight(constant: 430)
+        topView.backgroundColor = .secondarySystemBackground
+        topView.addSubview(loadingIndicator)
+        loadingIndicator.centerInSuperview()
+        
+        let bottomView = UIView()
+        bottomView.backgroundColor = .systemBackground
+        
+        let stackView = VerticalStackView(arrangedSubviews: [topView, bottomView])
+        
+        addSubview(stackView)
+        stackView.fillSuperview()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func didFinishLoading() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.alpha = 0
+        }) { _ in
+            self.loadingIndicator.stopAnimating()
+            self.removeFromSuperview()
+        }
+    }
+}
+

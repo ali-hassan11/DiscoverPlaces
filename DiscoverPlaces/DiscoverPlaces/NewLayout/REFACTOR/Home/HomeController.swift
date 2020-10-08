@@ -171,7 +171,7 @@ extension HomeController {
     //MARK: Home Large Cell Header & GoogleCell Footer
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeLargeCellHolder.id, for: indexPath) as! HomeLargeCellHolder
+            guard let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeLargeCellHolder.id, for: indexPath) as? HomeLargeCellHolder else { return UICollectionReusableView() }
             cell.horizontalController.userLocation = self.userLocation
             cell.horizontalController.results = placeResults
             cell.configureTitle(with: userLocation?.name)
