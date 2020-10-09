@@ -31,7 +31,7 @@ struct PlaceDetailResult: Decodable {
     let photos: [Photo]?
     let rating: Double?
     let types: [String]?
-    let geometry: Geometry?
+    let geometry: Geometry
     let vicinity: String?
 }
 

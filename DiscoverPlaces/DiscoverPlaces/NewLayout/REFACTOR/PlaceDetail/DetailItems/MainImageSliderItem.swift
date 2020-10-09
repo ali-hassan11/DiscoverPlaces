@@ -2,6 +2,6 @@
 struct MainImageSliderItem {
     let name: String
     let rating: Double?
-    let distance: String?
+    let distance: Double
     let photos: [Photo]?
 }

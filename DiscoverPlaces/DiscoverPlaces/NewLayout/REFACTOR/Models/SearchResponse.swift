@@ -17,7 +17,7 @@ struct SearchResponse: Decodable {
 }
 
 struct PlaceResult: Decodable {
-    let geometry: Geometry?
+    let geometry: Geometry
     let icon: String? //Probably won't need this
     let place_id: String
     let name: String?
@@ -84,13 +84,13 @@ struct Geometry: Decodable {
 import CoreLocation
 
 extension Geometry {
-    func distanceString(from userLocation: Location) -> String? {
+    func distance(from userLocation: Location) -> Double {
 //        guard userLocation.isNotEmpty() else { return nil }
         
         let fromLocation = CLLocation(latitude: location.lat, longitude: location.lng)
         let toLocation = CLLocation(latitude: userLocation.lat, longitude: userLocation.lng)
         let distance = fromLocation.distance(from: toLocation)
-        return "\(distance.inUnits())"
+        return distance
     }
 
 }

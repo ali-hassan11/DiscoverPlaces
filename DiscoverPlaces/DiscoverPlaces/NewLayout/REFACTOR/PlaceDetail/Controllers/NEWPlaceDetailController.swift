@@ -96,7 +96,11 @@ extension NEWPlaceDetailController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard let mainImageCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? MainImageSliderCell else { return }
+        mainImageCell.refreshDistanceLabel()
+        
         tableView.reloadData()
+
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true

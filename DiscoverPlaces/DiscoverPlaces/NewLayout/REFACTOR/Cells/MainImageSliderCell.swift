@@ -12,10 +12,10 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCel
     @IBOutlet weak var gradientView: UIView!
     
     private var imagesController: ImagesHorizontalController?
+    private var viewModel: MainImageSliderViewModel?
         
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         imagesController = ImagesHorizontalController()
         imagesSliderContainer.addSubview(imagesController?.view ?? UIView())
         imagesController?.view.fillSuperview()
@@ -24,13 +24,17 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCel
     
     func configure(using viewModel: DetailItemViewModelType) {
         guard let viewModel = viewModel as? MainImageSliderViewModel else { return }
-    
+        self.viewModel = viewModel
         configureLabels(using: viewModel)
         configureStars(using: viewModel)
         configureImageSlider(using: viewModel)
         if !pageIndicatoinrIsConfigured {
             configurePageIndicator(using: viewModel)
         }
+    }
+    
+    func refreshDistanceLabel() {
+        distanceLabel.attributedText = viewModel?.distanceAttributedString()
     }
             
     private var isStarViewAdded = false
@@ -57,7 +61,7 @@ final class MainImageSliderCell: UITableViewCell, NibLoadableReusable, DetailCel
         placeNameLabel.attributedText = viewModel.placeName
         placeNameLabel.numberOfLines = 2
         
-        distanceLabel.attributedText = viewModel.distance
+        distanceLabel.attributedText = viewModel.distanceAttributedString()
     }
     
     private func configureImageSlider(using viewModel: MainImageSliderViewModel) {

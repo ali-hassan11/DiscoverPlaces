@@ -67,7 +67,8 @@ class NEWHomeTabCoordinator: NEWHomeTabCoordinatable {
     }
     
     func openInMaps(place: PlaceDetailResult) {
-        guard let lat = place.geometry?.location.lat, let long = place.geometry?.location.lng else { return }
+        let lat = place.geometry.location.lat
+        let long = place.geometry.location.lng 
         let coordinate = CLLocationCoordinate2DMake(lat,long)
         let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
         mapItem.name = place.name

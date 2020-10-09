@@ -56,9 +56,9 @@ final class MainImagesSliderCell: UICollectionReusableView {
         layoutPageIndicator()
     }
     
-    private func configureDistanceLabel(using detailGeometry: Geometry?, and userLocation: Location?) {
+    private func configureDistanceLabel(using detailGeometry: Geometry, and userLocation: Location?) {
         if let userLocation = userLocation {
-            distanceLabel.text = detailGeometry?.distanceString(from: userLocation)
+            distanceLabel.text = String(detailGeometry.distance(from: userLocation))
         }
     }
     

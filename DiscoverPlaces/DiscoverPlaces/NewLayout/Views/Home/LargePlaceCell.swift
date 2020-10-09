@@ -39,7 +39,7 @@ final class LargePlaceCell: UICollectionViewCell {
             starRatingView.populate(with: rating, displaysNumber: true)
             
             guard let userLocation = actualLocation else { return }
-            distanceLabel.text = result.geometry?.distanceString(from: userLocation)
+            distanceLabel.text = String(result.geometry.distance(from: userLocation).inUnits())
         }
     }
     

@@ -97,7 +97,7 @@ extension PlaceListController {
      
      override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          let place = placeResults[indexPath.item]
-         guard let location = place.geometry?.location else { return }
+         let location = place.geometry.location
          didSelectPlaceInListHandler?(place.place_id, location) //Don't think location this is used
      }
      

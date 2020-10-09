@@ -11,20 +11,15 @@ final class DetailsViewModel: NSObject {
     
     private let placeId: String
     private let userLocation: LocationItem
-    
-    private var result: PlaceDetailResult?
-    
+        
     private weak var coordinator: DetailCoordinatable?
-    
-    public let backgroundColor: UIColor
-    
+        
     init(coordinator: DetailCoordinatable?, placeId: String, location: LocationItem, typography: Typography, theming: PlaceDetailTheming) {
         self.placeId = placeId
         self.userLocation = location
         self.typography = typography
         self.theming = theming
         self.coordinator = coordinator
-        self.backgroundColor = theming.background
     }
 }
 
@@ -66,7 +61,7 @@ extension DetailsViewModel {
         //Main Images Slider
         if let photos = result.photos {
             
-            let distance = result.geometry?.distanceString(from: userLocation.actualUserLocation ?? userLocation.selectedLocation)
+            let distance = result.geometry.distance(from: userLocation.actualUserLocation ?? userLocation.selectedLocation)
 
             let mainImagesSliderItem = MainImageSliderItem(name: result.name, rating: result.rating, distance: distance, photos: photos)
             items.append(Self.configureMainImageSliderDetailItem(using: mainImagesSliderItem,
@@ -126,11 +121,8 @@ extension DetailsViewModel {
         
         self.items = items
         
-        if let location = result.geometry?.location {
-            fetchMorePlacesData(near: location, items: items, completion: completion)
-        } else {
-            completion(nil)
-        }
+        let location = result.geometry.location
+        fetchMorePlacesData(near: location, items: items, completion: completion)
     }
     
     ///Create Custom error that contains a string & action?
@@ -172,7 +164,6 @@ extension DetailsViewModel {
     }
     
 }
-
 
 //MARK: TableView DataSource & DataSource
 extension DetailsViewModel: UITableViewDataSource, UITableViewDelegate {
