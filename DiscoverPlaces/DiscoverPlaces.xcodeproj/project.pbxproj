@@ -62,7 +62,6 @@
 		CE5835A023DE16B000C89622 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE58359E23DE16B000C89622 /* Main.storyboard */; };
 		CE5835A223DE16B600C89622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE5835A123DE16B600C89622 /* Assets.xcassets */; };
 		CE5835A523DE16B600C89622 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5835A323DE16B600C89622 /* LaunchScreen.storyboard */; };
-		CE5835B023DE16B600C89622 /* BLANKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835AF23DE16B600C89622 /* BLANKTests.swift */; };
 		CE5835BB23DE16B700C89622 /* DiscoverPlacesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835BA23DE16B700C89622 /* DiscoverPlacesUITests.swift */; };
 		CE5835C923DE173800C89622 /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835C823DE173800C89622 /* BaseTabBarController.swift */; };
 		CE5835CC23DE1F5E00C89622 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5835CB23DE1F5E00C89622 /* SearchController.swift */; };
@@ -229,7 +228,6 @@
 		CE5835A423DE16B600C89622 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE5835A623DE16B600C89622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE5835AB23DE16B600C89622 /* DiscoverPlacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverPlacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE5835AF23DE16B600C89622 /* BLANKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLANKTests.swift; sourceTree = "<group>"; };
 		CE5835B123DE16B600C89622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE5835B623DE16B700C89622 /* DiscoverPlacesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverPlacesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5835BA23DE16B700C89622 /* DiscoverPlacesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverPlacesUITests.swift; sourceTree = "<group>"; };
@@ -549,7 +547,6 @@
 		CE5835AE23DE16B600C89622 /* DiscoverPlacesTests */ = {
 			isa = PBXGroup;
 			children = (
-				CE5835AF23DE16B600C89622 /* BLANKTests.swift */,
 				CE5835B123DE16B600C89622 /* Info.plist */,
 			);
 			path = DiscoverPlacesTests;
@@ -1189,7 +1186,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE5835B023DE16B600C89622 /* BLANKTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

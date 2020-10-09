@@ -20,7 +20,7 @@ final class SettingsController: UITableViewController, MFMailComposeViewControll
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "emptyId")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "emptyId")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reviewId")
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "EmailId")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "emailId")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "aboutId")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "termsId")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "privacyId")
@@ -34,24 +34,25 @@ final class SettingsController: UITableViewController, MFMailComposeViewControll
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: UnitsCell.id, for: indexPath) as! UnitsCell
-            configure(cell: cell)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: UnitsCell.id, for: indexPath) as? UnitsCell else {
+                return UITableViewCell()
+            }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "emptyId", for: indexPath)
-            configure(cell: cell, isEmptyCell: true)
+            configure(cell: cell, isSelectable: false)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "reviewId", for: indexPath)
             configure(cell: cell, withText: "Review")
             return cell
         case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EmailId", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "emailId", for: indexPath)
             configure(cell: cell, withText: "Feedback")
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "emptyId", for: indexPath)
-            configure(cell: cell, isEmptyCell: true)
+            configure(cell: cell, isSelectable: false)
             return cell
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: "aboutId", for: indexPath)
@@ -70,13 +71,13 @@ final class SettingsController: UITableViewController, MFMailComposeViewControll
         }
     }
     
-    private func configure(cell: UITableViewCell, withText: String = "", isEmptyCell: Bool = false) {
+    private func configure(cell: UITableViewCell, withText: String = "", isSelectable: Bool = true) {
         let label = UILabel(text: withText, color: .label, numberOfLines: 1)
         cell.addSubview(label)
         label.fillSuperview(padding: .init(top: 0, left: 20, bottom: 0, right: 20))
         
         cell.backgroundColor = .systemBackground
-        if isEmptyCell {
+        if !isSelectable {
             cell.selectionStyle = .none
         }
     }
@@ -188,18 +189,18 @@ final class UnitsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: "Units")
         setupViews()
-        
+        selectionStyle = .none
         configureUnitSwitch()
     }
     
     private func setupViews() {
-        addSubview(unitsSwitch)
+        contentView.addSubview(unitsSwitch)
         unitsSwitch.centerYInSuperview()
-        unitsSwitch.anchor(top: nil, leading: nil, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 20))
+        unitsSwitch.anchor(top: nil, leading: nil, bottom: nil, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 20))
         
-        addSubview(label)
+        contentView.addSubview(label)
         label.centerYInSuperview()
-        label.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: unitsSwitch.leadingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 12))
+        label.anchor(top: nil, leading: contentView.leadingAnchor, bottom: nil, trailing: unitsSwitch.leadingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 12))
     }
     
     private func configureUnitSwitch() {
@@ -215,5 +216,4 @@ final class UnitsCell: UITableViewCell {
     @objc func toggleUnits(sender: UISegmentedControl) {
         DefaultsManager.setUnits(to: sender.selectedSegmentIndex == 0 ? .km : .miles)
     }
-    
 }
