@@ -1,7 +1,7 @@
 
 import UIKit
 
-final class CategoriesHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
+final class CategoriesHorizontalController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     ///Used for calculation in sizeForItemAt
     private let numberOfRows:CGFloat = 3
@@ -17,8 +17,11 @@ final class CategoriesHorizontalController: HorizontalSnappingController, UIColl
         collectionView.backgroundColor = .systemBackground
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.id)
         collectionView.contentInset = .init(top: Constants.topPadding, left: Constants.sidePadding, bottom: Constants.bottomPadding, right: Constants.sidePadding)
+        
+        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
     }
-    
 }
 
 extension CategoriesHorizontalController {
