@@ -1,6 +1,6 @@
 ### DiscoverPlaces App
 
-iOS app, allowing users discover places of interest around the world!
+iOS app, allowing users to discover places of interest around the world!
 
 
 ### Features:
