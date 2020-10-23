@@ -1,6 +1,7 @@
 ### DiscoverPlaces App
 
 iOS app, allowing users to discover places of interest around the world!
+Download Link: https://apps.apple.com/gb/app/discover-places-pro/id1511789627
 
 
 ### Features:
