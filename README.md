@@ -16,5 +16,3 @@ Features:
 ◦ Switch to dark mode to enable our slick midnight theme
 
 ◦ Find places by text search
-
-![Alt text](/Users/user/Documents/iOS-dev/iOS-Projects/DiscoverPlaces/UX+Design/Screenshots/2.Detail.png?raw=true "Title")
