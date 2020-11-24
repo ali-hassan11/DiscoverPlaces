@@ -21,9 +21,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Allow locations so we can show you the best places near you</string>
+	<string>Allow locations so that we can show you the best places near you</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow locations so we can show you the best places near you</string>
+	<string>Allow locations so that we can show you the best places near you</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
