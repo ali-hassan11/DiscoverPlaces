@@ -1,0 +1,110 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "CosmosSettings"
+provides-nominal:
+- "6Cosmos0A8SettingsV"
+provides-member:
+- ["6Cosmos0A8SettingsV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "/"
+- "CGPoint"
+- "CosmosDefaultSettings"
+- "CosmosSettings"
+- "Double"
+- "UIImage"
+depends-member:
+- ["6Cosmos0A15DefaultSettingsV", "disablePanGestures"]
+- ["6Cosmos0A15DefaultSettingsV", "emptyBorderColor"]
+- ["6Cosmos0A15DefaultSettingsV", "emptyBorderWidth"]
+- ["6Cosmos0A15DefaultSettingsV", "emptyColor"]
+- ["6Cosmos0A15DefaultSettingsV", "fillMode"]
+- ["6Cosmos0A15DefaultSettingsV", "filledBorderColor"]
+- ["6Cosmos0A15DefaultSettingsV", "filledBorderWidth"]
+- ["6Cosmos0A15DefaultSettingsV", "filledColor"]
+- ["6Cosmos0A15DefaultSettingsV", "minTouchRating"]
+- ["6Cosmos0A15DefaultSettingsV", "passTouchesToSuperview"]
+- ["6Cosmos0A15DefaultSettingsV", "starMargin"]
+- ["6Cosmos0A15DefaultSettingsV", "starPoints"]
+- ["6Cosmos0A15DefaultSettingsV", "starSize"]
+- ["6Cosmos0A15DefaultSettingsV", "textColor"]
+- ["6Cosmos0A15DefaultSettingsV", "textFont"]
+- ["6Cosmos0A15DefaultSettingsV", "textMargin"]
+- ["6Cosmos0A15DefaultSettingsV", "totalStars"]
+- ["6Cosmos0A15DefaultSettingsV", "updateOnTouch"]
+- ["6Cosmos0A8SettingsV", "CGPoint"]
+- ["6Cosmos0A8SettingsV", "CosmosDefaultSettings"]
+- ["6Cosmos0A8SettingsV", "CosmosSettings"]
+- ["6Cosmos0A8SettingsV", "Double"]
+- ["6Cosmos0A8SettingsV", "UIImage"]
+- ["6Cosmos0A8SettingsV", "default"]
+- ["6Cosmos0A8SettingsV", "disablePanGestures"]
+- ["6Cosmos0A8SettingsV", "emptyBorderColor"]
+- ["6Cosmos0A8SettingsV", "emptyBorderWidth"]
+- ["6Cosmos0A8SettingsV", "emptyColor"]
+- ["6Cosmos0A8SettingsV", "emptyImage"]
+- ["6Cosmos0A8SettingsV", "fillMode"]
+- ["6Cosmos0A8SettingsV", "filledBorderColor"]
+- ["6Cosmos0A8SettingsV", "filledBorderWidth"]
+- ["6Cosmos0A8SettingsV", "filledColor"]
+- ["6Cosmos0A8SettingsV", "filledImage"]
+- ["6Cosmos0A8SettingsV", "init"]
+- ["6Cosmos0A8SettingsV", "minTouchRating"]
+- ["6Cosmos0A8SettingsV", "passTouchesToSuperview"]
+- ["6Cosmos0A8SettingsV", "starMargin"]
+- ["6Cosmos0A8SettingsV", "starPoints"]
+- ["6Cosmos0A8SettingsV", "starSize"]
+- ["6Cosmos0A8SettingsV", "textColor"]
+- ["6Cosmos0A8SettingsV", "textFont"]
+- ["6Cosmos0A8SettingsV", "textMargin"]
+- ["6Cosmos0A8SettingsV", "totalStars"]
+- ["6Cosmos0A8SettingsV", "updateOnTouch"]
+- ["s27ExpressibleByIntegerLiteralP", "IntegerLiteralType"]
+- ["s27ExpressibleByIntegerLiteralP", "init"]
+- ["So8NSObjectC", ""]
+- ["So8NSObjectP", ""]
+- ["s35_ExpressibleByBuiltinBooleanLiteralP", "init"]
+- ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- ["s26_ExpressibleByColorLiteralP", "init"]
+depends-nominal:
+- "6Cosmos0A15DefaultSettingsV"
+- "6Cosmos0A8SettingsV"
+- "s27ExpressibleByIntegerLiteralP"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- "s35_ExpressibleByBuiltinBooleanLiteralP"
+- "s35_ExpressibleByBuiltinIntegerLiteralP"
+- "s26_ExpressibleByColorLiteralP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/ObjectiveC.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/CoreImage.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/Combine.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/QuartzCore.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/Dispatch.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/Metal.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/Darwin.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/Foundation.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/CoreFoundation.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/CoreGraphics.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/Swift.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/UIKit.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/SwiftOnoneSupport.swiftmodule/arm64-apple-ios.swiftmodule"
+- "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Headers/Public/Cosmos/Cosmos-umbrella.h"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/usr/include/mach-o/dyld.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
+- "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Headers/Public/Cosmos/Cosmos.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/UserNotifications.framework/Headers/UserNotifications.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "177d5be2fa9d6e683373bbff4a6209a8"

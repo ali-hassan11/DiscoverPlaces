@@ -1,0 +1,301 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "CosmosDefaultSettings"
+provides-nominal:
+- "6Cosmos0A15DefaultSettingsV"
+provides-member:
+- ["6Cosmos0A15DefaultSettingsV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- "/"
+- "BooleanLiteralType"
+- "CGPoint"
+- "CosmosDefaultSettings"
+- "Double"
+- "FloatLiteralType"
+- "IntegerLiteralType"
+- "StarFillMode"
+- "UIColor"
+- "UIFont"
+- "UIScreen"
+- "defaultColor"
+- !private "textFont"
+depends-member:
+- ["s18AdditiveArithmeticP", ""]
+- ["s18AdditiveArithmeticP", "init"]
+- ["SK", ""]
+- ["SB", "init"]
+- ["So7CGPointV", "init"]
+- ["s7CVarArgP", "TextStyle"]
+- ["s7CVarArgP", ""]
+- ["s7CVarArgP", "clear"]
+- ["s7CVarArgP", "init"]
+- ["s7CVarArgP", "main"]
+- !private ["s7CVarArgP", "pointSize"]
+- ["s7CVarArgP", "preferredFont"]
+- ["s7CVarArgP", "scale"]
+- ["Sl", ""]
+- ["SL", ""]
+- ["SL", "init"]
+- ["6Cosmos0A15DefaultSettingsV", "CGPoint"]
+- ["6Cosmos0A15DefaultSettingsV", "Double"]
+- ["6Cosmos0A15DefaultSettingsV", "StarFillMode"]
+- ["6Cosmos0A15DefaultSettingsV", "UIColor"]
+- ["6Cosmos0A15DefaultSettingsV", "UIFont"]
+- ["6Cosmos0A15DefaultSettingsV", "UIScreen"]
+- ["6Cosmos0A15DefaultSettingsV", "defaultColor"]
+- ["6Cosmos0A15DefaultSettingsV", "disablePanGestures"]
+- ["6Cosmos0A15DefaultSettingsV", "emptyBorderColor"]
+- ["6Cosmos0A15DefaultSettingsV", "emptyBorderWidth"]
+- ["6Cosmos0A15DefaultSettingsV", "emptyColor"]
+- ["6Cosmos0A15DefaultSettingsV", "fillMode"]
+- ["6Cosmos0A15DefaultSettingsV", "filledBorderColor"]
+- ["6Cosmos0A15DefaultSettingsV", "filledBorderWidth"]
+- ["6Cosmos0A15DefaultSettingsV", "filledColor"]
+- ["6Cosmos0A15DefaultSettingsV", "init"]
+- ["6Cosmos0A15DefaultSettingsV", "minTouchRating"]
+- ["6Cosmos0A15DefaultSettingsV", "passTouchesToSuperview"]
+- ["6Cosmos0A15DefaultSettingsV", "rating"]
+- ["6Cosmos0A15DefaultSettingsV", "starMargin"]
+- ["6Cosmos0A15DefaultSettingsV", "starPoints"]
+- ["6Cosmos0A15DefaultSettingsV", "starSize"]
+- ["6Cosmos0A15DefaultSettingsV", "textColor"]
+- ["6Cosmos0A15DefaultSettingsV", "textFont"]
+- ["6Cosmos0A15DefaultSettingsV", "textMargin"]
+- ["6Cosmos0A15DefaultSettingsV", "textSize"]
+- ["6Cosmos0A15DefaultSettingsV", "totalStars"]
+- ["6Cosmos0A15DefaultSettingsV", "updateOnTouch"]
+- ["s28CustomDebugStringConvertibleP", "TextStyle"]
+- ["s28CustomDebugStringConvertibleP", "clear"]
+- ["s28CustomDebugStringConvertibleP", "init"]
+- ["s28CustomDebugStringConvertibleP", "main"]
+- !private ["s28CustomDebugStringConvertibleP", "pointSize"]
+- ["s28CustomDebugStringConvertibleP", "preferredFont"]
+- ["s28CustomDebugStringConvertibleP", "scale"]
+- ["s17CustomReflectableP", "init"]
+- ["s23CustomStringConvertibleP", "TextStyle"]
+- ["s23CustomStringConvertibleP", ""]
+- ["s23CustomStringConvertibleP", "clear"]
+- ["s23CustomStringConvertibleP", "init"]
+- ["s23CustomStringConvertibleP", "main"]
+- !private ["s23CustomStringConvertibleP", "pointSize"]
+- ["s23CustomStringConvertibleP", "preferredFont"]
+- ["s23CustomStringConvertibleP", "scale"]
+- ["Se", "init"]
+- ["Sd", "init"]
+- ["SE", "init"]
+- ["SQ", "TextStyle"]
+- ["SQ", ""]
+- ["SQ", "clear"]
+- ["SQ", "footnote"]
+- ["SQ", "full"]
+- ["SQ", "init"]
+- ["SQ", "main"]
+- !private ["SQ", "pointSize"]
+- ["SQ", "preferredFont"]
+- ["SQ", "scale"]
+- ["s25ExpressibleByArrayLiteralP", "init"]
+- ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
+- ["s25ExpressibleByFloatLiteralP", ""]
+- ["s25ExpressibleByFloatLiteralP", "init"]
+- ["s27ExpressibleByIntegerLiteralP", "IntegerLiteralType"]
+- ["s27ExpressibleByIntegerLiteralP", ""]
+- ["s27ExpressibleByIntegerLiteralP", "init"]
+- ["s32ExpressibleByStringInterpolationP", ""]
+- ["s26ExpressibleByStringLiteralP", ""]
+- ["s33ExpressibleByUnicodeScalarLiteralP", ""]
+- ["SF", ""]
+- ["SF", "init"]
+- ["SH", "TextStyle"]
+- ["SH", ""]
+- ["SH", "clear"]
+- ["SH", "footnote"]
+- ["SH", "full"]
+- ["SH", "init"]
+- ["SH", "main"]
+- !private ["SH", "pointSize"]
+- ["SH", "preferredFont"]
+- ["SH", "scale"]
+- ["s25LosslessStringConvertibleP", ""]
+- ["s25LosslessStringConvertibleP", "init"]
+- ["So8NSCodingP", ""]
+- ["So8NSCodingP", "clear"]
+- ["So8NSCodingP", "init"]
+- ["So9NSCopyingP", "TextStyle"]
+- ["So9NSCopyingP", "clear"]
+- ["So9NSCopyingP", "init"]
+- !private ["So9NSCopyingP", "pointSize"]
+- ["So9NSCopyingP", "preferredFont"]
+- ["So21NSItemProviderReadingP", "clear"]
+- ["So21NSItemProviderReadingP", "init"]
+- ["So21NSItemProviderWritingP", "clear"]
+- ["So21NSItemProviderWritingP", "init"]
+- ["So8NSObjectC", "TextStyle"]
+- ["So8NSObjectC", ""]
+- ["So8NSObjectC", "clear"]
+- ["So8NSObjectC", "colorNamed"]
+- ["So8NSObjectC", "colorWithCGColor"]
+- ["So8NSObjectC", "colorWithCIColor"]
+- ["So8NSObjectC", "colorWithDisplayP3Red"]
+- ["So8NSObjectC", "colorWithDynamicProvider"]
+- ["So8NSObjectC", "colorWithHue"]
+- ["So8NSObjectC", "colorWithPatternImage"]
+- ["So8NSObjectC", "colorWithRed"]
+- ["So8NSObjectC", "colorWithWhite"]
+- ["So8NSObjectC", "init"]
+- ["So8NSObjectC", "main"]
+- !private ["So8NSObjectC", "pointSize"]
+- ["So8NSObjectC", "preferredFont"]
+- ["So8NSObjectC", "preferredFontForTextStyle"]
+- ["So8NSObjectC", "scale"]
+- ["So8NSObjectP", "TextStyle"]
+- ["So8NSObjectP", ""]
+- ["So8NSObjectP", "clear"]
+- ["So8NSObjectP", "colorNamed"]
+- ["So8NSObjectP", "colorWithCGColor"]
+- ["So8NSObjectP", "colorWithCIColor"]
+- ["So8NSObjectP", "colorWithDisplayP3Red"]
+- ["So8NSObjectP", "colorWithDynamicProvider"]
+- ["So8NSObjectP", "colorWithHue"]
+- ["So8NSObjectP", "colorWithPatternImage"]
+- ["So8NSObjectP", "colorWithRed"]
+- ["So8NSObjectP", "colorWithWhite"]
+- ["So8NSObjectP", "init"]
+- ["So8NSObjectP", "main"]
+- !private ["So8NSObjectP", "pointSize"]
+- ["So8NSObjectP", "preferredFont"]
+- ["So8NSObjectP", "preferredFontForTextStyle"]
+- ["So8NSObjectP", "scale"]
+- ["So14NSSecureCodingP", "clear"]
+- ["So14NSSecureCodingP", "init"]
+- ["Sj", ""]
+- ["Sj", "init"]
+- ["SY", ""]
+- ["SY", "footnote"]
+- ["SY", "full"]
+- ["s10SIMDScalarP", "init"]
+- ["ST", ""]
+- ["s13SignedNumericP", ""]
+- ["s13SignedNumericP", "init"]
+- ["6Cosmos12StarFillModeO", "full"]
+- ["Sx", ""]
+- ["Sx", "init"]
+- ["s16TextOutputStreamP", ""]
+- ["s20TextOutputStreamableP", ""]
+- ["s20TextOutputStreamableP", "init"]
+- ["So15UIFontTextStylea", "footnote"]
+- ["So7UIColorC", "clear"]
+- ["So7UIColorC", "init"]
+- ["So6UIFontC", "TextStyle"]
+- !private ["So6UIFontC", "pointSize"]
+- ["So6UIFontC", "preferredFont"]
+- ["So8UIScreenC", "main"]
+- ["So8UIScreenC", "scale"]
+- ["So18UITraitEnvironmentP", "main"]
+- ["So18UITraitEnvironmentP", "scale"]
+- ["s15_CVarArgAlignedP", "init"]
+- ["s22_CVarArgPassedAsDoubleP", "init"]
+- ["s30_CustomPlaygroundQuickLookableP", "init"]
+- ["s35_ExpressibleByBuiltinBooleanLiteralP", "init"]
+- ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
+- ["s33_ExpressibleByBuiltinFloatLiteralP", "init"]
+- ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
+- ["s26_ExpressibleByColorLiteralP", "clear"]
+- ["s26_ExpressibleByColorLiteralP", "init"]
+- ["s35_HasCustomAnyHashableRepresentationP", ""]
+- ["s35_HasCustomAnyHashableRepresentationP", "footnote"]
+- ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "TextStyle"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "clear"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "main"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "pointSize"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "preferredFont"]
+- ["10Foundation27_KeyValueCodingAndObservingP", "scale"]
+- ["s21_ObjectiveCBridgeableP", "footnote"]
+- ["s21_ObjectiveCBridgeableP", "init"]
+- ["s20_SwiftNewtypeWrapperP", "footnote"]
+depends-nominal:
+- "s18AdditiveArithmeticP"
+- "SK"
+- "SB"
+- "So7CGPointV"
+- "s7CVarArgP"
+- "Sl"
+- "SL"
+- "6Cosmos0A15DefaultSettingsV"
+- "s28CustomDebugStringConvertibleP"
+- "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- "Se"
+- "Sd"
+- "SE"
+- "SQ"
+- "s25ExpressibleByArrayLiteralP"
+- "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- "s25ExpressibleByFloatLiteralP"
+- "s27ExpressibleByIntegerLiteralP"
+- "s32ExpressibleByStringInterpolationP"
+- "s26ExpressibleByStringLiteralP"
+- "s33ExpressibleByUnicodeScalarLiteralP"
+- "SF"
+- "SH"
+- "s25LosslessStringConvertibleP"
+- "So8NSCodingP"
+- "So9NSCopyingP"
+- "So21NSItemProviderReadingP"
+- "So21NSItemProviderWritingP"
+- "So8NSObjectC"
+- "So8NSObjectP"
+- "So14NSSecureCodingP"
+- "Sj"
+- "SY"
+- "s10SIMDScalarP"
+- "ST"
+- "s13SignedNumericP"
+- "6Cosmos12StarFillModeO"
+- "Sx"
+- "s16TextOutputStreamP"
+- "s20TextOutputStreamableP"
+- "So15UIFontTextStylea"
+- "So7UIColorC"
+- "So6UIFontC"
+- "So8UIScreenC"
+- "So18UITraitEnvironmentP"
+- "s15_CVarArgAlignedP"
+- "s22_CVarArgPassedAsDoubleP"
+- "s30_CustomPlaygroundQuickLookableP"
+- "s35_ExpressibleByBuiltinBooleanLiteralP"
+- "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- "s33_ExpressibleByBuiltinFloatLiteralP"
+- "s35_ExpressibleByBuiltinIntegerLiteralP"
+- "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- "s26_ExpressibleByColorLiteralP"
+- "s35_HasCustomAnyHashableRepresentationP"
+- "10Foundation27_KeyValueCodingAndObservingP"
+- "s21_ObjectiveCBridgeableP"
+- "s20_SwiftNewtypeWrapperP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/Foundation.swiftmodule/armv7-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/CoreFoundation.swiftmodule/armv7-apple-ios.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/prebuilt-modules/UIKit.swiftmodule/armv7-apple-ios.swiftmodule"
+- "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Headers/Public/Cosmos/Cosmos-umbrella.h"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/usr/include/mach-o/dyld.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
+- "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Headers/Public/Cosmos/Cosmos.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/OpenGLES.framework/Headers/OpenGLES.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/CoreImage.framework/Headers/CoreImage.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/QuartzCore.framework/Headers/QuartzCore.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/Metal.framework/Headers/Metal.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/UserNotifications.framework/Headers/UserNotifications.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.3.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "8f886dd35960c8b4551d00e68703a71d"

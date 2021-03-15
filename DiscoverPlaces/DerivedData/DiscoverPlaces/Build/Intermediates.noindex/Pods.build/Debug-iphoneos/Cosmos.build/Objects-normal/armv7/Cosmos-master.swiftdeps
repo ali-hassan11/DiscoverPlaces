@@ -1,0 +1,19 @@
+version: "Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)"
+options: "0520ae618a10d73b17f6e27a1003acde"
+build_time: [1615830436, 964527000]
+inputs:
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/CosmosAccessibility.swift": [1615830418, 25800909]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/CosmosDefaultSettings.swift": [1615830418, 26291234]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/CosmosLayerHelper.swift": [1615830418, 26485346]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/CosmosLayers.swift": [1615830418, 26935514]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/CosmosLocalizedRating.swift": [1615830418, 27562589]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/CosmosRating.swift": [1615830418, 27782273]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/CosmosSettings.swift": [1615830418, 27986071]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/CosmosSize.swift": [1615830418, 28169313]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/CosmosText.swift": [1615830418, 28346870]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/CosmosTouch.swift": [1615830418, 28799556]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/Helpers/CosmosTouchTarget.swift": [1615830418, 29411662]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/CosmosView.swift": [1615830418, 29070149]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/Helpers/RightToLeft.swift": [1615830418, 29609224]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/StarFillMode.swift": [1615830418, 29789910]
+  "/Users/hassaa17/Documents/GitHub/DiscoverPlaces/DiscoverPlaces/Pods/Cosmos/Cosmos/StarLayer.swift": [1615830418, 29991015]
